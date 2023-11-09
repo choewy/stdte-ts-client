@@ -1,14 +1,12 @@
 module.exports = {
   root: true,
   rules: {
-    "react-native/no-inline-styles": "off",
-    "react-hooks/rules-of-hooks": "off",
-    "react/no-unstable-nested-components": "off",
-    "react/react-in-jsx-scope": "off",
-    "linebreak-style": ["error", require("os").EOL === "\r\n" ? "windows" : "unix"],
-    "prettier/prettier": ["error", { endOfLine: "auto" }],
-    "max-len": [
-      "error",
+    'react-native/no-inline-styles': 'off',
+    'react-hooks/rules-of-hooks': 'off',
+    'react/no-unstable-nested-components': 'off',
+    'react/react-in-jsx-scope': 'off',
+    'max-len': [
+      'error',
       {
         code: 120,
         tabWidth: 2,

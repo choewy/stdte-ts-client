@@ -7,19 +7,19 @@ export class RecoilStore<T> {
     this.store = atom({ key, default: value });
   }
 
-  public useValue() {
+  useValue() {
     return useRecoilValue(this.store);
   }
 
-  public useState() {
+  useState() {
     return useRecoilState(this.store);
   }
 
-  public useSetState() {
+  useSetState() {
     return useSetRecoilState(this.store);
   }
 
-  public useResetState() {
+  useResetState() {
     return useResetRecoilState(this.store);
   }
 }

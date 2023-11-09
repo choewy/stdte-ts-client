@@ -26,11 +26,14 @@
       "@store/*": ["src/store/*"],
       "@service": ["src/service"],
       "@service/*": ["src/service/*"],
+      "@hook": ["src/hook"],
+      "@hook/*": ["src/hook/*"],
       "@page": ["src/page"],
       "@page/*": ["src/page/*"],
       "@component": ["src/component"],
       "@component/*": ["src/component/*"],
-      "@/*": ["src/*"]
+      "@app": ["src/app.tsx"],
+      "@router": ["src/router.tsx"]
     }
   },
   "include": ["src"]

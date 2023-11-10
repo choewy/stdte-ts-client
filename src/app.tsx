@@ -1,11 +1,11 @@
-import { FC } from 'react';
+import { FunctionComponent } from 'react';
 import { RecoilRoot } from 'recoil';
 import { RouterProvider } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
 import { router } from '@router';
 
-export const App: FC = () => {
+export const App: FunctionComponent = () => {
   return (
     <RecoilRoot>
       <HelmetProvider>

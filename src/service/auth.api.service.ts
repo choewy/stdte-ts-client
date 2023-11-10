@@ -1,5 +1,6 @@
-import { AuthCheckResponseDto } from '@common';
 import { Api } from '@core';
+
+import { AuthCheckResponse } from './types';
 
 export class AuthApiService extends Api {
   private static instance = new AuthApiService();
@@ -9,6 +10,6 @@ export class AuthApiService extends Api {
   }
 
   async checkAuth() {
-    return this.transform<AuthCheckResponseDto, null>(this.get('/auth'));
+    return this.valueFrom<AuthCheckResponse>(this.get('/auth'));
   }
 }

@@ -21,7 +21,31 @@ export class AuthHook {
     const checkAuth = useCallback(async () => {
       const res = await AuthApiService.getInstance().checkAuth();
 
-      setAuthStore((prev) => ({ ...prev, ok: res.ok }));
+      if (res.ok) {
+        setAuthStore({
+          ok: true,
+          auth: {
+            id: res.data.id,
+            email: res.data.email,
+            name: res.data.name,
+          },
+          role: res.data.role
+            ? {
+                id: res.data.role.id,
+                name: res.data.role.name,
+                rolePolicy: {
+                  id: res.data.role.rolePolicy.id,
+                  accessRole: res.data.role.rolePolicy.accessRole.value,
+                  accessTeam: res.data.role.rolePolicy.accessTeam.value,
+                  accessUser: res.data.role.rolePolicy.accessUser.value,
+                  accessProject: res.data.role.rolePolicy.accessProject.value,
+                },
+              }
+            : null,
+        });
+      } else {
+        setAuthStore({ ok: false, auth: null, role: null });
+      }
     }, [setAuthStore]);
 
     useEffect(() => {
@@ -30,7 +54,7 @@ export class AuthHook {
 
     useEffect(() => {
       if (location.pathname === PagePath.Home) {
-        if (authStore.ok === null || authStore.ok === false) {
+        if (authStore.ok === false) {
           navigate(PagePath.SignIn, { replace: true });
         }
 

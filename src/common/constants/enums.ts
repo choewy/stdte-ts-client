@@ -8,6 +8,7 @@ export enum EventType {
 
 export enum PagePath {
   Home = '/',
+  Forbidden = '/forbidden',
   SignIn = '/signin',
   SignUp = '/signup',
   SignOut = '/signout',
@@ -20,21 +21,6 @@ export enum PagePath {
   Member = '/member',
   ProjectTable = '/project',
   ProjectSetting = '/setting',
-}
-
-export enum PageName {
-  Home = '홈',
-  SignIn = '로그인',
-  SignUp = '회원가입',
-  MyPage = '내 정보',
-  Role = '역할 관리',
-  Credential = '계정 관리',
-  TimeRecordTable = '시간기록 테이블',
-  TimeRecordAnalytics = '시간기록 집계',
-  Team = '팀 목록',
-  Member = '구성원 목록',
-  ProjectTable = '프로젝트 목록',
-  ProjectSetting = '프로젝트 설정',
 }
 
 export enum SideMenuType {

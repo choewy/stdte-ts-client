@@ -24,6 +24,22 @@ export const DEFAULT_THEME = createTheme({
   palette: { primary: { main: '#A00' } },
 });
 
+export const PAGE_NAMES: Partial<Record<PagePath, string>> = {
+  [PagePath.Home]: '홈',
+  [PagePath.Forbidden]: '접근제한',
+  [PagePath.SignIn]: '로그인',
+  [PagePath.SignUp]: '회원가입',
+  [PagePath.MyPage]: '내정보',
+  [PagePath.Role]: '역할 관리',
+  [PagePath.Credential]: '계정 관리',
+  [PagePath.TimeRecordTable]: '시간기록 테이블',
+  [PagePath.TimeRecordAnalytics]: '시간기록 집계',
+  [PagePath.Team]: '팀 목록',
+  [PagePath.Member]: '구성원 목록',
+  [PagePath.ProjectTable]: '프로젝트 목록',
+  [PagePath.ProjectSetting]: '프로젝트 설정',
+};
+
 export const SIDE_MENUS: SideMenuItemValue[] = [
   {
     key: createKey('side-menu'),

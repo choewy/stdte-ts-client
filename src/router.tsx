@@ -5,6 +5,7 @@ import { Layout } from '@layout';
 import { MemberPage } from './page/member.page';
 import {
   CredentialPage,
+  ForbiddenPage,
   HomePage,
   MyPage,
   ProjectSettingPage,
@@ -26,6 +27,10 @@ export const router = createBrowserRouter([
       {
         path: PagePath.Home,
         element: <HomePage />,
+      },
+      {
+        path: PagePath.Forbidden,
+        element: <ForbiddenPage />,
       },
       {
         path: PagePath.SignIn,

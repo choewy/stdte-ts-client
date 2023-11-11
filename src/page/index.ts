@@ -4,6 +4,7 @@ export * from './signin.page';
 export * from './signup.page';
 export * from './signout.page';
 
+export * from './forbidden.page';
 export * from './mypage.page';
 
 export * from './role.page';

@@ -20,7 +20,7 @@ export const Layout: FunctionComponent = () => {
   SettingHook.getInstance().useChangeTitles();
 
   NotiHook.getInstance().useListenEvent();
-  AuthHook.getInstance().useAuthCheck(ok, location);
+  AuthHook.getInstance().useAuthCheck(ok, location, navigate);
   AuthHook.getInstance().useAuthGuard(ok, location, navigate);
 
   return (

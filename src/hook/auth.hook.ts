@@ -3,79 +3,100 @@ import { Location, NavigateFunction, useNavigate } from 'react-router-dom';
 import { isEmail, isNotEmpty, minLength } from 'class-validator';
 
 import { NotiEvent, PagePath, TimeoutKey } from '@common';
-import { AuthStore, AuthStoreValue } from '@store';
-import { AuthApiService, AuthSignInBody, LocalStorageService, TimeoutService } from '@service';
+import { AuthStore, AuthStoreValue, authStoreDefaultValue } from '@store';
+import {
+  AuthApiService,
+  AuthResponse,
+  AuthSignInBody,
+  AuthSignUpBody,
+  LocalStorageService,
+  TimeoutService,
+} from '@service';
 
 export class AuthHook {
   private static instance = new AuthHook();
 
-  public static getInstance() {
+  public static getInstance(): AuthHook {
     return this.instance;
   }
 
-  useAuthCheck(ok: boolean, location: Location): void {
+  private toAuthStoreValue(data: AuthResponse): AuthStoreValue {
+    const authStoreValue: AuthStoreValue = {
+      ok: true,
+      auth: null,
+      role: null,
+      authStatus: 0,
+      employmentStatus: 0,
+    };
+
+    if (data) {
+      authStoreValue.auth = {
+        id: data.id,
+        email: data.email,
+        name: data.name,
+      };
+    }
+
+    if (data.role) {
+      authStoreValue.role = {
+        id: data.role.id,
+        name: data.role.name,
+        rolePolicy: null,
+      };
+    }
+
+    if (data.role?.rolePolicy) {
+      authStoreValue.role.rolePolicy = {
+        id: data.role.rolePolicy.id,
+        accessRole: data.role.rolePolicy.accessRole.value,
+        accessTeam: data.role.rolePolicy.accessTeam.value,
+        accessUser: data.role.rolePolicy.accessUser.value,
+        accessProject: data.role.rolePolicy.accessProject.value,
+      };
+    }
+
+    return authStoreValue;
+  }
+
+  useAuthCheck(ok: boolean, location: Location, navigate: NavigateFunction): void {
     const pathname = location.pathname as PagePath;
 
     const setAuthStore = AuthStore.getInstance().useSetState();
 
     const checkAuth = useCallback(async () => {
-      const { ok, data, exception } = await AuthApiService.getInstance().checkAuth();
+      const { ok, data } = await AuthApiService.getInstance().checkAuth();
 
-      if (ok === false) {
-        const pathname = location.pathname as PagePath;
-
-        if (![PagePath.SignIn, PagePath.SignUp, PagePath.SignOut].includes(pathname)) {
-          NotiEvent.dispatchException(exception);
-        }
-
-        return setAuthStore({ ok: false, auth: null, role: null });
+      if (ok === true) {
+        return setAuthStore(this.toAuthStoreValue(data));
       }
 
-      const authStoreValue: AuthStoreValue = {
-        ok: true,
-        auth: null,
-        role: null,
-      };
+      setAuthStore({ ...authStoreDefaultValue, ok: false });
 
-      if (data) {
-        authStoreValue.auth = {
-          id: data.id,
-          email: data.email,
-          name: data.name,
-        };
+      if ([PagePath.SignIn, PagePath.SignUp, PagePath.SignOut].includes(pathname)) {
+        return;
       }
 
-      if (data.role) {
-        authStoreValue.role = {
-          id: data.role.id,
-          name: data.role.name,
-          rolePolicy: null,
-        };
+      if ([PagePath.Home, PagePath.SignOut].includes(pathname)) {
+        return navigate(PagePath.SignIn, { replace: true });
       }
-
-      if (data.role?.rolePolicy) {
-        authStoreValue.role.rolePolicy = {
-          id: data.role.rolePolicy.id,
-          accessRole: data.role.rolePolicy.accessRole.value,
-          accessTeam: data.role.rolePolicy.accessTeam.value,
-          accessUser: data.role.rolePolicy.accessUser.value,
-          accessProject: data.role.rolePolicy.accessProject.value,
-        };
-      }
-
-      setAuthStore(authStoreValue);
-    }, [location, setAuthStore]);
+    }, [pathname, navigate, setAuthStore]);
 
     useEffect(() => {
-      if (ok === null) {
-        checkAuth();
+      if (ok !== null) {
+        return;
       }
+
+      checkAuth();
     }, [ok, pathname, checkAuth]);
   }
 
   useAuthGuard(ok: boolean, location: Location, navigate: NavigateFunction): void {
+    const pathname = location.pathname as PagePath;
+
     useEffect(() => {
-      const pathname = location.pathname as PagePath;
+      if (ok === null) {
+        return;
+      }
 
       if ([PagePath.Home, PagePath.SignOut].includes(pathname)) {
         if (ok === false) {
@@ -86,7 +107,7 @@ export class AuthHook {
       }
 
       if ([PagePath.SignIn, PagePath.SignUp].includes(pathname as PagePath)) {
-        if (ok === null || ok === false) {
+        if (ok === false) {
           return;
         }
 
@@ -98,7 +119,7 @@ export class AuthHook {
 
         navigate(PagePath.SignIn, { replace: true });
       }
-    }, [ok, location.pathname, navigate]);
+    }, [ok, pathname, navigate]);
   }
 
   useSignInState() {
@@ -108,7 +129,18 @@ export class AuthHook {
     });
   }
 
+  useSignUpState() {
+    return useState<AuthSignUpBody>({
+      email: '',
+      password: '',
+      confirmPassword: '',
+      name: '',
+    });
+  }
+
   useSignIn(body: AuthSignInBody) {
+    const setAuthStore = AuthStore.getInstance().useSetState();
+
     return useCallback(
       async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -129,11 +161,64 @@ export class AuthHook {
           return NotiEvent.dispatchWarning('비밀번호를 확인하세요.');
         }
 
-        const { ok, exception } = await AuthApiService.getInstance().signin(body);
+        const { ok, data, exception } = await AuthApiService.getInstance().signin(body);
 
         if (ok === false) {
           return NotiEvent.dispatchException(exception);
         }
+
+        setAuthStore(this.toAuthStoreValue(data));
+
+        LocalStorageService.getInstance().setEmail(body.email);
+      },
+      [body, setAuthStore],
+    );
+  }
+
+  useSignUp(body: AuthSignUpBody) {
+    const setAuthStore = AuthStore.getInstance().useSetState();
+
+    return useCallback(
+      async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        if (isNotEmpty(body.email) === false) {
+          return NotiEvent.dispatchWarning('이메일을 입력하세요.');
+        }
+
+        if (isEmail(body.email) === false) {
+          return NotiEvent.dispatchWarning('이메일 형식이 아닙니다.');
+        }
+
+        if (isNotEmpty(body.name) === false) {
+          return NotiEvent.dispatchWarning('이름을 입력하세요.');
+        }
+
+        if (minLength(body.name, 2) === false) {
+          return NotiEvent.dispatchWarning('이름을 확인하세요.');
+        }
+
+        if (isNotEmpty(body.password) === false) {
+          return NotiEvent.dispatchWarning('비밀번호를 입력하세요.');
+        }
+
+        if (minLength(body.password, 6) === false) {
+          return NotiEvent.dispatchWarning('비밀번호를 확인하세요.');
+        }
+
+        if (body.password !== body.confirmPassword) {
+          return NotiEvent.dispatchWarning('비밀번호가 일치하지 않습니다.');
+        }
+
+        const { ok, data, exception } = await AuthApiService.getInstance().signup(body);
+
+        if (ok === false) {
+          return NotiEvent.dispatchException(exception);
+        }
+
+        setAuthStore(this.toAuthStoreValue(data));
+
+        LocalStorageService.getInstance().setEmail(body.email);
       },
       [body],
     );
@@ -141,21 +226,27 @@ export class AuthHook {
 
   useSignout(): void {
     const navigate = useNavigate();
-    const resetAuthStore = AuthStore.getInstance().useResetState();
+
+    const authStore = AuthStore.getInstance().useValue();
+    const setAuthStore = AuthStore.getInstance().useSetState();
 
     const signout = useCallback(async () => {
+      if (authStore.ok === null || authStore.ok === false) {
+        return;
+      }
+
       const { ok, exception } = await AuthApiService.getInstance().signout();
 
       if (ok === false) {
         NotiEvent.dispatchException(exception);
       } else {
-        resetAuthStore();
+        setAuthStore({ ...authStoreDefaultValue, ok: false });
 
         TimeoutService.getInstance().setTimeout(TimeoutKey.SignOut, () =>
           NotiEvent.dispatchInfo('로그인 페이지로 이동합니다.'),
         );
       }
-    }, [resetAuthStore, navigate]);
+    }, [authStore, setAuthStore, navigate]);
 
     useEffect(() => {
       signout();

@@ -1,42 +1,35 @@
 import { FunctionComponent } from 'react';
 
-import { Box, Button, TextField, Typography } from '@mui/material';
+import { Box, Button, TextField } from '@mui/material';
 
 import { PageContainer } from '@component';
-import { PageName, SignStyle } from '@common';
+import { ButtonAttributes, SignStyle, TextFieldAttributes } from '@common';
 import { AuthHook, TextFieldHook } from '@hook';
 
 export const SignInPage: FunctionComponent = () => {
   const [body, setBody] = AuthHook.getInstance().useSignInState();
 
   return (
-    <PageContainer maxWidth="xs">
+    <PageContainer maxWidth="xs" sx={SignStyle.Container}>
       <Box sx={SignStyle.Wrapper}>
-        <Typography component="h1" variant="h5">
-          {PageName.SignIn}
-        </Typography>
         <Box component="form" noValidate onSubmit={AuthHook.getInstance().useSignIn(body)}>
           <TextField
-            required
-            fullWidth
+            {...TextFieldAttributes.Sign}
             type="email"
             name="email"
             label="이메일"
-            margin="normal"
             value={body.email}
             onChange={TextFieldHook.getInstance().useOnChangeText(setBody)}
-          />{' '}
+          />
           <TextField
-            required
-            fullWidth
+            {...TextFieldAttributes.Sign}
             type="password"
             name="password"
             label="비밀번호"
-            margin="normal"
             value={body.password}
             onChange={TextFieldHook.getInstance().useOnChangeText(setBody)}
           />
-          <Button type="submit" fullWidth variant="contained" sx={SignStyle.Button}>
+          <Button {...ButtonAttributes.Sign} sx={SignStyle.Button}>
             로그인
           </Button>
         </Box>

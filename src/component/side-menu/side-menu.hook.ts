@@ -43,6 +43,7 @@ export class SideMenuHook {
   useNavigateMenuItemProps(item: SideMenuItemValue): [boolean, Pick<ListItemButtonProps, 'onClick'>['onClick']] {
     const location = useLocation();
     const navigate = useNavigate();
+    const pathname = location.pathname;
 
     const [selected, setSelected] = useState<boolean>(false);
 
@@ -51,20 +52,21 @@ export class SideMenuHook {
     }, [item, navigate]);
 
     useEffect(() => {
-      if (location.pathname.startsWith(item.path)) {
+      if (pathname.startsWith(item.path)) {
         if (item.path === PagePath.Home) {
-          setSelected(location.pathname === item.path);
+          setSelected(pathname === item.path);
         } else {
           setSelected(true);
         }
       }
-    }, [item, location.pathname, setSelected]);
+    }, [item, pathname, setSelected]);
 
     return [selected, onClick];
   }
 
   useCollapseMenuItemProps(item: SideMenuItemValue): [boolean, Pick<ListItemButtonProps, 'onClick'>['onClick']] {
     const location = useLocation();
+    const pathname = location.pathname;
 
     const [collapsed, setCollapsed] = useState<boolean>(false);
 
@@ -73,14 +75,14 @@ export class SideMenuHook {
     }, [item, setCollapsed]);
 
     useEffect(() => {
-      const childItem = item.children.find(({ path }) => location.pathname.startsWith(path));
+      const childItem = item.children.find(({ path }) => pathname.startsWith(path));
 
       if (childItem) {
         setCollapsed(true);
       } else {
         setCollapsed(false);
       }
-    }, [item, location.pathname, setCollapsed]);
+    }, [item, pathname, setCollapsed]);
 
     return [collapsed, onClick];
   }

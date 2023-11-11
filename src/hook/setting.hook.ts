@@ -13,13 +13,15 @@ export class SettingHook {
 
   useChangeTitles(): void {
     const location = useLocation();
+    const pathname = location.pathname;
+
     const setSetting = SettingStore.getInstance().useSetState();
 
     useEffect(() => {
       let helmetTitle = '';
       let gnbTitle = '';
 
-      switch (location.pathname) {
+      switch (pathname) {
         case PagePath.Home:
           helmetTitle = PageName.Home;
           gnbTitle = PageName.Home;
@@ -97,7 +99,7 @@ export class SettingHook {
         gnbTitle,
         openSideMenu: false,
       }));
-    }, [location.pathname, setSetting]);
+    }, [pathname, setSetting]);
   }
 
   useSideMenuCallback(openSideMenu: boolean) {

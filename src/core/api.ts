@@ -1,7 +1,7 @@
 import QueryString from 'qs';
 import { Axios, AxiosResponse } from 'axios';
 
-import { ApiConfig, ApiException, ApiResponse } from '@common';
+import { ApiConfig, ApiException, ApiResponse, NotiEvent } from '@common';
 
 export class Api extends Axios {
   constructor() {
@@ -55,11 +55,18 @@ export class Api extends Axios {
 
       res.ok = true;
       res.data = response.data;
-      res.exception = null;
     } catch (e) {
       res.ok = false;
-      res.data = null;
-      res.exception = e as ApiException;
+
+      const exception = e as ApiException;
+
+      if (exception) {
+        if (exception.statusCode < 500) {
+          res.exception = exception;
+        } else {
+          NotiEvent.dispatchException(res.exception);
+        }
+      }
     }
 
     return res;

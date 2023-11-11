@@ -57,15 +57,10 @@ export class Api extends Axios {
       res.data = response.data;
     } catch (e) {
       res.ok = false;
+      res.exception = e as ApiException;
 
-      const exception = e as ApiException;
-
-      if (exception) {
-        if (exception.statusCode < 500) {
-          res.exception = exception;
-        } else {
-          NotiEvent.dispatchException(res.exception);
-        }
+      if (res.exception && res.exception.statusCode >= 500) {
+        NotiEvent.dispatchException(res.exception);
       }
     }
 

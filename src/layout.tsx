@@ -1,4 +1,4 @@
-import { Fragment, FunctionComponent } from 'react';
+import { Fragment, FunctionComponent, useCallback } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
@@ -7,25 +7,30 @@ import { createTheme } from '@mui/material';
 
 import { AuthHook, SettingHook } from '@hook';
 import { SettingStore } from '@store';
-import { Gnb } from '@component';
+import { Gnb, SideMenu } from '@component';
 
 export const Layout: FunctionComponent = () => {
-  const { title, themeColor } = SettingStore.getInstance().useValue();
+  const [{ helmetTitle, themeColor, gnbTitle, openSideMenu }, setSettingStore] = SettingStore.getInstance().useState();
 
-  SettingHook.getInstance().useChangeTitle();
+  SettingHook.getInstance().useChangeTitles();
   AuthHook.getInstance().useAuthGuard();
+
+  const onOpenSideMenu = useCallback(() => {
+    setSettingStore((prev) => ({ ...prev, openSideMenu: true }));
+  }, [setSettingStore]);
+
+  const onCloseSideMenu = useCallback(() => {
+    setSettingStore((prev) => ({ ...prev, openSideMenu: false }));
+  }, [setSettingStore]);
 
   return (
     <Fragment>
       <Helmet>
-        <title>{title}</title>
+        <title>{helmetTitle}</title>
       </Helmet>
-      <ThemeProvider
-        theme={createTheme({
-          palette: { primary: { main: themeColor } },
-        })}
-      >
-        <Gnb />
+      <ThemeProvider theme={createTheme({ palette: { primary: { main: themeColor } } })}>
+        <Gnb iconButtonProps={{ onClick: onOpenSideMenu }} titleProps={{ title: gnbTitle }} />
+        <SideMenu open={openSideMenu} onClose={onCloseSideMenu} />
         <Outlet />
       </ThemeProvider>
     </Fragment>

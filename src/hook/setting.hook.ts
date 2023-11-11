@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { PageHelmetTitle, PagePath } from '@common';
+import { PageGnbTitle, PageHelmetTitle, PagePath } from '@common';
 import { SettingStore } from '@store';
 
 export class SettingHook {
@@ -11,28 +11,35 @@ export class SettingHook {
     return this.instance;
   }
 
-  public useChangeTitle(): void {
+  public useChangeTitles(): void {
     const location = useLocation();
     const setSetting = SettingStore.getInstance().useSetState();
 
     useEffect(() => {
-      let title = '';
+      let helmetTitle = '';
+      let gnbTitle = '';
 
       switch (location.pathname) {
         case PagePath.Home:
-          title = PageHelmetTitle.Home;
+          helmetTitle = PageHelmetTitle.Home;
+          gnbTitle = PageGnbTitle.Home;
+
           break;
 
         case PagePath.SignIn:
-          title = PageHelmetTitle.SignIn;
+          helmetTitle = PageHelmetTitle.SignIn;
+          gnbTitle = PageGnbTitle.SignIn;
+
           break;
 
         case PagePath.SignUp:
-          title = PageHelmetTitle.SignUp;
+          helmetTitle = PageHelmetTitle.SignUp;
+          gnbTitle = PageGnbTitle.SignUp;
+
           break;
       }
 
-      setSetting((prev) => ({ ...prev, title }));
+      setSetting((prev) => ({ ...prev, helmetTitle, gnbTitle }));
     }, [location.pathname, setSetting]);
   }
 }

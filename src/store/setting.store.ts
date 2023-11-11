@@ -4,8 +4,10 @@ import { SettingStoreValue } from './types';
 
 export class SettingStore extends RecoilStore<SettingStoreValue> {
   private static instance = new SettingStore(SettingStore.name, {
-    title: '',
+    helmetTitle: '',
     themeColor: '#A00',
+    gnbTitle: '',
+    openSideMenu: false,
   });
 
   public static getInstance() {

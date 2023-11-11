@@ -1,8 +1,10 @@
 import { Auth, Role } from '@common/constants';
 
 export type SettingStoreValue = {
-  title: string;
+  helmetTitle: string;
   themeColor: string;
+  gnbTitle: string;
+  openSideMenu: boolean;
 };
 
 export type AuthStoreValue = {

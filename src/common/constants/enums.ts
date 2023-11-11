@@ -10,6 +10,12 @@ export enum PageHelmetTitle {
   SignUp = '회원가입',
 }
 
+export enum PageGnbTitle {
+  Home = '홈',
+  SignIn = '로그인',
+  SignUp = '회원가입',
+}
+
 export enum GenderCode {
   Male1 = 1,
   Male2 = 3,

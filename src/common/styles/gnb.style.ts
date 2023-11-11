@@ -1,7 +1,7 @@
 import { SxProps } from '@mui/material';
 
 export class GnbStyle {
-  public static get Container(): SxProps {
+  public static get Wrapper(): SxProps {
     return { flexGrow: 1 };
   }
 

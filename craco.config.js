@@ -1,7 +1,18 @@
 var path = require('path');
+var webpack = require('webpack');
 
 module.exports = {
   webpack: {
+    plugins: [
+      new webpack.ProvidePlugin({
+        Buffer: ['buffer', 'Buffer'],
+      }),
+    ],
+    resolve: {
+      fallback: {
+        buffer: require.resolve('buffer'),
+      },
+    },
     alias: {
       '@common': path.resolve(__dirname, 'src/common'),
       '@core': path.resolve(__dirname, 'src/core'),

@@ -106,7 +106,7 @@ export class AuthHook {
         return;
       }
 
-      if ([PagePath.SignIn, PagePath.SignUp].includes(pathname as PagePath)) {
+      if ([PagePath.SignIn, PagePath.SignUp].includes(pathname)) {
         if (ok === false) {
           return;
         }

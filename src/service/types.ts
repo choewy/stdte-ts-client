@@ -42,3 +42,9 @@ export type AuthSignUpBody = {
   password: string;
   confirmPassword: string;
 };
+
+export type AuthUpdatePasswordBody = {
+  currentPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+};

@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { PageGnbTitle, PageHelmetTitle, PagePath } from '@common';
+import { PageName, PagePath } from '@common';
 import { SettingStore } from '@store';
 
 export class SettingHook {
@@ -21,72 +21,72 @@ export class SettingHook {
 
       switch (location.pathname) {
         case PagePath.Home:
-          helmetTitle = PageHelmetTitle.Home;
-          gnbTitle = PageGnbTitle.Home;
+          helmetTitle = PageName.Home;
+          gnbTitle = PageName.Home;
 
           break;
 
         case PagePath.SignIn:
-          helmetTitle = PageHelmetTitle.SignIn;
-          gnbTitle = PageGnbTitle.SignIn;
+          helmetTitle = PageName.SignIn;
+          gnbTitle = PageName.SignIn;
 
           break;
 
         case PagePath.SignUp:
-          helmetTitle = PageHelmetTitle.SignUp;
-          gnbTitle = PageGnbTitle.SignUp;
+          helmetTitle = PageName.SignUp;
+          gnbTitle = PageName.SignUp;
 
           break;
 
         case PagePath.MyPage:
-          helmetTitle = PageHelmetTitle.MyPage;
-          gnbTitle = PageGnbTitle.MyPage;
+          helmetTitle = PageName.MyPage;
+          gnbTitle = PageName.MyPage;
 
           break;
 
         case PagePath.Role:
-          helmetTitle = PageHelmetTitle.Role;
-          gnbTitle = PageGnbTitle.Role;
+          helmetTitle = PageName.Role;
+          gnbTitle = PageName.Role;
 
           break;
 
         case PagePath.Credential:
-          helmetTitle = PageHelmetTitle.Credential;
-          gnbTitle = PageGnbTitle.Credential;
+          helmetTitle = PageName.Credential;
+          gnbTitle = PageName.Credential;
 
           break;
 
         case PagePath.TimeRecordTable:
-          helmetTitle = PageHelmetTitle.TimeRecordTable;
-          gnbTitle = PageGnbTitle.TimeRecordTable;
+          helmetTitle = PageName.TimeRecordTable;
+          gnbTitle = PageName.TimeRecordTable;
 
           break;
 
         case PagePath.TimeRecordAnalytics:
-          helmetTitle = PageHelmetTitle.TimeRecordAnalytics;
-          gnbTitle = PageGnbTitle.TimeRecordAnalytics;
+          helmetTitle = PageName.TimeRecordAnalytics;
+          gnbTitle = PageName.TimeRecordAnalytics;
 
           break;
 
         case PagePath.Team:
-          helmetTitle = PageHelmetTitle.Team;
-          gnbTitle = PageGnbTitle.Team;
+          helmetTitle = PageName.Team;
+          gnbTitle = PageName.Team;
 
           break;
 
-        case PagePath.User:
-          helmetTitle = PageHelmetTitle.User;
-          gnbTitle = PageGnbTitle.User;
+        case PagePath.Member:
+          helmetTitle = PageName.Member;
+          gnbTitle = PageName.Member;
           break;
 
         case PagePath.ProjectTable:
-          helmetTitle = PageHelmetTitle.ProjectTable;
-          gnbTitle = PageGnbTitle.ProjectTable;
+          helmetTitle = PageName.ProjectTable;
+          gnbTitle = PageName.ProjectTable;
           break;
 
         case PagePath.ProjectSetting:
-          helmetTitle = PageHelmetTitle.ProjectSetting;
-          gnbTitle = PageGnbTitle.ProjectSetting;
+          helmetTitle = PageName.ProjectSetting;
+          gnbTitle = PageName.ProjectSetting;
 
           break;
       }

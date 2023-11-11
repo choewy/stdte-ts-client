@@ -32,8 +32,9 @@
       "@page/*": ["src/page/*"],
       "@component": ["src/component"],
       "@component/*": ["src/component/*"],
-      "@app": ["src/app.tsx"],
-      "@router": ["src/router.tsx"]
+      "@layout": ["src/layout.tsx"],
+      "@router": ["src/router.tsx"],
+      "@app": ["src/app.tsx"]
     }
   },
   "include": ["src"]

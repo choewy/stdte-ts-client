@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { Fragment, FunctionComponent } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
@@ -7,15 +7,16 @@ import { createTheme } from '@mui/material';
 
 import { AuthHook, SettingHook } from '@hook';
 import { SettingStore } from '@store';
+import { Gnb } from '@component';
 
-export const PageOutlet: FunctionComponent = () => {
+export const Layout: FunctionComponent = () => {
   const { title, themeColor } = SettingStore.getInstance().useValue();
 
   SettingHook.getInstance().useChangeTitle();
   AuthHook.getInstance().useAuthGuard();
 
   return (
-    <>
+    <Fragment>
       <Helmet>
         <title>{title}</title>
       </Helmet>
@@ -24,8 +25,9 @@ export const PageOutlet: FunctionComponent = () => {
           palette: { primary: { main: themeColor } },
         })}
       >
+        <Gnb />
         <Outlet />
       </ThemeProvider>
-    </>
+    </Fragment>
   );
 };

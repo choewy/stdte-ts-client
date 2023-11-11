@@ -5,7 +5,7 @@ export class HashService {
     return this.instance;
   }
 
-  toBase64(data: string): string {
-    return Buffer.from(data, 'utf-8').toString('base64');
+  toHex(data: string): string {
+    return Buffer.from(data, 'utf-8').toString('hex');
   }
 }

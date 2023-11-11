@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { PagePath } from '@common';
 import { AuthStore } from '@store';
 import { AuthApiService } from '@service';
-import { AuthStoreValue } from '@store/types';
+import { AuthStoreValue } from '@store';
 
 export class AuthHook {
   private static instance = new AuthHook();

@@ -4,6 +4,14 @@ export enum PagePath {
   SignUp = '/signup',
   SignOut = '/signout',
   MyPage = '/mypage',
+  Role = '/role',
+  Credential = '/credential',
+  TimeRecordTable = '/table',
+  TimeRecordAnalytics = '/analytics',
+  Team = '/team',
+  User = '/user',
+  ProjectTable = '/project',
+  ProjectSetting = '/setting',
 }
 
 export enum PageHelmetTitle {
@@ -11,6 +19,14 @@ export enum PageHelmetTitle {
   SignIn = '로그인',
   SignUp = '회원가입',
   MyPage = '내 정보',
+  Role = '역할 관리',
+  Credential = '계정 관리',
+  TimeRecordTable = '시간 관리 테이블',
+  TimeRecordAnalytics = '시간 관리 집계',
+  Team = '팀 목록',
+  User = '구성원 목록',
+  ProjectTable = '프로젝트 목록',
+  ProjectSetting = '프로젝트 설정',
 }
 
 export enum PageGnbTitle {
@@ -18,6 +34,20 @@ export enum PageGnbTitle {
   SignIn = '로그인',
   SignUp = '회원가입',
   MyPage = '내 정보',
+  Role = '역할 관리',
+  Credential = '계정 관리',
+  TimeRecordTable = '시간 관리 테이블',
+  TimeRecordAnalytics = '시간 관리 집계',
+  Team = '팀 목록',
+  User = '구성원 목록',
+  ProjectTable = '프로젝트 목록',
+  ProjectSetting = '프로젝트 설정',
+}
+
+export enum SideMenuType {
+  Global = 'global',
+  Public = 'public',
+  Private = 'private',
 }
 
 export enum GenderCode {

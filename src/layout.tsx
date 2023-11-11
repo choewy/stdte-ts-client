@@ -12,7 +12,7 @@ import { Gnb, SideMenu } from '@component';
 
 export const Layout: FunctionComponent = () => {
   const { helmetTitle, themeColor, gnbTitle, openSideMenu } = SettingStore.getInstance().useValue();
-  const { ok } = AuthStore.getInstance().useValue();
+  const { ok, auth, role } = AuthStore.getInstance().useValue();
 
   SettingHook.getInstance().useChangeTitles();
   AuthHook.getInstance().useAuthCheck();
@@ -33,7 +33,14 @@ export const Layout: FunctionComponent = () => {
             onSignout: navigateHook.useNavigateCallback(PagePath.SignOut, true),
           }}
         />
-        <SideMenu open={openSideMenu} onClose={SettingHook.getInstance().useSideMenuCallback(false)} />
+        <SideMenu
+          open={openSideMenu}
+          onClose={SettingHook.getInstance().useSideMenuCallback(false)}
+          listProps={{
+            auth,
+            role,
+          }}
+        />
         <Outlet />
       </ThemeProvider>
     </Fragment>

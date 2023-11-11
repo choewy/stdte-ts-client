@@ -1,6 +1,9 @@
 import { HttpStatusCode } from 'axios';
 
-import { RolePolicyValue } from './enums';
+import { SvgIconTypeMap } from '@mui/material';
+import { OverridableComponent } from '@mui/material/OverridableComponent';
+
+import { RolePolicyValue, SideMenuType } from './enums';
 
 export type ApiException = {
   message: string;
@@ -21,6 +24,17 @@ export type ApiResponse<D> = {
 export type EnumMap<V, T> = {
   value: V;
   text: T;
+};
+
+export type SideMenuItemValue = {
+  key: string;
+  type: SideMenuType;
+  title: string;
+  Icon: OverridableComponent<SvgIconTypeMap<{}, 'svg'>>;
+  path?: string;
+  divider?: boolean;
+  access?: Partial<Record<keyof Omit<RolePolicy, 'id'>, RolePolicyValue>>;
+  children?: Omit<SideMenuItemValue, 'children'>[];
 };
 
 export type Auth = {

@@ -42,10 +42,7 @@ export const Layout: FunctionComponent = () => {
         <SideMenu
           open={openSideMenu}
           onClose={SettingHook.getInstance().useSideMenuCallback(false)}
-          listProps={{
-            auth,
-            role,
-          }}
+          listProps={{ auth, role }}
         />
         <Outlet />
       </ThemeProvider>

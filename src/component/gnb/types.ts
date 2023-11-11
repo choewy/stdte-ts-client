@@ -1,11 +1,12 @@
-import { ButtonProps, IconButtonProps } from '@mui/material';
+import { NavigateFunction } from 'react-router-dom';
+
+import { IconButtonProps } from '@mui/material';
 
 export type GnbIconButtonProps = Pick<IconButtonProps, 'onClick'>;
 export type GnbTitleProps = { title: string };
 export type GnbButtonGroupProps = {
-  visible: boolean;
-  onMyPage: Pick<ButtonProps, 'onClick'>['onClick'];
-  onSignout: Pick<ButtonProps, 'onClick'>['onClick'];
+  auth: boolean;
+  navigate: NavigateFunction;
 };
 
 export type GnbProps = {

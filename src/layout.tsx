@@ -5,9 +5,8 @@ import { Helmet } from 'react-helmet-async';
 import { ThemeProvider } from '@emotion/react';
 import { createTheme } from '@mui/material';
 
-import { PagePath } from '@common';
 import { AuthStore, SettingStore } from '@store';
-import { AuthHook, navigateHook, NotiHook, SettingHook } from '@hook';
+import { AuthHook, NotiHook, SettingHook } from '@hook';
 import { Gnb, Notisnack, SideMenu } from '@component';
 
 export const Layout: FunctionComponent = () => {
@@ -34,9 +33,8 @@ export const Layout: FunctionComponent = () => {
           iconButtonProps={{ onClick: SettingHook.getInstance().useSideMenuCallback(true) }}
           titleProps={{ title: gnbTitle }}
           buttonGroupProps={{
-            visible: ok,
-            onMyPage: navigateHook.useNavigateCallback(PagePath.MyPage),
-            onSignout: navigateHook.useNavigateCallback(PagePath.SignOut, true),
+            auth: ok,
+            navigate,
           }}
         />
         <SideMenu

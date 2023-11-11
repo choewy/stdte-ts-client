@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { PageGnbTitle, PageHelmetTitle, PagePath } from '@common';
@@ -11,7 +11,7 @@ export class SettingHook {
     return this.instance;
   }
 
-  public useChangeTitles(): void {
+  useChangeTitles(): void {
     const location = useLocation();
     const setSetting = SettingStore.getInstance().useSetState();
 
@@ -41,5 +41,13 @@ export class SettingHook {
 
       setSetting((prev) => ({ ...prev, helmetTitle, gnbTitle }));
     }, [location.pathname, setSetting]);
+  }
+
+  useSideMenuCallback(openSideMenu: boolean) {
+    const setSettingStore = SettingStore.getInstance().useSetState();
+
+    return useCallback(() => {
+      setSettingStore((prev) => ({ ...prev, openSideMenu }));
+    }, [setSettingStore]);
   }
 }

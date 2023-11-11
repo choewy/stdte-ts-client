@@ -15,7 +15,7 @@ export class Api extends Axios {
     });
   }
 
-  protected async valueFrom<D>(response: Promise<AxiosResponse<D, ApiException>>) {
+  protected async valueFrom<D>(request: Promise<AxiosResponse<D, ApiException>>) {
     const res: ApiResponse<D> = {
       ok: false,
       data: null,
@@ -23,10 +23,14 @@ export class Api extends Axios {
     };
 
     try {
-      const { data } = await response;
+      const response = await request;
+
+      if (response.status >= 400) {
+        throw response.data;
+      }
 
       res.ok = true;
-      res.data = data;
+      res.data = response.data;
       res.exception = null;
     } catch (e) {
       const error = e as AxiosError;

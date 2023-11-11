@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { PagePath } from '@common';
 import { AuthStore } from '@store';
 import { AuthApiService } from '@service';
+import { AuthStoreValue } from '@store/types';
 
 export class AuthHook {
   private static instance = new AuthHook();
@@ -12,49 +13,65 @@ export class AuthHook {
     return this.instance;
   }
 
-  useAuthGuard(): void {
-    const location = useLocation();
-    const navigate = useNavigate();
-
-    const [authStore, setAuthStore] = AuthStore.getInstance().useState();
+  useAuthCheck(): void {
+    const setAuthStore = AuthStore.getInstance().useSetState();
 
     const checkAuth = useCallback(async () => {
-      const res = await AuthApiService.getInstance().checkAuth();
+      const response = await AuthApiService.getInstance().checkAuth();
 
-      if (res.ok) {
-        setAuthStore({
-          ok: true,
-          auth: {
-            id: res.data.id,
-            email: res.data.email,
-            name: res.data.name,
-          },
-          role: res.data.role
-            ? {
-                id: res.data.role.id,
-                name: res.data.role.name,
-                rolePolicy: {
-                  id: res.data.role.rolePolicy.id,
-                  accessRole: res.data.role.rolePolicy.accessRole.value,
-                  accessTeam: res.data.role.rolePolicy.accessTeam.value,
-                  accessUser: res.data.role.rolePolicy.accessUser.value,
-                  accessProject: res.data.role.rolePolicy.accessProject.value,
-                },
-              }
-            : null,
-        });
-      } else {
-        setAuthStore({ ok: false, auth: null, role: null });
+      if (response.ok === false) {
+        return setAuthStore({ ok: false, auth: null, role: null });
       }
+
+      const authStoreValue: AuthStoreValue = {
+        ok: true,
+        auth: null,
+        role: null,
+      };
+
+      if (response.data) {
+        authStoreValue.auth = {
+          id: response.data.id,
+          email: response.data.email,
+          name: response.data.name,
+        };
+      }
+
+      if (response.data.role) {
+        authStoreValue.role = {
+          id: response.data.role.id,
+          name: response.data.role.name,
+          rolePolicy: null,
+        };
+      }
+
+      if (response.data.role?.rolePolicy) {
+        authStoreValue.role.rolePolicy = {
+          id: response.data.role.rolePolicy.id,
+          accessRole: response.data.role.rolePolicy.accessRole.value,
+          accessTeam: response.data.role.rolePolicy.accessTeam.value,
+          accessUser: response.data.role.rolePolicy.accessUser.value,
+          accessProject: response.data.role.rolePolicy.accessProject.value,
+        };
+      }
+
+      setAuthStore(authStoreValue);
     }, [setAuthStore]);
 
     useEffect(() => {
       checkAuth();
     }, [checkAuth]);
+  }
+
+  useAuthGuard(): void {
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const { ok } = AuthStore.getInstance().useValue();
 
     useEffect(() => {
       if (location.pathname === PagePath.Home) {
-        if (authStore.ok === false) {
+        if (ok === false) {
           navigate(PagePath.SignIn, { replace: true });
         }
 
@@ -62,18 +79,31 @@ export class AuthHook {
       }
 
       if ([PagePath.SignIn, PagePath.SignUp].includes(location.pathname as PagePath)) {
-        if (authStore.ok === null || authStore.ok === false) {
+        if (ok === null || ok === false) {
           return;
         }
 
         navigate(PagePath.Home, { replace: true });
       } else {
-        if (authStore.ok === true) {
+        if (ok === true) {
           return;
         }
 
         navigate(PagePath.SignIn, { replace: true });
       }
-    }, [location.pathname, authStore.ok, navigate]);
+    }, [location.pathname, ok, navigate]);
+  }
+
+  useSignout(): void {
+    const resetAuthStore = AuthStore.getInstance().useResetState();
+
+    const signout = useCallback(async () => {
+      await AuthApiService.getInstance().signout();
+      resetAuthStore();
+    }, [resetAuthStore]);
+
+    useEffect(() => {
+      signout();
+    }, [signout]);
   }
 }

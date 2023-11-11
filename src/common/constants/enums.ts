@@ -2,18 +2,22 @@ export enum PagePath {
   Home = '/',
   SignIn = '/signin',
   SignUp = '/signup',
+  SignOut = '/signout',
+  MyPage = '/mypage',
 }
 
 export enum PageHelmetTitle {
   Home = '홈',
   SignIn = '로그인',
   SignUp = '회원가입',
+  MyPage = '내 정보',
 }
 
 export enum PageGnbTitle {
   Home = '홈',
   SignIn = '로그인',
   SignUp = '회원가입',
+  MyPage = '내 정보',
 }
 
 export enum GenderCode {

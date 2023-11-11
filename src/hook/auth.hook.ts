@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { PagePath } from '@common';
+import { NotiEvent, PagePath } from '@common';
 import { AuthStore } from '@store';
 import { AuthApiService } from '@service';
 import { AuthStoreValue } from '@store';
@@ -14,12 +14,19 @@ export class AuthHook {
   }
 
   useAuthCheck(): void {
+    const location = useLocation();
     const setAuthStore = AuthStore.getInstance().useSetState();
 
     const checkAuth = useCallback(async () => {
       const response = await AuthApiService.getInstance().checkAuth();
 
       if (response.ok === false) {
+        const pathname = location.pathname as PagePath;
+
+        if (![PagePath.SignIn, PagePath.SignUp].includes(pathname)) {
+          NotiEvent.dispatchException(response.exception);
+        }
+
         return setAuthStore({ ok: false, auth: null, role: null });
       }
 
@@ -56,7 +63,7 @@ export class AuthHook {
       }
 
       setAuthStore(authStoreValue);
-    }, [setAuthStore]);
+    }, [location, setAuthStore]);
 
     useEffect(() => {
       checkAuth();

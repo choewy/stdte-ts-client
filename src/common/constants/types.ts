@@ -4,6 +4,7 @@ import { SvgIconTypeMap } from '@mui/material';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 
 import { RolePolicyValue, SideMenuType } from './enums';
+import { VariantType } from 'notistack';
 
 export type ApiException = {
   message: string;
@@ -19,6 +20,12 @@ export type ApiResponse<D> = {
   ok: boolean;
   data: D;
   exception?: ApiException;
+};
+
+export type NotiEventDetail = {
+  id: string;
+  variant: VariantType;
+  message: string;
 };
 
 export type EnumMap<V, T> = {

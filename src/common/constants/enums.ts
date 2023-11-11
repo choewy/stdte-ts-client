@@ -1,3 +1,7 @@
+export enum EventType {
+  Noti = 'noti-event',
+}
+
 export enum PagePath {
   Home = '/',
   SignIn = '/signin',

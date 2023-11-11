@@ -33,11 +33,9 @@ export class Api extends Axios {
       res.data = response.data;
       res.exception = null;
     } catch (e) {
-      const error = e as AxiosError;
-
       res.ok = false;
       res.data = null;
-      res.exception = error.response?.data as ApiException;
+      res.exception = e as ApiException;
     }
 
     return res;

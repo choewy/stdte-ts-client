@@ -7,14 +7,15 @@ import { createTheme } from '@mui/material';
 
 import { PagePath } from '@common';
 import { AuthStore, SettingStore } from '@store';
-import { AuthHook, navigateHook, SettingHook } from '@hook';
-import { Gnb, SideMenu } from '@component';
+import { AuthHook, navigateHook, NotiHook, SettingHook } from '@hook';
+import { Gnb, Notisnack, SideMenu } from '@component';
 
 export const Layout: FunctionComponent = () => {
   const { helmetTitle, themeColor, gnbTitle, openSideMenu } = SettingStore.getInstance().useValue();
   const { ok, auth, role } = AuthStore.getInstance().useValue();
 
   SettingHook.getInstance().useChangeTitles();
+  NotiHook.getInstance().useListenEvent();
   AuthHook.getInstance().useAuthCheck();
   AuthHook.getInstance().useAuthGuard();
 
@@ -24,6 +25,7 @@ export const Layout: FunctionComponent = () => {
         <title>{helmetTitle}</title>
       </Helmet>
       <ThemeProvider theme={createTheme({ palette: { primary: { main: themeColor } } })}>
+        <Notisnack noti={NotiHook.getInstance().useConsume()} />
         <Gnb
           iconButtonProps={{ onClick: SettingHook.getInstance().useSideMenuCallback(true) }}
           titleProps={{ title: gnbTitle }}

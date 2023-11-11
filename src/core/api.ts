@@ -1,5 +1,5 @@
 import QueryString from 'qs';
-import { Axios, AxiosError, AxiosResponse } from 'axios';
+import { Axios, AxiosResponse } from 'axios';
 
 import { ApiConfig, ApiException, ApiResponse } from '@common';
 
@@ -9,8 +9,32 @@ export class Api extends Axios {
       baseURL: new ApiConfig().getHttpApiUrl(),
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
-      transformRequest: [(data) => data],
-      transformResponse: [(data) => (data === undefined ? null : JSON.parse(data))],
+      transformRequest: [
+        (data) => {
+          let value;
+
+          try {
+            value = JSON.stringify(data);
+          } catch {
+            value = data;
+          }
+
+          return value;
+        },
+      ],
+      transformResponse: [
+        (data) => {
+          let value;
+
+          try {
+            value = JSON.parse(data);
+          } catch {
+            value = data;
+          }
+
+          return value;
+        },
+      ],
       paramsSerializer: (params) => QueryString.stringify(params, { arrayFormat: 'brackets' }),
     });
   }

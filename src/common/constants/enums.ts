@@ -1,3 +1,7 @@
+export enum TimeoutKey {
+  SignOut = 'signout',
+}
+
 export enum EventType {
   Noti = 'noti-event',
 }

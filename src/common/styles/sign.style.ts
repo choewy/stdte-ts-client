@@ -7,4 +7,6 @@ export class SignStyle {
     flexDirection: 'column',
     alignItems: 'center',
   };
+
+  public static Button: SxProps = { mt: 3, mb: 2 };
 }

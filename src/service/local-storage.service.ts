@@ -7,8 +7,8 @@ export class LocalStorageService {
 
   private readonly EMAIL_KEY = '__stdte_ts_email';
 
-  getEmail(): string | null {
-    return localStorage.getItem(this.EMAIL_KEY) ?? null;
+  getEmail(): string {
+    return localStorage.getItem(this.EMAIL_KEY) ?? '';
   }
 
   setEmail(email: string): void {

@@ -1,5 +1,5 @@
 import { Fragment, FunctionComponent } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
 import { ThemeProvider } from '@emotion/react';
@@ -11,13 +11,17 @@ import { AuthHook, navigateHook, NotiHook, SettingHook } from '@hook';
 import { Gnb, Notisnack, SideMenu } from '@component';
 
 export const Layout: FunctionComponent = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const { helmetTitle, themeColor, gnbTitle, openSideMenu } = SettingStore.getInstance().useValue();
   const { ok, auth, role } = AuthStore.getInstance().useValue();
 
   SettingHook.getInstance().useChangeTitles();
+
   NotiHook.getInstance().useListenEvent();
-  AuthHook.getInstance().useAuthCheck();
-  AuthHook.getInstance().useAuthGuard();
+  AuthHook.getInstance().useAuthCheck(ok, location);
+  AuthHook.getInstance().useAuthGuard(ok, location, navigate);
 
   return (
     <Fragment>

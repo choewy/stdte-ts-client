@@ -20,3 +20,8 @@ export class AuthCheckResponse {
   name: string;
   role: AuthRoleResponse | null;
 }
+
+export class AuthSignInBody {
+  email: string;
+  password: string;
+}

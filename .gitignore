@@ -2,6 +2,7 @@
 
 # development
 /local
+.env.local
 
 # dependencies
 /node_modules

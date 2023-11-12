@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "env-cmd -f .env craco start",
+    "start:local": "env-cmd -f .env.local craco start",
+    "start": "craco start",
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject"

@@ -1,9 +1,11 @@
-import { Fragment, FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 
 import { AuthHook } from '@hook';
 
-export const SignOutPage: FunctionComponent = () => {
+const SignOutPage: FunctionComponent = () => {
   AuthHook.getInstance().useSignout();
 
-  return <Fragment />;
+  return null;
 };
+
+export default SignOutPage;

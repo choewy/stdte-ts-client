@@ -2,9 +2,10 @@ import './index.css';
 
 import reportWebVitals from './reportWebVitals';
 
+import { lazy } from 'react';
 import ReactDOM from 'react-dom/client';
 
-import { App } from '@app';
+const App = lazy(() => import('@app'));
 
 const element = document.getElementById('root');
 

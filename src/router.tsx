@@ -2,7 +2,6 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import { PagePath } from '@common';
 import { Layout } from '@layout';
-import { MemberPage } from './page/member.page';
 import {
   CredentialPage,
   ForbiddenPage,
@@ -15,10 +14,11 @@ import {
   SignOutPage,
   SignUpPage,
   TeamPage,
+  MemberPage,
   TimeRecordAnalyticsPage,
   TimeRecordTablePage,
+  RedirectPage,
 } from '@page';
-import { RedirectPage } from '@page/redirect.page';
 
 export const router = createBrowserRouter([
   {

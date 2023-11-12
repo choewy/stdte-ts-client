@@ -1,5 +1,7 @@
 import { FunctionComponent } from 'react';
 
-export const ProjectSettingPage: FunctionComponent = () => {
+const ProjectSettingPage: FunctionComponent = () => {
   return <div>Project Setting Page</div>;
 };
+
+export default ProjectSettingPage;

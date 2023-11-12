@@ -6,7 +6,7 @@ import { PageContainer } from '@component';
 import { ButtonAttributes, SignStyle, TextFieldAttributes } from '@common';
 import { AuthHook, TextFieldHook } from '@hook';
 
-export const SignUpPage: FunctionComponent = () => {
+const SignUpPage: FunctionComponent = () => {
   const [body, setBody] = AuthHook.getInstance().useSignUpState();
 
   return (
@@ -53,3 +53,5 @@ export const SignUpPage: FunctionComponent = () => {
     </PageContainer>
   );
 };
+
+export default SignUpPage;

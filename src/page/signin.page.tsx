@@ -6,7 +6,7 @@ import { PageContainer } from '@component';
 import { ButtonAttributes, SignStyle, TextFieldAttributes } from '@common';
 import { AuthHook, TextFieldHook } from '@hook';
 
-export const SignInPage: FunctionComponent = () => {
+const SignInPage: FunctionComponent = () => {
   const [body, setBody] = AuthHook.getInstance().useSignInState();
 
   return (
@@ -37,3 +37,5 @@ export const SignInPage: FunctionComponent = () => {
     </PageContainer>
   );
 };
+
+export default SignInPage;

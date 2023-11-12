@@ -1,5 +1,7 @@
 import { FunctionComponent } from 'react';
 
-export const RolePage: FunctionComponent = () => {
+const RolePage: FunctionComponent = () => {
   return <div>Role</div>;
 };
+
+export default RolePage;

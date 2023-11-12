@@ -1,16 +1,29 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, Suspense } from 'react';
 import { RecoilRoot } from 'recoil';
 import { RouterProvider } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
-import { router } from '@router';
+import { Backdrop, CircularProgress } from '@mui/material';
 
-export const App: FunctionComponent = () => {
+import { router } from '@router';
+import { BackdropStyle } from '@common';
+
+const App: FunctionComponent = () => {
   return (
     <RecoilRoot>
       <HelmetProvider>
-        <RouterProvider router={router} />
+        <Suspense
+          fallback={
+            <Backdrop open={true} sx={BackdropStyle.Suspense}>
+              <CircularProgress color="inherit" />
+            </Backdrop>
+          }
+        >
+          <RouterProvider router={router} />
+        </Suspense>
       </HelmetProvider>
     </RecoilRoot>
   );
 };
+
+export default App;

@@ -1,5 +1,7 @@
 import { FunctionComponent } from 'react';
 
-export const ProjectTablePage: FunctionComponent = () => {
+const ProjectTablePage: FunctionComponent = () => {
   return <div>Project Table Page</div>;
 };
+
+export default ProjectTablePage;

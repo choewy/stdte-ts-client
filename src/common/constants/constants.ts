@@ -7,7 +7,6 @@ import {
   Groups,
   History,
   Home,
-  Key,
   ManageAccounts,
   PersonAdd,
   PersonSearch,
@@ -51,28 +50,6 @@ export const SIDE_MENUS: SideMenuItemValue[] = [
   },
   {
     key: createKey('side-menu'),
-    type: SideMenuType.Public,
-    title: '로그인',
-    path: PagePath.SignIn,
-    Icon: Key,
-  },
-  {
-    key: createKey('side-menu'),
-    type: SideMenuType.Public,
-    title: '회원가입',
-    path: PagePath.SignUp,
-    Icon: PersonAdd,
-  },
-  {
-    key: createKey('side-menu'),
-    type: SideMenuType.Private,
-    title: '내 정보',
-    path: PagePath.MyPage,
-    Icon: PersonAdd,
-    divider: true,
-  },
-  {
-    key: createKey('side-menu'),
     type: SideMenuType.Private,
     title: '관리자',
     Icon: Settings,
@@ -82,6 +59,7 @@ export const SIDE_MENUS: SideMenuItemValue[] = [
       accessTeam: RolePolicyValue.Admin,
       accessProject: RolePolicyValue.Admin,
     },
+    divider: true,
     children: [
       {
         key: createKey('side-menu'),
@@ -104,6 +82,7 @@ export const SIDE_MENUS: SideMenuItemValue[] = [
     type: SideMenuType.Private,
     title: '시간기록',
     Icon: History,
+    divider: true,
     children: [
       {
         key: createKey('side-menu'),
@@ -130,6 +109,7 @@ export const SIDE_MENUS: SideMenuItemValue[] = [
       accessUser: RolePolicyValue.Read,
       accessTeam: RolePolicyValue.Read,
     },
+    divider: true,
     children: [
       {
         key: createKey('side-menu'),
@@ -152,6 +132,7 @@ export const SIDE_MENUS: SideMenuItemValue[] = [
     type: SideMenuType.Private,
     title: '프로젝트',
     Icon: PersonAdd,
+    divider: true,
     access: {
       accessProject: RolePolicyValue.Read,
     },

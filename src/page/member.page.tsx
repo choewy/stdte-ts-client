@@ -1,5 +1,7 @@
 import { FunctionComponent } from 'react';
 
-export const MemberPage: FunctionComponent = () => {
+const MemberPage: FunctionComponent = () => {
   return <div>Member Page</div>;
 };
+
+export default MemberPage;

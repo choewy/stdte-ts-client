@@ -3,6 +3,8 @@ import { Navigate } from 'react-router-dom';
 
 import { PagePath } from '@common';
 
-export const RedirectPage: FunctionComponent = () => {
+const RedirectPage: FunctionComponent = () => {
   return <Navigate to={PagePath.Home} replace />;
 };
+
+export default RedirectPage;

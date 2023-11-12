@@ -1,5 +1,7 @@
 import { FunctionComponent } from 'react';
 
-export const TimeRecordTablePage: FunctionComponent = () => {
+const TimeRecordTablePage: FunctionComponent = () => {
   return <div>Time Record Table Page</div>;
 };
+
+export default TimeRecordTablePage;

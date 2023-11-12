@@ -1,5 +1,8 @@
 import { FunctionComponent } from 'react';
+import { useLocation } from 'react-router-dom';
 
 export const ForbiddenPage: FunctionComponent = () => {
-  return <div>Forbidden Page</div>;
+  const location = useLocation();
+
+  return <div>Forbidden Page : {location.state}</div>;
 };

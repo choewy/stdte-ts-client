@@ -56,14 +56,16 @@ export enum DegreeText {
 
 export enum AuthStatusValue {
   Wating = 0,
-  Active = 1,
-  Reject = 2,
+  Reject = 1,
+  Active = 2,
+  Disable = 3,
 }
 
 export enum AuthStatusText {
   Wating = '승인대기',
-  Active = '승인완료',
   Reject = '승인거절',
+  Active = '활성',
+  Disable = '비활성',
 }
 
 export enum EmploymentStatusValue {

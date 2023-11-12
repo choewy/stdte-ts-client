@@ -3,7 +3,7 @@ import { HttpStatusCode } from 'axios';
 import { SvgIconTypeMap } from '@mui/material';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 
-import { RolePolicyValue, SideMenuType } from './enums';
+import { AuthStatusValue, EmploymentStatusValue, RolePolicyValue, SideMenuType } from './enums';
 import { VariantType } from 'notistack';
 
 export type ApiException = {
@@ -48,6 +48,8 @@ export type Auth = {
   id: number;
   name: string;
   email: string;
+  authStatus: AuthStatusValue;
+  employmentStatus: EmploymentStatusValue;
 };
 
 export type User = Auth & {};

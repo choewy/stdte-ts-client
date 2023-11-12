@@ -20,7 +20,7 @@ export const Layout: FunctionComponent = () => {
 
   NotiHook.getInstance().useListenEvent();
   AuthHook.getInstance().useAuthCheck(ok, location, navigate);
-  AuthHook.getInstance().useAuthGuard(ok, location, navigate);
+  AuthHook.getInstance().useAuthGuard(ok, auth, location, navigate);
 
   return (
     <Fragment>

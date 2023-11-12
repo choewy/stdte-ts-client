@@ -2,7 +2,7 @@ import { FormEvent, useCallback, useEffect, useState } from 'react';
 import { Location, NavigateFunction, useNavigate } from 'react-router-dom';
 import { isEmail, isNotEmpty, minLength } from 'class-validator';
 
-import { NotiEvent, PagePath, TimeoutKey } from '@common';
+import { Auth, AuthStatusValue, AuthStatusText, NotiEvent, PagePath, TimeoutKey } from '@common';
 import { AuthStore, AuthStoreValue, authStoreDefaultValue } from '@store';
 import {
   AuthApiService,
@@ -34,6 +34,8 @@ export class AuthHook {
         id: data.id,
         email: data.email,
         name: data.name,
+        authStatus: data.authStatus.value,
+        employmentStatus: data.employmentStatus.value,
       };
     }
 
@@ -71,14 +73,6 @@ export class AuthHook {
       }
 
       setAuthStore({ ...authStoreDefaultValue, ok: false });
-
-      if ([PagePath.SignIn, PagePath.SignUp, PagePath.SignOut].includes(pathname)) {
-        return;
-      }
-
-      if ([PagePath.Home, PagePath.SignOut].includes(pathname)) {
-        return navigate(PagePath.SignIn, { replace: true });
-      }
     }, [pathname, navigate, setAuthStore]);
 
     useEffect(() => {
@@ -90,7 +84,7 @@ export class AuthHook {
     }, [ok, pathname, checkAuth]);
   }
 
-  useAuthGuard(ok: boolean, location: Location, navigate: NavigateFunction): void {
+  useAuthGuard(ok: boolean, auth: Auth, location: Location, navigate: NavigateFunction): void {
     const pathname = location.pathname as PagePath;
 
     useEffect(() => {
@@ -98,28 +92,34 @@ export class AuthHook {
         return;
       }
 
-      if ([PagePath.Home, PagePath.SignOut].includes(pathname)) {
-        if (ok === false) {
+      if (ok === false) {
+        if (![PagePath.SignIn, PagePath.SignUp].includes(pathname)) {
           navigate(PagePath.SignIn, { replace: true });
         }
 
         return;
       }
 
-      if ([PagePath.SignIn, PagePath.SignUp].includes(pathname)) {
-        if (ok === false) {
-          return;
-        }
-
-        navigate(PagePath.Home, { replace: true });
-      } else {
-        if (ok === true) {
-          return;
-        }
-
-        navigate(PagePath.SignIn, { replace: true });
+      if (auth.authStatus === AuthStatusValue.Wating) {
+        return navigate(PagePath.Forbidden, { replace: true, state: AuthStatusText.Wating });
       }
-    }, [ok, pathname, navigate]);
+
+      if (auth.authStatus === AuthStatusValue.Reject) {
+        return navigate(PagePath.Forbidden, { replace: true, state: AuthStatusText.Reject });
+      }
+
+      if (auth.authStatus === AuthStatusValue.Disable) {
+        return navigate(PagePath.Forbidden, { replace: true, state: AuthStatusText.Disable });
+      }
+
+      if ([PagePath.Forbidden].includes(pathname)) {
+        return navigate(PagePath.Home, { replace: true });
+      }
+
+      if ([PagePath.SignIn, PagePath.SignUp].includes(pathname)) {
+        return navigate(PagePath.Home, { replace: true });
+      }
+    }, [ok, auth, pathname, navigate]);
   }
 
   useSignInState() {

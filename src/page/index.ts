@@ -1,5 +1,6 @@
 import { lazy } from 'react';
 
+export const RedirectPage = lazy(() => import('./redirect.page'));
 export const HomePage = lazy(() => import('./home.page'));
 export const SignInPage = lazy(() => import('./signin.page'));
 export const SignUpPage = lazy(() => import('./signup.page'));
@@ -14,4 +15,4 @@ export const TeamPage = lazy(() => import('./team.page'));
 export const MemberPage = lazy(() => import('./member.page'));
 export const ProjectTablePage = lazy(() => import('./project-table.page'));
 export const ProjectSettingPage = lazy(() => import('./project-setting.page'));
-export const RedirectPage = lazy(() => import('./redirect.page'));
+export const LogPage = lazy(() => import('./log.page'));

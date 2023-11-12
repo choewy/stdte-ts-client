@@ -37,6 +37,7 @@ export const PAGE_NAMES: Partial<Record<PagePath, string>> = {
   [PagePath.Member]: '구성원 목록',
   [PagePath.ProjectTable]: '프로젝트 목록',
   [PagePath.ProjectSetting]: '프로젝트 설정',
+  [PagePath.Log]: '로그',
 };
 
 export const SIDE_MENUS: SideMenuItemValue[] = [
@@ -74,6 +75,28 @@ export const SIDE_MENUS: SideMenuItemValue[] = [
         title: '역할 관리',
         Icon: AdminPanelSettings,
         path: PagePath.Role,
+      },
+    ],
+  },
+  {
+    key: createKey('side-menu'),
+    type: SideMenuType.Private,
+    title: '개발자',
+    Icon: Settings,
+    access: {
+      accessRole: RolePolicyValue.Developer,
+      accessUser: RolePolicyValue.Developer,
+      accessTeam: RolePolicyValue.Developer,
+      accessProject: RolePolicyValue.Developer,
+    },
+    divider: true,
+    children: [
+      {
+        key: createKey('side-menu'),
+        type: SideMenuType.Private,
+        title: '로그 조회',
+        Icon: ManageAccounts,
+        path: PagePath.Log,
       },
     ],
   },

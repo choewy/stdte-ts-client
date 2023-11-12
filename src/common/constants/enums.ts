@@ -21,6 +21,7 @@ export enum PagePath {
   Member = '/member',
   ProjectTable = '/project',
   ProjectSetting = '/setting',
+  Log = '/log',
 }
 
 export enum SideMenuType {
@@ -117,6 +118,7 @@ export enum RolePolicyValue {
   Update = 3,
   Delete = 4,
   All = 5,
+  Developer = 8,
   Admin = 9,
 }
 
@@ -127,5 +129,6 @@ export enum RolePolicyText {
   Update = '수정',
   Delete = '삭제',
   All = '전체',
+  Developer = '개발자',
   Admin = '관리자',
 }

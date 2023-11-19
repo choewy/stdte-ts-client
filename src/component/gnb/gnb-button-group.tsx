@@ -2,8 +2,9 @@ import { FunctionComponent } from 'react';
 
 import { Box, Button } from '@mui/material';
 
-import { GnbButtonGroupProps } from './types';
 import { PagePath } from '@common';
+
+import { GnbButtonGroupProps } from './types';
 
 export const GnbButtonGroup: FunctionComponent<GnbButtonGroupProps> = ({ auth, navigate }) => {
   if (auth) {

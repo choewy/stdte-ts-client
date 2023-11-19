@@ -2,9 +2,8 @@ import { FunctionComponent } from 'react';
 
 import { Typography } from '@mui/material';
 
-import { GnbStyle } from '@common';
-
 import { GnbTitleProps } from './types';
+import { GnbStyle } from './gnb.style';
 
 export const GnbTitle: FunctionComponent<GnbTitleProps> = ({ title }) => {
   return (

@@ -2,13 +2,13 @@ import { useCallback, useEffect } from 'react';
 
 import { GridColDef, GridPaginationModel } from '@mui/x-data-grid';
 
-import { NotiEvent, Role, RolePolicyText, RolePolicyValue, User, toEnumText } from '@common';
+import { NotiEvent, RolePolicyText, RolePolicyValue, RoleRow, toEnumText } from '@common';
 import { RoleStoreValueGenerator, roleStore } from '@store';
 import { roleApiService } from '@service';
 import { GridTableProps } from '@component';
 
 export class RoleHook {
-  useGetRoleGridTableColumns(): GridColDef<Role & { users: User[] }>[] {
+  useGetRoleGridTableColumns(): GridColDef<RoleRow>[] {
     return [
       {
         field: 'id',

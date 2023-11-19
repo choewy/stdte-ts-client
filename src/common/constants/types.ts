@@ -4,7 +4,15 @@ import { VariantType } from 'notistack';
 import { SvgIconTypeMap } from '@mui/material';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 
-import { AuthStatusValue, EmploymentStatusValue, QueryOrder, RolePolicyValue, SideMenuType } from './enums';
+import {
+  AuthStatusValue,
+  DegreeValue,
+  EmploymentStatusValue,
+  GenderCode,
+  QueryOrder,
+  RolePolicyValue,
+  SideMenuType,
+} from './enums';
 
 export type EnumType = string[] | (string | number)[] | Record<string, string | number>;
 
@@ -60,7 +68,22 @@ export type Auth = {
   employmentStatus: EmploymentStatusValue;
 };
 
-export type User = Auth & {};
+export type User = {
+  id: number;
+  name: string;
+  email: string;
+  birthday: string | null;
+  genderCode: GenderCode | null;
+  scienceCode: string | null;
+  degree: DegreeValue | null;
+  school: string | null;
+  major: string | null;
+  carType: string | null;
+  carNumber: string | null;
+  authStatus: AuthStatusValue;
+  employmentStatus: EmploymentStatusValue;
+  createdAt: string;
+};
 
 export type RolePolicy = {
   id: number;
@@ -74,6 +97,16 @@ export type Role = {
   id: number;
   name: string;
   rolePolicy: RolePolicy;
+};
+
+export type Team = {
+  id: number;
+  name: string;
+};
+
+export type Profile = User & {
+  role: Role | null;
+  team: Team | null;
 };
 
 export type HttpRequestLog = {
@@ -109,4 +142,8 @@ export type HttpRequestLogQuery = ApiListQuery & {
   methods: Method[];
   statusCodes: HttpStatusCode[];
   order: QueryOrder;
+};
+
+export type RoleRow = Role & {
+  users: User[];
 };

@@ -6,6 +6,7 @@ import {
   HttpRequestLog,
   HttpRequestLogQuery,
   Role,
+  RoleRow,
 } from '@common/constants';
 
 export type SettingStoreValue = {
@@ -31,6 +32,6 @@ export type HttpRequestLogStoreValue = {
 
 export type RoleStoreValue = {
   total: number;
-  rows: Role[];
+  rows: RoleRow[];
   query: ApiListQuery;
 };

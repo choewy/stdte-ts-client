@@ -8,6 +8,7 @@ import {
   NotiEventDetail,
   QueryOrder,
   Role,
+  RoleRow,
 } from '@common';
 
 import { HttpRequestLogStoreValue, RoleStoreValue, SettingStoreValue, SignStoreValue } from './types';
@@ -160,7 +161,7 @@ export class HttpRequestLogStoreValueGenerator implements HttpRequestLogStoreVal
 
 export class RoleStoreValueGenerator implements RoleStoreValue {
   total: number = 0;
-  rows: Role[] = [];
+  rows: RoleRow[] = [];
   query: ApiListQuery = {
     skip: 0,
     take: 20,
@@ -182,7 +183,7 @@ export class RoleStoreValueGenerator implements RoleStoreValue {
     return this;
   }
 
-  setRows(rows: Role[]): this {
+  setRows(rows: RoleRow[]): this {
     this.rows = rows;
 
     return this;

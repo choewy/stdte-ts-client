@@ -1,10 +1,10 @@
 import { HttpStatusCode } from 'axios';
+import { VariantType } from 'notistack';
 
 import { SvgIconTypeMap } from '@mui/material';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 
 import { AuthStatusValue, EmploymentStatusValue, RolePolicyValue, SideMenuType } from './enums';
-import { VariantType } from 'notistack';
 
 export type ApiException = {
   message: string;
@@ -28,11 +28,6 @@ export type NotiEventDetail = {
   message: string;
 };
 
-export type EnumMap<V, T> = {
-  value: V;
-  text: T;
-};
-
 export type SideMenuItemValue = {
   key: string;
   type: SideMenuType;
@@ -52,7 +47,7 @@ export type Auth = {
   employmentStatus: EmploymentStatusValue;
 };
 
-export type User = Auth & {};
+export type User = Auth;
 
 export type RolePolicy = {
   id: number;

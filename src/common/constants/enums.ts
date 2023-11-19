@@ -38,12 +38,12 @@ export enum GenderCode {
 }
 
 export enum DegreeValue {
-  Null = 0,
-  HighSchool = 1,
-  Bachelor2Years = 2,
-  Bachelor4Years = 3,
-  Master = 4,
-  Doctor = 5,
+  Null = 'null',
+  HighSchool = 'high-school',
+  Bachelor2Years = 'bachelor-2-years',
+  Bachelor4Years = 'bachelor-4-years',
+  Master = 'master',
+  Doctor = 'doctor',
 }
 
 export enum DegreeText {
@@ -56,10 +56,10 @@ export enum DegreeText {
 }
 
 export enum AuthStatusValue {
-  Wating = 0,
-  Reject = 1,
-  Active = 2,
-  Disable = 3,
+  Wating = 'wating',
+  Reject = 'reject',
+  Active = 'active',
+  Disable = 'disable',
 }
 
 export enum AuthStatusText {
@@ -70,10 +70,10 @@ export enum AuthStatusText {
 }
 
 export enum EmploymentStatusValue {
-  Wating = 0,
-  Active = 1,
-  Vacate = 2,
-  Retire = 3,
+  Null = 'null',
+  Active = 'active',
+  Vacate = 'vacate',
+  Retire = 'retire',
 }
 
 export enum EmploymentStatusText {
@@ -84,8 +84,8 @@ export enum EmploymentStatusText {
 }
 
 export enum ProjectScopeValue {
-  Public = 0,
-  Team = 1,
+  Public = 'public',
+  Team = 'team',
 }
 
 export enum ProjectScopeText {
@@ -94,12 +94,12 @@ export enum ProjectScopeText {
 }
 
 export enum ProjectStatusValue {
-  Wating = 0,
-  Active = 1,
-  Pause = 2,
-  Cancel = 3,
-  Finish = 4,
-  AfterService = 5,
+  Wating = 'wating',
+  Active = 'active',
+  Pause = 'pause',
+  Cancel = 'cancel',
+  Finish = 'finish',
+  AfterService = 'a/s',
 }
 
 export enum ProjectStatusText {
@@ -112,14 +112,14 @@ export enum ProjectStatusText {
 }
 
 export enum RolePolicyValue {
-  Limit = 0,
-  Read = 1,
-  Write = 2,
-  Update = 3,
-  Delete = 4,
-  All = 5,
-  Developer = 8,
-  Admin = 9,
+  Limit = 1,
+  Read = 2,
+  Write = 3,
+  Update = 4,
+  Delete = 5,
+  Entire = 6,
+  Developer = 7,
+  Admin = 8,
 }
 
 export enum RolePolicyText {
@@ -128,7 +128,7 @@ export enum RolePolicyText {
   Write = '생성',
   Update = '수정',
   Delete = '삭제',
-  All = '전체',
+  Entire = '전체',
   Developer = '개발자',
   Admin = '관리자',
 }

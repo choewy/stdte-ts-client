@@ -1,3 +1,12 @@
+export enum QueryOrder {
+  Asc = 'asc',
+  Desc = 'desc',
+}
+
+export enum LuxonFormat {
+  DateTime = 'yyyy-MM-dd HH:mm:ss',
+}
+
 export enum TimeoutKey {
   SignOut = 'signout',
 }
@@ -21,7 +30,7 @@ export enum PagePath {
   Member = '/member',
   ProjectTable = '/project',
   ProjectSetting = '/setting',
-  Log = '/log',
+  HttpRequestLog = '/http-request-log',
 }
 
 export enum SideMenuType {

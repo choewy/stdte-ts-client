@@ -1,10 +1,10 @@
-import { HttpStatusCode } from 'axios';
+import { HttpStatusCode, Method } from 'axios';
 import { VariantType } from 'notistack';
 
 import { SvgIconTypeMap } from '@mui/material';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 
-import { AuthStatusValue, EmploymentStatusValue, RolePolicyValue, SideMenuType } from './enums';
+import { AuthStatusValue, EmploymentStatusValue, QueryOrder, RolePolicyValue, SideMenuType } from './enums';
 
 export type ApiException = {
   message: string;
@@ -20,6 +20,12 @@ export type ApiResponse<D> = {
   ok: boolean;
   data: D;
   exception?: ApiException;
+};
+
+export type ApiListResponse<D, Q> = {
+  total: number;
+  rows: D[];
+  query: Q;
 };
 
 export type NotiEventDetail = {
@@ -47,8 +53,6 @@ export type Auth = {
   employmentStatus: EmploymentStatusValue;
 };
 
-export type User = Auth;
-
 export type RolePolicy = {
   id: number;
   accessRole: RolePolicyValue;
@@ -61,4 +65,41 @@ export type Role = {
   id: number;
   name: string;
   rolePolicy: RolePolicy;
+};
+
+export type HttpRequestLog = {
+  id: string;
+  ip: string;
+  method: string;
+  path: string;
+  params: object | null;
+  query: object | null;
+  body: object | null;
+  status: {
+    code: number;
+    message: string;
+  };
+  exception: {
+    name: string;
+    message: string;
+  } | null;
+  error: {
+    name: string;
+    message: string;
+    stack: string;
+  } | null;
+  user: {
+    id: number;
+    name: string;
+  } | null;
+  requestAt: string;
+  responseAt: string;
+};
+
+export type HttpRequestLogQuery = {
+  skip: number;
+  take: number;
+  methods: Method[];
+  statusCodes: HttpStatusCode[];
+  order: QueryOrder;
 };

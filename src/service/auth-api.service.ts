@@ -6,12 +6,12 @@ import { AuthResponse, AuthSignInBody, AuthSignUpBody, AuthUpdatePasswordBody } 
 import { hashService } from './hash.service';
 
 export class AuthApiService extends Api {
-  async checkAuth(): Promise<ApiResponse<AuthResponse>> {
-    return this.valueFrom<AuthResponse>(this.get('/auth'));
+  async checkAuth<R = AuthResponse>(): Promise<ApiResponse<R>> {
+    return this.valueFrom<R>(this.get('/auth'));
   }
 
-  async updatePassword(body: AuthUpdatePasswordBody): Promise<ApiResponse<void>> {
-    return this.valueFrom<void>(
+  async updatePassword<R = void>(body: AuthUpdatePasswordBody): Promise<ApiResponse<R>> {
+    return this.valueFrom<R>(
       this.patch('/auth', {
         ...body,
         currentPassword: hashService.toHex(body.currentPassword),
@@ -21,8 +21,8 @@ export class AuthApiService extends Api {
     );
   }
 
-  async signin(body: AuthSignInBody): Promise<ApiResponse<AuthResponse>> {
-    return this.valueFrom<AuthResponse>(
+  async signin<R = AuthResponse>(body: AuthSignInBody): Promise<ApiResponse<R>> {
+    return this.valueFrom<R>(
       this.post('/auth/signin', {
         ...body,
         password: hashService.toHex(body.password),
@@ -30,8 +30,8 @@ export class AuthApiService extends Api {
     );
   }
 
-  async signup(body: AuthSignUpBody): Promise<ApiResponse<AuthResponse>> {
-    return this.valueFrom<AuthResponse>(
+  async signup<R = AuthResponse>(body: AuthSignUpBody): Promise<ApiResponse<R>> {
+    return this.valueFrom<R>(
       this.post('/auth/signup', {
         ...body,
         password: hashService.toHex(body.password),
@@ -40,8 +40,8 @@ export class AuthApiService extends Api {
     );
   }
 
-  async signout(): Promise<ApiResponse<void>> {
-    return this.valueFrom<void>(this.post('/auth/signout'));
+  async signout<R = void>(): Promise<ApiResponse<R>> {
+    return this.valueFrom<R>(this.post('/auth/signout'));
   }
 }
 

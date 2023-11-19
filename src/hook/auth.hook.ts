@@ -15,9 +15,13 @@ export class AuthHook {
     const checkAuth = useCallback(async () => {
       const { ok, data } = await authApiService.checkAuth();
 
+      let sign = new SignStoreValueGenerator().setOk(ok);
+
       if (ok === true) {
-        return setSign(new SignStoreValueGenerator().setOk(ok).setAuth(data).setRole(data.role));
+        sign = sign.setAuth(data).setRole(data.role);
       }
+
+      return setSign(sign);
     }, [pathname, navigate, setSign]);
 
     useEffect(() => {

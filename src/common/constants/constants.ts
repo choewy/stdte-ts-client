@@ -52,6 +52,28 @@ export const SIDE_MENUS: SideMenuItemValue[] = [
   {
     key: createKey('side-menu'),
     type: SideMenuType.Private,
+    title: '개발자',
+    Icon: Settings,
+    access: {
+      accessRole: RolePolicyValue.Developer,
+      accessUser: RolePolicyValue.Developer,
+      accessTeam: RolePolicyValue.Developer,
+      accessProject: RolePolicyValue.Developer,
+    },
+    divider: true,
+    children: [
+      {
+        key: createKey('side-menu'),
+        type: SideMenuType.Private,
+        title: 'Http 요청 로그',
+        Icon: ManageAccounts,
+        path: PagePath.HttpRequestLog,
+      },
+    ],
+  },
+  {
+    key: createKey('side-menu'),
+    type: SideMenuType.Private,
     title: '관리자',
     Icon: Settings,
     access: {
@@ -75,28 +97,6 @@ export const SIDE_MENUS: SideMenuItemValue[] = [
         title: '역할 관리',
         Icon: AdminPanelSettings,
         path: PagePath.Role,
-      },
-    ],
-  },
-  {
-    key: createKey('side-menu'),
-    type: SideMenuType.Private,
-    title: '개발자',
-    Icon: Settings,
-    access: {
-      accessRole: RolePolicyValue.Developer,
-      accessUser: RolePolicyValue.Developer,
-      accessTeam: RolePolicyValue.Developer,
-      accessProject: RolePolicyValue.Developer,
-    },
-    divider: true,
-    children: [
-      {
-        key: createKey('side-menu'),
-        type: SideMenuType.Private,
-        title: 'Http 요청 로그',
-        Icon: ManageAccounts,
-        path: PagePath.HttpRequestLog,
       },
     ],
   },

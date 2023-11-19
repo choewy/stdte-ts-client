@@ -127,8 +127,8 @@ export enum RolePolicyValue {
   Update = 4,
   Delete = 5,
   Entire = 6,
-  Developer = 7,
-  Admin = 8,
+  Admin = 7,
+  Developer = 8,
 }
 
 export enum RolePolicyText {
@@ -138,6 +138,6 @@ export enum RolePolicyText {
   Update = '수정',
   Delete = '삭제',
   Entire = '전체',
-  Developer = '개발자',
   Admin = '관리자',
+  Developer = '개발자',
 }

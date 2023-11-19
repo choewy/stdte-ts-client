@@ -15,4 +15,4 @@ export const TeamPage = lazy(() => import('./team.page'));
 export const MemberPage = lazy(() => import('./member.page'));
 export const ProjectTablePage = lazy(() => import('./project-table.page'));
 export const ProjectSettingPage = lazy(() => import('./project-setting.page'));
-export const LogPage = lazy(() => import('./log.page'));
+export const HttpRequestLogPage = lazy(() => import('./http-request-log.page'));

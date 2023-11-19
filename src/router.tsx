@@ -18,7 +18,7 @@ import {
   TimeRecordAnalyticsPage,
   TimeRecordTablePage,
   RedirectPage,
-  LogPage,
+  HttpRequestLogPage,
 } from '@page';
 
 export const router = createBrowserRouter([
@@ -82,8 +82,8 @@ export const router = createBrowserRouter([
         element: <ProjectSettingPage />,
       },
       {
-        path: PagePath.Log,
-        element: <LogPage />,
+        path: PagePath.HttpRequestLog,
+        element: <HttpRequestLogPage />,
       },
       {
         path: '*',

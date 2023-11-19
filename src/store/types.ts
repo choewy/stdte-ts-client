@@ -1,4 +1,11 @@
-import { Auth, AuthStatusValue, EmploymentStatusValue, Role } from '@common/constants';
+import {
+  Auth,
+  AuthStatusValue,
+  EmploymentStatusValue,
+  HttpRequestLog,
+  HttpRequestLogQuery,
+  Role,
+} from '@common/constants';
 
 export type SettingStoreValue = {
   helmetTitle: string;
@@ -13,4 +20,10 @@ export type SignStoreValue = {
   role: Role | null;
   authStatus: AuthStatusValue;
   employmentStatus: EmploymentStatusValue;
+};
+
+export type HttpRequestLogStoreValue = {
+  total: number;
+  rows: HttpRequestLog[];
+  query: HttpRequestLogQuery;
 };

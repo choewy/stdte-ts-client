@@ -1,6 +1,15 @@
-import { Auth, AuthStatusValue, EmploymentStatusValue, NotiEventDetail, Role } from '@common';
+import {
+  Auth,
+  AuthStatusValue,
+  EmploymentStatusValue,
+  HttpRequestLog,
+  HttpRequestLogQuery,
+  NotiEventDetail,
+  QueryOrder,
+  Role,
+} from '@common';
 
-import { SettingStoreValue, SignStoreValue } from './types';
+import { HttpRequestLogStoreValue, SettingStoreValue, SignStoreValue } from './types';
 
 export class SettingStoreValueGenerator implements SettingStoreValue {
   helmetTitle: string = '';
@@ -105,5 +114,45 @@ export class NotiEventsStoreValueGenerator extends Array<NotiEventDetail> {
 
   remove(id: string): NotiEventsStoreValueGenerator {
     return new NotiEventsStoreValueGenerator(this.filter((noti) => noti.id !== id));
+  }
+}
+
+export class HttpRequestLogStoreValueGenerator implements HttpRequestLogStoreValue {
+  total: number = 0;
+  rows: HttpRequestLog[] = [];
+  query: HttpRequestLogQuery = {
+    skip: 0,
+    take: 20,
+    methods: [],
+    statusCodes: [],
+    order: QueryOrder.Desc,
+  };
+
+  constructor(prev?: HttpRequestLogStoreValue) {
+    if (prev == null) {
+      return;
+    }
+
+    this.total = prev.total;
+    this.rows = prev.rows;
+    this.query = prev.query;
+  }
+
+  setTotal(total: number): this {
+    this.total = total;
+
+    return this;
+  }
+
+  setRows(rows: HttpRequestLog[]): this {
+    this.rows = rows;
+
+    return this;
+  }
+
+  setQuery(query: HttpRequestLogQuery): this {
+    this.query = query;
+
+    return this;
   }
 }

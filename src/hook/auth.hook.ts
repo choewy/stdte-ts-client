@@ -3,77 +3,22 @@ import { Location, NavigateFunction, useNavigate } from 'react-router-dom';
 import { isEmail, isNotEmpty, minLength } from 'class-validator';
 
 import { Auth, AuthStatusValue, AuthStatusText, NotiEvent, PagePath, TimeoutKey } from '@common';
-import { AuthStore, AuthStoreValue, authStoreDefaultValue } from '@store';
-import {
-  AuthResponse,
-  AuthSignInBody,
-  AuthSignUpBody,
-  authApiService,
-  localStorageService,
-  timeoutService,
-} from '@service';
+import { SignStoreValueGenerator, signStore } from '@store';
+import { AuthSignInBody, AuthSignUpBody, authApiService, localStorageService, timeoutService } from '@service';
 
 export class AuthHook {
-  private static instance = new AuthHook();
-
-  public static getInstance(): AuthHook {
-    return this.instance;
-  }
-
-  private toAuthStoreValue(data: AuthResponse): AuthStoreValue {
-    const authStoreValue: AuthStoreValue = {
-      ok: true,
-      auth: null,
-      role: null,
-      authStatus: 0,
-      employmentStatus: 0,
-    };
-
-    if (data) {
-      authStoreValue.auth = {
-        id: data.id,
-        email: data.email,
-        name: data.name,
-        authStatus: data.authStatus.value,
-        employmentStatus: data.employmentStatus.value,
-      };
-    }
-
-    if (data.role) {
-      authStoreValue.role = {
-        id: data.role.id,
-        name: data.role.name,
-        rolePolicy: null,
-      };
-    }
-
-    if (data.role?.rolePolicy) {
-      authStoreValue.role.rolePolicy = {
-        id: data.role.rolePolicy.id,
-        accessRole: data.role.rolePolicy.accessRole.value,
-        accessTeam: data.role.rolePolicy.accessTeam.value,
-        accessUser: data.role.rolePolicy.accessUser.value,
-        accessProject: data.role.rolePolicy.accessProject.value,
-      };
-    }
-
-    return authStoreValue;
-  }
-
   useAuthCheck(ok: boolean, location: Location, navigate: NavigateFunction): void {
     const pathname = location.pathname as PagePath;
 
-    const setAuthStore = AuthStore.getInstance().useSetState();
+    const setSign = signStore.useSetState();
 
     const checkAuth = useCallback(async () => {
       const { ok, data } = await authApiService.checkAuth();
 
       if (ok === true) {
-        return setAuthStore(this.toAuthStoreValue(data));
+        return setSign(new SignStoreValueGenerator().setOk(ok).setAuth(data).setRole(data.role));
       }
-
-      setAuthStore({ ...authStoreDefaultValue, ok: false });
-    }, [pathname, navigate, setAuthStore]);
+    }, [pathname, navigate, setSign]);
 
     useEffect(() => {
       if (ok !== null) {
@@ -139,7 +84,7 @@ export class AuthHook {
   }
 
   useSignIn(body: AuthSignInBody) {
-    const setAuthStore = AuthStore.getInstance().useSetState();
+    const setSign = signStore.useSetState();
 
     return useCallback(
       async (e: FormEvent<HTMLFormElement>) => {
@@ -167,16 +112,16 @@ export class AuthHook {
           return NotiEvent.dispatchException(exception);
         }
 
-        setAuthStore(this.toAuthStoreValue(data));
+        setSign(new SignStoreValueGenerator().setOk(ok).setAuth(data).setRole(data.role));
 
         localStorageService.setEmail(body.email);
       },
-      [body, setAuthStore],
+      [body, setSign],
     );
   }
 
   useSignUp(body: AuthSignUpBody) {
-    const setAuthStore = AuthStore.getInstance().useSetState();
+    const setSign = signStore.useSetState();
 
     return useCallback(
       async (e: FormEvent<HTMLFormElement>) => {
@@ -216,7 +161,7 @@ export class AuthHook {
           return NotiEvent.dispatchException(exception);
         }
 
-        setAuthStore(this.toAuthStoreValue(data));
+        setSign(new SignStoreValueGenerator().setOk(ok).setAuth(data).setRole(data.role));
 
         localStorageService.setEmail(body.email);
       },
@@ -227,11 +172,10 @@ export class AuthHook {
   useSignout(): void {
     const navigate = useNavigate();
 
-    const authStore = AuthStore.getInstance().useValue();
-    const setAuthStore = AuthStore.getInstance().useSetState();
+    const [sign, setSign] = signStore.useState();
 
     const signout = useCallback(async () => {
-      if (authStore.ok === null || authStore.ok === false) {
+      if (sign.ok === null || sign.ok === false) {
         return;
       }
 
@@ -240,14 +184,16 @@ export class AuthHook {
       if (ok === false) {
         NotiEvent.dispatchException(exception);
       } else {
-        setAuthStore({ ...authStoreDefaultValue, ok: false });
+        setSign(new SignStoreValueGenerator().setOk(false));
 
         timeoutService.setTimeout(TimeoutKey.SignOut, () => NotiEvent.dispatchInfo('로그인 페이지로 이동합니다.'));
       }
-    }, [authStore, setAuthStore, navigate]);
+    }, [sign, setSign, navigate]);
 
     useEffect(() => {
       signout();
     }, [signout]);
   }
 }
+
+export const authHook = new AuthHook();

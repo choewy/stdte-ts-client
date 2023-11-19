@@ -2,20 +2,14 @@ import { useCallback, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { PAGE_NAMES, PagePath } from '@common';
-import { SettingStore } from '@store';
+import { SettingStoreValueGenerator, settingStore } from '@store';
 
 export class SettingHook {
-  private static instance = new SettingHook();
-
-  public static getInstance() {
-    return this.instance;
-  }
-
   useChangeTitles(): void {
     const location = useLocation();
     const pathname = location.pathname as PagePath;
 
-    const setSetting = SettingStore.getInstance().useSetState();
+    const setSetting = settingStore.useSetState();
 
     useEffect(() => {
       const title = PAGE_NAMES[pathname];
@@ -24,20 +18,17 @@ export class SettingHook {
         return;
       }
 
-      setSetting((prev) => ({
-        ...prev,
-        helmetTitle: title,
-        gnbTitle: title,
-        openSideMenu: false,
-      }));
+      setSetting((prev) => new SettingStoreValueGenerator(prev).setTitles(title).setOpenSideMenu(false));
     }, [pathname, setSetting]);
   }
 
   useSideMenuCallback(openSideMenu: boolean) {
-    const setSettingStore = SettingStore.getInstance().useSetState();
+    const setSettingStore = settingStore.useSetState();
 
     return useCallback(() => {
-      setSettingStore((prev) => ({ ...prev, openSideMenu }));
+      setSettingStore((prev) => new SettingStoreValueGenerator(prev).setOpenSideMenu(openSideMenu));
     }, [setSettingStore]);
   }
 }
+
+export const settingHook = new SettingHook();

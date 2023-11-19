@@ -3,12 +3,6 @@ import { Dispatch, SetStateAction, useCallback } from 'react';
 import { TextFieldProps } from '@mui/material';
 
 export class TextFieldHook {
-  private static instance = new TextFieldHook();
-
-  public static getInstance() {
-    return this.instance;
-  }
-
   useOnChangeText<T>(setState: Dispatch<SetStateAction<T>>): Pick<TextFieldProps, 'onChange'>['onChange'] {
     return useCallback(
       (e) => {
@@ -21,3 +15,5 @@ export class TextFieldHook {
     );
   }
 }
+
+export const textFieldHook = new TextFieldHook();

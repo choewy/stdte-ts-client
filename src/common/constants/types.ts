@@ -6,6 +6,8 @@ import { OverridableComponent } from '@mui/material/OverridableComponent';
 
 import { AuthStatusValue, EmploymentStatusValue, QueryOrder, RolePolicyValue, SideMenuType } from './enums';
 
+export type EnumType = string[] | (string | number)[] | Record<string, string | number>;
+
 export type ApiException = {
   message: string;
   statusCode: HttpStatusCode;
@@ -57,6 +59,8 @@ export type Auth = {
   authStatus: AuthStatusValue;
   employmentStatus: EmploymentStatusValue;
 };
+
+export type User = Auth & {};
 
 export type RolePolicy = {
   id: number;

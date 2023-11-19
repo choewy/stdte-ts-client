@@ -1,19 +1,68 @@
-import { NotiEvent, Role } from '@common';
-import { GridTableProps } from '@component';
-import { GridColDef, GridPaginationModel } from '@mui/x-data-grid';
-import { roleApiService } from '@service';
-import { RoleStoreValueGenerator, roleStore } from '@store';
 import { useCallback, useEffect } from 'react';
 
+import { GridColDef, GridPaginationModel } from '@mui/x-data-grid';
+
+import { NotiEvent, Role, RolePolicyText, RolePolicyValue, User, toEnumText } from '@common';
+import { RoleStoreValueGenerator, roleStore } from '@store';
+import { roleApiService } from '@service';
+import { GridTableProps } from '@component';
+
 export class RoleHook {
-  useGetRoleGridTableColumns(): GridColDef<Role>[] {
+  useGetRoleGridTableColumns(): GridColDef<Role & { users: User[] }>[] {
     return [
       {
         field: 'id',
         headerName: 'ID',
         headerAlign: 'center',
         align: 'center',
-        width: 80,
+        width: 120,
+      },
+      {
+        field: 'name',
+        headerName: '역할명',
+        headerAlign: 'center',
+        align: 'center',
+        width: 200,
+      },
+      {
+        field: 'users',
+        headerName: '할당',
+        headerAlign: 'center',
+        align: 'center',
+        width: 120,
+        valueGetter: ({ row }) => `${row.users.length}명`,
+      },
+      {
+        field: 'rolePolicy.accessRole',
+        headerName: '역할 정보 접근 권한',
+        headerAlign: 'center',
+        align: 'center',
+        width: 250,
+        valueGetter: ({ row }) => toEnumText(RolePolicyValue, RolePolicyText, row.rolePolicy?.accessRole),
+      },
+      {
+        field: 'rolePolicy.accessTeam',
+        headerName: '팀 정보 접근 권한',
+        headerAlign: 'center',
+        align: 'center',
+        width: 250,
+        valueGetter: ({ row }) => toEnumText(RolePolicyValue, RolePolicyText, row.rolePolicy?.accessTeam),
+      },
+      {
+        field: 'rolePolicy.accessUser',
+        headerName: '계정 정보 접근 권한',
+        headerAlign: 'center',
+        align: 'center',
+        width: 250,
+        valueGetter: ({ row }) => toEnumText(RolePolicyValue, RolePolicyText, row.rolePolicy?.accessUser),
+      },
+      {
+        field: 'rolePolicy.accessProject',
+        headerName: '프로젝트 정보 접근 권한',
+        headerAlign: 'center',
+        align: 'center',
+        width: 250,
+        valueGetter: ({ row }) => toEnumText(RolePolicyValue, RolePolicyText, row.rolePolicy?.accessProject),
       },
     ];
   }

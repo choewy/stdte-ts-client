@@ -4,22 +4,22 @@ import { Box, Button, TextField } from '@mui/material';
 
 import { PageContainer } from '@component';
 import { ButtonAttributes, SignStyle, TextFieldAttributes } from '@common';
-import { AuthHook, TextFieldHook } from '@hook';
+import { textFieldHook, authHook } from '@hook';
 
 const SignInPage: FunctionComponent = () => {
-  const [body, setBody] = AuthHook.getInstance().useSignInState();
+  const [body, setBody] = authHook.useSignInState();
 
   return (
     <PageContainer maxWidth="xs" sx={SignStyle.Container}>
       <Box sx={SignStyle.Wrapper}>
-        <Box component="form" noValidate onSubmit={AuthHook.getInstance().useSignIn(body)}>
+        <Box component="form" noValidate onSubmit={authHook.useSignIn(body)}>
           <TextField
             {...TextFieldAttributes.Sign}
             type="email"
             name="email"
             label="이메일"
             value={body.email}
-            onChange={TextFieldHook.getInstance().useOnChangeText(setBody)}
+            onChange={textFieldHook.useOnChangeText(setBody)}
           />
           <TextField
             {...TextFieldAttributes.Sign}
@@ -27,7 +27,7 @@ const SignInPage: FunctionComponent = () => {
             name="password"
             label="비밀번호"
             value={body.password}
-            onChange={TextFieldHook.getInstance().useOnChangeText(setBody)}
+            onChange={textFieldHook.useOnChangeText(setBody)}
           />
           <Button {...ButtonAttributes.Sign} sx={SignStyle.Button}>
             로그인

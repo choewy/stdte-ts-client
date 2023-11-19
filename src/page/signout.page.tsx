@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
 
-import { AuthHook } from '@hook';
+import { authHook } from '@hook';
 
 const SignOutPage: FunctionComponent = () => {
-  AuthHook.getInstance().useSignout();
+  authHook.useSignout();
 
   return null;
 };

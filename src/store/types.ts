@@ -7,7 +7,7 @@ export type SettingStoreValue = {
   openSideMenu: boolean;
 };
 
-export type AuthStoreValue = {
+export type SignStoreValue = {
   ok: null | boolean;
   auth: Auth | null;
   role: Role | null;

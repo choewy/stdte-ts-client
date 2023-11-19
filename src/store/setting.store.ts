@@ -1,16 +1,12 @@
 import { RecoilStore } from '@core';
 
 import { SettingStoreValue } from './types';
+import { SettingStoreValueGenerator } from './generators';
 
 export class SettingStore extends RecoilStore<SettingStoreValue> {
-  private static instance = new SettingStore(SettingStore.name, {
-    helmetTitle: '',
-    themeColor: '#A00',
-    gnbTitle: '',
-    openSideMenu: false,
-  });
-
-  public static getInstance() {
-    return this.instance;
+  constructor() {
+    super(SettingStore.name, new SettingStoreValueGenerator());
   }
 }
+
+export const settingStore = new SettingStore();

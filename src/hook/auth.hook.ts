@@ -5,12 +5,12 @@ import { isEmail, isNotEmpty, minLength } from 'class-validator';
 import { Auth, AuthStatusValue, AuthStatusText, NotiEvent, PagePath, TimeoutKey } from '@common';
 import { AuthStore, AuthStoreValue, authStoreDefaultValue } from '@store';
 import {
-  AuthApiService,
   AuthResponse,
   AuthSignInBody,
   AuthSignUpBody,
-  LocalStorageService,
-  TimeoutService,
+  authApiService,
+  localStorageService,
+  timeoutService,
 } from '@service';
 
 export class AuthHook {
@@ -66,7 +66,7 @@ export class AuthHook {
     const setAuthStore = AuthStore.getInstance().useSetState();
 
     const checkAuth = useCallback(async () => {
-      const { ok, data } = await AuthApiService.getInstance().checkAuth();
+      const { ok, data } = await authApiService.checkAuth();
 
       if (ok === true) {
         return setAuthStore(this.toAuthStoreValue(data));
@@ -124,7 +124,7 @@ export class AuthHook {
 
   useSignInState() {
     return useState<AuthSignInBody>({
-      email: LocalStorageService.getInstance().getEmail(),
+      email: localStorageService.getEmail(),
       password: '',
     });
   }
@@ -161,7 +161,7 @@ export class AuthHook {
           return NotiEvent.dispatchWarning('비밀번호를 확인하세요.');
         }
 
-        const { ok, data, exception } = await AuthApiService.getInstance().signin(body);
+        const { ok, data, exception } = await authApiService.signin(body);
 
         if (ok === false) {
           return NotiEvent.dispatchException(exception);
@@ -169,7 +169,7 @@ export class AuthHook {
 
         setAuthStore(this.toAuthStoreValue(data));
 
-        LocalStorageService.getInstance().setEmail(body.email);
+        localStorageService.setEmail(body.email);
       },
       [body, setAuthStore],
     );
@@ -210,7 +210,7 @@ export class AuthHook {
           return NotiEvent.dispatchWarning('비밀번호가 일치하지 않습니다.');
         }
 
-        const { ok, data, exception } = await AuthApiService.getInstance().signup(body);
+        const { ok, data, exception } = await authApiService.signup(body);
 
         if (ok === false) {
           return NotiEvent.dispatchException(exception);
@@ -218,7 +218,7 @@ export class AuthHook {
 
         setAuthStore(this.toAuthStoreValue(data));
 
-        LocalStorageService.getInstance().setEmail(body.email);
+        localStorageService.setEmail(body.email);
       },
       [body],
     );
@@ -235,16 +235,14 @@ export class AuthHook {
         return;
       }
 
-      const { ok, exception } = await AuthApiService.getInstance().signout();
+      const { ok, exception } = await authApiService.signout();
 
       if (ok === false) {
         NotiEvent.dispatchException(exception);
       } else {
         setAuthStore({ ...authStoreDefaultValue, ok: false });
 
-        TimeoutService.getInstance().setTimeout(TimeoutKey.SignOut, () =>
-          NotiEvent.dispatchInfo('로그인 페이지로 이동합니다.'),
-        );
+        timeoutService.setTimeout(TimeoutKey.SignOut, () => NotiEvent.dispatchInfo('로그인 페이지로 이동합니다.'));
       }
     }, [authStore, setAuthStore, navigate]);
 

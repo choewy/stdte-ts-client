@@ -1,12 +1,6 @@
 import { TimeoutKey } from '@common';
 
 export class TimeoutService {
-  private static instance = new TimeoutService();
-
-  public static getInstance() {
-    return this.instance;
-  }
-
   private map: Record<TimeoutKey, NodeJS.Timeout | null> = {
     [TimeoutKey.SignOut]: null,
   };
@@ -29,3 +23,5 @@ export class TimeoutService {
     }
   }
 }
+
+export const timeoutService = new TimeoutService();

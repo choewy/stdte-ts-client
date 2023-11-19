@@ -1,10 +1,4 @@
 export class LocalStorageService {
-  private static instance = new LocalStorageService();
-
-  public static getInstance() {
-    return this.instance;
-  }
-
   private readonly EMAIL_KEY = '__stdte_ts_email';
 
   getEmail(): string {
@@ -15,3 +9,5 @@ export class LocalStorageService {
     localStorage.setItem(this.EMAIL_KEY, email);
   }
 }
+
+export const localStorageService = new LocalStorageService();

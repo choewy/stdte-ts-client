@@ -11,7 +11,7 @@ import { GridTableToolbar } from './grid-table-toolbar';
 export const GridTable: FunctionComponent<GridTableProps> = ({ toolbarProps, filterComponent, ...props }) => {
   return (
     <Box sx={GridTableStyle.Wrapper}>
-      {filterComponent && filterComponent}
+      {filterComponent == null ? null : filterComponent}
       <DataGrid
         {...GridTableAttribute.Default}
         {...props}

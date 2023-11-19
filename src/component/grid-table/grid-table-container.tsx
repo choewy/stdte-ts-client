@@ -6,7 +6,7 @@ import { documentHook } from '@hook';
 import { GridTableStyle } from './grid-table.style';
 
 export const GridTableContainer: FunctionComponent<PropsWithChildren> = ({ children }) => {
-  const responseiveSize = documentHook.useResponsiveSize(100, 0);
+  const responseiveSize = documentHook.useResponsiveSize(120, 0);
 
   return <Box sx={{ ...GridTableStyle.Conatiner, height: responseiveSize.height }}>{children}</Box>;
 };

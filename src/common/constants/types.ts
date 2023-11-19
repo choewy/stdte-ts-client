@@ -28,6 +28,11 @@ export type ApiListResponse<D, Q> = {
   query: Q;
 };
 
+export type ApiListQuery = {
+  skip: number;
+  take: number;
+};
+
 export type NotiEventDetail = {
   id: string;
   variant: VariantType;
@@ -96,9 +101,7 @@ export type HttpRequestLog = {
   responseAt: string;
 };
 
-export type HttpRequestLogQuery = {
-  skip: number;
-  take: number;
+export type HttpRequestLogQuery = ApiListQuery & {
   methods: Method[];
   statusCodes: HttpStatusCode[];
   order: QueryOrder;

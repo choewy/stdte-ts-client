@@ -1,4 +1,5 @@
 import {
+  ApiListQuery,
   Auth,
   AuthStatusValue,
   EmploymentStatusValue,
@@ -9,7 +10,7 @@ import {
   Role,
 } from '@common';
 
-import { HttpRequestLogStoreValue, SettingStoreValue, SignStoreValue } from './types';
+import { HttpRequestLogStoreValue, RoleStoreValue, SettingStoreValue, SignStoreValue } from './types';
 
 export class SettingStoreValueGenerator implements SettingStoreValue {
   helmetTitle: string = '';
@@ -151,6 +152,43 @@ export class HttpRequestLogStoreValueGenerator implements HttpRequestLogStoreVal
   }
 
   setQuery(query: HttpRequestLogQuery): this {
+    this.query = query;
+
+    return this;
+  }
+}
+
+export class RoleStoreValueGenerator implements RoleStoreValue {
+  total: number = 0;
+  rows: Role[] = [];
+  query: ApiListQuery = {
+    skip: 0,
+    take: 20,
+  };
+
+  constructor(prev?: RoleStoreValue) {
+    if (prev == null) {
+      return;
+    }
+
+    this.total = prev.total;
+    this.rows = prev.rows;
+    this.query = prev.query;
+  }
+
+  setTotal(total: number): this {
+    this.total = total;
+
+    return this;
+  }
+
+  setRows(rows: Role[]): this {
+    this.rows = rows;
+
+    return this;
+  }
+
+  setQuery(query: ApiListQuery): this {
     this.query = query;
 
     return this;

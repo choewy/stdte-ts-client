@@ -1,4 +1,5 @@
 import {
+  ApiListQuery,
   Auth,
   AuthStatusValue,
   EmploymentStatusValue,
@@ -26,4 +27,10 @@ export type HttpRequestLogStoreValue = {
   total: number;
   rows: HttpRequestLog[];
   query: HttpRequestLogQuery;
+};
+
+export type RoleStoreValue = {
+  total: number;
+  rows: Role[];
+  query: ApiListQuery;
 };

@@ -92,7 +92,7 @@ export class HttpRequestLogHook {
       }
 
       setHttpRequestLog((prev) => new HttpRequestLogStoreValueGenerator(prev).setTotal(data.total).setRows(data.rows));
-    }, [query, setHttpRequestLog]);
+    }, [query]);
   }
 
   useOnPaginationModelChange() {
@@ -110,13 +110,13 @@ export class HttpRequestLogHook {
   }
 
   useGetHttpRequestLogGridTableProps(): GridTableProps {
+    const resetHttpRequestLog = httpRequestLogStore.useResetState();
+
     const { total, rows, query } = httpRequestLogStore.useValue();
 
     const columns = this.useGetHttpRequestLogGridTableColumns();
     const onPaginationModelChange = this.useOnPaginationModelChange();
     const getHttpRequestLogRows = this.useGetHttpRequestLogRows();
-
-    const resetHttpRequestLog = httpRequestLogStore.useResetState();
 
     useEffect(() => {
       getHttpRequestLogRows();

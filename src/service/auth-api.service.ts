@@ -11,24 +11,33 @@ export class AuthApiService extends Api {
   }
 
   async updatePassword(body: AuthUpdatePasswordBody): Promise<ApiResponse<void>> {
-    body.currentPassword = hashService.toHex(body.currentPassword);
-    body.newPassword = hashService.toHex(body.newPassword);
-    body.confirmPassword = hashService.toHex(body.confirmPassword);
-
-    return this.valueFrom<void>(this.patch('/auth', body));
+    return this.valueFrom<void>(
+      this.patch('/auth', {
+        ...body,
+        currentPassword: hashService.toHex(body.currentPassword),
+        newPassword: hashService.toHex(body.newPassword),
+        confirmPassword: hashService.toHex(body.confirmPassword),
+      }),
+    );
   }
 
   async signin(body: AuthSignInBody): Promise<ApiResponse<AuthResponse>> {
-    body.password = hashService.toHex(body.password);
-
-    return this.valueFrom<AuthResponse>(this.post('/auth/signin', body));
+    return this.valueFrom<AuthResponse>(
+      this.post('/auth/signin', {
+        ...body,
+        password: hashService.toHex(body.password),
+      }),
+    );
   }
 
   async signup(body: AuthSignUpBody): Promise<ApiResponse<AuthResponse>> {
-    body.password = hashService.toHex(body.password);
-    body.confirmPassword = hashService.toHex(body.confirmPassword);
-
-    return this.valueFrom<AuthResponse>(this.post('/auth/signup', body));
+    return this.valueFrom<AuthResponse>(
+      this.post('/auth/signup', {
+        ...body,
+        password: hashService.toHex(body.password),
+        confirmPassword: hashService.toHex(body.confirmPassword),
+      }),
+    );
   }
 
   async signout(): Promise<ApiResponse<void>> {

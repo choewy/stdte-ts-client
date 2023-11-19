@@ -1,19 +1,11 @@
-import {
-  AuthStatusText,
-  AuthStatusValue,
-  EmploymentStatusText,
-  EmploymentStatusValue,
-  EnumMap,
-  RolePolicyText,
-  RolePolicyValue,
-} from '@common';
+import { AuthStatusValue, EmploymentStatusValue, RolePolicyValue } from '@common';
 
 export type AuthRolePolicyResponse = {
   id: number;
-  accessRole: EnumMap<RolePolicyValue, RolePolicyText>;
-  accessTeam: EnumMap<RolePolicyValue, RolePolicyText>;
-  accessUser: EnumMap<RolePolicyValue, RolePolicyText>;
-  accessProject: EnumMap<RolePolicyValue, RolePolicyText>;
+  accessRole: RolePolicyValue;
+  accessTeam: RolePolicyValue;
+  accessUser: RolePolicyValue;
+  accessProject: RolePolicyValue;
 };
 
 export type AuthRoleResponse = {
@@ -26,8 +18,8 @@ export type AuthResponse = {
   id: number;
   email: string;
   name: string;
-  authStatus: EnumMap<AuthStatusValue, AuthStatusText>;
-  employmentStatus: EnumMap<EmploymentStatusValue, EmploymentStatusText>;
+  authStatus: AuthStatusValue;
+  employmentStatus: EmploymentStatusValue;
   role: AuthRoleResponse | null;
 };
 

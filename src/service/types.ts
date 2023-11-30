@@ -40,3 +40,18 @@ export type AuthUpdatePasswordBody = {
   newPassword: string;
   confirmPassword: string;
 };
+
+export type RolePolicyBody = {
+  accessRole: RolePolicyValue;
+  accessTeam: RolePolicyValue;
+  accessUser: RolePolicyValue;
+  accessProject: RolePolicyValue;
+};
+
+export type RoleCreateBody = {
+  name: string;
+  rolePolicy: RolePolicyBody;
+  users: number[];
+};
+
+export type RoleUpdateBody = Partial<RoleCreateBody>;

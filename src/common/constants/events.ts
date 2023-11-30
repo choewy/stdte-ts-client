@@ -21,8 +21,8 @@ export class NotiEvent extends CustomEvent<NotiEventDetail> {
     window.dispatchEvent(new NotiEvent('error', message));
   }
 
-  public static dispatchException(exception?: ApiException) {
-    if (exception === undefined) {
+  public static dispatchException(exception?: ApiException | null) {
+    if (exception == null) {
       return;
     }
 

@@ -87,7 +87,7 @@ export class HttpRequestLogHook {
     return useCallback(async () => {
       const { ok, data, exception } = await httpRequestLogApiService.getHttpRequestLogList(query);
 
-      if (ok === false) {
+      if (ok === false || data == null) {
         return NotiEvent.dispatchException(exception);
       }
 

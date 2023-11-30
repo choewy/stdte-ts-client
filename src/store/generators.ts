@@ -20,14 +20,12 @@ export class SettingStoreValueGenerator implements SettingStoreValue {
   openSideMenu: boolean = false;
 
   constructor(prev?: SettingStoreValue) {
-    if (prev == null) {
-      return;
+    if (prev) {
+      this.helmetTitle = prev.helmetTitle;
+      this.themeColor = prev.themeColor;
+      this.gnbTitle = prev.gnbTitle;
+      this.openSideMenu = prev.openSideMenu;
     }
-
-    this.helmetTitle = prev.helmetTitle;
-    this.themeColor = prev.themeColor;
-    this.gnbTitle = prev.gnbTitle;
-    this.openSideMenu = prev.openSideMenu;
   }
 
   setTitles(title: string): this {
@@ -58,15 +56,13 @@ export class SignStoreValueGenerator implements SignStoreValue {
   employmentStatus: EmploymentStatus = EmploymentStatus.Wating;
 
   constructor(prev?: SignStoreValue) {
-    if (prev == null) {
-      return;
+    if (prev) {
+      this.ok = prev.ok;
+      this.auth = prev.auth;
+      this.role = prev.role;
+      this.authStatus = prev.authStatus;
+      this.employmentStatus = prev.employmentStatus;
     }
-
-    this.ok = prev.ok;
-    this.auth = prev.auth;
-    this.role = prev.role;
-    this.authStatus = prev.authStatus;
-    this.employmentStatus = prev.employmentStatus;
   }
 
   setOk(ok: boolean): this {
@@ -90,7 +86,7 @@ export class SignStoreValueGenerator implements SignStoreValue {
     return this;
   }
 
-  setRole(role: Role): this {
+  setRole(role: Role | null): this {
     this.role = role;
 
     return this;
@@ -101,11 +97,9 @@ export class NotiEventsStoreValueGenerator extends Array<NotiEventDetail> {
   constructor(prev?: NotiEventDetail[]) {
     super();
 
-    if (prev == null) {
-      return;
+    if (prev) {
+      Object.assign(this, prev);
     }
-
-    Object.assign(this, prev);
   }
 
   append(notiEventDetail: NotiEventDetail): this {
@@ -131,13 +125,11 @@ export class HttpRequestLogStoreValueGenerator implements HttpRequestLogStoreVal
   };
 
   constructor(prev?: HttpRequestLogStoreValue) {
-    if (prev == null) {
-      return;
+    if (prev) {
+      this.total = prev.total;
+      this.rows = prev.rows;
+      this.query = prev.query;
     }
-
-    this.total = prev.total;
-    this.rows = prev.rows;
-    this.query = prev.query;
   }
 
   setTotal(total: number): this {
@@ -168,13 +160,11 @@ export class RoleStoreValueGenerator implements RoleStoreValue {
   };
 
   constructor(prev?: RoleStoreValue) {
-    if (prev == null) {
-      return;
+    if (prev) {
+      this.total = prev.total;
+      this.rows = prev.rows;
+      this.query = prev.query;
     }
-
-    this.total = prev.total;
-    this.rows = prev.rows;
-    this.query = prev.query;
   }
 
   setTotal(total: number): this {

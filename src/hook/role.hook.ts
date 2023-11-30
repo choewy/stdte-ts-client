@@ -73,7 +73,7 @@ export class RoleHook {
     return useCallback(async () => {
       const { ok, data, exception } = await roleApiService.getRoleList(query);
 
-      if (ok === false) {
+      if (ok === false || data == null) {
         return NotiEvent.dispatchException(exception);
       }
 

@@ -28,10 +28,20 @@ export class SideMenuHook {
     }
 
     return sideMenuValues.filter(({ access }) => {
+      if (access == null) {
+        return true;
+      }
+
       const keys = Object.keys(access ?? {}) as Array<keyof Omit<RolePolicy, 'id'>>;
 
       for (const key of keys) {
-        if (role.rolePolicy[key] < access[key]) {
+        const scope = access[key];
+
+        if (scope == null) {
+          continue;
+        }
+
+        if (role.rolePolicy[key] < scope) {
           return false;
         }
       }
@@ -48,10 +58,18 @@ export class SideMenuHook {
     const [selected, setSelected] = useState<boolean>(false);
 
     const onClick = useCallback(() => {
+      if (item.path == null) {
+        return;
+      }
+
       navigate(item.path);
     }, [item, navigate]);
 
     useEffect(() => {
+      if (item.path == null) {
+        return;
+      }
+
       if (pathname.startsWith(item.path)) {
         if (item.path === PagePath.Home) {
           setSelected(pathname === item.path);
@@ -75,7 +93,11 @@ export class SideMenuHook {
     }, [item, setCollapsed]);
 
     useEffect(() => {
-      const childItem = item.children.find(({ path }) => pathname.startsWith(path));
+      if (item.children == null) {
+        return;
+      }
+
+      const childItem = item.children.find(({ path }) => path && pathname.startsWith(path));
 
       if (childItem) {
         setCollapsed(true);

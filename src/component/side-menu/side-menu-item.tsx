@@ -48,6 +48,10 @@ export const SideNavigateMenuItem: FunctionComponent<SideMenuItemProps> = ({ ite
 export const SideCollapseMenuItem: FunctionComponent<SideMenuItemProps> = ({ item }) => {
   const [collapsed, onClick] = SideMenuHook.getInstance().useCollapseMenuItemProps(item);
 
+  if (item.children == null) {
+    return null;
+  }
+
   return (
     <Fragment>
       <SideDefaultMenuItem

@@ -20,8 +20,8 @@ export type ApiException = {
 
 export type ApiResponse<D> = {
   ok: boolean;
-  data: D;
-  exception?: ApiException;
+  data: D | null;
+  exception: ApiException | null;
 };
 
 export type ApiListResponse<D, Q> = {

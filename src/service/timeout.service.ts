@@ -17,8 +17,10 @@ export class TimeoutService {
   }
 
   setClear(key: TimeoutKey): void {
-    if (this.map[key]) {
-      clearTimeout(this.map[key]);
+    const target = this.map[key];
+
+    if (target) {
+      clearTimeout(target);
       this.map[key] = null;
     }
   }

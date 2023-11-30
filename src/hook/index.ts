@@ -6,3 +6,4 @@ export * from './setting.hook';
 export * from './noti.hook';
 export * from './auth.hook';
 export * from './role.hook';
+export * from './profile.hook';

@@ -33,7 +33,7 @@ export const Layout: FunctionComponent = () => {
           iconButtonProps={{ onClick: settingHook.useSideMenuCallback(true) }}
           titleProps={{ title: gnbTitle }}
           buttonGroupProps={{
-            auth: ok,
+            auth: ok === true,
             navigate,
           }}
         />

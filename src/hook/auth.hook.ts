@@ -7,7 +7,7 @@ import { SignStoreValueGenerator, signStore } from '@store';
 import { AuthSignInBody, AuthSignUpBody, authApiService, localStorageService, timeoutService } from '@service';
 
 export class AuthHook {
-  useAuthCheck(ok: boolean, location: Location, navigate: NavigateFunction): void {
+  useAuthCheck(ok: boolean | null, location: Location, navigate: NavigateFunction): void {
     const pathname = location.pathname as PagePath;
 
     const setSign = signStore.useSetState();
@@ -15,13 +15,11 @@ export class AuthHook {
     const checkAuth = useCallback(async () => {
       const { ok, data } = await authApiService.checkAuth();
 
-      let sign = new SignStoreValueGenerator().setOk(ok);
-
-      if (ok === true) {
-        sign = sign.setAuth(data).setRole(data.role);
+      if (ok === false || data == null) {
+        return;
       }
 
-      return setSign(sign);
+      return setSign(new SignStoreValueGenerator().setOk(ok).setAuth(data).setRole(data.role));
     }, [pathname, navigate, setSign]);
 
     useEffect(() => {
@@ -33,11 +31,11 @@ export class AuthHook {
     }, [ok, pathname, checkAuth]);
   }
 
-  useAuthGuard(ok: boolean, auth: Auth, location: Location, navigate: NavigateFunction): void {
+  useAuthGuard(ok: boolean | null, auth: Auth | null, location: Location, navigate: NavigateFunction): void {
     const pathname = location.pathname as PagePath;
 
     useEffect(() => {
-      if (ok === null) {
+      if (ok == null || auth == null) {
         return;
       }
 
@@ -104,7 +102,7 @@ export class AuthHook {
 
         const { ok, data, exception } = await authApiService.signin(body);
 
-        if (ok === false) {
+        if (ok === false || data == null) {
           return NotiEvent.dispatchException(exception);
         }
 
@@ -153,7 +151,7 @@ export class AuthHook {
 
         const { ok, data, exception } = await authApiService.signup(body);
 
-        if (ok === false) {
+        if (ok === false || data == null) {
           return NotiEvent.dispatchException(exception);
         }
 

@@ -1,21 +1,21 @@
-export enum QueryOrder {
+export const enum QueryOrder {
   Asc = 'asc',
   Desc = 'desc',
 }
 
-export enum LuxonFormat {
+export const enum LuxonFormat {
   DateTime = 'yyyy-MM-dd HH:mm:ss',
 }
 
-export enum TimeoutKey {
+export const enum TimeoutKey {
   SignOut = 'signout',
 }
 
-export enum EventType {
+export const enum EventType {
   Noti = 'noti-event',
 }
 
-export enum PagePath {
+export const enum PagePath {
   Home = '/',
   Forbidden = '/forbidden',
   SignIn = '/signin',
@@ -33,20 +33,13 @@ export enum PagePath {
   HttpRequestLog = '/http-request-log',
 }
 
-export enum SideMenuType {
+export const enum SideMenuType {
   Global = 'global',
   Public = 'public',
   Private = 'private',
 }
 
-export enum GenderCode {
-  Male1 = 1,
-  Male2 = 3,
-  Female1 = 2,
-  Female2 = 4,
-}
-
-export enum DegreeValue {
+export const enum Degree {
   Null = 'null',
   HighSchool = 'high-school',
   Bachelor2Years = 'bachelor-2-years',
@@ -55,54 +48,31 @@ export enum DegreeValue {
   Doctor = 'doctor',
 }
 
-export enum DegreeText {
-  Null = '없음',
-  HighSchool = '고졸',
-  Bachelor2Years = '전문학사',
-  Bachelor4Years = '일반학사',
-  Master = '석사',
-  Doctor = '박사',
-}
-
-export enum AuthStatusValue {
+export const enum AuthStatus {
   Wating = 'wating',
   Reject = 'reject',
   Active = 'active',
   Disable = 'disable',
 }
 
-export enum AuthStatusText {
-  Wating = '승인대기',
-  Reject = '승인거절',
-  Active = '활성',
-  Disable = '비활성',
-}
-
-export enum EmploymentStatusValue {
-  Null = 'null',
+export const enum EmploymentStatus {
+  Wating = 'wating',
   Active = 'active',
   Vacate = 'vacate',
   Retire = 'retire',
 }
 
-export enum EmploymentStatusText {
-  Wating = '확인필요',
-  Active = '재직',
-  Vacate = '휴직',
-  Retire = '퇴직',
-}
-
-export enum ProjectScopeValue {
+export const enum ProjectScope {
   Public = 'public',
   Team = 'team',
 }
 
-export enum ProjectScopeText {
+export const enum ProjectScopeText {
   Public = '전체',
   Team = '팀',
 }
 
-export enum ProjectStatusValue {
+export const enum ProjectStatus {
   Wating = 'wating',
   Active = 'active',
   Pause = 'pause',
@@ -111,16 +81,7 @@ export enum ProjectStatusValue {
   AfterService = 'a/s',
 }
 
-export enum ProjectStatusText {
-  Wating = '수주',
-  Active = '진행',
-  Pause = '중단',
-  Cancel = '취소',
-  Finish = '종료',
-  AfterService = 'A/S',
-}
-
-export enum RolePolicyValue {
+export const enum RolePolicyScope {
   Limit = 1,
   Read = 2,
   Write = 3,
@@ -131,7 +92,7 @@ export enum RolePolicyValue {
   Developer = 8,
 }
 
-export enum RolePolicyText {
+export const enum RolePolicyScopeText {
   Limit = '제한',
   Read = '조회',
   Write = '생성',

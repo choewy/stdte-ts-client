@@ -4,15 +4,7 @@ import { VariantType } from 'notistack';
 import { SvgIconTypeMap } from '@mui/material';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 
-import {
-  AuthStatusValue,
-  DegreeValue,
-  EmploymentStatusValue,
-  GenderCode,
-  QueryOrder,
-  RolePolicyValue,
-  SideMenuType,
-} from './enums';
+import { AuthStatus, Degree, EmploymentStatus, QueryOrder, RolePolicyScope, SideMenuType } from './enums';
 
 export type EnumType = string[] | (string | number)[] | Record<string, string | number>;
 
@@ -56,7 +48,7 @@ export type SideMenuItemValue = {
   Icon: OverridableComponent<SvgIconTypeMap<{}, 'svg'>>;
   path?: string;
   divider?: boolean;
-  access?: Partial<Record<keyof Omit<RolePolicy, 'id'>, RolePolicyValue>>;
+  access?: Partial<Record<keyof Omit<RolePolicy, 'id'>, RolePolicyScope>>;
   children?: Omit<SideMenuItemValue, 'children'>[];
 };
 
@@ -64,8 +56,8 @@ export type Auth = {
   id: number;
   name: string;
   email: string;
-  authStatus: AuthStatusValue;
-  employmentStatus: EmploymentStatusValue;
+  authStatus: AuthStatus;
+  employmentStatus: EmploymentStatus;
 };
 
 export type User = {
@@ -73,24 +65,24 @@ export type User = {
   name: string;
   email: string;
   birthday: string | null;
-  genderCode: GenderCode | null;
+  genderCode: number | null;
   scienceCode: string | null;
-  degree: DegreeValue | null;
+  degree: Degree | null;
   school: string | null;
   major: string | null;
   carType: string | null;
   carNumber: string | null;
-  authStatus: AuthStatusValue;
-  employmentStatus: EmploymentStatusValue;
+  authStatus: AuthStatus;
+  employmentStatus: EmploymentStatus;
   createdAt: string;
 };
 
 export type RolePolicy = {
   id: number;
-  accessRole: RolePolicyValue;
-  accessTeam: RolePolicyValue;
-  accessUser: RolePolicyValue;
-  accessProject: RolePolicyValue;
+  accessRole: RolePolicyScope;
+  accessTeam: RolePolicyScope;
+  accessUser: RolePolicyScope;
+  accessProject: RolePolicyScope;
 };
 
 export type Role = {

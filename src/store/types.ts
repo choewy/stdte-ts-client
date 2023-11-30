@@ -1,11 +1,12 @@
 import {
   ApiListQuery,
   Auth,
-  AuthStatusValue,
-  EmploymentStatusValue,
+  AuthStatus,
+  EmploymentStatus,
   HttpRequestLog,
   HttpRequestLogQuery,
   Role,
+  RolePolicy,
   RoleRow,
 } from '@common/constants';
 
@@ -20,8 +21,8 @@ export type SignStoreValue = {
   ok: null | boolean;
   auth: Auth | null;
   role: Role | null;
-  authStatus: AuthStatusValue;
-  employmentStatus: EmploymentStatusValue;
+  authStatus: AuthStatus;
+  employmentStatus: EmploymentStatus;
 };
 
 export type HttpRequestLogStoreValue = {
@@ -34,4 +35,10 @@ export type RoleStoreValue = {
   total: number;
   rows: RoleRow[];
   query: ApiListQuery;
+};
+
+export type RoleSelectStoreValue = {
+  id: number;
+  name: string;
+  rolePolicy: Pick<RolePolicy, 'accessUser'>;
 };

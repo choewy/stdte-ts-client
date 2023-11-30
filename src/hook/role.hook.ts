@@ -2,7 +2,7 @@ import { useCallback, useEffect } from 'react';
 
 import { GridColDef, GridPaginationModel } from '@mui/x-data-grid';
 
-import { NotiEvent, RolePolicyText, RolePolicyValue, RoleRow, toEnumText } from '@common';
+import { EnumMapper, NotiEvent, RoleRow } from '@common';
 import { RoleStoreValueGenerator, roleStore } from '@store';
 import { roleApiService } from '@service';
 import { GridTableProps } from '@component';
@@ -38,7 +38,7 @@ export class RoleHook {
         headerAlign: 'center',
         align: 'center',
         width: 250,
-        valueGetter: ({ row }) => toEnumText(RolePolicyValue, RolePolicyText, row.rolePolicy?.accessRole),
+        valueGetter: ({ row }) => EnumMapper.getRolePolicyScopeText(row.rolePolicy?.accessRole),
       },
       {
         field: 'rolePolicy.accessTeam',
@@ -46,7 +46,7 @@ export class RoleHook {
         headerAlign: 'center',
         align: 'center',
         width: 250,
-        valueGetter: ({ row }) => toEnumText(RolePolicyValue, RolePolicyText, row.rolePolicy?.accessTeam),
+        valueGetter: ({ row }) => EnumMapper.getRolePolicyScopeText(row.rolePolicy?.accessTeam),
       },
       {
         field: 'rolePolicy.accessUser',
@@ -54,7 +54,7 @@ export class RoleHook {
         headerAlign: 'center',
         align: 'center',
         width: 250,
-        valueGetter: ({ row }) => toEnumText(RolePolicyValue, RolePolicyText, row.rolePolicy?.accessUser),
+        valueGetter: ({ row }) => EnumMapper.getRolePolicyScopeText(row.rolePolicy?.accessUser),
       },
       {
         field: 'rolePolicy.accessProject',
@@ -62,7 +62,7 @@ export class RoleHook {
         headerAlign: 'center',
         align: 'center',
         width: 250,
-        valueGetter: ({ row }) => toEnumText(RolePolicyValue, RolePolicyText, row.rolePolicy?.accessProject),
+        valueGetter: ({ row }) => EnumMapper.getRolePolicyScopeText(row.rolePolicy?.accessProject),
       },
     ];
   }

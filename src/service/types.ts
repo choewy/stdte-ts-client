@@ -1,25 +1,17 @@
-import { AuthStatusValue, EmploymentStatusValue, RolePolicyValue } from '@common';
-
-export type AuthRolePolicyResponse = {
-  id: number;
-  accessRole: RolePolicyValue;
-  accessTeam: RolePolicyValue;
-  accessUser: RolePolicyValue;
-  accessProject: RolePolicyValue;
-};
+import { AuthStatus, EmploymentStatus, RolePolicy } from '@common';
 
 export type AuthRoleResponse = {
   id: number;
   name: string;
-  rolePolicy: AuthRolePolicyResponse;
+  rolePolicy: RolePolicy;
 };
 
 export type AuthResponse = {
   id: number;
   email: string;
   name: string;
-  authStatus: AuthStatusValue;
-  employmentStatus: EmploymentStatusValue;
+  authStatus: AuthStatus;
+  employmentStatus: EmploymentStatus;
   role: AuthRoleResponse | null;
 };
 
@@ -41,12 +33,7 @@ export type AuthUpdatePasswordBody = {
   confirmPassword: string;
 };
 
-export type RolePolicyBody = {
-  accessRole: RolePolicyValue;
-  accessTeam: RolePolicyValue;
-  accessUser: RolePolicyValue;
-  accessProject: RolePolicyValue;
-};
+export type RolePolicyBody = Pick<RolePolicy, 'accessRole' | 'accessTeam' | 'accessUser' | 'accessProject'>;
 
 export type RoleCreateBody = {
   name: string;

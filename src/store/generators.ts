@@ -1,8 +1,8 @@
 import {
   ApiListQuery,
   Auth,
-  AuthStatusValue,
-  EmploymentStatusValue,
+  AuthStatus,
+  EmploymentStatus,
   HttpRequestLog,
   HttpRequestLogQuery,
   NotiEventDetail,
@@ -54,8 +54,8 @@ export class SignStoreValueGenerator implements SignStoreValue {
   ok: null | boolean = null;
   auth: Auth | null = null;
   role: Role | null = null;
-  authStatus: AuthStatusValue = AuthStatusValue.Wating;
-  employmentStatus: EmploymentStatusValue = EmploymentStatusValue.Null;
+  authStatus: AuthStatus = AuthStatus.Wating;
+  employmentStatus: EmploymentStatus = EmploymentStatus.Wating;
 
   constructor(prev?: SignStoreValue) {
     if (prev == null) {

@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { PAGE_NAMES, PagePath } from '@common';
+import { EnumMapper, PagePath } from '@common';
 import { SettingStoreValueGenerator, settingStore } from '@store';
 
 export class SettingHook {
@@ -12,7 +12,7 @@ export class SettingHook {
     const setSetting = settingStore.useSetState();
 
     useEffect(() => {
-      const title = PAGE_NAMES[pathname];
+      const title = EnumMapper.getPageTitle(pathname);
 
       if (title === undefined) {
         return;

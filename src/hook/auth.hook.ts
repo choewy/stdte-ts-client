@@ -2,7 +2,7 @@ import { FormEvent, useCallback, useEffect, useState } from 'react';
 import { Location, NavigateFunction, useNavigate } from 'react-router-dom';
 import { isEmail, isNotEmpty, minLength } from 'class-validator';
 
-import { Auth, AuthStatusValue, AuthStatusText, NotiEvent, PagePath, TimeoutKey } from '@common';
+import { Auth, AuthStatus, EnumMapper, NotiEvent, PagePath, TimeoutKey } from '@common';
 import { SignStoreValueGenerator, signStore } from '@store';
 import { AuthSignInBody, AuthSignUpBody, authApiService, localStorageService, timeoutService } from '@service';
 
@@ -49,16 +49,8 @@ export class AuthHook {
         return;
       }
 
-      if (auth.authStatus === AuthStatusValue.Wating) {
-        return navigate(PagePath.Forbidden, { replace: true, state: AuthStatusText.Wating });
-      }
-
-      if (auth.authStatus === AuthStatusValue.Reject) {
-        return navigate(PagePath.Forbidden, { replace: true, state: AuthStatusText.Reject });
-      }
-
-      if (auth.authStatus === AuthStatusValue.Disable) {
-        return navigate(PagePath.Forbidden, { replace: true, state: AuthStatusText.Disable });
+      if ([AuthStatus.Wating, AuthStatus.Reject, AuthStatus.Disable].includes(auth.authStatus)) {
+        return navigate(PagePath.Forbidden, { replace: true, state: EnumMapper.getAuthStatusText(auth.authStatus) });
       }
 
       if ([PagePath.Forbidden].includes(pathname)) {

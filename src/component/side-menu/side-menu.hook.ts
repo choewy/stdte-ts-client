@@ -3,16 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { ListItemButtonProps } from '@mui/material';
 
-import {
-  Auth,
-  PagePath,
-  Role,
-  RolePolicy,
-  SIDE_MENUS,
-  SideMenuType,
-  SideMenuItemValue,
-  AuthStatusValue,
-} from '@common';
+import { Auth, PagePath, Role, RolePolicy, SIDE_MENUS, SideMenuType, SideMenuItemValue, AuthStatus } from '@common';
 
 export class SideMenuHook {
   private static instance = new SideMenuHook();
@@ -26,7 +17,7 @@ export class SideMenuHook {
 
     if (auth === null) {
       authTypes.push(SideMenuType.Public);
-    } else if (auth.authStatus === AuthStatusValue.Active) {
+    } else if (auth.authStatus === AuthStatus.Active) {
       authTypes.push(SideMenuType.Private);
     }
 

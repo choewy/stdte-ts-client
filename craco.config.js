@@ -15,6 +15,7 @@ module.exports = {
     },
     alias: {
       '@common': path.resolve(__dirname, 'src/common'),
+      '@config': path.resolve(__dirname, 'src/config'),
       '@core': path.resolve(__dirname, 'src/core'),
       '@store': path.resolve(__dirname, 'src/store'),
       '@service': path.resolve(__dirname, 'src/service'),

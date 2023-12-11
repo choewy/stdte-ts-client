@@ -28,6 +28,8 @@
       "@store/*": ["src/store/*"],
       "@service": ["src/service"],
       "@service/*": ["src/service/*"],
+      "@hook": ["src/hook"],
+      "@hook/*": ["src/hook/*"],
       "@component": ["src/component"],
       "@component/*": ["src/component/*"],
       "@page": ["src/page"],

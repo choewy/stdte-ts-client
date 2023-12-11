@@ -26,6 +26,7 @@ export type CredentialsSignInBody = {
 export type CredentialsSignUpBody = {
   email: string;
   name: string;
+  password: string;
   confirmPassword: string;
 };
 

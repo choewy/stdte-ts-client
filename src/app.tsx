@@ -8,7 +8,9 @@ import { router } from '@router';
 const App: FunctionComponent = () => {
   return (
     <RecoilRoot>
-      <HelmetProvider>{/* <RouterProvider router={router} /> */}</HelmetProvider>
+      <HelmetProvider>
+        <RouterProvider router={router} />
+      </HelmetProvider>
     </RecoilRoot>
   );
 };

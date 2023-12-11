@@ -4,7 +4,7 @@ import { AppConfig } from '@config';
 
 import { HttpClientResponse } from './types';
 
-export class HttpClient {
+export class HttpService {
   private readonly instance: Axios;
 
   constructor() {

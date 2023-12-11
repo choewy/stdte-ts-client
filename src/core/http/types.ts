@@ -14,10 +14,18 @@ export type HttpClientException = {
   };
 };
 
-export type HttpClientResponse<R> = {
-  ok: boolean;
-  version: string;
-  request: HttpClientRequest;
-  data: R | null;
-  exception: HttpClientException | null;
-};
+export type HttpClientResponse<R> =
+  | {
+      ok: true;
+      version: string;
+      request: HttpClientRequest;
+      data: R;
+      exception: null;
+    }
+  | {
+      ok: false;
+      version: string;
+      request: HttpClientRequest;
+      data: null;
+      exception: HttpClientException;
+    };

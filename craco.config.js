@@ -19,7 +19,6 @@ module.exports = {
       '@core': path.resolve(__dirname, 'src/core'),
       '@store': path.resolve(__dirname, 'src/store'),
       '@service': path.resolve(__dirname, 'src/service'),
-      '@hook': path.resolve(__dirname, 'src/hook'),
       '@component': path.resolve(__dirname, 'src/component'),
       '@page': path.resolve(__dirname, 'src/page'),
       '@layout': path.resolve(__dirname, 'src/layout.tsx'),

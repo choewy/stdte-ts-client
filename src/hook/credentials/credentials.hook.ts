@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { credentialsStore } from '@store';
 import {
@@ -29,6 +29,13 @@ export class CredentialsHook {
     }, [getCredentials]);
   }
 
+  useSignInState() {
+    return useState<CredentialsSignInBody>({
+      email: '',
+      password: '',
+    });
+  }
+
   useSignInCallback(body: CredentialsSignInBody) {
     const setCredentials = credentialsStore.useSetState();
 
@@ -47,6 +54,15 @@ export class CredentialsHook {
 
       setCredentials(res.data);
     }, [body, setCredentials]);
+  }
+
+  useSignUpState() {
+    return useState<CredentialsSignUpBody>({
+      email: '',
+      name: '',
+      password: '',
+      confirmPassword: '',
+    });
   }
 
   useSignUpCallback(body: CredentialsSignUpBody) {

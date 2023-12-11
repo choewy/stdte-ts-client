@@ -5,13 +5,6 @@ import { HelmetProvider } from 'react-helmet-async';
 
 import { router } from '@router';
 
-import io from 'socket.io-client';
-
-const socket = io('ws://localhost:3000/timelog', {
-  transports: ['websocket'],
-  withCredentials: true,
-});
-
 const App: FunctionComponent = () => {
   return (
     <RecoilRoot>

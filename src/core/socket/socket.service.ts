@@ -6,6 +6,7 @@ export class SocketService extends Socket {
   constructor(nsp: string = '') {
     super(
       new Manager(new AppConfig().getServerUrl(), {
+        transports: ['websocket'],
         withCredentials: true,
         reconnection: true,
         autoConnect: false,

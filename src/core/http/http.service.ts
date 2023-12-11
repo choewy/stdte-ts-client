@@ -7,7 +7,8 @@ import { HttpClientResponse } from './types';
 export class HttpService {
   private readonly instance: Axios;
 
-  constructor() {
+  constructor(protected readonly path: string = '') {
+    this.path = this.path.startsWith('/') ? this.path : `/${this.path}`;
     this.instance = axios.create({
       baseURL: new AppConfig().getServerUrl(),
       withCredentials: true,
@@ -32,23 +33,27 @@ export class HttpService {
     };
   }
 
-  protected async get<R, D>(url: string, config?: AxiosRequestConfig<D>) {
+  protected url(...args: (string | number)[]) {
+    return [this.path, ...args].join('/');
+  }
+
+  protected async get<R, D = any>(url: string = '', config?: AxiosRequestConfig<D>) {
     return this.transform<R>(() => this.instance.get(url, config));
   }
 
-  protected async post<R, D>(url: string, data?: D, config?: AxiosRequestConfig<D>) {
+  protected async post<R, D = any>(url: string = '', data?: D, config?: AxiosRequestConfig<D>) {
     return this.transform<R>(() => this.instance.post(url, data, config));
   }
 
-  protected async patch<R, D>(url: string, data?: D, config?: AxiosRequestConfig<D>) {
+  protected async patch<R, D = any>(url: string = '', data?: D, config?: AxiosRequestConfig<D>) {
     return this.transform<R>(() => this.instance.patch(url, data, config));
   }
 
-  protected async put<R, D>(url: string, data?: D, config?: AxiosRequestConfig<D>) {
+  protected async put<R, D = any>(url: string = '', data?: D, config?: AxiosRequestConfig<D>) {
     return this.transform<R>(() => this.instance.put(url, data, config));
   }
 
-  protected async delete<R, D>(url: string, config?: AxiosRequestConfig<D>) {
+  protected async delete<R, D = any>(url: string = '', config?: AxiosRequestConfig<D>) {
     return this.transform<R>(() => this.instance.delete(url, config));
   }
 }

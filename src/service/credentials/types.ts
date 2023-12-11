@@ -1,11 +1,21 @@
-import { CredentialsStatus } from '@common';
+import { CredentialsStatus, RolePolicyProperty } from '@common';
+
+export type CredentialsRoleRespnose = {
+  id: number;
+  name: string;
+  rolePolicy: RolePolicyProperty;
+  createdAt: string;
+  updatedAt: string;
+};
 
 export type CredentialsResponse = {
   id: number;
+  name: string;
   email: string;
+  role: CredentialsRoleRespnose | null;
   status: CredentialsStatus;
-  createdAt: string | null;
-  updatedAt: string | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type CredentialsSignInBody = {

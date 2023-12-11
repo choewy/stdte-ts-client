@@ -1,9 +1,5 @@
-import { CredentialsStatus } from './enums';
+import { ROLE_POLICY_KEY } from './constants';
+import { RolePolicyLevel } from './enums';
 
-export type Credentials = {
-  id: number;
-  email: string;
-  status: CredentialsStatus;
-  createdAt: string;
-  updatedAt: string;
-};
+export type RolePolicyKey = (typeof ROLE_POLICY_KEY)[number];
+export type RolePolicyProperty = Record<RolePolicyKey, RolePolicyLevel>;

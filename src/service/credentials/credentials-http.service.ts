@@ -15,11 +15,11 @@ export class CredentialsHttpService extends HttpService {
   }
 
   async signin(body: CredentialsSignInBody) {
-    return this.post<null>(this.url('signin'), body);
+    return this.post<CredentialsResponse>(this.url('signin'), body);
   }
 
   async signup(body: CredentialsSignUpBody) {
-    return this.post<null>(this.url('signup'), body);
+    return this.post<CredentialsResponse>(this.url('signup'), body);
   }
 
   async signout() {

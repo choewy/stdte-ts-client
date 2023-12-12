@@ -2,7 +2,15 @@ import { Navigate, createBrowserRouter } from 'react-router-dom';
 
 import { Layout } from '@layout';
 import { PagePath } from '@common';
-import { AllowGuestOnlyGuardPage, AllowUserOnlyGuardPage, EmptyPage, SignInPage, SignOutPage, SignUpPage } from '@page';
+import {
+  AllowGuestOnlyGuardPage,
+  AllowUserOnlyGuardPage,
+  EmptyPage,
+  HomePage,
+  SignInPage,
+  SignOutPage,
+  SignUpPage,
+} from '@page';
 
 export const router = createBrowserRouter([
   {
@@ -10,7 +18,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: PagePath.Home,
-        element: <EmptyPage title="다른 페이지로 Redirect" />,
+        element: <HomePage />,
       },
       {
         element: <AllowGuestOnlyGuardPage />,

@@ -1,7 +1,8 @@
 import { RecoilStore } from '@core';
-import { SnackEventDetail } from '@service';
 
-export class SnackStore extends RecoilStore<SnackEventDetail[]> {
+import { SnackStoreProps } from './types';
+
+export class SnackStore extends RecoilStore<SnackStoreProps> {
   constructor() {
     super(SnackStore.name, []);
   }

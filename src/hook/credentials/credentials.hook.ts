@@ -167,7 +167,7 @@ export class CredentialsHook {
     const setCredentials = credentialsStore.useSetState();
 
     return useCallback(
-      async (e: FormEvent<HTMLFormElement>) => {
+      async (e: FormEvent<HTMLElement>) => {
         e.preventDefault();
 
         const message = credentialsValidator.signin(body);
@@ -202,7 +202,7 @@ export class CredentialsHook {
     const setCredentials = credentialsStore.useSetState();
 
     return useCallback(
-      async (e: FormEvent<HTMLFormElement>) => {
+      async (e: FormEvent<HTMLElement>) => {
         e.preventDefault();
 
         const message = credentialsValidator.signup(body);

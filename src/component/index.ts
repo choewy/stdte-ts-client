@@ -1,2 +1,2 @@
-export * from './page-container';
 export * from './dialogs';
+export * from './props';

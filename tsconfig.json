@@ -31,5 +31,6 @@
       "@app": ["src/app.tsx"]
     }
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["./craco.config.js"]
 }

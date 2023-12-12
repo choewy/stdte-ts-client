@@ -221,19 +221,33 @@ export class CredentialsHook {
     );
   }
 
+  useUpdateMyPasswordState() {
+    return useState<CredentialsUpdatePasswordBody>({
+      currentPassword: '',
+      newPassword: '',
+      confirmPassword: '',
+    });
+  }
+
   useUpdatePasswordCallback(body: CredentialsUpdatePasswordBody) {
     return useCallback(async () => {
       const message = credentialsValidator.updatePassword(body);
 
       if (message) {
-        return SnackEvent.dispatchByWarning(message);
+        SnackEvent.dispatchByWarning(message);
+        return false;
       }
 
       const res = await credentialsHttpService.updatePassword(body);
 
       if (res.ok === false) {
-        return SnackEvent.dispatchByException(new CredentialsException(res.exception));
+        SnackEvent.dispatchByException(new CredentialsException(res.exception));
+        return false;
       }
+
+      SnackEvent.dispatchBySuccess('비밀번호가 변경되었습니다.');
+
+      return true;
     }, [body]);
   }
 

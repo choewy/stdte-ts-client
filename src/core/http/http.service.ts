@@ -20,8 +20,8 @@ export class HttpService {
     LoadingEvent.dispatch(true);
 
     const res = await request()
-      .then((response) => ({ ok: true, data: response.data }))
-      .catch((error) => ({ ok: false, data: error.response.data }));
+      .then((response) => ({ ok: true, data: response?.data }))
+      .catch((error) => ({ ok: false, data: error.response?.data }));
 
     LoadingEvent.dispatch(false, delay);
 

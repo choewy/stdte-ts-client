@@ -2,7 +2,7 @@
 
 # development
 /local
-/hemp
+/temp
 .env.local
 
 # dependencies

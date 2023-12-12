@@ -1,15 +1,8 @@
 import { RecoilStore } from '@core';
 
-export class LayoutStore extends RecoilStore<{
-  size: {
-    innerWidth: number;
-    innerHeight: number;
-  };
-  theme: { color: string };
-  helmet: { title: string };
-  header: { title: string };
-  sidebar: { open: boolean };
-}> {
+import { LayoutStoreProps } from './types';
+
+export class LayoutStore extends RecoilStore<LayoutStoreProps> {
   constructor() {
     super(LayoutStore.name, {
       size: { innerHeight: window.innerHeight, innerWidth: window.innerWidth },

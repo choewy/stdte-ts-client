@@ -1,8 +1,8 @@
 import { RecoilStore } from '@core';
 
-import { Credentials } from './types';
+import { CredentialsStoreProps } from './types';
 
-export class CredentialsStore extends RecoilStore<Credentials> {
+export class CredentialsStore extends RecoilStore<CredentialsStoreProps> {
   constructor() {
     super(CredentialsStore.name, null);
   }

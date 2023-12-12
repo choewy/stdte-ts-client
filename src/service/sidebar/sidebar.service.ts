@@ -11,7 +11,7 @@ import {
 } from '@mui/icons-material';
 
 import { PagePath, RolePolicyKey, RolePolicyLevel } from '@common';
-import { Credentials } from '@store';
+import { CredentialsStoreProps } from '@store';
 
 import { SidebarMenuScope, SidebarMenuType } from './enums';
 import { SidebarMenuItemProperty } from './types';
@@ -111,7 +111,7 @@ export class SidebarService {
     },
   ];
 
-  filterItems(credentials: Credentials) {
+  filterItems(credentials: CredentialsStoreProps) {
     const scope =
       credentials === null || credentials === false ? SidebarMenuScope.GuestOnly : SidebarMenuScope.UserOnly;
 

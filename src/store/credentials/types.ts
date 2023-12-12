@@ -1,3 +1,3 @@
 import { CredentialsResponse } from '@service';
 
-export type Credentials = CredentialsResponse | null | false;
+export type CredentialsStoreProps = CredentialsResponse | null | false;

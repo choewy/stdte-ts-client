@@ -1,5 +1,6 @@
 export enum PagePath {
   Home = '/',
+  HomeIframe = '/iframe',
   MyPage = '/mypage',
   SignIn = '/signin',
   SignUp = '/signup',

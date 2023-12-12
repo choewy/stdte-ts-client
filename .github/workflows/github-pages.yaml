@@ -28,7 +28,7 @@ jobs:
 
       - name: Create environments
         env:
-          ENV: ${{ secrets.ENV_DEVELOP }}
+          ENV: ${{ secrets.ENV_GHPAGES }}
           TAG: ${{ github.ref_name }}
         run: |
           rm .env*

@@ -1,11 +1,16 @@
-import { FunctionComponent, useCallback, useEffect } from 'react';
+import { FunctionComponent, SyntheticEvent, useCallback, useEffect } from 'react';
 
-import { IFrameConfig } from '@config';
+import { AppConfig } from '@config';
 import { LoadingEvent } from '@core';
+import { PagePath } from '@common';
 
 export const HomePage: FunctionComponent = () => {
-  const onLoad = useCallback(() => {
+  const onLoad = useCallback((e: SyntheticEvent<HTMLIFrameElement>, error?: Error) => {
     LoadingEvent.dispatch(false, 1);
+
+    if (error) {
+      console.log(error);
+    }
   }, []);
 
   useEffect(() => {
@@ -14,8 +19,9 @@ export const HomePage: FunctionComponent = () => {
 
   return (
     <iframe
-      src={new IFrameConfig().getIframeSrc()}
+      src={new AppConfig().getAppUrl() + PagePath.HomeIframe}
       onLoad={onLoad}
+      onError={onLoad}
       style={{
         height: '100vh',
         width: '100%',

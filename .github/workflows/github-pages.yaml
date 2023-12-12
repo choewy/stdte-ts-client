@@ -31,13 +31,15 @@ jobs:
           ENV: ${{ secrets.ENV_DEVELOP }}
           TAG: ${{ github.ref_name }}
         run: |
-          rm .env
+          rm .env*
           echo "$ENV" >> .env
           echo "VERSION=$TAG$(date +'%Y-%m-%d_%H:%M:%S')" >> .env
+          cat .env
 
       - name: Add homepage into package.json
         run: |
-          node ./gh-pages.js
+          node gh-pages.js
+          cat package.json
 
       - name: Build application
         run: |

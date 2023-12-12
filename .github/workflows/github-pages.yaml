@@ -33,13 +33,11 @@ jobs:
         run: |
           rm .env*
           echo "$ENV" >> .env
-          echo "VERSION=$TAG$(date +'%Y-%m-%d_%H:%M:%S')" >> .env
-          cat .env
+          echo "VERSION=$TAG_$(date +'%Y-%m-%d_%H:%M:%S')" >> .env
 
       - name: Add homepage into package.json
         run: |
           node gh-pages.js
-          cat package.json
 
       - name: Build application
         run: |

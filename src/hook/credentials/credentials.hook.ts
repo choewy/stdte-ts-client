@@ -19,10 +19,6 @@ export class CredentialsHook {
     const setCredentials = credentialsStore.useSetState();
 
     const getCredentials = useCallback(async () => {
-      if (pathname === PagePath.HomeIframe) {
-        return;
-      }
-
       const res = await credentialsHttpService.credentials();
 
       if (res.ok === false) {

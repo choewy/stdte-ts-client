@@ -6,7 +6,6 @@ import {
   AllowGuestOnlyGuardPage,
   AllowUserOnlyGuardPage,
   EmptyPage,
-  HomeIframePage,
   HomePage,
   SignInPage,
   SignOutPage,
@@ -21,10 +20,6 @@ export const router = createBrowserRouter(
         {
           path: PagePath.Home,
           element: <HomePage />,
-        },
-        {
-          path: PagePath.HomeIframe,
-          element: <HomeIframePage />,
         },
         {
           element: <AllowGuestOnlyGuardPage />,

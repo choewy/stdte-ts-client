@@ -1,8 +1,7 @@
 import { FunctionComponent, SyntheticEvent, useCallback, useEffect } from 'react';
 
-import { AppConfig } from '@config';
+import { IframeConfig } from '@config';
 import { LoadingEvent } from '@core';
-import { PagePath } from '@common';
 
 export const HomePage: FunctionComponent = () => {
   const onLoad = useCallback((e: SyntheticEvent<HTMLIFrameElement>, error?: Error) => {
@@ -19,11 +18,11 @@ export const HomePage: FunctionComponent = () => {
 
   return (
     <iframe
-      src={new AppConfig().getAppUrl() + PagePath.HomeIframe}
+      src={new IframeConfig().getIframeSrc()}
       onLoad={onLoad}
       onError={onLoad}
       style={{
-        height: '100vh',
+        height: '91vh',
         width: '100%',
       }}
     />

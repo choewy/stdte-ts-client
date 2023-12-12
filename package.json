@@ -45,6 +45,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@babel/plugin-transform-optional-chaining": "^7.23.4",
     "@types/luxon": "^3.3.4",
     "@types/uuid": "^9.0.7",
     "env-cmd": "^10.1.0"

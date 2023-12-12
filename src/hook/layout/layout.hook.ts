@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import { PagePath } from '@common';
 import { layoutStore } from '@store';
 import {
   SidebarMenuItemCollapseProperty,
@@ -8,9 +9,78 @@ import {
   SidebarMenuItemProperty,
   SidebarMenuType,
 } from '@service';
-import { PagePath } from '@common';
 
 export class LayoutHook {
+  useTitleListener() {
+    const pathname = useLocation().pathname;
+    const setLayout = layoutStore.useSetState();
+
+    const parseTitle = useCallback(() => {
+      switch (pathname) {
+        case PagePath.Home:
+          return '홈';
+
+        case PagePath.SignIn:
+          return '로그인';
+
+        case PagePath.SignUp:
+          return '회원가입';
+
+        case PagePath.SignOut:
+          return '로그아웃';
+
+        case PagePath.MyPage:
+          return '마이페이지';
+
+        case PagePath.AdminRole:
+          return '역할 관리';
+
+        case PagePath.AdminCredentials:
+          return '계정 관리';
+
+        case PagePath.User:
+          return '구성원';
+
+        case PagePath.Project:
+          return '사업';
+
+        case PagePath.ProjectCustomer:
+          return '고객사';
+
+        case PagePath.ProjectBusinessCategory:
+          return '사업 구분';
+
+        case PagePath.ProjectIndustryCategory:
+          return '산업 분야';
+
+        case PagePath.ProjectTaskCategory:
+          return '수행 업무 구분';
+
+        case PagePath.TimeAnalysis:
+          return '시간 집계';
+
+        case PagePath.Setting:
+          return '설정';
+      }
+
+      if (PagePath.TimeRecord.startsWith(pathname)) {
+        return '시간 기록';
+      }
+
+      return '';
+    }, [pathname]);
+
+    useEffect(() => {
+      const title = parseTitle();
+
+      setLayout((prev) => ({
+        ...prev,
+        helmet: { title: ['STDTE', title].join(' - ') },
+        header: { title },
+      }));
+    }, [parseTitle, setLayout]);
+  }
+
   useResizeListener() {
     const setLayout = layoutStore.useSetState();
 

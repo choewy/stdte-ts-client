@@ -12,8 +12,8 @@ import { Theme } from './theme';
 import { Sidebar } from './sidebar';
 
 export const Layout: FunctionComponent = () => {
+  layoutHook.useTitleListener();
   layoutHook.useResizeListener();
-
   credentialsHook.useCredentials();
 
   return (

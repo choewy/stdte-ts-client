@@ -1,5 +1,5 @@
 import { FormEvent, useCallback, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { PagePath } from '@common';
 import { credentialsStore } from '@store';
@@ -15,6 +15,7 @@ import {
 
 export class CredentialsHook {
   useCredentials() {
+    const pathname = useLocation().pathname;
     const setCredentials = credentialsStore.useSetState();
 
     const getCredentials = useCallback(async () => {
@@ -23,7 +24,11 @@ export class CredentialsHook {
       if (res.ok === false) {
         setCredentials(false);
 
-        return SnackEvent.dispatchByException(new CredentialsException(res.exception));
+        if (![PagePath.SignIn, PagePath.SignUp].find((pagepath) => pagepath.startsWith(pathname))) {
+          SnackEvent.dispatchByException(new CredentialsException(res.exception));
+        }
+
+        return;
       }
 
       setCredentials(res.data);
@@ -32,6 +37,58 @@ export class CredentialsHook {
     useEffect(() => {
       getCredentials();
     }, [getCredentials]);
+  }
+
+  useGuestOnlyGuard(): boolean | null {
+    const credentials = credentialsStore.useValue();
+
+    const [pass, setPass] = useState<boolean | null>(null);
+
+    const lazy = useCallback(() => {
+      if (credentials === null) {
+        return setPass(null);
+      }
+
+      setTimeout(() => {
+        if (credentials === false) {
+          return setPass(true);
+        } else {
+          return setPass(false);
+        }
+      }, 1500);
+    }, [credentials, setPass]);
+
+    useEffect(() => {
+      lazy();
+    }, [lazy]);
+
+    return pass;
+  }
+
+  useUserOnlyGuard(): boolean | null {
+    const credentials = credentialsStore.useValue();
+
+    const [pass, setPass] = useState<boolean | null>(null);
+
+    const lazy = useCallback(() => {
+      if (credentials === null) {
+        return setPass(null);
+      }
+
+      setTimeout(() => {
+        if (credentials) {
+          return setPass(true);
+        } else {
+          return setPass(false);
+        }
+      }, 1500);
+    }, [credentials, setPass]);
+
+    useEffect(() => {
+      lazy();
+    }, [lazy]);
+
+    return pass;
   }
 
   useSignInState() {

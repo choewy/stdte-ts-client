@@ -2,7 +2,7 @@ import { Navigate, createBrowserRouter } from 'react-router-dom';
 
 import { Layout } from '@layout';
 import { PagePath } from '@common';
-import { AllowGuestOnlyGuardPage, AllowUserOnlyGuardPage, EmptyPage } from '@page';
+import { AllowGuestOnlyGuardPage, AllowUserOnlyGuardPage, EmptyPage, SignInPage } from '@page';
 
 export const router = createBrowserRouter([
   {
@@ -17,7 +17,7 @@ export const router = createBrowserRouter([
         children: [
           {
             path: PagePath.SignIn,
-            element: <EmptyPage title="로그인 후 페이지 분기 처리(가입 승인 등)" />,
+            element: <SignInPage />,
           },
           {
             path: PagePath.SignUp,

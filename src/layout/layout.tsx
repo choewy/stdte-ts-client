@@ -1,6 +1,8 @@
 import { Fragment, FunctionComponent } from 'react';
 import { Outlet } from 'react-router-dom';
 
+import { CssBaseline } from '@mui/material';
+
 import { credentialsHook, layoutHook } from '@hook';
 
 import { Helmet } from './helmet';
@@ -21,6 +23,7 @@ export const Layout: FunctionComponent = () => {
         <Header />
         <Sidebar />
         <Snack />
+        <CssBaseline />
         <Outlet />
       </Theme>
     </Fragment>

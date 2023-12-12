@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { FormEvent, useCallback, useEffect, useState } from 'react';
 
 import { credentialsStore } from '@store';
 import {
@@ -42,21 +42,26 @@ export class CredentialsHook {
   useSignInCallback(body: CredentialsSignInBody) {
     const setCredentials = credentialsStore.useSetState();
 
-    return useCallback(async () => {
-      const message = credentialsValidator.signin(body);
+    return useCallback(
+      async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
 
-      if (message) {
-        return SnackEvent.dispatchByWarning(message);
-      }
+        const message = credentialsValidator.signin(body);
 
-      const res = await credentialsHttpService.signin(body);
+        if (message) {
+          return SnackEvent.dispatchByWarning(message);
+        }
 
-      if (res.ok === false) {
-        return SnackEvent.dispatchByException(new CredentialsException(res.exception));
-      }
+        const res = await credentialsHttpService.signin(body);
 
-      setCredentials(res.data);
-    }, [body, setCredentials]);
+        if (res.ok === false) {
+          return SnackEvent.dispatchByException(new CredentialsException(res.exception));
+        }
+
+        setCredentials(res.data);
+      },
+      [body, setCredentials],
+    );
   }
 
   useSignUpState() {
@@ -71,21 +76,26 @@ export class CredentialsHook {
   useSignUpCallback(body: CredentialsSignUpBody) {
     const setCredentials = credentialsStore.useSetState();
 
-    return useCallback(async () => {
-      const message = credentialsValidator.signup(body);
+    return useCallback(
+      async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
 
-      if (message) {
-        return SnackEvent.dispatchByWarning(message);
-      }
+        const message = credentialsValidator.signup(body);
 
-      const res = await credentialsHttpService.signup(body);
+        if (message) {
+          return SnackEvent.dispatchByWarning(message);
+        }
 
-      if (res.ok === false) {
-        return SnackEvent.dispatchByException(new CredentialsException(res.exception));
-      }
+        const res = await credentialsHttpService.signup(body);
 
-      setCredentials(res.data);
-    }, [body, setCredentials]);
+        if (res.ok === false) {
+          return SnackEvent.dispatchByException(new CredentialsException(res.exception));
+        }
+
+        setCredentials(res.data);
+      },
+      [body, setCredentials],
+    );
   }
 
   useUpdatePasswordCallback(body: CredentialsUpdatePasswordBody) {

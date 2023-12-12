@@ -14,7 +14,7 @@ export const SidebarMenuCollapseItem: FunctionComponent<SidebarMenuItemCollapseP
 
   return (
     <>
-      <SidebarMenuDefaultItem item={props} onClick={onClick} />
+      <SidebarMenuDefaultItem item={props} onClick={onClick} collapsed={collapsed} />
       <Collapse in={collapsed} timeout="auto" unmountOnExit>
         <List disablePadding component="div" sx={SidebarStyle.Item(1)}>
           {props.children.map((child) => (

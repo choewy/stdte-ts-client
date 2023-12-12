@@ -8,7 +8,7 @@ export const HomePage: FunctionComponent = () => {
     LoadingEvent.dispatch(false, 1);
 
     if (error) {
-      console.log(error);
+      console.error(error);
     }
   }, []);
 

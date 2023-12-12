@@ -2,6 +2,7 @@ import { Navigate, createBrowserRouter } from 'react-router-dom';
 
 import { PagePath } from '@common';
 import { Layout } from '@layout';
+import { MyPage } from './page/my/my.page';
 import {
   AllowGuestOnlyGuardPage,
   AllowUserOnlyGuardPage,
@@ -62,7 +63,7 @@ export const router = createBrowserRouter(
             },
             {
               path: PagePath.MyPage,
-              element: <EmptyPage title="마이페이지" />,
+              element: <MyPage />,
             },
             {
               path: PagePath.Admin,

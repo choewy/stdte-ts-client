@@ -8,6 +8,7 @@ export const Helmet: FunctionComponent = () => {
 
   return (
     <HelmetAsync>
+      <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
       <title>{layout.helmet.title}</title>
     </HelmetAsync>
   );

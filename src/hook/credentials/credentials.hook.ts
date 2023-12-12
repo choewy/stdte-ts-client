@@ -1,5 +1,7 @@
 import { FormEvent, useCallback, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
+import { PagePath } from '@common';
 import { credentialsStore } from '@store';
 import {
   CredentialsException,
@@ -10,8 +12,6 @@ import {
   credentialsHttpService,
   credentialsValidator,
 } from '@service';
-import { useNavigate } from 'react-router-dom';
-import { PagePath } from '@common';
 
 export class CredentialsHook {
   useCredentials() {
@@ -118,7 +118,7 @@ export class CredentialsHook {
 
   useSignOutCallback() {
     const navigate = useNavigate();
-    const resetCredentials = credentialsStore.useResetState();
+    const setCredentials = credentialsStore.useSetState();
 
     return useCallback(async () => {
       const res = await credentialsHttpService.signout();
@@ -128,8 +128,8 @@ export class CredentialsHook {
       }
 
       navigate(PagePath.SignIn, { replace: true });
-      resetCredentials();
-    }, [navigate, resetCredentials]);
+      setCredentials(false);
+    }, [navigate, setCredentials]);
   }
 
   useSignOutEffect() {

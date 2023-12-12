@@ -10,7 +10,11 @@ export const HeaderButtonGroup: FunctionComponent = () => {
   const navigate = useNavigate();
   const credentials = credentialsStore.useValue();
 
-  if (credentials === null || credentials === false) {
+  if (credentials === null) {
+    return null;
+  }
+
+  if (credentials === false) {
     return (
       <Box>
         <Button color="inherit" onClick={() => navigate(PagePath.SignIn)}>

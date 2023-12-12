@@ -10,6 +10,8 @@ import {
   credentialsHttpService,
   credentialsValidator,
 } from '@service';
+import { useNavigate } from 'react-router-dom';
+import { PagePath } from '@common';
 
 export class CredentialsHook {
   useCredentials() {
@@ -112,6 +114,30 @@ export class CredentialsHook {
         return SnackEvent.dispatchByException(new CredentialsException(res.exception));
       }
     }, [body]);
+  }
+
+  useSignOutCallback() {
+    const navigate = useNavigate();
+    const resetCredentials = credentialsStore.useResetState();
+
+    return useCallback(async () => {
+      const res = await credentialsHttpService.signout();
+
+      if (res.ok === false) {
+        return SnackEvent.dispatchByException(new CredentialsException(res.exception));
+      }
+
+      navigate(PagePath.SignIn, { replace: true });
+      resetCredentials();
+    }, [navigate, resetCredentials]);
+  }
+
+  useSignOutEffect() {
+    const signout = this.useSignOutCallback();
+
+    useEffect(() => {
+      signout();
+    }, [signout]);
   }
 }
 

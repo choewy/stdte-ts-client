@@ -12,7 +12,7 @@ export const AllowGuestOnlyGuardPage: FunctionComponent = () => {
   }
 
   if (pass === false) {
-    return <Navigate to={PagePath.MyPage} replace={true} />;
+    return <Navigate to={PagePath.Home} replace={true} />;
   }
 
   return <Outlet />;

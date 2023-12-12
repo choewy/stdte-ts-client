@@ -1,7 +1,7 @@
 import { FormEvent, useCallback, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { PagePath } from '@common';
+import { CredentialsStatus, PagePath } from '@common';
 import { credentialsStore } from '@store';
 import {
   CredentialsException,
@@ -12,6 +12,7 @@ import {
   credentialsHttpService,
   credentialsValidator,
 } from '@service';
+import { CredentialsGuardPassOrPath } from './types';
 
 export class CredentialsHook {
   useCredentials() {
@@ -39,52 +40,119 @@ export class CredentialsHook {
     }, [getCredentials]);
   }
 
-  useGuestOnlyGuard(): boolean | null {
+  useGuestOnlyGuard() {
     const credentials = credentialsStore.useValue();
 
-    const [pass, setPass] = useState<boolean | null>(null);
+    const [passOrPath, setPassOrPath] = useState<CredentialsGuardPassOrPath>(null);
 
     const check = useCallback(() => {
       if (credentials === null) {
-        return setPass(null);
-      }
-
-      if (credentials === false) {
-        return setPass(true);
-      } else {
-        return setPass(false);
-      }
-    }, [credentials, setPass]);
-
-    useEffect(() => {
-      check();
-    }, [check]);
-
-    return pass;
-  }
-
-  useUserOnlyGuard(): boolean | null {
-    const credentials = credentialsStore.useValue();
-
-    const [pass, setPass] = useState<boolean | null>(null);
-
-    const check = useCallback(() => {
-      if (credentials === null) {
-        return setPass(null);
+        return setPassOrPath(null);
       }
 
       if (credentials) {
-        return setPass(true);
-      } else {
-        return setPass(false);
+        return setPassOrPath(PagePath.Home);
       }
-    }, [credentials, setPass]);
+
+      setPassOrPath(true);
+    }, [credentials, setPassOrPath]);
 
     useEffect(() => {
       check();
     }, [check]);
 
-    return pass;
+    return passOrPath;
+  }
+
+  useUserOnlyGuard() {
+    const pathname = useLocation().pathname;
+    const credentials = credentialsStore.useValue();
+
+    const [passOrPath, setPassOrPath] = useState<CredentialsGuardPassOrPath>(null);
+
+    const check = useCallback(() => {
+      if (credentials === null) {
+        return setPassOrPath(null);
+      }
+
+      if (credentials === false) {
+        return setPassOrPath(PagePath.SignIn);
+      }
+
+      if (credentials.status === CredentialsStatus.Active) {
+        return setPassOrPath(true);
+      }
+
+      if ([PagePath.MyPage, PagePath.SignOut].includes(pathname as PagePath)) {
+        return setPassOrPath(true);
+      }
+
+      switch (credentials.status) {
+        case CredentialsStatus.Wating:
+          return setPassOrPath(PagePath.Wating);
+
+        case CredentialsStatus.Reject:
+          return setPassOrPath(PagePath.Rejected);
+
+        case CredentialsStatus.Disable:
+          return setPassOrPath(PagePath.Disabled);
+      }
+    }, [pathname, credentials, setPassOrPath]);
+
+    useEffect(() => {
+      check();
+    }, [check]);
+
+    return passOrPath;
+  }
+
+  useBlockOnlyGuard() {
+    const pathname = useLocation().pathname;
+    const credentials = credentialsStore.useValue();
+
+    const [passOrPath, setPassOrPath] = useState<CredentialsGuardPassOrPath>(null);
+
+    useEffect(() => {
+      if (credentials == null) {
+        return setPassOrPath(null);
+      }
+
+      if (credentials === false) {
+        return setPassOrPath(PagePath.SignIn);
+      }
+
+      if (credentials.status === CredentialsStatus.Active) {
+        return setPassOrPath(PagePath.Home);
+      }
+
+      switch (credentials.status) {
+        case CredentialsStatus.Wating:
+          if (pathname === PagePath.Wating) {
+            setPassOrPath(true);
+          } else {
+            setPassOrPath(PagePath.Wating);
+          }
+          break;
+
+        case CredentialsStatus.Reject:
+          if (pathname === PagePath.Rejected) {
+            setPassOrPath(true);
+          } else {
+            setPassOrPath(PagePath.Rejected);
+          }
+          break;
+
+        case CredentialsStatus.Disable:
+          if (pathname === PagePath.Disabled) {
+            setPassOrPath(true);
+          } else {
+            setPassOrPath(PagePath.Disabled);
+          }
+          break;
+      }
+    }, [pathname, credentials, setPassOrPath]);
+
+    return passOrPath;
   }
 
   useSignInState() {

@@ -1,10 +1,11 @@
 import { Navigate, createBrowserRouter } from 'react-router-dom';
 
-import { Layout } from '@layout';
 import { PagePath } from '@common';
+import { Layout } from '@layout';
 import {
   AllowGuestOnlyGuardPage,
   AllowUserOnlyGuardPage,
+  AllowBlockOnlyGuardPage,
   EmptyPage,
   HomePage,
   NotFoundPage,
@@ -32,6 +33,23 @@ export const router = createBrowserRouter(
             {
               path: PagePath.SignUp,
               element: <SignUpPage />,
+            },
+          ],
+        },
+        {
+          element: <AllowBlockOnlyGuardPage />,
+          children: [
+            {
+              path: PagePath.Wating,
+              element: <div>가입 승인 대기중</div>,
+            },
+            {
+              path: PagePath.Rejected,
+              element: <div>가입 승인 거절됨</div>,
+            },
+            {
+              path: PagePath.Disabled,
+              element: <div>계정 비활성 상태</div>,
             },
           ],
         },

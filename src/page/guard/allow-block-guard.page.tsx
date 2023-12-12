@@ -3,10 +3,10 @@ import { Navigate, Outlet } from 'react-router-dom';
 
 import { credentialsHook } from '@hook';
 
-export const AllowGuestOnlyGuardPage: FunctionComponent = () => {
-  const passOrPath = credentialsHook.useGuestOnlyGuard();
+export const AllowBlockOnlyGuardPage: FunctionComponent = () => {
+  const passOrPath = credentialsHook.useBlockOnlyGuard();
 
-  if (passOrPath === null) {
+  if (passOrPath == null) {
     return null;
   }
 

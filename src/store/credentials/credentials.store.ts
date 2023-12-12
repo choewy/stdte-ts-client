@@ -1,7 +1,8 @@
 import { RecoilStore } from '@core';
-import { CredentialsResponse } from '@service';
 
-export class CredentialsStore extends RecoilStore<CredentialsResponse | null | false> {
+import { Credentials } from './types';
+
+export class CredentialsStore extends RecoilStore<Credentials> {
   constructor() {
     super(CredentialsStore.name, null);
   }

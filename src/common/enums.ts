@@ -8,6 +8,7 @@ export enum PagePath {
   TimeRecord = '/time/record',
   TimeRecordByUser = '/time/record/:id',
   TimeAnalysis = '/time/analysis',
+  Developer = '/developer',
   Admin = '/admin',
   AdminRole = '/admin/role',
   AdminCredentials = '/admin/credentials',

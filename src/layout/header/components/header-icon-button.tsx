@@ -8,7 +8,7 @@ import { layoutHook } from '@hook';
 import { HeaderStyle } from '../header.style';
 
 export const HeaderIconButton: FunctionComponent = () => {
-  const onClick = layoutHook.useHeaderIconButtonClickCallback();
+  const onClick = layoutHook.useSidebarCallback(true);
 
   return (
     <IconButton

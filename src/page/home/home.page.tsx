@@ -22,7 +22,7 @@ export const HomePage: FunctionComponent = () => {
       onLoad={onLoad}
       onError={onLoad}
       style={{
-        height: '91vh',
+        height: 'calc(100vh - 71px)',
         width: '100%',
       }}
     />

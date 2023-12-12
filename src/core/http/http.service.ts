@@ -1,8 +1,9 @@
-import axios, { Axios, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { Axios, AxiosResponse } from 'axios';
 
 import { AppConfig } from '@config';
 
-import { HttpClientResponse } from './types';
+import { HttpClientResponse, HttpClientrequestConfig } from './types';
+import { LoadingEvent } from '../loading';
 
 export class HttpService {
   private readonly instance: Axios;
@@ -15,10 +16,14 @@ export class HttpService {
     });
   }
 
-  private async transform<R>(request: () => Promise<AxiosResponse>): Promise<HttpClientResponse<R>> {
+  private async transform<R>(request: () => Promise<AxiosResponse>, delay?: number): Promise<HttpClientResponse<R>> {
+    LoadingEvent.dispatch(true);
+
     const res = await request()
       .then((response) => ({ ok: true, data: response.data }))
       .catch((error) => ({ ok: false, data: error.response.data }));
+
+    LoadingEvent.dispatch(false, delay);
 
     return {
       ok: res.ok,
@@ -37,23 +42,23 @@ export class HttpService {
     return [this.path, ...args].join('/');
   }
 
-  protected async get<R, D = any>(url: string = '', config?: AxiosRequestConfig<D>) {
-    return this.transform<R>(() => this.instance.get(url, config));
+  protected async get<R, D = any>(url: string = '', config?: HttpClientrequestConfig<D>) {
+    return this.transform<R>(() => this.instance.get(url, config), config?.delay);
   }
 
-  protected async post<R, D = any>(url: string = '', data?: D, config?: AxiosRequestConfig<D>) {
-    return this.transform<R>(() => this.instance.post(url, data, config));
+  protected async post<R, D = any>(url: string = '', data?: D, config?: HttpClientrequestConfig<D>) {
+    return this.transform<R>(() => this.instance.post(url, data, config), config?.delay);
   }
 
-  protected async patch<R, D = any>(url: string = '', data?: D, config?: AxiosRequestConfig<D>) {
-    return this.transform<R>(() => this.instance.patch(url, data, config));
+  protected async patch<R, D = any>(url: string = '', data?: D, config?: HttpClientrequestConfig<D>) {
+    return this.transform<R>(() => this.instance.patch(url, data, config), config?.delay);
   }
 
-  protected async put<R, D = any>(url: string = '', data?: D, config?: AxiosRequestConfig<D>) {
-    return this.transform<R>(() => this.instance.put(url, data, config));
+  protected async put<R, D = any>(url: string = '', data?: D, config?: HttpClientrequestConfig<D>) {
+    return this.transform<R>(() => this.instance.put(url, data, config), config?.delay);
   }
 
-  protected async delete<R, D = any>(url: string = '', config?: AxiosRequestConfig<D>) {
-    return this.transform<R>(() => this.instance.delete(url, config));
+  protected async delete<R, D = any>(url: string = '', config?: HttpClientrequestConfig<D>) {
+    return this.transform<R>(() => this.instance.delete(url, config), config?.delay);
   }
 }

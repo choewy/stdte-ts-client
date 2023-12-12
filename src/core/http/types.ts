@@ -1,3 +1,9 @@
+import { AxiosRequestConfig } from 'axios';
+
+export type HttpClientrequestConfig<D> = AxiosRequestConfig<D> & {
+  delay?: number;
+};
+
 export type HttpClientRequest = {
   id: string;
   requestedAt: Date;

@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { PagePath } from '@common';
+import { LoadingEvent } from '@core';
 import { layoutStore } from '@store';
 import {
   SidebarMenuItemCollapseProperty,
@@ -103,6 +104,28 @@ export class LayoutHook {
     }, [listener]);
   }
 
+  useLoadingListener() {
+    const setLayout = layoutStore.useSetState();
+
+    const listener = useCallback(
+      (e: Event) => {
+        setLayout((prev) => ({
+          ...prev,
+          loading: (e as LoadingEvent).detail,
+        }));
+      },
+      [setLayout],
+    );
+
+    useEffect(() => {
+      window.addEventListener(LoadingEvent.EVENT_NAME, listener);
+
+      return () => {
+        window.removeEventListener(LoadingEvent.EVENT_NAME, listener);
+      };
+    }, [listener]);
+  }
+
   useSidebarCallback(open: boolean) {
     const setLayout = layoutStore.useSetState();
 
@@ -131,9 +154,12 @@ export class LayoutHook {
 
   useSidebarNavigateCallback(item: SidebarMenuItemNavigatePropery) {
     const navigate = useNavigate();
+    const closeSidebar = this.useSidebarCallback(false);
+
     const onClick = useCallback(() => {
+      closeSidebar();
       navigate(item.path);
-    }, [item, navigate]);
+    }, [item, closeSidebar, navigate]);
 
     return onClick;
   }

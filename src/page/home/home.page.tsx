@@ -1,28 +1,25 @@
-import { FunctionComponent, useCallback, useState } from 'react';
+import { FunctionComponent, useCallback, useEffect } from 'react';
 
-import { Loading } from '@component';
 import { IFrameConfig } from '@config';
+import { LoadingEvent } from '@core';
 
 export const HomePage: FunctionComponent = () => {
-  const [loading, setLoading] = useState<boolean>(true);
-
   const onLoad = useCallback(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1500);
-  }, [setLoading]);
+    LoadingEvent.dispatch(false, 1);
+  }, []);
+
+  useEffect(() => {
+    LoadingEvent.dispatch(true);
+  }, []);
 
   return (
-    <>
-      {loading ? <Loading /> : null}
-      <iframe
-        src={new IFrameConfig().getIframeSrc()}
-        onLoad={onLoad}
-        style={{
-          height: '100vh',
-          width: '100%',
-        }}
-      />
-    </>
+    <iframe
+      src={new IFrameConfig().getIframeSrc()}
+      onLoad={onLoad}
+      style={{
+        height: '100vh',
+        width: '100%',
+      }}
+    />
   );
 };

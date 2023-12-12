@@ -44,23 +44,21 @@ export class CredentialsHook {
 
     const [pass, setPass] = useState<boolean | null>(null);
 
-    const lazy = useCallback(() => {
+    const check = useCallback(() => {
       if (credentials === null) {
         return setPass(null);
       }
 
-      setTimeout(() => {
-        if (credentials === false) {
-          return setPass(true);
-        } else {
-          return setPass(false);
-        }
-      }, 1500);
+      if (credentials === false) {
+        return setPass(true);
+      } else {
+        return setPass(false);
+      }
     }, [credentials, setPass]);
 
     useEffect(() => {
-      lazy();
-    }, [lazy]);
+      check();
+    }, [check]);
 
     return pass;
   }
@@ -70,23 +68,21 @@ export class CredentialsHook {
 
     const [pass, setPass] = useState<boolean | null>(null);
 
-    const lazy = useCallback(() => {
+    const check = useCallback(() => {
       if (credentials === null) {
         return setPass(null);
       }
 
-      setTimeout(() => {
-        if (credentials) {
-          return setPass(true);
-        } else {
-          return setPass(false);
-        }
-      }, 1500);
+      if (credentials) {
+        return setPass(true);
+      } else {
+        return setPass(false);
+      }
     }, [credentials, setPass]);
 
     useEffect(() => {
-      lazy();
-    }, [lazy]);
+      check();
+    }, [check]);
 
     return pass;
   }

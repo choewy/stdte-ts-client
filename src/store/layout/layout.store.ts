@@ -1,6 +1,10 @@
 import { RecoilStore } from '@core';
 
 export class LayoutStore extends RecoilStore<{
+  size: {
+    innerWidth: number;
+    innerHeight: number;
+  };
   theme: { color: string };
   helmet: { title: string };
   header: { title: string };
@@ -8,6 +12,7 @@ export class LayoutStore extends RecoilStore<{
 }> {
   constructor() {
     super(LayoutStore.name, {
+      size: { innerHeight: window.innerHeight, innerWidth: window.innerWidth },
       theme: { color: '#A00' },
       helmet: { title: '' },
       header: { title: '' },

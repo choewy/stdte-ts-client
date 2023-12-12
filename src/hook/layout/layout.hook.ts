@@ -11,6 +11,28 @@ import {
 import { PagePath } from '@common';
 
 export class LayoutHook {
+  useResizeListener() {
+    const setLayout = layoutStore.useSetState();
+
+    const listener = useCallback(() => {
+      setLayout((prev) => ({
+        ...prev,
+        size: {
+          innerWidth: window.innerWidth,
+          innerHeight: window.innerHeight,
+        },
+      }));
+    }, [setLayout]);
+
+    useEffect(() => {
+      window.addEventListener('resize', listener);
+
+      return () => {
+        window.removeEventListener('resize', listener);
+      };
+    }, [listener]);
+  }
+
   useSidebarCallback(open: boolean) {
     const setLayout = layoutStore.useSetState();
 

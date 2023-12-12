@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { SnackEvent, SnackEventDetail } from '@service';
 import { snackStore } from '@store';
@@ -7,17 +7,20 @@ export class SnackHook {
   ussEventListener() {
     const setSnack = snackStore.useSetState();
 
-    useEffect(() => {
-      const handleEvent = (e: Event) => {
+    const listener = useCallback(
+      (e: Event) => {
         setSnack((prev) => [...prev, (e as SnackEvent).detail]);
-      };
+      },
+      [setSnack],
+    );
 
-      window.addEventListener(SnackEvent.EVENT_NAME, handleEvent);
+    useEffect(() => {
+      window.addEventListener(SnackEvent.EVENT_NAME, listener);
 
       return () => {
-        window.removeEventListener(SnackEvent.EVENT_NAME, handleEvent);
+        window.removeEventListener(SnackEvent.EVENT_NAME, listener);
       };
-    }, [setSnack]);
+    }, [listener]);
   }
 
   useDequeue() {

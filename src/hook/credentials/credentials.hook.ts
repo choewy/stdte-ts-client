@@ -11,6 +11,7 @@ import {
   SnackEvent,
   credentialsHttpService,
   credentialsValidator,
+  localStorageService,
 } from '@service';
 import { CredentialsGuardPassOrPath } from './types';
 
@@ -157,7 +158,7 @@ export class CredentialsHook {
 
   useSignInState() {
     return useState<CredentialsSignInBody>({
-      email: '',
+      email: localStorageService.getEmail(),
       password: '',
     });
   }
@@ -181,6 +182,7 @@ export class CredentialsHook {
           return SnackEvent.dispatchByException(new CredentialsException(res.exception));
         }
 
+        localStorageService.setEmail(body.email);
         setCredentials(res.data);
       },
       [body, setCredentials],
@@ -262,7 +264,6 @@ export class CredentialsHook {
         return SnackEvent.dispatchByException(new CredentialsException(res.exception));
       }
 
-      navigate(PagePath.SignIn, { replace: true });
       setCredentials(false);
     }, [navigate, setCredentials]);
   }

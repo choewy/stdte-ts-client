@@ -1,3 +1,4 @@
+export * from './local-storage';
 export * from './sidebar';
 export * from './snack';
 export * from './setting';

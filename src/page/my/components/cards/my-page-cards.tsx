@@ -23,6 +23,7 @@ export const MyPageCards: FunctionComponent = () => {
   return (
     <Box sx={boxSx(size.innerHeight - 125)}>
       <MyPageCredentialsCard />
+      {/* @todo */}
       <MyPagePersinalCard />
       <MyPageEducationalCard />
       <MyPageVehicleCard />

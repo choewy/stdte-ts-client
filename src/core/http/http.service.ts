@@ -29,7 +29,7 @@ export class HttpService {
         responsedAt: new Date(res.data?.request?.responsedAt),
       },
       data: res.ok ? res.data?.data : null,
-      exception: res.ok ? null : res.data,
+      exception: res.ok ? null : res.data?.data,
     };
   }
 

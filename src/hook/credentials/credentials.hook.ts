@@ -2,9 +2,11 @@ import { useCallback, useEffect, useState } from 'react';
 
 import { credentialsStore } from '@store';
 import {
+  CredentialsException,
   CredentialsSignInBody,
   CredentialsSignUpBody,
   CredentialsUpdatePasswordBody,
+  SnackEvent,
   credentialsHttpService,
   credentialsValidator,
 } from '@service';
@@ -18,7 +20,8 @@ export class CredentialsHook {
 
       if (res.ok === false) {
         setCredentials(false);
-        return console.debug('todo - send exception event');
+
+        return SnackEvent.dispatchByException(new CredentialsException(res.exception));
       }
 
       setCredentials(res.data);
@@ -43,13 +46,13 @@ export class CredentialsHook {
       const message = credentialsValidator.signin(body);
 
       if (message) {
-        return console.debug(message);
+        return SnackEvent.dispatchByWarning(message);
       }
 
       const res = await credentialsHttpService.signin(body);
 
       if (res.ok === false) {
-        return console.debug('todo - send exception event');
+        return SnackEvent.dispatchByException(new CredentialsException(res.exception));
       }
 
       setCredentials(res.data);
@@ -72,13 +75,13 @@ export class CredentialsHook {
       const message = credentialsValidator.signup(body);
 
       if (message) {
-        return console.debug(message);
+        return SnackEvent.dispatchByWarning(message);
       }
 
       const res = await credentialsHttpService.signup(body);
 
       if (res.ok === false) {
-        return;
+        return SnackEvent.dispatchByException(new CredentialsException(res.exception));
       }
 
       setCredentials(res.data);
@@ -90,13 +93,13 @@ export class CredentialsHook {
       const message = credentialsValidator.updatePassword(body);
 
       if (message) {
-        return console.debug(message);
+        return SnackEvent.dispatchByWarning(message);
       }
 
       const res = await credentialsHttpService.updatePassword(body);
 
-      if (res.ok) {
-        return console.debug('todo - send exception event');
+      if (res.ok === false) {
+        return SnackEvent.dispatchByException(new CredentialsException(res.exception));
       }
     }, [body]);
   }

@@ -7,7 +7,7 @@ export type HttpClientRequest = {
 export type HttpClientException = {
   status: number;
   name: string;
-  message?: string;
+  message: string;
   cause?: {
     name?: string;
     message?: string;

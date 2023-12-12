@@ -2,6 +2,7 @@
 
 # development
 /local
+/temp
 .env.local
 
 # dependencies

@@ -1,24 +1,15 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { Navigate, createBrowserRouter } from 'react-router-dom';
 
-import { PagePath } from '@common';
 import { Layout } from '@layout';
+import { PagePath } from '@common';
 import {
-  CredentialPage,
-  ForbiddenPage,
+  AllowGuestOnlyGuardPage,
+  AllowUserOnlyGuardPage,
+  EmptyPage,
   HomePage,
-  MyPage,
-  ProjectSettingPage,
-  ProjectTablePage,
-  RolePage,
   SignInPage,
   SignOutPage,
   SignUpPage,
-  TeamPage,
-  MemberPage,
-  TimeRecordAnalyticsPage,
-  TimeRecordTablePage,
-  RedirectPage,
-  HttpRequestLogPage,
 } from '@page';
 
 export const router = createBrowserRouter([
@@ -30,64 +21,90 @@ export const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: PagePath.Forbidden,
-        element: <ForbiddenPage />,
+        element: <AllowGuestOnlyGuardPage />,
+        children: [
+          {
+            path: PagePath.SignIn,
+            element: <SignInPage />,
+          },
+          {
+            path: PagePath.SignUp,
+            element: <SignUpPage />,
+          },
+        ],
       },
       {
-        path: PagePath.SignIn,
-        element: <SignInPage />,
-      },
-      {
-        path: PagePath.SignUp,
-        element: <SignUpPage />,
-      },
-      {
-        path: PagePath.SignOut,
-        element: <SignOutPage />,
-      },
-      {
-        path: PagePath.MyPage,
-        element: <MyPage />,
-      },
-      {
-        path: PagePath.Role,
-        element: <RolePage />,
-      },
-      {
-        path: PagePath.Credential,
-        element: <CredentialPage />,
-      },
-      {
-        path: PagePath.TimeRecordTable,
-        element: <TimeRecordTablePage />,
-      },
-      {
-        path: PagePath.TimeRecordAnalytics,
-        element: <TimeRecordAnalyticsPage />,
-      },
-      {
-        path: PagePath.Team,
-        element: <TeamPage />,
-      },
-      {
-        path: PagePath.Member,
-        element: <MemberPage />,
-      },
-      {
-        path: PagePath.ProjectTable,
-        element: <ProjectTablePage />,
-      },
-      {
-        path: PagePath.ProjectSetting,
-        element: <ProjectSettingPage />,
-      },
-      {
-        path: PagePath.HttpRequestLog,
-        element: <HttpRequestLogPage />,
-      },
-      {
-        path: '*',
-        element: <RedirectPage />,
+        element: <AllowUserOnlyGuardPage />,
+        children: [
+          {
+            path: PagePath.SignOut,
+            element: <SignOutPage />,
+          },
+          {
+            path: PagePath.MyPage,
+            element: <EmptyPage title="마이페이지" />,
+          },
+          {
+            path: PagePath.Admin,
+            element: <Navigate to={PagePath.AdminRole} />,
+          },
+          {
+            path: PagePath.AdminRole,
+            element: <EmptyPage title="관리자 역할관리" />,
+          },
+          {
+            path: PagePath.AdminCredentials,
+            element: <EmptyPage title="관리자 계정관리" />,
+          },
+          {
+            path: PagePath.Time,
+            element: <Navigate to={PagePath.TimeRecord} />,
+          },
+          {
+            path: PagePath.TimeRecord,
+            element: <EmptyPage title="시간관리 내 기록으로 Redirect" />,
+          },
+          {
+            path: PagePath.TimeRecordByUser,
+            element: <EmptyPage title="시간관리 내 기록 또는 누군가의 기록" />,
+          },
+          {
+            path: PagePath.TimeAnalysis,
+            element: <EmptyPage title="시간관리 통계" />,
+          },
+          {
+            path: PagePath.User,
+            element: <EmptyPage title="구성원 목록" />,
+          },
+          {
+            path: PagePath.Project,
+            element: <EmptyPage title="프로젝트 목록" />,
+          },
+          {
+            path: PagePath.ProjectCustomer,
+            element: <EmptyPage title="프로젝트 고객사 목록" />,
+          },
+          {
+            path: PagePath.ProjectCategory,
+            element: <Navigate to={PagePath.ProjectBusinessCategory} />,
+          },
+          {
+            path: PagePath.ProjectBusinessCategory,
+            element: <EmptyPage title="프로젝트 사업구분" />,
+          },
+          {
+            path: PagePath.ProjectIndustryCategory,
+            element: <EmptyPage title="프로젝트 산업분야" />,
+          },
+          {
+            path: PagePath.ProjectTaskCategory,
+            element: <EmptyPage title="프로젝트 수행업무" />,
+          },
+          {
+            path: PagePath.Setting,
+            element: <EmptyPage title="설정" />,
+          },
+        ],
       },
     ],
   },

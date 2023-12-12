@@ -1,104 +1,46 @@
-export const enum QueryOrder {
-  Asc = 'asc',
-  Desc = 'desc',
+export enum GenderCode {
+  Male1 = 1,
+  Male2 = 3,
+  Female1 = 2,
+  Female2 = 4,
 }
 
-export const enum LuxonFormat {
-  DateTime = 'yyyy-MM-dd HH:mm:ss',
+export enum Degree {
+  HighSchool = 1,
+  Bachelor2Years = 2,
+  Bachelor4Years = 3,
+  Master = 4,
+  Doctor = 5,
 }
 
-export const enum TimeoutKey {
-  SignOut = 'signout',
+export enum CredentialsStatus {
+  Wating = 0,
+  Reject = 1,
+  Active = 2,
+  Disable = 3,
 }
 
-export const enum EventType {
-  Noti = 'noti-event',
+export enum UserStatus {
+  Wating = 0,
+  Active = 1,
+  Vacate = 2,
+  Retire = 3,
 }
 
-export const enum PagePath {
-  Home = '/',
-  Forbidden = '/forbidden',
-  SignIn = '/signin',
-  SignUp = '/signup',
-  SignOut = '/signout',
-  MyPage = '/mypage',
-  Role = '/role',
-  Credential = '/credential',
-  TimeRecordTable = '/table',
-  TimeRecordAnalytics = '/analytics',
-  Team = '/team',
-  Member = '/member',
-  ProjectTable = '/project',
-  ProjectSetting = '/setting',
-  HttpRequestLog = '/http-request-log',
+export enum RolePolicyLevel {
+  Limit = 0,
+  Read = 1,
+  Create = 2,
+  Update = 3,
+  Delete = 4,
+  Admin = 99,
+  Developer = 100,
 }
 
-export const enum SideMenuType {
-  Global = 'global',
-  Public = 'public',
-  Private = 'private',
-}
-
-export const enum Degree {
-  Null = 'null',
-  HighSchool = 'high-school',
-  Bachelor2Years = 'bachelor-2-years',
-  Bachelor4Years = 'bachelor-4-years',
-  Master = 'master',
-  Doctor = 'doctor',
-}
-
-export const enum AuthStatus {
-  Wating = 'wating',
-  Reject = 'reject',
-  Active = 'active',
-  Disable = 'disable',
-}
-
-export const enum EmploymentStatus {
-  Wating = 'wating',
-  Active = 'active',
-  Vacate = 'vacate',
-  Retire = 'retire',
-}
-
-export const enum ProjectScope {
-  Public = 'public',
-  Team = 'team',
-}
-
-export const enum ProjectScopeText {
-  Public = '전체',
-  Team = '팀',
-}
-
-export const enum ProjectStatus {
-  Wating = 'wating',
-  Active = 'active',
-  Pause = 'pause',
-  Cancel = 'cancel',
-  Finish = 'finish',
-  AfterService = 'a/s',
-}
-
-export const enum RolePolicyScope {
-  Limit = 1,
-  Read = 2,
-  Write = 3,
-  Update = 4,
-  Delete = 5,
-  Entire = 6,
-  Admin = 7,
-  Developer = 8,
-}
-
-export const enum RolePolicyScopeText {
-  Limit = '제한',
-  Read = '조회',
-  Write = '생성',
-  Update = '수정',
-  Delete = '삭제',
-  Entire = '전체',
-  Admin = '관리자',
-  Developer = '개발자',
+export enum ProjectStatus {
+  Wating = 0,
+  Active = 1,
+  Complete = 3,
+  AfterService = 4,
+  LeavingOut = 5,
 }

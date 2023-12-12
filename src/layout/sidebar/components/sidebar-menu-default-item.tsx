@@ -9,7 +9,8 @@ import { layoutHook } from '@hook';
 export const SidebarMenuDefaultItem: FunctionComponent<{
   item: SidebarMenuItemProperty;
   onClick: () => void;
-}> = ({ item, onClick }) => {
+  collapsed?: boolean;
+}> = ({ item, onClick, collapsed }) => {
   const selected = layoutHook.useSidbarSelectState(item);
 
   return (
@@ -20,7 +21,7 @@ export const SidebarMenuDefaultItem: FunctionComponent<{
             <item.Icon />
           </ListItemIcon>
           <ListItemText primary={item.name} />
-          {item.type === SidebarMenuType.Navigate ? null : selected ? <ExpandLess /> : <ExpandMore />}
+          {item.type === SidebarMenuType.Navigate ? null : collapsed ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
       </ListItem>
     </>

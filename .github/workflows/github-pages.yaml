@@ -28,16 +28,16 @@ jobs:
 
       - name: Create environments
         env:
-          ENV: ${{ secrets.ENV_DEVELOP }}
+          ENV: ${{ secrets.ENV_GHPAGES }}
           TAG: ${{ github.ref_name }}
         run: |
-          rm .env
+          rm .env*
           echo "$ENV" >> .env
-          echo "VERSION=$TAG$(date +'%Y-%m-%d_%H:%M:%S')" >> .env
+          echo "VERSION=$TAG_$(date +'%Y-%m-%d_%H:%M:%S')" >> .env
 
       - name: Add homepage into package.json
         run: |
-          node ./gh-pages.js
+          node gh-pages.js
 
       - name: Build application
         run: |

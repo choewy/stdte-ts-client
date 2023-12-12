@@ -32,7 +32,7 @@ export class CredentialsHook {
       }
 
       setCredentials(res.data);
-    }, [setCredentials]);
+    }, [pathname, setCredentials]);
 
     useEffect(() => {
       getCredentials();

@@ -8,3 +8,4 @@ export * from './signout';
 export * from './role';
 export * from './user';
 export * from './credentials';
+export * from './not-found';

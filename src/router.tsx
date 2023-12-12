@@ -7,6 +7,7 @@ import {
   AllowUserOnlyGuardPage,
   EmptyPage,
   HomePage,
+  NotFoundPage,
   SignInPage,
   SignOutPage,
   SignUpPage,
@@ -108,6 +109,10 @@ export const router = createBrowserRouter(
           ],
         },
       ],
+    },
+    {
+      path: '*',
+      element: <NotFoundPage />,
     },
   ],
   { basename: process.env.PUBLIC_URL },

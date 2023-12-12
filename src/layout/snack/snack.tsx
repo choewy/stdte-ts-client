@@ -5,9 +5,9 @@ import styled from '@emotion/styled';
 
 import { snackHook } from '@hook';
 
-import { Snackbar } from './snackbar';
+import { Snackbar } from './components';
 
-export const SnackProvider: FunctionComponent = () => {
+export const Snack: FunctionComponent = () => {
   snackHook.ussEventListener();
 
   return (

@@ -1,8 +1,8 @@
 import { SetterOrUpdater } from 'recoil';
-import { useCallback, useEffect, useState } from 'react';
+import { MouseEvent, useCallback, useEffect, useState } from 'react';
 
 import { ProfileStoreProps, profileStore } from '@store';
-import { SnackEvent, UserException, userHttpService } from '@service';
+import { SnackEvent, UserException, userHttpService, userValidator } from '@service';
 
 import { ProfileBehcleState, ProfileEducationalState, ProfilePersonalState } from './types';
 
@@ -33,7 +33,6 @@ export class ProfileHook {
     const [body, setBody] = useState<ProfilePersonalState>({
       name: '',
       birthday: '',
-      gender: '',
       phone: '',
       scienceNumber: '',
       enteringDay: '',
@@ -44,7 +43,6 @@ export class ProfileHook {
       setBody({
         name: profile.name,
         birthday: profile.birthday,
-        gender: profile.gender,
         phone: profile.phone,
         scienceNumber: profile.scienceNumber,
         enteringDay: profile.enteringDay,
@@ -53,6 +51,31 @@ export class ProfileHook {
     }, [profile, setBody]);
 
     return [body, setBody];
+  }
+
+  useUpdatePersonal(body: ProfilePersonalState) {
+    const setProfile = profileStore.useSetState();
+
+    return useCallback(
+      async (_: MouseEvent<HTMLButtonElement>) => {
+        const message = userValidator.update(body);
+
+        if (message) {
+          return SnackEvent.dispatchByWarning(message);
+        }
+
+        const res = await userHttpService.updateMyProfile(body);
+
+        if (res.ok === false) {
+          return SnackEvent.dispatchByException(new UserException(res.exception));
+        }
+
+        SnackEvent.dispatchBySuccess('인적사항이 저장되었습니다.');
+
+        setProfile((prev) => ({ ...prev, ...body }));
+      },
+      [body, setProfile],
+    );
   }
 
   useEducationalState(profile: ProfileStoreProps): [ProfileEducationalState, SetterOrUpdater<ProfileEducationalState>] {
@@ -73,6 +96,31 @@ export class ProfileHook {
     return [body, setBody];
   }
 
+  useUpdateEducational(body: ProfileEducationalState) {
+    const setProfile = profileStore.useSetState();
+
+    return useCallback(
+      async (_: MouseEvent<HTMLButtonElement>) => {
+        const message = userValidator.update(body);
+
+        if (message) {
+          return SnackEvent.dispatchByWarning(message);
+        }
+
+        const res = await userHttpService.updateMyProfile(body);
+
+        if (res.ok === false) {
+          return SnackEvent.dispatchByException(new UserException(res.exception));
+        }
+
+        SnackEvent.dispatchBySuccess('학력사항이 저장되었습니다.');
+
+        setProfile((prev) => ({ ...prev, ...body }));
+      },
+      [body, setProfile],
+    );
+  }
+
   useBehicleState(profile: ProfileStoreProps): [ProfileBehcleState, SetterOrUpdater<ProfileBehcleState>] {
     const [body, setBody] = useState<ProfileBehcleState>({ carType: '', carNumber: '' });
 
@@ -81,6 +129,31 @@ export class ProfileHook {
     }, [profile, setBody]);
 
     return [body, setBody];
+  }
+
+  useUpdateBehicle(body: ProfileBehcleState) {
+    const setProfile = profileStore.useSetState();
+
+    return useCallback(
+      async (_: MouseEvent<HTMLButtonElement>) => {
+        const message = userValidator.update(body);
+
+        if (message) {
+          return SnackEvent.dispatchByWarning(message);
+        }
+
+        const res = await userHttpService.updateMyProfile(body);
+
+        if (res.ok === false) {
+          return SnackEvent.dispatchByException(new UserException(res.exception));
+        }
+
+        SnackEvent.dispatchBySuccess('차량정보가 저장되었습니다.');
+
+        setProfile((prev) => ({ ...prev, ...body }));
+      },
+      [body, setProfile],
+    );
   }
 }
 

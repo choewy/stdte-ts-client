@@ -1,9 +1,9 @@
-import { ProfileStoreProps } from '@store';
+import { UserUpdateBody } from '@service';
 
 export type ProfilePersonalState = Pick<
-  ProfileStoreProps,
-  'name' | 'birthday' | 'gender' | 'phone' | 'scienceNumber' | 'enteringDay' | 'resignationDay'
+  UserUpdateBody,
+  'name' | 'birthday' | 'phone' | 'scienceNumber' | 'enteringDay' | 'resignationDay'
 >;
 
-export type ProfileEducationalState = Pick<ProfileStoreProps, 'degree' | 'school' | 'major'>;
-export type ProfileBehcleState = Pick<ProfileStoreProps, 'carType' | 'carNumber'>;
+export type ProfileEducationalState = Pick<UserUpdateBody, 'degree' | 'school' | 'major'>;
+export type ProfileBehcleState = Pick<UserUpdateBody, 'carType' | 'carNumber'>;

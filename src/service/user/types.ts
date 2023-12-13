@@ -37,14 +37,14 @@ export type UserResponse = {
 export type UserUpdateBody = {
   name: string;
   phone: string;
-  birthday: Date;
-  genderCode: GenderCode;
+  birthday: string;
+  gender: GenderCode | string;
   scienceNumber: string;
-  degree: Degree;
+  degree: Degree | string;
   school: string;
   major: string;
   carType: string;
   carNumber: string;
-  enteringDay: Date;
-  resignationDay: Date;
+  enteringDay: string;
+  resignationDay: string;
 };

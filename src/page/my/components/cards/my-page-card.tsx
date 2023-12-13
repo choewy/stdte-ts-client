@@ -3,12 +3,31 @@ import { FunctionComponent } from 'react';
 import { Paper, Typography } from '@mui/material';
 
 import { MyPageCardProps } from './types';
-import { MyProps } from '@props';
 
 export const MyPageCard: FunctionComponent<MyPageCardProps> = ({ title, children }) => {
   return (
-    <Paper {...MyProps.paper({})}>
-      <Typography {...MyProps.typography({})}>{title}</Typography>
+    <Paper
+      {...{
+        elevation: 3,
+        noValidate: true,
+        sx: {
+          p: 2,
+          m: 1,
+          flex: 1,
+          overflow: 'scroll',
+          minWidth: 340,
+        },
+      }}
+    >
+      <Typography
+        {...{
+          textAlign: 'center',
+          variant: 'h6',
+          sx: { my: 1 },
+        }}
+      >
+        {title}
+      </Typography>
       {children}
     </Paper>
   );

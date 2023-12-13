@@ -3,7 +3,6 @@ import { FormEvent, FunctionComponent, useCallback } from 'react';
 import { Box, Button, FormControl, TextField } from '@mui/material';
 
 import { credentialsHook, dialogHook, textFieldHook } from '@hook';
-import { MyProps } from '@props';
 
 export const MyPageUpdatePAsswordDialogContent: FunctionComponent = () => {
   const [body, setBody] = credentialsHook.useUpdateMyPasswordState();
@@ -30,34 +29,34 @@ export const MyPageUpdatePAsswordDialogContent: FunctionComponent = () => {
 
   return (
     <Box component="form" onSubmit={onSubmit}>
-      <FormControl {...MyProps.formControl({})}>
+      <FormControl>
         <TextField
-          {...MyProps.textField({
+          {...{
             type: 'password',
             label: '현재 비밀번호',
             value: body.currentPassword,
             onChange: onChangeCurrentPassword,
-          })}
+          }}
         />
         <TextField
-          {...MyProps.textField({
+          {...{
             type: 'password',
             label: '새 비밀번호',
             value: body.newPassword,
             onChange: onChangeNewPassword,
-          })}
+          }}
         />
         <TextField
-          {...MyProps.textField({
+          {...{
             type: 'password',
             label: '비밀번호 확인',
             value: body.confirmPassword,
             onChange: onChangeConfirmPassword,
-          })}
+          }}
         />
       </FormControl>
-      <FormControl {...MyProps.formControl({})}>
-        <Button {...MyProps.button({ type: 'submit', children: '변경하기' })} />
+      <FormControl>
+        <Button {...{ type: 'submit', children: '변경하기' }} />
       </FormControl>
     </Box>
   );

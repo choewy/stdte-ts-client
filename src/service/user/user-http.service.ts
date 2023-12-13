@@ -7,7 +7,7 @@ export class UserHttpService extends HttpService {
     return this.get<UserResponse>(this.url('profile'));
   }
 
-  async updateMyProfile(body: UserUpdateBody) {
+  async updateMyProfile(body: Partial<UserUpdateBody>) {
     return this.patch<null>(this.url('profile'), body);
   }
 }

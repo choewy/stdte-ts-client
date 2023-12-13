@@ -13,6 +13,7 @@ import {
   SignInPage,
   SignOutPage,
   SignUpPage,
+  CredentialsPage,
 } from '@page';
 
 export const router = createBrowserRouter(
@@ -75,7 +76,7 @@ export const router = createBrowserRouter(
             },
             {
               path: PagePath.AdminCredentials,
-              element: <EmptyPage title="관리자 계정관리" />,
+              element: <CredentialsPage />,
             },
             {
               path: PagePath.Time,

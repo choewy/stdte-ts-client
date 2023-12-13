@@ -1,4 +1,5 @@
 import { CredentialsStatus, RolePolicyProperty } from '@common';
+import { HttpClientListQuery, HttpClientListResponse } from '@core';
 
 export type CredentialsRoleRespnose = {
   id: number;
@@ -35,6 +36,27 @@ export type CredentialsUpdatePasswordBody = {
   newPassword: string;
   confirmPassword: string;
 };
+
+export type CredentialsAdminStatsResposne = {
+  status: CredentialsStatus;
+  count: number;
+};
+
+export type CredentialsAdminListQuery = HttpClientListQuery & { status: CredentialsStatus };
+
+export type CredentialsAdminRowResponse = {
+  id: number;
+  email: string;
+  name: string;
+  status: CredentialsStatus;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type CredentialsAdminListResponse = HttpClientListResponse<
+  CredentialsAdminRowResponse,
+  CredentialsAdminListQuery
+>;
 
 export type CredentialsAdminUpdatePasswordBody = {
   newPassword: string;

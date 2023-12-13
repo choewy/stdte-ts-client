@@ -1,3 +1,5 @@
+import { CredentialsStatus } from './enums';
+
 export const ROLE_POLICY_KEY = [
   'credentials',
   'roleAndPolicy',
@@ -9,3 +11,7 @@ export const ROLE_POLICY_KEY = [
   'businessCategory',
   'project',
 ] as const;
+
+export const CREDENTIALS_STATUS_VALUES = Object.values(CredentialsStatus)
+  .filter((status) => typeof status === 'number')
+  .sort() as CredentialsStatus[];

@@ -2,7 +2,7 @@ import { FormEvent, useCallback, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { CredentialsStatus, PagePath } from '@common';
-import { credentialsStore } from '@store';
+import { adminCredentialsStore, credentialsStore } from '@store';
 import {
   CredentialsException,
   CredentialsSignInBody,
@@ -275,6 +275,46 @@ export class CredentialsHook {
     useEffect(() => {
       signout();
     }, [signout]);
+  }
+
+  useGetCredentialsStatsCallback() {
+    const setAdminCredentials = adminCredentialsStore.useSetState();
+
+    return useCallback(async () => {
+      const res = await credentialsHttpService.getStatsByAdmin();
+
+      if (res.ok === false) {
+        return SnackEvent.dispatchByException(new CredentialsException(res.exception));
+      }
+
+      setAdminCredentials((prev) => ({ ...prev, stats: res.data }));
+    }, [setAdminCredentials]);
+  }
+
+  useAdminCredentialsStats() {
+    const getCredentialsStats = this.useGetCredentialsStatsCallback();
+
+    useEffect(() => {
+      getCredentialsStats();
+    }, [getCredentialsStats]);
+  }
+
+  useAdminCredentialsList() {
+    const [{ query }, setAdminCredentials] = adminCredentialsStore.useState();
+
+    const getCredentialsList = useCallback(async () => {
+      const res = await credentialsHttpService.getListByAdmin(query);
+
+      if (res.ok === false) {
+        return SnackEvent.dispatchByException(new CredentialsException(res.exception));
+      }
+
+      setAdminCredentials((prev) => ({ ...prev, list: res.data }));
+    }, [query, setAdminCredentials]);
+
+    useEffect(() => {
+      getCredentialsList();
+    }, [getCredentialsList]);
   }
 }
 

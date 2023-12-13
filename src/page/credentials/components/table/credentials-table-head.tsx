@@ -1,0 +1,18 @@
+import { FunctionComponent } from 'react';
+
+import { TableCell, TableHead, TableRow } from '@mui/material';
+
+export const CredentialsTableHead: FunctionComponent = () => {
+  return (
+    <TableHead>
+      <TableRow>
+        <TableCell align="center">ID</TableCell>
+        <TableCell align="center">이메일</TableCell>
+        <TableCell align="center">이름</TableCell>
+        <TableCell align="center">가입일시</TableCell>
+        <TableCell align="center">수정일시</TableCell>
+        <TableCell align="center">상태</TableCell>
+      </TableRow>
+    </TableHead>
+  );
+};

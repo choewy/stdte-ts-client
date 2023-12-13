@@ -1,19 +1,18 @@
 import { FunctionComponent } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 
-import { PagePath } from '@common';
 import { credentialsHook } from '@hook';
 
 export const AllowUserOnlyGuardPage: FunctionComponent = () => {
-  const pass = credentialsHook.useUserOnlyGuard();
+  const passOrPasth = credentialsHook.useUserOnlyGuard();
 
-  if (pass === null) {
+  if (passOrPasth === null) {
     return null;
   }
 
-  if (pass === false) {
-    return <Navigate to={PagePath.SignIn} replace={true} />;
+  if (passOrPasth === true) {
+    return <Outlet />;
   }
 
-  return <Outlet />;
+  return <Navigate to={passOrPasth} replace={true} />;
 };

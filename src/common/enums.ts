@@ -1,5 +1,8 @@
 export enum PagePath {
   Home = '/',
+  Wating = '/wating',
+  Rejected = '/rejected',
+  Disabled = '/disabled',
   MyPage = '/mypage',
   SignIn = '/signin',
   SignUp = '/signup',

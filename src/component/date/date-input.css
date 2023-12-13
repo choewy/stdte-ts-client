@@ -1,0 +1,24 @@
+input[type='date']::before {
+  content: attr(placeholder);
+  position: absolute;
+  color: inherit;
+}
+
+input[type='date'] {
+  color: transparent;
+}
+
+input[type='date']:focus,
+input[type='date']:valid {
+  color: inherit;
+}
+
+input[type='date']:focus::before,
+input[type='date']:valid::before {
+  content: '';
+}
+
+.date-input .MuiFormLabel-asterisk,
+.date-input .MuiInputLabel-asterisk {
+  display: none;
+}

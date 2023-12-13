@@ -6,14 +6,14 @@ export class CredentialsException implements HttpClientException {
   name: string;
   message: string;
 
-  constructor(exception: HttpClientException) {
+  constructor(exception: HttpClientException, invalidMessage?: string) {
     this.name = exception.name;
     this.status = exception.status;
     this.message = exception.message;
 
     switch (exception.name) {
       case HttpException.InvalidCredentialsException:
-        this.message = CredentialsErrorMessage.InvalidCredentials;
+        this.message = invalidMessage ?? CredentialsErrorMessage.InvalidCredentials;
         break;
 
       case HttpException.AlreadyExistUserEmailException:

@@ -1,5 +1,8 @@
-import { SidebarMenuItemDefaultProperty } from '@service';
+import { SidebarMenuItemProperty } from '@service';
 
 export type SidebarMenuItemDefaultProps = {
-  item: SidebarMenuItemDefaultProperty;
+  item: SidebarMenuItemProperty;
+  onClick: () => void;
+  collapsed?: boolean;
+  depth?: number;
 };

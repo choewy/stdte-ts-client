@@ -1,29 +1,37 @@
 import { FunctionComponent } from 'react';
 
-import { ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { Box, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 
-import { SidebarMenuItemProperty, SidebarMenuType } from '@service';
+import { SidebarMenuType } from '@service';
 import { layoutHook } from '@hook';
 
-export const SidebarMenuDefaultItem: FunctionComponent<{
-  item: SidebarMenuItemProperty;
-  onClick: () => void;
-  collapsed?: boolean;
-}> = ({ item, onClick, collapsed }) => {
+import { SidebarMenuItemDefaultProps } from './types';
+
+export const SidebarMenuDefaultItem: FunctionComponent<SidebarMenuItemDefaultProps> = ({
+  item,
+  onClick,
+  collapsed,
+  depth,
+}) => {
   const selected = layoutHook.useSidbarSelectState(item);
+  const icon = collapsed ? <ExpandLess /> : <ExpandMore />;
 
   return (
-    <>
-      <ListItem disablePadding>
-        <ListItemButton selected={selected} onClick={onClick}>
-          <ListItemIcon>
-            <item.Icon />
-          </ListItemIcon>
-          <ListItemText primary={item.name} />
-          {item.type === SidebarMenuType.Navigate ? null : collapsed ? <ExpandLess /> : <ExpandMore />}
-        </ListItemButton>
-      </ListItem>
-    </>
+    <ListItem disablePadding>
+      <ListItemButton selected={selected} onClick={onClick}>
+        {depth && <Box sx={{ width: depth * 20 }} />}
+        <ListItemIcon>
+          <item.Icon {...{ sx: { fontSize: 18 } }} />
+        </ListItemIcon>
+        <ListItemText
+          {...{
+            primary: item.name,
+            primaryTypographyProps: { sx: { fontSize: 13 } },
+          }}
+        />
+        {item.type === SidebarMenuType.Navigate ? null : icon}
+      </ListItemButton>
+    </ListItem>
   );
 };

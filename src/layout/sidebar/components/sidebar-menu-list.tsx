@@ -13,7 +13,7 @@ export const SidebarMenuList: FunctionComponent = () => {
   const items = sidebarService.filterItems(credentials);
 
   return (
-    <List>
+    <List disablePadding>
       {items.map((item) =>
         item.type === SidebarMenuType.Navigate ? (
           <SidebarMenuNaviageItem key={item.key} {...item} />

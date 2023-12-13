@@ -30,6 +30,15 @@ export class LayoutHook {
         case PagePath.SignOut:
           return '로그아웃';
 
+        case PagePath.Wating:
+          return '가입 승인 대기';
+
+        case PagePath.Rejected:
+          return '가입 거절';
+
+        case PagePath.Disabled:
+          return '비활성 계정';
+
         case PagePath.MyPage:
           return '마이페이지';
 

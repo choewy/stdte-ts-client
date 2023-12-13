@@ -1,69 +1,69 @@
-import { FunctionComponent } from 'react';
+import { v4 } from 'uuid';
+
+import { FunctionComponent, ReactElement } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Box, Button } from '@mui/material';
 
 import { PagePath } from '@common';
 import { credentialsStore } from '@store';
+import { HeaderThemeSwitch } from './header-theme-switch';
 
 export const HeaderButtonGroup: FunctionComponent = () => {
   const navigate = useNavigate();
   const credentials = credentialsStore.useValue();
 
-  if (credentials === null) {
-    return null;
-  }
+  const elements: ReactElement[] = [<HeaderThemeSwitch key={v4()} />];
 
-  if (credentials === false) {
-    return (
-      <Box>
-        <Button
-          {...{
-            onClick: () => navigate(PagePath.SignIn),
-            fullWidth: false,
-            color: 'inherit',
-            variant: 'outlined',
-          }}
-        >
-          로그인
-        </Button>
-        <Button
-          {...{
-            onClick: () => navigate(PagePath.SignUp),
-            fullWidth: false,
-            color: 'inherit',
-            variant: 'outlined',
-          }}
-        >
-          회원가입
-        </Button>
-      </Box>
-    );
-  }
-
-  return (
-    <Box>
+  if (credentials) {
+    elements.push(
       <Button
         {...{
+          key: v4(),
+          children: '내정보',
           onClick: () => navigate(PagePath.MyPage),
           fullWidth: false,
           color: 'inherit',
           variant: 'outlined',
         }}
-      >
-        내정보
-      </Button>
-
+      />,
       <Button
         {...{
+          key: v4(),
+          children: '로그아웃',
           onClick: () => navigate(PagePath.SignOut),
           fullWidth: false,
           color: 'inherit',
           variant: 'outlined',
         }}
-      >
-        로그아웃
-      </Button>
-    </Box>
-  );
+      />,
+    );
+  }
+
+  if (credentials === false) {
+    elements.push(
+      <Button
+        {...{
+          key: v4(),
+          children: '로그인',
+          onClick: () => navigate(PagePath.SignIn),
+          fullWidth: false,
+          color: 'inherit',
+          variant: 'outlined',
+        }}
+      />,
+      <Button
+        {...{
+          key: v4(),
+          onClick: () => navigate(PagePath.SignUp),
+          children: '회원가입',
+          fullWidth: false,
+          color: 'inherit',
+          variant: 'outlined',
+        }}
+      />,
+    );
+  }
+
+  return <Box>{elements}</Box>;
 };

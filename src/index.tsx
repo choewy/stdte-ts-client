@@ -5,6 +5,11 @@ import reportWebVitals from './reportWebVitals';
 
 import App from '@app';
 
+import { SystemConfig } from '@config';
+import { Settings } from 'luxon';
+
+Settings.defaultZone = new SystemConfig().getTimezone();
+
 const element = document.getElementById('root');
 
 if (element) {

@@ -18,7 +18,6 @@ module.exports = {
       '@config': path.resolve(__dirname, 'src/config'),
       '@core': path.resolve(__dirname, 'src/core'),
       '@store': path.resolve(__dirname, 'src/store'),
-      '@props': path.resolve(__dirname, 'src/props'),
       '@service': path.resolve(__dirname, 'src/service'),
       '@hook': path.resolve(__dirname, 'src/hook'),
       '@component': path.resolve(__dirname, 'src/component'),

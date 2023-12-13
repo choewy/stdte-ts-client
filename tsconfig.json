@@ -22,7 +22,6 @@
       "@config": ["src/config"],
       "@core": ["src/core"],
       "@store": ["src/store"],
-      "@props": ["src/props"],
       "@service": ["src/service"],
       "@hook": ["src/hook"],
       "@component": ["src/component"],

@@ -5,7 +5,6 @@ import { Box, Drawer } from '@mui/material';
 import { layoutStore } from '@store';
 import { layoutHook } from '@hook';
 
-import { SidebarStyle } from './sidebar.style';
 import { SidebarMenuList } from './components';
 
 export const Sidebar: FunctionComponent = () => {
@@ -14,7 +13,7 @@ export const Sidebar: FunctionComponent = () => {
 
   return (
     <Drawer anchor="left" open={layout.sidebar.open} onClose={onClose}>
-      <Box sx={SidebarStyle.Wrapper()}>
+      <Box sx={{ width: 250 }}>
         <SidebarMenuList />
       </Box>
     </Drawer>

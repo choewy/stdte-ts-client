@@ -7,7 +7,7 @@ export class LayoutStore extends RecoilStore<LayoutStoreProps> {
     super(LayoutStore.name, {
       loading: false,
       size: { innerHeight: window.innerHeight, innerWidth: window.innerWidth },
-      theme: { color: '#A00' },
+      theme: '#A00',
       helmet: { title: '' },
       header: { title: '' },
       sidebar: { open: false },

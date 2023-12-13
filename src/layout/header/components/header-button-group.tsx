@@ -17,10 +17,24 @@ export const HeaderButtonGroup: FunctionComponent = () => {
   if (credentials === false) {
     return (
       <Box>
-        <Button color="inherit" onClick={() => navigate(PagePath.SignIn)}>
+        <Button
+          {...{
+            onClick: () => navigate(PagePath.SignIn),
+            fullWidth: false,
+            color: 'inherit',
+            variant: 'outlined',
+          }}
+        >
           로그인
         </Button>
-        <Button color="inherit" onClick={() => navigate(PagePath.SignUp)}>
+        <Button
+          {...{
+            onClick: () => navigate(PagePath.SignUp),
+            fullWidth: false,
+            color: 'inherit',
+            variant: 'outlined',
+          }}
+        >
           회원가입
         </Button>
       </Box>
@@ -29,10 +43,25 @@ export const HeaderButtonGroup: FunctionComponent = () => {
 
   return (
     <Box>
-      <Button color="inherit" onClick={() => navigate(PagePath.MyPage)}>
+      <Button
+        {...{
+          onClick: () => navigate(PagePath.MyPage),
+          fullWidth: false,
+          color: 'inherit',
+          variant: 'outlined',
+        }}
+      >
         내정보
       </Button>
-      <Button color="inherit" onClick={() => navigate(PagePath.SignOut)}>
+
+      <Button
+        {...{
+          onClick: () => navigate(PagePath.SignOut),
+          fullWidth: false,
+          color: 'inherit',
+          variant: 'outlined',
+        }}
+      >
         로그아웃
       </Button>
     </Box>

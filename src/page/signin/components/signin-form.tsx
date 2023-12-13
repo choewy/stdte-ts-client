@@ -3,7 +3,6 @@ import { FunctionComponent } from 'react';
 import { Button, FormControl, Paper, TextField, Typography } from '@mui/material';
 
 import { credentialsHook, textFieldHook } from '@hook';
-import { SignProps } from '@props';
 
 export const SignInForm: FunctionComponent = () => {
   const [body, setBody] = credentialsHook.useSignInState();
@@ -13,28 +12,38 @@ export const SignInForm: FunctionComponent = () => {
   const onSubmit = credentialsHook.useSignInCallback(body);
 
   return (
-    <Paper {...SignProps.paper({ onSubmit })}>
-      <Typography {...SignProps.typography({ children: '로그인' })} />
-      <FormControl {...SignProps.formControl({})}>
+    <Paper
+      {...{
+        component: 'form',
+        elevation: 3,
+        noValidate: true,
+        sx: { p: 5, boxSizing: 'border-box', width: 425 },
+        onSubmit,
+      }}
+    >
+      <Typography {...{ textAlign: 'center', variant: 'h6', children: '로그인' }} />
+      <FormControl>
         <TextField
-          {...SignProps.textField({
+          {...{
             type: 'email',
             label: '이메일',
             value: body.email,
             onChange: onChangeEmail,
-          })}
+            required: true,
+          }}
         />
         <TextField
-          {...SignProps.textField({
+          {...{
             type: 'password',
             label: '비밀번호',
             value: body.password,
             onChange: onChangePassword,
-          })}
+            required: true,
+          }}
         />
       </FormControl>
-      <FormControl {...SignProps.formControl({})}>
-        <Button {...SignProps.button({ children: '로그인' })} />
+      <FormControl>
+        <Button {...{ type: 'submit', children: '로그인' }} />
       </FormControl>
     </Paper>
   );

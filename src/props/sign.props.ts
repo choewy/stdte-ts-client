@@ -1,4 +1,4 @@
-import { ButtonProps, FormControlProps, PaperProps, TextFieldProps } from '@mui/material';
+import { ButtonProps, FormControlProps, PaperProps, TextFieldProps, TypographyProps } from '@mui/material';
 
 import { GlobalProps } from './global.props';
 
@@ -11,7 +11,8 @@ export class SignProps {
     return {
       component: 'form',
       elevation: 3,
-      sx: { p: 5, boxSizing: 'border-box', width: 400 },
+      noValidate: true,
+      sx: { p: 5, boxSizing: 'border-box', width: 425 },
       ...props,
     };
   }
@@ -22,5 +23,9 @@ export class SignProps {
 
   static formControl<T extends FormControlProps>(props: T): T {
     return GlobalProps.formControl({ fullWidth: true, ...props });
+  }
+
+  static typography<T extends TypographyProps>(props: T): T {
+    return { textAlign: 'center', variant: 'h6', ...props };
   }
 }

@@ -30,7 +30,7 @@ export const HeaderButtonGroup: FunctionComponent = () => {
   return (
     <Box>
       <Button color="inherit" onClick={() => navigate(PagePath.MyPage)}>
-        내 정보
+        내정보
       </Button>
       <Button color="inherit" onClick={() => navigate(PagePath.SignOut)}>
         로그아웃

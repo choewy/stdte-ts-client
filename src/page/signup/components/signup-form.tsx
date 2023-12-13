@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
 
-import { Button, FormControl, Paper, TextField } from '@mui/material';
+import { Button, FormControl, Paper, TextField, Typography } from '@mui/material';
 
 import { credentialsHook, textFieldHook } from '@hook';
-import { SignProps } from '@component';
+import { SignProps } from '@props';
 
 export const SignUpForm: FunctionComponent = () => {
   const [body, setBody] = credentialsHook.useSignUpState();
@@ -16,6 +16,7 @@ export const SignUpForm: FunctionComponent = () => {
 
   return (
     <Paper {...SignProps.paper({ onSubmit })}>
+      <Typography {...SignProps.typography({ children: '회원가입' })} />
       <FormControl {...SignProps.formControl({})}>
         <TextField
           {...SignProps.textField({
@@ -51,7 +52,7 @@ export const SignUpForm: FunctionComponent = () => {
         />
       </FormControl>
       <FormControl {...SignProps.formControl({})}>
-        <Button {...SignProps.button({ children: '회원가입' })} />
+        <Button {...SignProps.button({ children: '가입요청' })} />
       </FormControl>
     </Paper>
   );

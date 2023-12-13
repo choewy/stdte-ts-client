@@ -13,24 +13,20 @@ import {
   credentialsValidator,
   localStorageService,
 } from '@service';
+
 import { CredentialsGuardPassOrPath } from './types';
 
 export class CredentialsHook {
   useCredentials() {
     const pathname = useLocation().pathname;
+
     const setCredentials = credentialsStore.useSetState();
 
     const getCredentials = useCallback(async () => {
       const res = await credentialsHttpService.credentials();
 
       if (res.ok === false) {
-        setCredentials(false);
-
-        if (![PagePath.SignIn, PagePath.SignUp].find((pagepath) => pagepath.startsWith(pathname))) {
-          SnackEvent.dispatchByException(new CredentialsException(res.exception));
-        }
-
-        return;
+        return setCredentials(false);
       }
 
       setCredentials(res.data);
@@ -46,7 +42,7 @@ export class CredentialsHook {
 
     const [passOrPath, setPassOrPath] = useState<CredentialsGuardPassOrPath>(null);
 
-    const check = useCallback(() => {
+    useEffect(() => {
       if (credentials === null) {
         return setPassOrPath(null);
       }
@@ -58,10 +54,6 @@ export class CredentialsHook {
       setPassOrPath(true);
     }, [credentials, setPassOrPath]);
 
-    useEffect(() => {
-      check();
-    }, [check]);
-
     return passOrPath;
   }
 
@@ -71,12 +63,16 @@ export class CredentialsHook {
 
     const [passOrPath, setPassOrPath] = useState<CredentialsGuardPassOrPath>(null);
 
-    const check = useCallback(() => {
+    useEffect(() => {
       if (credentials === null) {
         return setPassOrPath(null);
       }
 
       if (credentials === false) {
+        if (pathname !== PagePath.SignOut) {
+          SnackEvent.dispatchByWarning('접근 권한이 없습니다(로그인 필요)');
+        }
+
         return setPassOrPath(PagePath.SignIn);
       }
 
@@ -90,19 +86,18 @@ export class CredentialsHook {
 
       switch (credentials.status) {
         case CredentialsStatus.Wating:
+          SnackEvent.dispatchByWarning('접근 권한이 없습니다(가입승인 대기 중)');
           return setPassOrPath(PagePath.Wating);
 
         case CredentialsStatus.Reject:
+          SnackEvent.dispatchByWarning('접근 권한이 없습니다(가입승인 거절)');
           return setPassOrPath(PagePath.Rejected);
 
         case CredentialsStatus.Disable:
+          SnackEvent.dispatchByWarning('접근 권한이 없습니다(비활성 계정)');
           return setPassOrPath(PagePath.Disabled);
       }
     }, [pathname, credentials, setPassOrPath]);
-
-    useEffect(() => {
-      check();
-    }, [check]);
 
     return passOrPath;
   }
@@ -119,6 +114,8 @@ export class CredentialsHook {
       }
 
       if (credentials === false) {
+        SnackEvent.dispatchByWarning('접근 권한이 없습니다(로그인 필요)');
+
         return setPassOrPath(PagePath.SignIn);
       }
 
@@ -183,6 +180,7 @@ export class CredentialsHook {
         }
 
         localStorageService.setEmail(body.email);
+        SnackEvent.dispatchBySuccess('로그인되었습니다.');
         setCredentials(res.data);
       },
       [body, setCredentials],
@@ -217,6 +215,7 @@ export class CredentialsHook {
           return SnackEvent.dispatchByException(new CredentialsException(res.exception));
         }
 
+        SnackEvent.dispatchBySuccess('회원가입이 요청되었습니다.');
         setCredentials(res.data);
       },
       [body, setCredentials],
@@ -263,6 +262,8 @@ export class CredentialsHook {
       if (res.ok === false) {
         return SnackEvent.dispatchByException(new CredentialsException(res.exception));
       }
+
+      SnackEvent.dispatchBySuccess('로그아웃되었습니다.');
 
       setCredentials(false);
     }, [navigate, setCredentials]);

@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
 
-import { Button, FormControl, Paper, TextField } from '@mui/material';
+import { Button, FormControl, Paper, TextField, Typography } from '@mui/material';
 
 import { credentialsHook, textFieldHook } from '@hook';
-import { SignProps } from '@component';
+import { SignProps } from '@props';
 
 export const SignInForm: FunctionComponent = () => {
   const [body, setBody] = credentialsHook.useSignInState();
@@ -14,6 +14,7 @@ export const SignInForm: FunctionComponent = () => {
 
   return (
     <Paper {...SignProps.paper({ onSubmit })}>
+      <Typography {...SignProps.typography({ children: '로그인' })} />
       <FormControl {...SignProps.formControl({})}>
         <TextField
           {...SignProps.textField({

@@ -7,19 +7,25 @@ import { snackHook } from '@hook';
 
 import { Snackbar } from './components';
 
+const StyledMaterialDesignContent = styled(MaterialDesignContent)(() => ({
+  '&.notistack-MuiContent-success': {
+    backgroundColor: '#A00',
+  },
+  '&.notistack-MuiContent-warning': {
+    backgroundColor: '#FF7F00',
+  },
+}));
+
 export const Snack: FunctionComponent = () => {
   snackHook.ussEventListener();
 
   return (
     <SnackbarProvider
       maxSnack={5}
-      autoHideDuration={3000}
+      autoHideDuration={5000}
       Components={{
-        info: styled(MaterialDesignContent)(() => ({
-          '&.notistack-MuiContent-info': {
-            backgroundColor: '#A00',
-          },
-        })),
+        success: StyledMaterialDesignContent,
+        warning: StyledMaterialDesignContent,
       }}
     >
       <Snackbar />

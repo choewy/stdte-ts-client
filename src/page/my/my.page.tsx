@@ -1,20 +1,18 @@
 import { FunctionComponent } from 'react';
 
-import { PageContainer } from '@component';
-import { layoutStore } from '@store';
+import { Box } from '@mui/material';
+
 import { profileHook } from '@hook';
 
 import { MyPageCards, MyPageUpdatePasswordDialog } from './components';
 
 export const MyPage: FunctionComponent = () => {
-  const size = layoutStore.useValue().size;
-
   profileHook.useMyProfile();
 
   return (
-    <PageContainer maxWidth={size.innerWidth > 768 ? 'lg' : 'xl'}>
+    <Box sx={{ width: '100%', overflow: 'scroll', mt: 2 }}>
       <MyPageUpdatePasswordDialog />
       <MyPageCards />
-    </PageContainer>
+    </Box>
   );
 };

@@ -1,6 +1,6 @@
 import { HttpClientException, HttpException } from '@core';
 
-import { UserrrorMessage } from './enums';
+import { UserErrorMessage } from './enums';
 
 export class UserException implements HttpClientException {
   status: number;
@@ -14,7 +14,7 @@ export class UserException implements HttpClientException {
 
     switch (exception.name) {
       case HttpException.NotFoundUserException:
-        this.message = UserrrorMessage.NotFoundUser;
+        this.message = UserErrorMessage.NotFoundUser;
         break;
     }
   }

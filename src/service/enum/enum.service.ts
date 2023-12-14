@@ -1,8 +1,9 @@
 import { CredentialsStatus, Degree } from '@common';
+import { CredentialsChangeStatusComponentProperty } from './types';
 
 export class EnumService {
-  credentialsStatusToText(credentialsStatus: CredentialsStatus): string {
-    switch (credentialsStatus) {
+  credentialsStatusToText(status: CredentialsStatus): string {
+    switch (status) {
       case CredentialsStatus.Wating:
         return '대기';
 
@@ -18,6 +19,68 @@ export class EnumService {
       default:
         return '';
     }
+  }
+
+  credentialsStatusComponentProperties(status: CredentialsStatus) {
+    const props: CredentialsChangeStatusComponentProperty[] = [];
+
+    switch (status) {
+      case CredentialsStatus.Wating:
+        props.push(
+          {
+            label: '승인',
+            message: '가입이 승인되었습니다.',
+            status: {
+              current: status,
+              next: CredentialsStatus.Active,
+            },
+          },
+          {
+            label: '거절',
+            message: '가입이 거절되었습니다.',
+            status: {
+              current: status,
+              next: CredentialsStatus.Reject,
+            },
+          },
+        );
+        break;
+
+      case CredentialsStatus.Reject:
+        props.push({
+          label: '승인',
+          message: '가입이 승인되었습니다.',
+          status: {
+            current: status,
+            next: CredentialsStatus.Active,
+          },
+        });
+        break;
+
+      case CredentialsStatus.Active:
+        props.push({
+          label: '비활성',
+          message: '계정이 비활성 상태로 변경되었습니다.',
+          status: {
+            current: status,
+            next: CredentialsStatus.Disable,
+          },
+        });
+        break;
+
+      case CredentialsStatus.Disable:
+        props.push({
+          label: '활성',
+          message: '계정이 활성 상태로 변경되었습니다.',
+          status: {
+            current: status,
+            next: CredentialsStatus.Active,
+          },
+        });
+        break;
+    }
+
+    return props;
   }
 
   degreeToText(degree: Degree | string): string {

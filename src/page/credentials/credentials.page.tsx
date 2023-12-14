@@ -4,7 +4,7 @@ import { Box } from '@mui/material';
 
 import { credentialsHook } from '@hook';
 
-import { CredentialsTable, CredentialsTabs } from './components';
+import { CredentialsPageUpdatePasswordDialog, CredentialsPageTabs, CredentialsPageTable } from './components';
 
 export const CredentialsPage: FunctionComponent = () => {
   const maxWidth = 1080;
@@ -22,8 +22,9 @@ export const CredentialsPage: FunctionComponent = () => {
         alignItems: 'center',
       }}
     >
-      <CredentialsTabs {...{ maxWidth }} />
-      <CredentialsTable {...{ maxWidth }} />
+      <CredentialsPageUpdatePasswordDialog />
+      <CredentialsPageTabs {...{ maxWidth }} />
+      <CredentialsPageTable {...{ maxWidth }} />
     </Box>
   );
 };

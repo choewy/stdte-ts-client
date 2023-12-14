@@ -4,10 +4,10 @@ import { Paper, Table, TableContainer } from '@mui/material';
 
 import { layoutStore } from '@store';
 
-import { CredentialsTableHead } from './credentials-table-head';
-import { CredentialsTableBody } from './credentials-table-body';
+import { CredentialsPageTableHead } from './credentials-page-table-head';
+import { CredentialsPageTableBody } from './credentials-page-table-body';
 
-export const CredentialsTable: FunctionComponent<{ maxWidth: number }> = ({ maxWidth }) => {
+export const CredentialsPageTable: FunctionComponent<{ maxWidth: number }> = ({ maxWidth }) => {
   const size = layoutStore.useValue().size;
 
   return (
@@ -20,8 +20,8 @@ export const CredentialsTable: FunctionComponent<{ maxWidth: number }> = ({ maxW
       }}
     >
       <Table stickyHeader>
-        <CredentialsTableHead />
-        <CredentialsTableBody />
+        <CredentialsPageTableHead />
+        <CredentialsPageTableBody />
       </Table>
     </TableContainer>
   );

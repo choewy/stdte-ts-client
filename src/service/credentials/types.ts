@@ -37,6 +37,12 @@ export type CredentialsUpdatePasswordBody = {
   confirmPassword: string;
 };
 
+export type CredentialsUpdateStatusParam = number;
+
+export type CredentialsUpdateStatusBody = {
+  status: CredentialsStatus;
+};
+
 export type CredentialsAdminStatsResposne = {
   status: CredentialsStatus;
   count: number;

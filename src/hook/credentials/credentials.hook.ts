@@ -7,11 +7,13 @@ import {
   CredentialsException,
   CredentialsSignInBody,
   CredentialsSignUpBody,
+  CredentialsChangeStatusComponentProperty,
   CredentialsUpdatePasswordBody,
   SnackEvent,
   credentialsHttpService,
   credentialsValidator,
   localStorageService,
+  CredentialsAdminUpdatePasswordBody,
 } from '@service';
 
 import { CredentialsGuardPassOrPath } from './types';
@@ -299,10 +301,10 @@ export class CredentialsHook {
     }, [getCredentialsStats]);
   }
 
-  useAdminCredentialsList() {
+  useGetCredentialsListCallback() {
     const [{ query }, setAdminCredentials] = adminCredentialsStore.useState();
 
-    const getCredentialsList = useCallback(async () => {
+    return useCallback(async () => {
       const res = await credentialsHttpService.getListByAdmin(query);
 
       if (res.ok === false) {
@@ -311,10 +313,61 @@ export class CredentialsHook {
 
       setAdminCredentials((prev) => ({ ...prev, list: res.data }));
     }, [query, setAdminCredentials]);
+  }
+
+  useAdminCredentialsList() {
+    const getCredentialsList = this.useGetCredentialsListCallback();
 
     useEffect(() => {
       getCredentialsList();
     }, [getCredentialsList]);
+  }
+
+  useAdminUpdateCredentialsStatus(id: number, property: CredentialsChangeStatusComponentProperty) {
+    const getCredentialsStats = this.useGetCredentialsStatsCallback();
+    const getCredentialsList = this.useGetCredentialsListCallback();
+
+    return useCallback(async () => {
+      const res = await credentialsHttpService.updateStatusByAdmin(id, { status: property.status.next });
+
+      if (res.ok === false) {
+        return SnackEvent.dispatchByException(new CredentialsException(res.exception));
+      }
+
+      SnackEvent.dispatchBySuccess(property.message);
+
+      await getCredentialsStats();
+      await getCredentialsList();
+    }, [id, property, getCredentialsStats, getCredentialsList]);
+  }
+
+  useUpdatePasswordByAdminState() {
+    return useState<CredentialsAdminUpdatePasswordBody>({
+      newPassword: '',
+      confirmPassword: '',
+    });
+  }
+
+  useUpdatePasswordByAdminCallback(id: number, body: CredentialsAdminUpdatePasswordBody) {
+    return useCallback(async () => {
+      const message = credentialsValidator.updatePasswordByAdmin(body);
+
+      if (message) {
+        SnackEvent.dispatchByWarning(message);
+        return false;
+      }
+
+      const res = await credentialsHttpService.updatePasswordByAdmin(id, body);
+
+      if (res.ok === false) {
+        SnackEvent.dispatchByException(new CredentialsException(res.exception));
+        return false;
+      }
+
+      SnackEvent.dispatchBySuccess('비밀번호가 변경되었습니다.');
+
+      return true;
+    }, [id, body]);
   }
 }
 

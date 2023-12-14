@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react';
 
 import { TableCell, TableHead, TableRow } from '@mui/material';
 
-export const CredentialsTableHead: FunctionComponent = () => {
+export const CredentialsPageTableHead: FunctionComponent = () => {
   return (
     <TableHead>
       <TableRow>
@@ -11,7 +11,7 @@ export const CredentialsTableHead: FunctionComponent = () => {
         <TableCell align="center">이름</TableCell>
         <TableCell align="center">가입일시</TableCell>
         <TableCell align="center">수정일시</TableCell>
-        <TableCell align="center">상태</TableCell>
+        <TableCell align="center"></TableCell>
       </TableRow>
     </TableHead>
   );

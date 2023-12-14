@@ -1,1 +1,1 @@
-export * from './credentials-table';
+export * from './credentials-page-table';

@@ -1,5 +1,5 @@
-export class TableHook {
-  calcMinWidth(value: string | number | boolean) {
+export class TableService {
+  getWidthByLength(value: string | number | boolean) {
     const length = String(value).length;
 
     if (length < 5) {
@@ -10,4 +10,4 @@ export class TableHook {
   }
 }
 
-export const tableHook = new TableHook();
+export const tableService = new TableService();

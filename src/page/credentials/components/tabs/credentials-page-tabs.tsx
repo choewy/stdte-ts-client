@@ -6,7 +6,7 @@ import { CredentialsStatus } from '@common';
 import { adminCredentialsStore } from '@store';
 import { tabHook } from '@hook';
 
-export const CredentialsTabs: FunctionComponent<{ maxWidth: number }> = () => {
+export const CredentialsPageTabs: FunctionComponent<{ maxWidth: number }> = () => {
   const [{ stats, query }, setAdminCredentials] = adminCredentialsStore.useState();
 
   const tabProps = tabHook.useCredentialsTabProps(stats);

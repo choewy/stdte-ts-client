@@ -56,8 +56,14 @@ export const CredentialsPageTableBodyRow: FunctionComponent<{ row: CredentialsAd
             alignItems: 'center',
           }}
         >
-          {buttonProperties.map((property) => (
-            <CredentialsPageTableBodyRowChangeStatusButton {...{ id: row.id, property }} />
+          {buttonProperties.map((property, i) => (
+            <CredentialsPageTableBodyRowChangeStatusButton
+              {...{
+                key: ['credentials-table-row-button', row.id, property.status.next, i].join('-'),
+                id: row.id,
+                property,
+              }}
+            />
           ))}
           <CredentialsPageTableBodyRowChangePasswordButton {...{ id: row.id }} />
         </Box>

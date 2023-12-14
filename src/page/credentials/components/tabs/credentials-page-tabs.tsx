@@ -7,13 +7,15 @@ import { adminCredentialsStore } from '@store';
 import { tabHook } from '@hook';
 
 export const CredentialsPageTabs: FunctionComponent<{ maxWidth: number }> = () => {
+  const initQuery = adminCredentialsStore.useInit().query;
+
   const [{ stats, query }, setAdminCredentials] = adminCredentialsStore.useState();
 
   const tabProps = tabHook.useCredentialsTabProps(stats);
 
   const onChange = useCallback(
     (_: SyntheticEvent<Element, Event>, status: CredentialsStatus) => {
-      setAdminCredentials((prev) => ({ ...prev, query: { ...prev.query, status } }));
+      setAdminCredentials((prev) => ({ ...prev, query: { ...initQuery, status } }));
     },
     [setAdminCredentials],
   );

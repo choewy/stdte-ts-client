@@ -9,7 +9,7 @@ export const CredentialsPageTableBodyRowChangeStatusButton: FunctionComponent<{
   id: number;
   property: CredentialsChangeStatusComponentProperty;
 }> = ({ id, property }) => {
-  const onClick = credentialsHook.useAdminUpdateCredentialsStatus(id, property);
+  const onClick = credentialsHook.useUpdateCredentialsStatusByAdminCallback(id, property);
 
   return (
     <Button

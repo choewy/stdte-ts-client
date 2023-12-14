@@ -3,18 +3,35 @@ import { useCallback } from 'react';
 import { dialogStore } from '@store';
 
 export class DialogHook {
-  useProfileUpdatePasswordDialogCallback(open: boolean) {
+  useMyPageUpdatePasswordDialogCallback(open: boolean) {
     const setDialog = dialogStore.useSetState();
 
     return useCallback(() => {
       setDialog((prev) => ({
         ...prev,
-        profile: {
-          ...prev.profile,
-          updatePassword: open,
+        mypage: {
+          ...prev.mypage,
+          updatePassword: { open },
         },
       }));
     }, [open, setDialog]);
+  }
+
+  useCredentialsPageUpdatePasswordDialogCallback(id: number, open: boolean) {
+    const setDialog = dialogStore.useSetState();
+
+    return useCallback(() => {
+      setDialog((prev) => ({
+        ...prev,
+        credentials: {
+          ...prev.credentials,
+          updatePassword: {
+            id: open === true ? id : 0,
+            open,
+          },
+        },
+      }));
+    }, [id, open, setDialog]);
   }
 }
 

@@ -1,5 +1,8 @@
 export type DialogStoreProps = {
-  profile: {
-    updatePassword: boolean;
+  mypage: {
+    updatePassword: { open: boolean };
+  };
+  credentials: {
+    updatePassword: { id: number; open: boolean };
   };
 };

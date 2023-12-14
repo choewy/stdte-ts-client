@@ -4,17 +4,17 @@ import { DialogBoxy } from '@component';
 import { dialogStore } from '@store';
 import { dialogHook } from '@hook';
 
-import { MyPageUpdatePAsswordDialogContent } from './my-page-update-password-dialog-content';
+import { MyPageUpdatePasswordDialogContent } from './my-page-update-password-dialog-content';
 
 export const MyPageUpdatePasswordDialog: FunctionComponent = () => {
   const dialog = dialogStore.useValue();
-  const onClose = dialogHook.useProfileUpdatePasswordDialogCallback(false);
+  const onClose = dialogHook.useMyPageUpdatePasswordDialogCallback(false);
 
   return (
     <DialogBoxy
-      open={dialog.profile.updatePassword}
+      open={dialog.mypage.updatePassword.open}
       onClose={onClose}
-      contents={<MyPageUpdatePAsswordDialogContent />}
+      contents={<MyPageUpdatePasswordDialogContent />}
     />
   );
 };

@@ -4,7 +4,7 @@ import { Box, Button, FormControl, TextField } from '@mui/material';
 
 import { credentialsHook, dialogHook, textFieldHook } from '@hook';
 
-export const MyPageUpdatePAsswordDialogContent: FunctionComponent = () => {
+export const MyPageUpdatePasswordDialogContent: FunctionComponent = () => {
   const [body, setBody] = credentialsHook.useUpdateMyPasswordState();
 
   const onChangeCurrentPassword = textFieldHook.useOnChangeObjectStrProperty('currentPassword', setBody);
@@ -12,7 +12,7 @@ export const MyPageUpdatePAsswordDialogContent: FunctionComponent = () => {
   const onChangeConfirmPassword = textFieldHook.useOnChangeObjectStrProperty('confirmPassword', setBody);
 
   const updatePassword = credentialsHook.useUpdatePasswordCallback(body);
-  const closeDialog = dialogHook.useProfileUpdatePasswordDialogCallback(false);
+  const closeDialog = dialogHook.useMyPageUpdatePasswordDialogCallback(false);
 
   const onSubmit = useCallback(
     async (e: FormEvent<HTMLFormElement>) => {

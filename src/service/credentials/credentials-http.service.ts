@@ -34,11 +34,11 @@ export class CredentialsHttpService extends HttpService {
   }
 
   async getStatsByAdmin() {
-    return this.get<CredentialsAdminStatsResposne[]>(this.url('stats'), { delay: 250 });
+    return this.get<CredentialsAdminStatsResposne[]>(this.url('stats'));
   }
 
   async getListByAdmin(query: CredentialsAdminListQuery) {
-    return this.get<CredentialsAdminListResponse>(this.url('list'), { params: query, delay: 250 });
+    return this.get<CredentialsAdminListResponse>(this.url('list'), { params: query, delay: 500 });
   }
 
   async updatePasswordByAdmin(id: number, body: CredentialsAdminUpdatePasswordBody) {

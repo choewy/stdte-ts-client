@@ -11,7 +11,7 @@ export const CredentialsPageTableBody: FunctionComponent = () => {
   return (
     <TableBody>
       {list.rows.map((row, i) => (
-        <CredentialsPageTableBodyRow key={['credentials-page-table-row', row.id, i].join('-')} row={row} />
+        <CredentialsPageTableBodyRow key={['credentials-page-table-row', row.id, i].join('-')} index={i} row={row} />
       ))}
     </TableBody>
   );

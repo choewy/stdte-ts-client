@@ -8,7 +8,10 @@ import { CredentialsAdminRowResponse, enumService, tableService } from '@service
 import { CredentialsPageTableBodyRowChangeStatusButton } from './credentials-page-table-body-row-change-status-button';
 import { CredentialsPageTableBodyRowChangePasswordButton } from './credentials-page-table-body-row-change-password-button';
 
-export const CredentialsPageTableBodyRow: FunctionComponent<{ row: CredentialsAdminRowResponse }> = ({ row }) => {
+export const CredentialsPageTableBodyRow: FunctionComponent<{ row: CredentialsAdminRowResponse; index: number }> = ({
+  row,
+  index,
+}) => {
   const createdAt = DateTime.fromJSDate(new Date(row.createdAt)).toFormat('yyyy-MM-dd HH:mm:ss');
   const updatedAt = DateTime.fromJSDate(new Date(row.updatedAt)).toFormat('yyyy-MM-dd HH:mm:ss');
 
@@ -16,8 +19,8 @@ export const CredentialsPageTableBodyRow: FunctionComponent<{ row: CredentialsAd
 
   return (
     <TableRow key={['credentials-tbl-row', row.id].join('-')} hover>
-      <TableCell align="center" sx={tableService.getWidthByTextLength(row.id, { width: true, minWidth: true })}>
-        {row.id}
+      <TableCell align="center" sx={tableService.getWidthByTextLength(index + 1, { width: true, minWidth: true })}>
+        {index + 1}
       </TableCell>
       <TableCell
         align="center"

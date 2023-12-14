@@ -69,6 +69,32 @@ export class RoleHook {
       setQuerySkip();
     }, [scrollEnd, setQuerySkip]);
   }
+
+  useDeleteRoleCallback(id: number) {
+    const setAdminRole = adminRoleStore.useSetState();
+
+    return useCallback(async () => {
+      const res = await roleHttpService.deleteRole(id);
+
+      if (res.ok === false) {
+        SnackEvent.dispatchByException(new RoleException(res.exception));
+        return false;
+      }
+
+      SnackEvent.dispatchBySuccess('역할이 삭제되었습니다.');
+
+      setAdminRole((prev) => ({
+        ...prev,
+        list: {
+          ...prev.list,
+          total: prev.list.total - 1,
+          rows: prev.list.rows.filter((row) => row.id !== id),
+        },
+      }));
+
+      return true;
+    }, [id, setAdminRole]);
+  }
 }
 
 export const roleHook = new RoleHook();

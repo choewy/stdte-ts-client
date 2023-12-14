@@ -8,7 +8,7 @@ export class TableService {
 
     const length = String(value).length;
 
-    if (length < 5) {
+    if (length < 6) {
       width = length * 30;
     } else {
       width = length * 10;
@@ -29,9 +29,9 @@ export class TableService {
       const length = buttonText.length;
 
       if (length < 4) {
-        width += 65;
-      } else {
         width += 20 * length;
+      } else {
+        width += 30 * length;
       }
     }
 

@@ -4,12 +4,20 @@ import { IframeConfig } from '@config';
 import { LoadingEvent } from '@core';
 
 export const HomePage: FunctionComponent = () => {
-  const onLoad = useCallback((e: SyntheticEvent<HTMLIFrameElement>, error?: Error) => {
-    LoadingEvent.dispatch(false, 1);
+  const onLoad = useCallback(async (_: SyntheticEvent<HTMLIFrameElement>, error?: Error) => {
+    await new Promise<void>((resolve) => {
+      if (error) {
+        console.error(error);
+      }
 
-    if (error) {
-      console.error(error);
-    }
+      const timeout = setTimeout(() => {
+        clearTimeout(timeout);
+
+        LoadingEvent.dispatch(false);
+
+        resolve();
+      }, 1500);
+    });
   }, []);
 
   useEffect(() => {

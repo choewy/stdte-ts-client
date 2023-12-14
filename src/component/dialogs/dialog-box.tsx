@@ -9,7 +9,7 @@ export const DialogBoxy: FunctionComponent<DialogBoxyProps> = ({ title, actions,
   return (
     <Dialog {...props} TransitionComponent={DialogTransition}>
       {title && <DialogTitle>{title}</DialogTitle>}
-      {contents && <DialogContent sx={{ mt: 1, minWidth: 400 }}>{contents}</DialogContent>}
+      {contents && <DialogContent>{contents}</DialogContent>}
       {actions && <DialogActions>{actions}</DialogActions>}
     </Dialog>
   );

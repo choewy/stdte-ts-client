@@ -14,6 +14,8 @@ export const CredentialsPageTableBodyRowChangePasswordButton: FunctionComponent<
       {...{
         children: '비밀번호 변경',
         fullWidth: false,
+        variant: 'text',
+        color: 'warning',
         size: 'small',
         onClick,
       }}

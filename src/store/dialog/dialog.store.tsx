@@ -11,6 +11,12 @@ export class DialogStore extends RecoilStore<DialogStoreProps> {
       credentials: {
         updatePassword: { id: 0, open: false },
       },
+      role: {
+        create: { open: false },
+        users: { id: 0, open: false },
+        update: { id: 0, open: false },
+        delete: { id: 0, open: false },
+      },
     });
   }
 }

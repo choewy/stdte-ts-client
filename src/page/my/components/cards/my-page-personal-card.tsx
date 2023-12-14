@@ -15,7 +15,7 @@ export const MyPagePersinalCard: FunctionComponent = () => {
 
   const onChangeName = textFieldHook.useOnChangeObjectStrProperty('name', setBody);
   const onChangePhone = textFieldHook.useOnChangeObjectPhoneNumberProperty('phone', setBody);
-  const onChangeScienceNumber = textFieldHook.useONChangeObjectScienceNumberProperty('scienceNumber', setBody);
+  const onChangeScienceNumber = textFieldHook.useOnChangeObjectScienceNumberProperty('scienceNumber', setBody);
   const onChangeBirthday = textFieldHook.useOnChangeObjectStrProperty('birthday', setBody);
   const onChangeEnteringDay = textFieldHook.useOnChangeObjectStrProperty('enteringDay', setBody);
   const onChangeResignationDay = textFieldHook.useOnChangeObjectStrProperty('resignationDay', setBody);

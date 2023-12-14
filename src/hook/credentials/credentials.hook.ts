@@ -249,7 +249,6 @@ export class CredentialsHook {
       }
 
       SnackEvent.dispatchBySuccess('비밀번호가 변경되었습니다.');
-
       return true;
     }, [body]);
   }
@@ -293,14 +292,6 @@ export class CredentialsHook {
     }, [setAdminCredentials]);
   }
 
-  useAdminCredentialsStats() {
-    const getCredentialsStats = this.useGetCredentialsStatsCallback();
-
-    useEffect(() => {
-      getCredentialsStats();
-    }, [getCredentialsStats]);
-  }
-
   useGetCredentialsListCallback() {
     const [{ query }, setAdminCredentials] = adminCredentialsStore.useState();
 
@@ -311,19 +302,68 @@ export class CredentialsHook {
         return SnackEvent.dispatchByException(new CredentialsException(res.exception));
       }
 
-      setAdminCredentials((prev) => ({ ...prev, list: res.data }));
+      setAdminCredentials((prev) => ({
+        ...prev,
+        list:
+          res.data.query.skip === 0
+            ? res.data
+            : {
+                ...prev.list,
+                rows: [...prev.list.rows, ...res.data.rows],
+                query: res.data.query,
+              },
+      }));
     }, [query, setAdminCredentials]);
   }
 
-  useAdminCredentialsList() {
+  useCredentialsScrollEnd(scrollEnd: boolean) {
+    const setAdminCredentials = adminCredentialsStore.useSetState();
+
+    const setQuerySkip = useCallback(() => {
+      setAdminCredentials((prev) => {
+        const skip = prev.query.skip + prev.query.take;
+
+        if (prev.list.total > skip) {
+          return { ...prev, query: { ...prev.query, skip } };
+        }
+
+        return prev;
+      });
+    }, [setAdminCredentials]);
+
+    useEffect(() => {
+      if (scrollEnd === false) {
+        return;
+      }
+
+      setQuerySkip();
+    }, [scrollEnd, setQuerySkip]);
+  }
+
+  useMountCredentialsPage() {
+    const getCredentialsStats = this.useGetCredentialsStatsCallback();
     const getCredentialsList = this.useGetCredentialsListCallback();
+
+    useEffect(() => {
+      getCredentialsStats();
+    }, [getCredentialsStats]);
 
     useEffect(() => {
       getCredentialsList();
     }, [getCredentialsList]);
   }
 
-  useAdminUpdateCredentialsStatus(id: number, property: CredentialsChangeStatusComponentProperty) {
+  useUnmountCredentialsPage() {
+    const resetAdminCredentials = adminCredentialsStore.useResetState();
+
+    useEffect(() => {
+      return () => {
+        resetAdminCredentials();
+      };
+    }, [resetAdminCredentials]);
+  }
+
+  useUpdateCredentialsStatusByAdminCallback(id: number, property: CredentialsChangeStatusComponentProperty) {
     const getCredentialsStats = this.useGetCredentialsStatsCallback();
     const getCredentialsList = this.useGetCredentialsListCallback();
 

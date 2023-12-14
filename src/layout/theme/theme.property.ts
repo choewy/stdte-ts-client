@@ -49,6 +49,26 @@ export class ThemeProperty implements ThemeOptions {
           sx: { fontSize: 12 },
         },
       },
+      MuiDialogTitle: {
+        defaultProps: {
+          sx: { borderBottom: 0.5, borderColor: 'GrayText' },
+        },
+      },
+      MuiDialogContent: {
+        defaultProps: {
+          sx: { mt: 2, minWidth: 400 },
+        },
+      },
+      MuiDialogContentText: {
+        defaultProps: {
+          sx: { paddingY: 2, fontSize: 13 },
+        },
+      },
+      MuiDialogActions: {
+        defaultProps: {
+          sx: { borderTop: 0.5, borderColor: 'GrayText' },
+        },
+      },
     };
   }
 }

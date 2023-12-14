@@ -6,7 +6,7 @@ import { CredentialsStatus } from '@common';
 import { adminCredentialsStore } from '@store';
 import { tabHook } from '@hook';
 
-export const CredentialsPageTabs: FunctionComponent<{ maxWidth: number }> = () => {
+export const CredentialsPageTabs: FunctionComponent<{ maxWidth: number }> = ({ maxWidth }) => {
   const initQuery = adminCredentialsStore.useInit().query;
 
   const [{ stats, query }, setAdminCredentials] = adminCredentialsStore.useState();
@@ -21,7 +21,7 @@ export const CredentialsPageTabs: FunctionComponent<{ maxWidth: number }> = () =
   );
 
   return (
-    <Box>
+    <Box sx={{ maxWidth, mb: 1, height: 40 }}>
       <Tabs value={query.status} onChange={onChange}>
         {tabProps.map((props) => (
           <Tab {...props} />

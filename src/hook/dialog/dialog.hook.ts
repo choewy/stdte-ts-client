@@ -33,6 +33,34 @@ export class DialogHook {
       }));
     }, [id, open, setDialog]);
   }
+
+  useRolePageCreateDialogCallback(open: boolean) {
+    const setDialog = dialogStore.useSetState();
+
+    return useCallback(() => {
+      setDialog((prev) => ({
+        ...prev,
+        role: {
+          ...prev.role,
+          create: { open },
+        },
+      }));
+    }, [open, setDialog]);
+  }
+
+  useRolePageDialogsCallback(key: 'update' | 'delete' | 'users', id: number, open: boolean) {
+    const setDialog = dialogStore.useSetState();
+
+    return useCallback(() => {
+      setDialog((prev) => ({
+        ...prev,
+        role: {
+          ...prev.role,
+          [key]: { id: open === true ? id : 0, open },
+        },
+      }));
+    }, [key, id, open, setDialog]);
+  }
 }
 
 export const dialogHook = new DialogHook();

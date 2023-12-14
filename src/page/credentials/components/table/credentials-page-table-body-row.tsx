@@ -48,14 +48,7 @@ export const CredentialsPageTableBodyRow: FunctionComponent<{ row: CredentialsAd
           { width: true, minWidth: true },
         )}
       >
-        <Box
-          sx={{
-            gap: 1,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
+        <Box sx={{ gap: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           {buttonProperties.map((property, i) => (
             <CredentialsPageTableBodyRowChangeStatusButton
               {...{

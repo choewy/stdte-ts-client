@@ -29,9 +29,9 @@ export class TableService {
       const length = buttonText.length;
 
       if (length < 4) {
-        width += 65;
-      } else {
         width += 20 * length;
+      } else {
+        width += 30 * length;
       }
     }
 

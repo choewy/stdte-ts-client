@@ -1,4 +1,4 @@
-import { CredentialsStatus, Degree } from '@common';
+import { CredentialsStatus, Degree, RolePolicyKey, RolePolicyLevel } from '@common';
 import { CredentialsChangeStatusComponentProperty } from './types';
 
 export class EnumService {
@@ -99,6 +99,65 @@ export class EnumService {
 
       case Degree.Doctor:
         return '박사';
+
+      default:
+        return '';
+    }
+  }
+
+  rolePolicyKeyToText(key: RolePolicyKey) {
+    switch (key) {
+      case 'roleAndPolicy':
+        return '역할 및 권한';
+
+      case 'credentials':
+        return '계정';
+
+      case 'user':
+        return '구성원';
+
+      case 'project':
+        return '사업';
+
+      case 'customer':
+        return '고객사';
+
+      case 'businessCategory':
+        return '사업분야';
+
+      case 'industryCategory':
+        return '산업구분';
+
+      case 'taskCategory':
+        return '수행업무구분';
+
+      case 'setting':
+        return '기타설정';
+
+      default:
+        return '';
+    }
+  }
+
+  rolePolicyLevelToText(level: RolePolicyLevel) {
+    switch (level) {
+      case RolePolicyLevel.Limit:
+        return '제한';
+
+      case RolePolicyLevel.Read:
+        return '조회';
+
+      case RolePolicyLevel.Create:
+        return '생성';
+
+      case RolePolicyLevel.Update:
+        return '수정';
+
+      case RolePolicyLevel.Delete:
+        return '삭제';
+
+      case RolePolicyLevel.Admin:
+        return '관리자';
 
       default:
         return '';

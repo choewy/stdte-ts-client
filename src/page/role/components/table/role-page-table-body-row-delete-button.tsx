@@ -4,18 +4,16 @@ import { Button } from '@mui/material';
 
 import { dialogHook } from '@hook';
 
-export const CredentialsPageTableBodyRowChangePasswordButton: FunctionComponent<{
-  id: number;
-}> = ({ id }) => {
-  const onClick = dialogHook.useCredentialsPageUpdatePasswordDialogCallback(id, true);
+export const RolePageTableBodyRowDeleteButton: FunctionComponent<{ id: number }> = ({ id }) => {
+  const onClick = dialogHook.useRolePageDialogsCallback('delete', id, true);
 
   return (
     <Button
       {...{
-        children: '비밀번호 변경',
+        children: '삭제',
         fullWidth: false,
         variant: 'text',
-        color: 'warning',
+        color: 'error',
         size: 'small',
         onClick,
       }}

@@ -17,6 +17,8 @@ export const CredentialsPageTableBodyRowChangeStatusButton: FunctionComponent<{
         children: property.label,
         fullWidth: false,
         size: 'small',
+        variant: 'text',
+        color: 'info',
         onClick,
       }}
     />

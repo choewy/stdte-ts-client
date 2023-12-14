@@ -8,8 +8,10 @@ export const RolePageTableHead: FunctionComponent = () => {
       <TableRow>
         <TableCell align="center">ID</TableCell>
         <TableCell align="center">이름</TableCell>
+        <TableCell align="center">인원</TableCell>
         <TableCell align="center">생성일시</TableCell>
         <TableCell align="center">수정일시</TableCell>
+        <TableCell align="center"></TableCell>
       </TableRow>
     </TableHead>
   );

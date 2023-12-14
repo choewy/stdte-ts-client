@@ -18,6 +18,7 @@ export const CredentialsPageTable: FunctionComponent<{ maxWidth: number }> = ({ 
     <TableContainer
       ref={scroll.ref}
       component={Paper}
+      elevation={2}
       sx={{
         height: size.innerHeight - 150,
         overflow: 'scroll',

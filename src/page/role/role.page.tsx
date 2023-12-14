@@ -3,7 +3,15 @@ import { FunctionComponent } from 'react';
 import { Box } from '@mui/material';
 
 import { roleHook } from '@hook';
-import { RolePageTable } from './components';
+
+import {
+  RolePageCreateDialog,
+  RolePageUpdateDialog,
+  RolePageDeleteDialog,
+  RolePageUsersDialog,
+  RolePageToolbar,
+  RolePageTable,
+} from './components';
 
 export const RolePage: FunctionComponent = () => {
   const maxWidth = 1080;
@@ -21,7 +29,11 @@ export const RolePage: FunctionComponent = () => {
         alignItems: 'center',
       }}
     >
-      {/* <CredentialsPageUpdatePasswordDialog /> */}
+      <RolePageCreateDialog />
+      <RolePageUpdateDialog />
+      <RolePageDeleteDialog />
+      <RolePageUsersDialog />
+      <RolePageToolbar {...{ maxWidth }} />
       <RolePageTable {...{ maxWidth }} />
     </Box>
   );

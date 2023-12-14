@@ -7,3 +7,4 @@ export * from './table';
 export * from './setting';
 export * from './credentials';
 export * from './user';
+export * from './role';

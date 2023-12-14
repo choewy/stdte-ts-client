@@ -56,7 +56,7 @@ export class ThemeProperty implements ThemeOptions {
       },
       MuiDialogContent: {
         defaultProps: {
-          sx: { mt: 3, minWidth: 400 },
+          sx: { mt: 2, minWidth: 400 },
         },
       },
       MuiDialogContentText: {

@@ -293,14 +293,6 @@ export class CredentialsHook {
     }, [setAdminCredentials]);
   }
 
-  useLoadCredentialsStats() {
-    const getCredentialsStats = this.useGetCredentialsStatsCallback();
-
-    useEffect(() => {
-      getCredentialsStats();
-    }, [getCredentialsStats]);
-  }
-
   useGetCredentialsListCallback() {
     const [{ query }, setAdminCredentials] = adminCredentialsStore.useState();
 
@@ -349,12 +341,27 @@ export class CredentialsHook {
     }, [scrollEnd, setQuerySkip]);
   }
 
-  useLoadCredentialsList() {
+  useMountCredentialsPage() {
+    const getCredentialsStats = this.useGetCredentialsStatsCallback();
     const getCredentialsList = this.useGetCredentialsListCallback();
+
+    useEffect(() => {
+      getCredentialsStats();
+    }, [getCredentialsStats]);
 
     useEffect(() => {
       getCredentialsList();
     }, [getCredentialsList]);
+  }
+
+  useUnmountCredentialsPage() {
+    const resetAdminCredentials = adminCredentialsStore.useResetState();
+
+    useEffect(() => {
+      return () => {
+        resetAdminCredentials();
+      };
+    }, [resetAdminCredentials]);
   }
 
   useUpdateCredentialsStatusByAdminCallback(id: number, property: CredentialsChangeStatusComponentProperty) {

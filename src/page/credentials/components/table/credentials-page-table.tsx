@@ -10,7 +10,6 @@ import { CredentialsPageTableBody } from './credentials-page-table-body';
 
 export const CredentialsPageTable: FunctionComponent<{ maxWidth: number }> = ({ maxWidth }) => {
   const size = layoutStore.useValue().size;
-
   const scroll = scrollHook.useDivScrollRefObject();
 
   credentialsHook.useCredentialsScrollEnd(scroll.end);

@@ -9,8 +9,8 @@ import { CredentialsPageUpdatePasswordDialog, CredentialsPageTabs, CredentialsPa
 export const CredentialsPage: FunctionComponent = () => {
   const maxWidth = 1080;
 
-  credentialsHook.useAdminCredentialsStats();
-  credentialsHook.useAdminCredentialsList();
+  credentialsHook.useLoadCredentialsStats();
+  credentialsHook.useLoadCredentialsList();
 
   return (
     <Box

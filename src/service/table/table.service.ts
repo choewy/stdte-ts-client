@@ -8,7 +8,7 @@ export class TableService {
 
     const length = String(value).length;
 
-    if (length < 5) {
+    if (length < 6) {
       width = length * 30;
     } else {
       width = length * 10;

@@ -17,7 +17,7 @@ export class ScrollHook {
 
       const clientHeight = ref.current.clientHeight;
       const scrollHeight = ref.current.scrollHeight;
-      const scrollOffset = scrollHeight - clientHeight;
+      const scrollOffset = scrollHeight - clientHeight - 5;
       const scrollTop = ref.current.scrollTop;
 
       if (stop.current === true) {
@@ -46,7 +46,7 @@ export class ScrollHook {
 
         ref.current.removeEventListener('scroll', onScroll);
       };
-    }, [onScroll]);
+    }, [ref, onScroll]);
 
     useEffect(() => {
       if (end === false) {
@@ -55,9 +55,7 @@ export class ScrollHook {
 
       const timeout = setTimeout(() => {
         clearTimeout(timeout);
-
         stop.current = false;
-
         setEnd(stop.current);
       }, 500);
     }, [stop, end, setEnd]);

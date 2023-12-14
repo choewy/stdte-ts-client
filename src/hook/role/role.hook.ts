@@ -97,17 +97,36 @@ export class RoleHook {
   }
 
   useRoleCreateCallback(body: RoleAdminCreateBody) {
-    return useCallback(async () => {
-      const res = await roleHttpService.createRole(body);
+    const setAdminRole = adminRoleStore.useSetState();
 
-      if (res.ok === false) {
-        SnackEvent.dispatchByException(new RoleException(res.exception));
+    return useCallback(async () => {
+      const createResponse = await roleHttpService.createRole(body);
+
+      if (createResponse.ok === false) {
+        SnackEvent.dispatchByException(new RoleException(createResponse.exception));
+        return false;
+      }
+
+      const getResponse = await roleHttpService.getRole(createResponse.data.id);
+
+      if (getResponse.ok === false) {
+        SnackEvent.dispatchByException(new RoleException(getResponse.exception));
         return false;
       }
 
       SnackEvent.dispatchBySuccess('역할이 생성되었습니다.');
+
+      setAdminRole((prev) => ({
+        ...prev,
+        list: {
+          ...prev.list,
+          total: prev.list.total + 1,
+          rows: [getResponse.data, ...prev.list.rows],
+        },
+      }));
+
       return true;
-    }, [body]);
+    }, [body, setAdminRole]);
   }
 
   useRoleUpdateState(role: RoleAdminRowResponse): [RoleAdminUpdateBody, SetterOrUpdater<RoleAdminUpdateBody>] {

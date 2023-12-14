@@ -17,7 +17,7 @@ export const SignInForm: FunctionComponent = () => {
         component: 'form',
         elevation: 3,
         noValidate: true,
-        sx: { p: 5, boxSizing: 'border-box', width: 425 },
+        sx: { p: 5, boxSizing: 'border-box', width: 400 },
         onSubmit,
       }}
     >

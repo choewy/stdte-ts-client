@@ -16,9 +16,9 @@ export const SidebarMenuList: FunctionComponent = () => {
     <List disablePadding>
       {items.map((item) =>
         item.type === SidebarMenuType.Navigate ? (
-          <SidebarMenuNaviageItem key={item.key} {...item} />
+          <SidebarMenuNaviageItem key={item.id} {...item} />
         ) : (
-          <SidebarMenuCollapseItem key={item.key} {...item} />
+          <SidebarMenuCollapseItem key={item.id} {...item} />
         ),
       )}
     </List>

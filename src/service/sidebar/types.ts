@@ -6,7 +6,7 @@ import { RolePolicyProperty } from '@common';
 import { SidebarMenuScope, SidebarMenuType } from './enums';
 
 export type SidebarMenuItemDefaultProperty = {
-  key?: string;
+  id?: string;
   scope: SidebarMenuScope | null;
   name: string;
   Icon: OverridableComponent<SvgIconTypeMap<{}, 'svg'>>;

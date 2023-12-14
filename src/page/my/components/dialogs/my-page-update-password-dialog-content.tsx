@@ -1,63 +1,45 @@
-import { FormEvent, FunctionComponent, useCallback } from 'react';
+import { FunctionComponent } from 'react';
+import { SetterOrUpdater } from 'recoil';
 
-import { Box, Button, FormControl, TextField } from '@mui/material';
+import { TextField } from '@mui/material';
 
-import { credentialsHook, dialogHook, textFieldHook } from '@hook';
+import { textFieldHook } from '@hook';
+import { CredentialsUpdatePasswordBody } from '@service';
 
-export const MyPageUpdatePasswordDialogContent: FunctionComponent = () => {
-  const [body, setBody] = credentialsHook.useUpdateMyPasswordState();
-
+export const MyPageUpdatePasswordDialogContent: FunctionComponent<{
+  body: CredentialsUpdatePasswordBody;
+  setBody: SetterOrUpdater<CredentialsUpdatePasswordBody>;
+}> = ({ body, setBody }) => {
   const onChangeCurrentPassword = textFieldHook.useOnChangeObjectStrProperty('currentPassword', setBody);
   const onChangeNewPassword = textFieldHook.useOnChangeObjectStrProperty('newPassword', setBody);
   const onChangeConfirmPassword = textFieldHook.useOnChangeObjectStrProperty('confirmPassword', setBody);
 
-  const updatePassword = credentialsHook.useUpdatePasswordCallback(body);
-  const closeDialog = dialogHook.useMyPageUpdatePasswordDialogCallback(false);
-
-  const onSubmit = useCallback(
-    async (e: FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-
-      const ok = await updatePassword();
-
-      if (ok) {
-        closeDialog();
-      }
-    },
-    [updatePassword, closeDialog],
-  );
-
   return (
-    <Box component="form" onSubmit={onSubmit}>
-      <FormControl>
-        <TextField
-          {...{
-            type: 'password',
-            label: '현재 비밀번호',
-            value: body.currentPassword,
-            onChange: onChangeCurrentPassword,
-          }}
-        />
-        <TextField
-          {...{
-            type: 'password',
-            label: '새 비밀번호',
-            value: body.newPassword,
-            onChange: onChangeNewPassword,
-          }}
-        />
-        <TextField
-          {...{
-            type: 'password',
-            label: '비밀번호 확인',
-            value: body.confirmPassword,
-            onChange: onChangeConfirmPassword,
-          }}
-        />
-      </FormControl>
-      <FormControl>
-        <Button {...{ type: 'submit', children: '변경하기' }} />
-      </FormControl>
-    </Box>
+    <>
+      <TextField
+        {...{
+          type: 'password',
+          label: '현재 비밀번호',
+          value: body.currentPassword,
+          onChange: onChangeCurrentPassword,
+        }}
+      />
+      <TextField
+        {...{
+          type: 'password',
+          label: '새 비밀번호',
+          value: body.newPassword,
+          onChange: onChangeNewPassword,
+        }}
+      />
+      <TextField
+        {...{
+          type: 'password',
+          label: '비밀번호 확인',
+          value: body.confirmPassword,
+          onChange: onChangeConfirmPassword,
+        }}
+      />
+    </>
   );
 };

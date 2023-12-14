@@ -1,7 +1,16 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { adminRoleStore } from '@store';
-import { RoleException, SnackEvent, roleHttpService } from '@service';
+import {
+  RoleAdminCreateBody,
+  RoleAdminRowResponse,
+  RoleAdminUpdateBody,
+  RoleException,
+  SnackEvent,
+  roleHttpService,
+} from '@service';
+import { RolePolicyLevel } from '@common';
+import { SetterOrUpdater } from 'recoil';
 
 export class RoleHook {
   useGetRoleListCallback() {
@@ -68,6 +77,63 @@ export class RoleHook {
 
       setQuerySkip();
     }, [scrollEnd, setQuerySkip]);
+  }
+
+  useRoleCreateState() {
+    return useState<RoleAdminCreateBody>({
+      name: '',
+      rolePolicy: {
+        roleAndPolicy: RolePolicyLevel.Limit,
+        credentials: RolePolicyLevel.Limit,
+        user: RolePolicyLevel.Limit,
+        project: RolePolicyLevel.Limit,
+        customer: RolePolicyLevel.Limit,
+        businessCategory: RolePolicyLevel.Limit,
+        industryCategory: RolePolicyLevel.Limit,
+        taskCategory: RolePolicyLevel.Limit,
+        setting: RolePolicyLevel.Limit,
+      },
+    });
+  }
+
+  useRoleCreateCallback(body: RoleAdminCreateBody) {
+    return useCallback(async () => {
+      const res = await roleHttpService.createRole(body);
+
+      if (res.ok === false) {
+        SnackEvent.dispatchByException(new RoleException(res.exception));
+        return false;
+      }
+
+      SnackEvent.dispatchBySuccess('역할이 생성되었습니다.');
+      return true;
+    }, [body]);
+  }
+
+  useRoleUpdateState(role: RoleAdminRowResponse): [RoleAdminUpdateBody, SetterOrUpdater<RoleAdminUpdateBody>] {
+    const [body, setBody] = useState<RoleAdminUpdateBody>({
+      name: '',
+      rolePolicy: {
+        roleAndPolicy: RolePolicyLevel.Limit,
+        credentials: RolePolicyLevel.Limit,
+        user: RolePolicyLevel.Limit,
+        project: RolePolicyLevel.Limit,
+        customer: RolePolicyLevel.Limit,
+        businessCategory: RolePolicyLevel.Limit,
+        industryCategory: RolePolicyLevel.Limit,
+        taskCategory: RolePolicyLevel.Limit,
+        setting: RolePolicyLevel.Limit,
+      },
+    });
+
+    useEffect(() => {
+      setBody({
+        name: role.name,
+        rolePolicy: role.rolePolicy,
+      });
+    }, [role, setBody]);
+
+    return [body, setBody];
   }
 
   useDeleteRoleCallback(id: number) {

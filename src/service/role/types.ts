@@ -17,3 +17,13 @@ export type RoleAdminRowResponse = {
 };
 
 export type RoleAdminListResponse = HttpClientListResponse<RoleAdminRowResponse, RoleAdminListQuery>;
+
+export type RoleAdminCreateBody = {
+  name: string;
+  rolePolicy: RolePolicyProperty;
+};
+
+export type RoleAdminUpdateBody = {
+  name: string;
+  rolePolicy: RolePolicyProperty;
+};

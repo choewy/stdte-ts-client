@@ -17,7 +17,7 @@ import { SidebarMenuScope, SidebarMenuType } from './enums';
 import { SidebarMenuItemProperty } from './types';
 
 export class SidebarService {
-  private readonly key = ['sidebar', v4()].join('-');
+  private readonly id = ['sidebar', v4()].join('-');
   private readonly items: SidebarMenuItemProperty[] = [
     {
       name: '홈',
@@ -116,7 +116,7 @@ export class SidebarService {
       credentials === null || credentials === false ? SidebarMenuScope.GuestOnly : SidebarMenuScope.UserOnly;
 
     const items = this.items.filter((item, i) => {
-      item.key = [this.key, i].join('-');
+      item.id = [this.id, item.type, item.scope, i].join('-');
 
       if (item.scope === null) {
         return true;

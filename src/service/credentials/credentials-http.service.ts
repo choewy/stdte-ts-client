@@ -1,6 +1,9 @@
 import { HttpService } from '@core';
 
 import {
+  CredentialsAdminListQuery,
+  CredentialsAdminListResponse,
+  CredentialsAdminStatsResposne,
   CredentialsAdminUpdatePasswordBody,
   CredentialsAdminUpdateStatusBody,
   CredentialsResponse,
@@ -28,6 +31,14 @@ export class CredentialsHttpService extends HttpService {
 
   async updatePassword(body: CredentialsUpdatePasswordBody) {
     return this.patch<null>(this.url('password'), body, { delay: 500 });
+  }
+
+  async getStatsByAdmin() {
+    return this.get<CredentialsAdminStatsResposne[]>(this.url('stats'));
+  }
+
+  async getListByAdmin(query: CredentialsAdminListQuery) {
+    return this.get<CredentialsAdminListResponse>(this.url('list'), { params: query, delay: 500 });
   }
 
   async updatePasswordByAdmin(id: number, body: CredentialsAdminUpdatePasswordBody) {

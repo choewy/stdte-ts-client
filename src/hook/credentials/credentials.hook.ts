@@ -2,16 +2,18 @@ import { FormEvent, useCallback, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { CredentialsStatus, PagePath } from '@common';
-import { credentialsStore } from '@store';
+import { adminCredentialsStore, credentialsStore } from '@store';
 import {
   CredentialsException,
   CredentialsSignInBody,
   CredentialsSignUpBody,
+  CredentialsChangeStatusComponentProperty,
   CredentialsUpdatePasswordBody,
   SnackEvent,
   credentialsHttpService,
   credentialsValidator,
   localStorageService,
+  CredentialsAdminUpdatePasswordBody,
 } from '@service';
 
 import { CredentialsGuardPassOrPath } from './types';
@@ -247,7 +249,6 @@ export class CredentialsHook {
       }
 
       SnackEvent.dispatchBySuccess('비밀번호가 변경되었습니다.');
-
       return true;
     }, [body]);
   }
@@ -275,6 +276,138 @@ export class CredentialsHook {
     useEffect(() => {
       signout();
     }, [signout]);
+  }
+
+  useGetCredentialsStatsCallback() {
+    const setAdminCredentials = adminCredentialsStore.useSetState();
+
+    return useCallback(async () => {
+      const res = await credentialsHttpService.getStatsByAdmin();
+
+      if (res.ok === false) {
+        return SnackEvent.dispatchByException(new CredentialsException(res.exception));
+      }
+
+      setAdminCredentials((prev) => ({ ...prev, stats: res.data }));
+    }, [setAdminCredentials]);
+  }
+
+  useGetCredentialsListCallback() {
+    const [{ query }, setAdminCredentials] = adminCredentialsStore.useState();
+
+    return useCallback(async () => {
+      const res = await credentialsHttpService.getListByAdmin(query);
+
+      if (res.ok === false) {
+        return SnackEvent.dispatchByException(new CredentialsException(res.exception));
+      }
+
+      setAdminCredentials((prev) => ({
+        ...prev,
+        list:
+          res.data.query.skip === 0
+            ? res.data
+            : {
+                ...prev.list,
+                rows: [...prev.list.rows, ...res.data.rows],
+                query: res.data.query,
+              },
+      }));
+    }, [query, setAdminCredentials]);
+  }
+
+  useCredentialsScrollEnd(scrollEnd: boolean) {
+    const setAdminCredentials = adminCredentialsStore.useSetState();
+
+    const setQuerySkip = useCallback(() => {
+      setAdminCredentials((prev) => {
+        const skip = prev.query.skip + prev.query.take;
+
+        if (prev.list.total > skip) {
+          return { ...prev, query: { ...prev.query, skip } };
+        }
+
+        return prev;
+      });
+    }, [setAdminCredentials]);
+
+    useEffect(() => {
+      if (scrollEnd === false) {
+        return;
+      }
+
+      setQuerySkip();
+    }, [scrollEnd, setQuerySkip]);
+  }
+
+  useMountCredentialsPage() {
+    const getCredentialsStats = this.useGetCredentialsStatsCallback();
+    const getCredentialsList = this.useGetCredentialsListCallback();
+
+    useEffect(() => {
+      getCredentialsStats();
+    }, [getCredentialsStats]);
+
+    useEffect(() => {
+      getCredentialsList();
+    }, [getCredentialsList]);
+  }
+
+  useUnmountCredentialsPage() {
+    const resetAdminCredentials = adminCredentialsStore.useResetState();
+
+    useEffect(() => {
+      return () => {
+        resetAdminCredentials();
+      };
+    }, [resetAdminCredentials]);
+  }
+
+  useUpdateCredentialsStatusByAdminCallback(id: number, property: CredentialsChangeStatusComponentProperty) {
+    const getCredentialsStats = this.useGetCredentialsStatsCallback();
+    const getCredentialsList = this.useGetCredentialsListCallback();
+
+    return useCallback(async () => {
+      const res = await credentialsHttpService.updateStatusByAdmin(id, { status: property.status.next });
+
+      if (res.ok === false) {
+        return SnackEvent.dispatchByException(new CredentialsException(res.exception));
+      }
+
+      SnackEvent.dispatchBySuccess(property.message);
+
+      await getCredentialsStats();
+      await getCredentialsList();
+    }, [id, property, getCredentialsStats, getCredentialsList]);
+  }
+
+  useUpdatePasswordByAdminState() {
+    return useState<CredentialsAdminUpdatePasswordBody>({
+      newPassword: '',
+      confirmPassword: '',
+    });
+  }
+
+  useUpdatePasswordByAdminCallback(id: number, body: CredentialsAdminUpdatePasswordBody) {
+    return useCallback(async () => {
+      const message = credentialsValidator.updatePasswordByAdmin(body);
+
+      if (message) {
+        SnackEvent.dispatchByWarning(message);
+        return false;
+      }
+
+      const res = await credentialsHttpService.updatePasswordByAdmin(id, body);
+
+      if (res.ok === false) {
+        SnackEvent.dispatchByException(new CredentialsException(res.exception));
+        return false;
+      }
+
+      SnackEvent.dispatchBySuccess('비밀번호가 변경되었습니다.');
+
+      return true;
+    }, [id, body]);
   }
 }
 

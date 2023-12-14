@@ -16,8 +16,8 @@ export const SidebarMenuCollapseItem: FunctionComponent<SidebarMenuItemCollapseP
       <SidebarMenuDefaultItem item={props} onClick={onClick} collapsed={collapsed} />
       <Collapse in={collapsed} timeout="auto" unmountOnExit>
         <List disablePadding component="div">
-          {props.children.map((child) => (
-            <SidebarMenuNaviageItem key={child.key} {...child} depth={1} />
+          {props.children.map((child, i) => (
+            <SidebarMenuNaviageItem key={[props.id, 'child', i].join('-')} {...child} depth={1} />
           ))}
         </List>
         <Divider />

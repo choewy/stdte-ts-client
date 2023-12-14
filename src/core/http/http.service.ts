@@ -19,11 +19,22 @@ export class HttpService {
   private async transform<R>(request: () => Promise<AxiosResponse>, delay?: number): Promise<HttpClientResponse<R>> {
     LoadingEvent.dispatch(true);
 
-    const res = await request()
-      .then((response) => ({ ok: true, data: response?.data }))
-      .catch((error) => ({ ok: false, data: error.response?.data }));
+    const res = await new Promise<{ ok: boolean; data: any }>(async (resolve, reject) => {
+      const res = await request()
+        .then((response) => ({ ok: true, data: response?.data }))
+        .catch((error) => ({ ok: false, data: error.response?.data }));
 
-    LoadingEvent.dispatch(false, delay);
+      if (delay == null) {
+        resolve(res);
+      }
+
+      const timeout = setTimeout(() => {
+        clearTimeout(timeout);
+        resolve(res);
+      }, delay);
+    });
+
+    LoadingEvent.dispatch(false);
 
     return {
       ok: res.ok,

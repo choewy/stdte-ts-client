@@ -10,7 +10,7 @@ import { MyPageCard } from './my-page-card';
 
 export const MyPageCredentialsCard: FunctionComponent = () => {
   const profile = profileStore.useValue();
-  const onClick = dialogHook.useProfileUpdatePasswordDialogCallback(true);
+  const onClick = dialogHook.useMyPageUpdatePasswordDialogCallback(true);
 
   return (
     <MyPageCard title="계정">

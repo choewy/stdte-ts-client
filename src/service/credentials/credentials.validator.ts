@@ -1,6 +1,11 @@
 import { isEmail, isEmpty } from 'class-validator';
 
-import { CredentialsSignInBody, CredentialsSignUpBody, CredentialsUpdatePasswordBody } from './types';
+import {
+  CredentialsAdminUpdatePasswordBody,
+  CredentialsSignInBody,
+  CredentialsSignUpBody,
+  CredentialsUpdatePasswordBody,
+} from './types';
 import { CredentialsErrorMessage } from './enums';
 
 export class CredentialsValidator {
@@ -49,6 +54,20 @@ export class CredentialsValidator {
       return CredentialsErrorMessage.EmptyCurrentPassword;
     }
 
+    if (isEmpty(body.newPassword)) {
+      return CredentialsErrorMessage.EmptyNewPassword;
+    }
+
+    if (isEmpty(body.confirmPassword)) {
+      return CredentialsErrorMessage.EmptyConfirmPassword;
+    }
+
+    if (body.newPassword !== body.confirmPassword) {
+      return CredentialsErrorMessage.IncorrectPassword;
+    }
+  }
+
+  updatePasswordByAdmin(body: CredentialsAdminUpdatePasswordBody) {
     if (isEmpty(body.newPassword)) {
       return CredentialsErrorMessage.EmptyNewPassword;
     }

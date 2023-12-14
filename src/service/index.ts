@@ -3,6 +3,8 @@ export * from './regexp';
 export * from './enum';
 export * from './sidebar';
 export * from './snack';
+export * from './table';
 export * from './setting';
 export * from './credentials';
 export * from './user';
+export * from './role';

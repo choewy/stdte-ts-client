@@ -35,3 +35,14 @@ export type HttpClientResponse<R> =
       data: null;
       exception: HttpClientException;
     };
+
+export type HttpClientListQuery = {
+  skip: number;
+  take: number;
+};
+
+export type HttpClientListResponse<R, Q = any> = {
+  total: number;
+  rows: R[];
+  query: Q;
+};

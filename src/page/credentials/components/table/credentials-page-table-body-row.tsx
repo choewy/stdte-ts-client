@@ -16,50 +16,42 @@ export const CredentialsPageTableBodyRow: FunctionComponent<{ row: CredentialsAd
 
   return (
     <TableRow key={['credentials-tbl-row', row.id].join('-')} hover>
-      <TableCell
-        align="center"
-        sx={{
-          width: tableService.getWidthByLength(row.id),
-          minWidth: tableService.getWidthByLength(row.id),
-        }}
-      >
+      <TableCell align="center" sx={tableService.getWidthByTextLength(row.id, { width: true, minWidth: true })}>
         {row.id}
       </TableCell>
-      <TableCell align="center" sx={{ flex: 1, minWidth: tableService.getWidthByLength(row.email) }}>
+      <TableCell
+        align="center"
+        sx={tableService.getWidthByTextLength(row.email, { minWidth: true }, { width: '100%' })}
+      >
         {row.email}
       </TableCell>
-      <TableCell align="center" sx={{ flex: 1, minWidth: tableService.getWidthByLength(row.name) }}>
+      <TableCell align="center" sx={tableService.getWidthByTextLength(row.name, { width: true, minWidth: true })}>
         {row.name}
       </TableCell>
       <TableCell
         align="center"
-        sx={{
-          width: tableService.getWidthByLength(updatedAt),
-          minWidth: tableService.getWidthByLength(createdAt),
-        }}
+        sx={tableService.getWidthByTextLength(updatedAt, { width: true, minWidth: true, maxWidth: true })}
       >
         {createdAt}
       </TableCell>
       <TableCell
         align="center"
-        sx={{
-          width: tableService.getWidthByLength(updatedAt),
-          minWidth: tableService.getWidthByLength(updatedAt),
-        }}
+        sx={tableService.getWidthByTextLength(createdAt, { width: true, minWidth: true, maxWidth: true })}
       >
         {updatedAt}
       </TableCell>
+
       <TableCell
         align="center"
-        sx={{
-          width: buttonProperties.length > 1 ? 300 : 230,
-          minWidth: buttonProperties.length > 1 ? 300 : 230,
-        }}
+        sx={tableService.getWidthByButtonTextLength(
+          buttonProperties.map((property) => property.label).concat('비밀번호 변경'),
+          { width: true, minWidth: true },
+        )}
       >
         <Box
           sx={{
-            display: 'flex',
             gap: 1,
+            display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
           }}

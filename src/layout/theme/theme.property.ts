@@ -1,7 +1,8 @@
-import { Components, PaletteOptions, Theme, ThemeOptions } from '@mui/material';
+import { Components, Palette, PaletteOptions, Theme, ThemeOptions, TypographyVariantsOptions } from '@mui/material';
 
 export class ThemeProperty implements ThemeOptions {
   palette?: PaletteOptions | undefined;
+  typography?: TypographyVariantsOptions | ((palette: Palette) => TypographyVariantsOptions) | undefined;
   components?: Components<Omit<Theme, 'components'>> | undefined;
 
   constructor(color: string) {
@@ -9,12 +10,12 @@ export class ThemeProperty implements ThemeOptions {
       ? { mode: color as 'dark' | 'light' }
       : { primary: { main: color } };
 
+    this.typography = { fontSize: 13 };
     this.components = {
       MuiFormControl: {
         defaultProps: {
           fullWidth: true,
           margin: 'normal',
-          sx: { fontSize: 13 },
         },
       },
       MuiMenuItem: {
@@ -25,7 +26,7 @@ export class ThemeProperty implements ThemeOptions {
           fullWidth: true,
           margin: 'normal',
           autoComplete: 'off',
-          InputProps: { sx: { fontSize: 13, colorScheme: color === 'dark' ? 'dark' : 'light' } },
+          InputProps: { sx: { colorScheme: color === 'dark' ? 'dark' : 'light' } },
           inputProps: { style: { fontSize: 13, colorScheme: color === 'dark' ? 'dark' : 'light' } },
           InputLabelProps: { style: { fontSize: 13 } },
         },
@@ -45,7 +46,7 @@ export class ThemeProperty implements ThemeOptions {
           fullWidth: true,
           variant: 'contained',
           size: 'large',
-          sx: { fontSize: 13 },
+          sx: { fontSize: 12 },
         },
       },
     };

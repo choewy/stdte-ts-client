@@ -24,7 +24,7 @@ export const RolePageUsersDialogContentListItem: FunctionComponent<{
   }, [row, setBody]);
 
   return (
-    <ListItem sx={{ paddingY: 0 }}>
+    <ListItem sx={{ paddingY: 0.5 }}>
       <ListItemButton
         {...{
           onClick,

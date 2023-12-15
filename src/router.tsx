@@ -80,6 +80,10 @@ export const router = createBrowserRouter(
               element: <CredentialsPage />,
             },
             {
+              path: PagePath.AdminSetting,
+              element: <EmptyPage title="공통설정" />,
+            },
+            {
               path: PagePath.Time,
               element: <Navigate to={PagePath.TimeRecord} />,
             },
@@ -101,6 +105,10 @@ export const router = createBrowserRouter(
             },
             {
               path: PagePath.Project,
+              element: <Navigate to={PagePath.ProjectList} />,
+            },
+            {
+              path: PagePath.ProjectList,
               element: <EmptyPage title="프로젝트 목록" />,
             },
             {
@@ -122,10 +130,6 @@ export const router = createBrowserRouter(
             {
               path: PagePath.ProjectTaskCategory,
               element: <EmptyPage title="프로젝트 수행업무" />,
-            },
-            {
-              path: PagePath.Setting,
-              element: <EmptyPage title="설정" />,
             },
           ],
         },

@@ -14,6 +14,7 @@ export type SnackEventDetail = {
 };
 
 export type SidebarMenuItemDefaultProperty = {
+  hidden?: boolean;
   id?: string;
   scope: SidebarMenuScope | null;
   name: string;

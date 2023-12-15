@@ -19,7 +19,7 @@ export const RolePageUsersDialog: FunctionComponent = () => {
       open={dialog.role.users.open}
       onClose={onClose}
       title="역할 인원"
-      contents={<RolePageUsersDialogContent {...{ body, setBody }} />}
+      contents={<RolePageUsersDialogContent {...{ name: row.name, body, setBody }} />}
       actions={<RolePageUsersDialogAction {...{ row, body, onClose }} />}
     />
   );

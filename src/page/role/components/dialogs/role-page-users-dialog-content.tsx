@@ -10,15 +10,18 @@ import { selectStore } from '@store';
 import { RolePageUsersDialogContentListItem } from './role-page-users-dialog-content-list-item';
 
 export const RolePageUsersDialogContent: FunctionComponent<{
+  name: string;
   body: RoleAdminUsersBody;
   setBody: SetterOrUpdater<RoleAdminUsersBody>;
-}> = ({ body, setBody }) => {
+}> = ({ name, body, setBody }) => {
   const { users } = selectStore.useValue();
+
   const scroll = scrollHook.useDivScrollRefObject();
   const onScroll = scrollHook.useOnScroll(scroll.ref, scroll.setEnd);
 
-  selectHook.useSelectUserList();
   selectHook.useSelectUsersScrollEnd(scroll.end);
+  selectHook.useSelectUserMount();
+  selectHook.useSelectUserUnMount();
 
   return (
     <Box
@@ -34,6 +37,7 @@ export const RolePageUsersDialogContent: FunctionComponent<{
           <RolePageUsersDialogContentListItem
             {...{
               key: ['select-user-list-item', row.id, row.name].join('-'),
+              name,
               row,
               body,
               setBody,

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
+import { SetterOrUpdater } from 'recoil';
 
-import { adminRoleStore } from '@store';
+import { adminRoleStore, selectStore } from '@store';
 import {
   RoleAdminCreateBody,
   RoleAdminRowResponse,
@@ -10,8 +11,8 @@ import {
   SnackEvent,
   roleHttpService,
 } from '@service';
+
 import { RolePolicyLevel } from '@common';
-import { SetterOrUpdater } from 'recoil';
 
 export class RoleHook {
   useGetRoleListCallback() {
@@ -48,12 +49,14 @@ export class RoleHook {
 
   useUnmountRolePage() {
     const resetAdminRole = adminRoleStore.useResetState();
+    const resetSelect = selectStore.useResetState();
 
     useEffect(() => {
       return () => {
         resetAdminRole();
+        resetSelect();
       };
-    }, [resetAdminRole]);
+    }, [resetAdminRole, resetSelect]);
   }
 
   useRoleScrollEnd(scrollEnd: boolean) {
@@ -97,17 +100,10 @@ export class RoleHook {
     const setAdminRole = adminRoleStore.useSetState();
 
     return useCallback(async () => {
-      const createResponse = await roleHttpService.createRole(body);
+      const res = await roleHttpService.createRole(body);
 
-      if (createResponse.ok === false) {
-        SnackEvent.dispatchByException(new RoleException(createResponse.exception));
-        return false;
-      }
-
-      const getResponse = await roleHttpService.getRole(createResponse.data.id);
-
-      if (getResponse.ok === false) {
-        SnackEvent.dispatchByException(new RoleException(getResponse.exception));
+      if (res.ok === false) {
+        SnackEvent.dispatchByException(new RoleException(res.exception));
         return false;
       }
 
@@ -118,7 +114,7 @@ export class RoleHook {
         list: {
           ...prev.list,
           total: prev.list.total + 1,
-          rows: [getResponse.data, ...prev.list.rows],
+          rows: [res.data, ...prev.list.rows],
         },
       }));
 
@@ -169,16 +165,7 @@ export class RoleHook {
         ...prev,
         list: {
           ...prev.list,
-          total: prev.list.total + 1,
-          rows: prev.list.rows.map((row) =>
-            row.id === id
-              ? {
-                  ...row,
-                  name: body.name,
-                  rolePolicy: body.rolePolicy,
-                }
-              : row,
-          ),
+          rows: prev.list.rows.map((row) => (row.id === id ? res.data : row)),
         },
       }));
 
@@ -200,7 +187,7 @@ export class RoleHook {
     const setAdminRole = adminRoleStore.useSetState();
 
     return useCallback(async () => {
-      const res = await roleHttpService.updateRole(id, {
+      const res = await roleHttpService.updateRoleUsers(id, {
         users: body.map(({ id }) => id),
       });
 
@@ -211,21 +198,25 @@ export class RoleHook {
 
       SnackEvent.dispatchBySuccess('역할이 수정되었습니다.');
 
-      setAdminRole((prev) => ({
-        ...prev,
-        list: {
-          ...prev.list,
-          total: prev.list.total + 1,
-          rows: prev.list.rows.map((row) =>
-            row.id === id
-              ? {
-                  ...row,
-                  users: body,
-                }
-              : row,
-          ),
-        },
-      }));
+      setAdminRole((prev) => {
+        if (res.data.length === 0) {
+          return prev;
+        }
+
+        const rows = [...prev.list.rows];
+
+        for (const role of res.data) {
+          const rowIndex = prev.list.rows.findIndex((row) => row.id === role.id);
+
+          if (rowIndex < 0) {
+            continue;
+          }
+
+          rows[rowIndex] = { ...rows[rowIndex], users: role.users };
+        }
+
+        return { ...prev, list: { ...prev.list, rows } };
+      });
 
       return true;
     }, [id, body, setAdminRole]);

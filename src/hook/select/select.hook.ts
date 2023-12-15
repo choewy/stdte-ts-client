@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from 'react';
 
 import { SelectException, SnackEvent, selectHttpService } from '@service';
-import { selectStore } from '@store';
+import { SELECT_STORE_DEFALUT_LIST, SELECT_STORE_DEFALUT_QUERY, selectStore } from '@store';
 
 export class SelectHook {
   useGetSelectUserListCallback() {
@@ -51,12 +51,28 @@ export class SelectHook {
     }, [scrollEnd, setSelect]);
   }
 
-  useSelectUserList() {
+  useSelectUserMount() {
     const getUserList = this.useGetSelectUserListCallback();
 
     useEffect(() => {
       getUserList();
     }, [getUserList]);
+  }
+
+  useSelectUserUnMount() {
+    const setSelect = selectStore.useSetState();
+
+    useEffect(() => {
+      return () => {
+        setSelect((prev) => ({
+          ...prev,
+          users: {
+            list: SELECT_STORE_DEFALUT_LIST,
+            query: SELECT_STORE_DEFALUT_QUERY,
+          },
+        }));
+      };
+    }, [setSelect]);
   }
 }
 

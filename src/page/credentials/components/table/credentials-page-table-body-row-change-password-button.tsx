@@ -1,23 +1,23 @@
 import { FunctionComponent } from 'react';
 
-import { Button } from '@mui/material';
+import { Link } from '@mui/material';
 
+import { sizeService } from '@service';
 import { dialogHook } from '@hook';
 
 export const CredentialsPageTableBodyRowChangePasswordButton: FunctionComponent<{
   id: number;
 }> = ({ id }) => {
+  const text = '비밀번호변경';
+
   const onClick = dialogHook.useCredentialsPageUpdatePasswordDialogCallback(id, true);
 
   return (
-    <Button
+    <Link
       {...{
-        children: '비밀번호 변경',
-        fullWidth: false,
-        variant: 'text',
-        color: 'warning',
-        size: 'small',
+        children: text,
         onClick,
+        sx: sizeService.getWidthByTextLength(text, { width: true, minWidth: true }, { cursor: 'pointer' }),
       }}
     />
   );

@@ -27,3 +27,5 @@ export type RoleAdminUpdateBody = {
   name: string;
   rolePolicy: RolePolicyProperty;
 };
+
+export type RoleAdminUsersBody = RoleAdminUserResponse[];

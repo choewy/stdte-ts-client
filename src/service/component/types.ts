@@ -1,9 +1,17 @@
+import { VariantType } from 'notistack';
+
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 import { SvgIconTypeMap } from '@mui/material';
 
 import { RolePolicyProperty } from '@common';
 
 import { SidebarMenuScope, SidebarMenuType } from './enums';
+
+export type SnackEventDetail = {
+  id: string;
+  variant: VariantType;
+  message: string;
+};
 
 export type SidebarMenuItemDefaultProperty = {
   id?: string;
@@ -26,3 +34,9 @@ export type SidebarMenuItemCollapseProperty = SidebarMenuItemDefaultProperty & {
 };
 
 export type SidebarMenuItemProperty = SidebarMenuItemNavigatePropery | SidebarMenuItemCollapseProperty;
+
+export type ComponentWidthOptions = {
+  width?: boolean;
+  minWidth?: boolean;
+  maxWidth?: boolean;
+};

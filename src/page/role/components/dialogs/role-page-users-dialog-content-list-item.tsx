@@ -45,7 +45,7 @@ export const RolePageUsersDialogContentListItem: FunctionComponent<{
             }}
           />
         </ListItemIcon>
-        <ListItemText {...{ primary: row.name, sx: { fontSize: 13 } }} />
+        <ListItemText {...{ primary: row.name, primaryTypographyProps: { sx: { fontSize: 13 } } }} />
         {row.description && row.description !== name && <Chip label={row.description} />}
       </ListItemButton>
     </ListItem>

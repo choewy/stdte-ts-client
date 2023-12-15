@@ -128,7 +128,7 @@ export class SidebarService {
           policy: { customer: RolePolicyLevel.Read },
         },
         {
-          name: '사업분야',
+          name: '사업구분',
           type: SidebarMenuType.Navigate,
           scope: SidebarMenuScope.UserOnly,
           Icon: CalendarMonth,
@@ -136,7 +136,7 @@ export class SidebarService {
           policy: { businessCategory: RolePolicyLevel.Read },
         },
         {
-          name: '산업구분',
+          name: '산업분야',
           type: SidebarMenuType.Navigate,
           scope: SidebarMenuScope.UserOnly,
           Icon: CalendarMonth,
@@ -186,6 +186,10 @@ export class SidebarService {
 
     const items = this.items.filter((item, i) => {
       item.id = [this.id, item.type, item.scope, i].join('-');
+
+      if (item.hidden === true) {
+        return false;
+      }
 
       if (item.scope === null) {
         return true;

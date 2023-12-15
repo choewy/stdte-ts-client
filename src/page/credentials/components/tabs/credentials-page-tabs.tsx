@@ -1,6 +1,6 @@
 import { FunctionComponent, SyntheticEvent, useCallback } from 'react';
 
-import { Box, Tab, Tabs } from '@mui/material';
+import { Box, Button, ButtonGroup, Tab, Tabs } from '@mui/material';
 
 import { CredentialsStatus } from '@common';
 import { adminCredentialsStore } from '@store';
@@ -21,12 +21,31 @@ export const CredentialsPageTabs: FunctionComponent<{ maxWidth: number }> = ({ m
   );
 
   return (
-    <Box sx={{ maxWidth, mb: 1, height: 40 }}>
+    <Box
+      sx={{
+        maxWidth,
+        display: 'flex',
+        width: '100%',
+        justifyContent: 'space-between',
+        height: 40,
+        mb: 1,
+      }}
+    >
       <Tabs value={query.status} onChange={onChange}>
         {tabProps.map((props) => (
           <Tab {...props} />
         ))}
       </Tabs>
+      <ButtonGroup
+        variant="outlined"
+        sx={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+          alignItems: 'flex-end',
+        }}
+      >
+        <Button {...{ children: '내보내기', size: 'small', sx: { width: 64 } }} />
+      </ButtonGroup>
     </Box>
   );
 };

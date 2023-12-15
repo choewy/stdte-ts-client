@@ -19,8 +19,9 @@ export const RolePageToolbar: FunctionComponent<{ maxWidth: number }> = ({ maxWi
         mb: 1,
       }}
     >
-      <ButtonGroup variant="contained">
+      <ButtonGroup variant="outlined">
         <Button {...{ children: '생성', onClick, size: 'small', sx: { width: 64 } }} />
+        <Button {...{ children: '내보내기', size: 'small', sx: { width: 64 } }} />
       </ButtonGroup>
     </Box>
   );

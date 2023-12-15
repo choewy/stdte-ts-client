@@ -1,4 +1,4 @@
-import { HttpClientException, HttpException } from '@core';
+import { HttpClientException, HttpErrorMessage, HttpException } from '@core';
 import { CredentialsErrorMessage } from './enums';
 
 export class CredentialsException implements HttpClientException {
@@ -13,7 +13,7 @@ export class CredentialsException implements HttpClientException {
 
     switch (exception.name) {
       case HttpException.InvalidCredentialsException:
-        this.message = invalidMessage ?? CredentialsErrorMessage.InvalidCredentials;
+        this.message = invalidMessage ?? HttpErrorMessage.InvalidCredentials;
         break;
 
       case HttpException.AlreadyExistUserEmailException:

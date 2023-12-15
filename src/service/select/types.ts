@@ -1,4 +1,9 @@
-export type SelectResponse<T = string | number> = {
-  value: T;
-  label: string;
+import { HttpClientListQuery, HttpClientListResponse } from '@core';
+
+export type SelectRowResponse = {
+  id: number;
+  name: string;
 };
+
+export type SelectListQuery = HttpClientListQuery;
+export type SelectListResponse = HttpClientListResponse<SelectRowResponse, SelectListQuery>;

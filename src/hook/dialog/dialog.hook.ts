@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 
-import { dialogStore } from '@store';
+import { DIALOG_DEFAULT_ROLE_ROW, dialogStore } from '@store';
+import { RoleAdminRowResponse } from '@service';
 
 export class DialogHook {
   useMyPageUpdatePasswordDialogCallback(open: boolean) {
@@ -48,7 +49,7 @@ export class DialogHook {
     }, [open, setDialog]);
   }
 
-  useRolePageDialogsCallback(key: 'update' | 'delete' | 'users', id: number, open: boolean) {
+  useRolePageDialogsCallback(key: 'update' | 'delete' | 'users', row: RoleAdminRowResponse, open: boolean) {
     const setDialog = dialogStore.useSetState();
 
     return useCallback(() => {
@@ -56,10 +57,10 @@ export class DialogHook {
         ...prev,
         role: {
           ...prev.role,
-          [key]: { id: open === true ? id : 0, open },
+          [key]: { open, row: open === true ? row : DIALOG_DEFAULT_ROLE_ROW },
         },
       }));
-    }, [key, id, open, setDialog]);
+    }, [key, row, open, setDialog]);
   }
 }
 

@@ -1,3 +1,5 @@
+import { RoleAdminRowResponse } from '@service';
+
 export type DialogStoreProps = {
   mypage: {
     updatePassword: { open: boolean };
@@ -7,8 +9,8 @@ export type DialogStoreProps = {
   };
   role: {
     create: { open: boolean };
-    users: { id: number; open: boolean };
-    update: { id: number; open: boolean };
-    delete: { id: number; open: boolean };
+    users: { open: boolean; row: RoleAdminRowResponse };
+    update: { open: boolean; row: RoleAdminRowResponse };
+    delete: { open: boolean; row: RoleAdminRowResponse };
   };
 };

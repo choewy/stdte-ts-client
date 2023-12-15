@@ -365,7 +365,8 @@ export class CredentialsHook {
 
   useUpdateCredentialsStatusByAdminCallback(id: number, property: CredentialsChangeStatusComponentProperty) {
     const getCredentialsStats = this.useGetCredentialsStatsCallback();
-    const getCredentialsList = this.useGetCredentialsListCallback();
+
+    const setAdminCredentials = adminCredentialsStore.useSetState();
 
     return useCallback(async () => {
       const res = await credentialsHttpService.updateStatusByAdmin(id, { status: property.status.next });
@@ -376,9 +377,16 @@ export class CredentialsHook {
 
       SnackEvent.dispatchBySuccess(property.message);
 
+      setAdminCredentials((prev) => ({
+        ...prev,
+        list: {
+          ...prev.list,
+          rows: prev.list.rows.filter((row) => row.id !== id),
+        },
+      }));
+
       await getCredentialsStats();
-      await getCredentialsList();
-    }, [id, property, getCredentialsStats, getCredentialsList]);
+    }, [id, property, setAdminCredentials, getCredentialsStats]);
   }
 
   useUpdatePasswordByAdminState() {

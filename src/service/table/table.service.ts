@@ -3,16 +3,28 @@ import { SxProps } from '@mui/material';
 import { TableWidthOptions } from './types';
 
 export class TableService {
+  private getLengthByBytes(str: string) {
+    let length = 0;
+
+    for (let i = 0; i < str.length; i++) {
+      const c = str.charCodeAt(i);
+
+      if (c > 128) {
+        length += 3;
+      } else {
+        length += 1;
+      }
+    }
+
+    return length;
+  }
+
   getWidthByTextLength(value: string | number | boolean, options: TableWidthOptions, sxProps: SxProps = {}): SxProps {
     let width = 0;
 
-    const length = String(value).length;
+    const length = this.getLengthByBytes(String(value));
 
-    if (length < 6) {
-      width = length * 30;
-    } else {
-      width = length * 10;
-    }
+    width = 10 * length;
 
     return {
       width: options.width === true ? width : undefined,
@@ -26,13 +38,9 @@ export class TableService {
     let width = 0;
 
     for (const buttonText of buttonTexts) {
-      const length = buttonText.length;
+      const length = this.getLengthByBytes(buttonText);
 
-      if (length < 4) {
-        width += 20 * length;
-      } else {
-        width += 30 * length;
-      }
+      width += 10 * length;
     }
 
     return {

@@ -5,6 +5,7 @@ import {
   RoleAdminCreateBody,
   RoleAdminRowResponse,
   RoleAdminUpdateBody,
+  RoleAdminUsersBody,
   RoleException,
   SnackEvent,
   roleHttpService,
@@ -129,7 +130,7 @@ export class RoleHook {
     }, [body, setAdminRole]);
   }
 
-  useRoleUpdateState(role?: RoleAdminRowResponse | null): [RoleAdminUpdateBody, SetterOrUpdater<RoleAdminUpdateBody>] {
+  useRoleUpdateState(role: RoleAdminRowResponse): [RoleAdminUpdateBody, SetterOrUpdater<RoleAdminUpdateBody>] {
     const [body, setBody] = useState<RoleAdminUpdateBody>({
       name: '',
       rolePolicy: {
@@ -146,10 +147,6 @@ export class RoleHook {
     });
 
     useEffect(() => {
-      if (role == null) {
-        return;
-      }
-
       setBody({
         name: role.name,
         rolePolicy: role.rolePolicy,
@@ -183,6 +180,16 @@ export class RoleHook {
 
       return true;
     }, [id, body, setAdminRole]);
+  }
+
+  useRoleUsersState(role: RoleAdminRowResponse): [RoleAdminUsersBody, SetterOrUpdater<RoleAdminUsersBody>] {
+    const [body, setBody] = useState<RoleAdminUsersBody>([]);
+
+    useEffect(() => {
+      setBody(role.users);
+    }, [role, setBody]);
+
+    return [body, setBody];
   }
 
   useDeleteRoleCallback(id: number) {

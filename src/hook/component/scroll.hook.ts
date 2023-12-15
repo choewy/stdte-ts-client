@@ -1,16 +1,10 @@
 import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
+import { SetterOrUpdater } from 'recoil';
 
 export class ScrollHook {
-  useDivScrollRefObject(): {
-    ref: RefObject<HTMLDivElement>;
-    end: boolean;
-  } {
-    const ref = useRef<HTMLDivElement | null>(null);
-    const stop = useRef<boolean>(false);
-
-    const [end, setEnd] = useState<boolean>(false);
-
-    const onScroll = useCallback(() => {
+  useOnScroll(ref: RefObject<HTMLDivElement>, setEnd: SetterOrUpdater<boolean>) {
+    return useCallback(() => {
+      console.log('scroll');
       if (ref.current == null) {
         return;
       }
@@ -20,7 +14,7 @@ export class ScrollHook {
       const scrollOffset = scrollHeight - clientHeight - 5;
       const scrollTop = ref.current.scrollTop;
 
-      if (stop.current === true) {
+      if (ref.current.dataset.mode === 'stop') {
         return;
       }
 
@@ -28,39 +22,48 @@ export class ScrollHook {
         return;
       }
 
-      stop.current = true;
-      setEnd(stop.current);
-    }, [ref, top, stop, setEnd]);
+      ref.current.dataset.mode = 'stop';
+      setEnd(true);
+    }, [ref, stop, setEnd]);
+  }
+
+  useDivScrollRefObject(): {
+    ref: RefObject<HTMLDivElement>;
+    end: boolean;
+    setEnd: SetterOrUpdater<boolean>;
+  } {
+    const ref = useRef<HTMLDivElement | null>(null);
+    const [end, setEnd] = useState<boolean>(false);
 
     useEffect(() => {
       if (ref.current == null) {
         return;
       }
 
-      ref.current.addEventListener('scroll', onScroll);
-
-      return () => {
-        if (ref.current == null) {
-          return;
-        }
-
-        ref.current.removeEventListener('scroll', onScroll);
-      };
-    }, [ref, onScroll]);
+      ref.current.dataset.mode = 'continue';
+    }, [ref]);
 
     useEffect(() => {
+      if (ref.current == null) {
+        return;
+      }
+
       if (end === false) {
         return;
       }
 
       const timeout = setTimeout(() => {
         clearTimeout(timeout);
-        stop.current = false;
-        setEnd(stop.current);
+
+        if (ref.current) {
+          ref.current.dataset.mode = 'continue';
+        }
+
+        setEnd(false);
       }, 500);
     }, [stop, end, setEnd]);
 
-    return { ref, end };
+    return { ref, end, setEnd };
   }
 }
 

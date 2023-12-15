@@ -18,8 +18,8 @@ export const RolePageCreateDialog: FunctionComponent = () => {
       open={dialog.role.create.open}
       onClose={onClose}
       title="역할 생성"
-      contents={<RolePageCreateDialogContent body={body} setBody={setBody} />}
-      actions={<RolePageCreateDialogAction body={body} />}
+      contents={<RolePageCreateDialogContent {...{ body, setBody }} />}
+      actions={<RolePageCreateDialogAction {...{ body, onClose }} />}
     />
   );
 };

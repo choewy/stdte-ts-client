@@ -17,7 +17,7 @@ export const RolePageDeleteDialog: FunctionComponent = () => {
       onClose={onClose}
       title="역할을 삭제하시겠습니까?"
       contents={<RolePageDeleteDialogContent />}
-      actions={<RolePageDeleteDialogAction id={dialog.role.delete.id} />}
+      actions={<RolePageDeleteDialogAction {...{ id: dialog.role.delete.id, onClose }} />}
     />
   );
 };

@@ -59,7 +59,11 @@ export class RoleHook {
   useRoleScrollEnd(scrollEnd: boolean) {
     const setAdminRole = adminRoleStore.useSetState();
 
-    const setQuerySkip = useCallback(() => {
+    useEffect(() => {
+      if (scrollEnd === false) {
+        return;
+      }
+
       setAdminRole((prev) => {
         const skip = prev.query.skip + prev.query.take;
 
@@ -69,15 +73,7 @@ export class RoleHook {
 
         return prev;
       });
-    }, [setAdminRole]);
-
-    useEffect(() => {
-      if (scrollEnd === false) {
-        return;
-      }
-
-      setQuerySkip();
-    }, [scrollEnd, setQuerySkip]);
+    }, [scrollEnd, setAdminRole]);
   }
 
   useRoleCreateState() {
@@ -174,7 +170,15 @@ export class RoleHook {
         list: {
           ...prev.list,
           total: prev.list.total + 1,
-          rows: prev.list.rows.map((row) => (row.id === id ? { ...row, ...body } : row)),
+          rows: prev.list.rows.map((row) =>
+            row.id === id
+              ? {
+                  ...row,
+                  name: body.name,
+                  rolePolicy: body.rolePolicy,
+                }
+              : row,
+          ),
         },
       }));
 
@@ -190,6 +194,41 @@ export class RoleHook {
     }, [role, setBody]);
 
     return [body, setBody];
+  }
+
+  useRoleUsersUpdateCallback(id: number, body: RoleAdminUsersBody) {
+    const setAdminRole = adminRoleStore.useSetState();
+
+    return useCallback(async () => {
+      const res = await roleHttpService.updateRole(id, {
+        users: body.map(({ id }) => id),
+      });
+
+      if (res.ok === false) {
+        SnackEvent.dispatchByException(new RoleException(res.exception));
+        return false;
+      }
+
+      SnackEvent.dispatchBySuccess('역할이 수정되었습니다.');
+
+      setAdminRole((prev) => ({
+        ...prev,
+        list: {
+          ...prev.list,
+          total: prev.list.total + 1,
+          rows: prev.list.rows.map((row) =>
+            row.id === id
+              ? {
+                  ...row,
+                  users: body,
+                }
+              : row,
+          ),
+        },
+      }));
+
+      return true;
+    }, [id, body, setAdminRole]);
   }
 
   useDeleteRoleCallback(id: number) {

@@ -21,7 +21,7 @@ export class RoleHttpService extends HttpService {
     return this.post<{ id: number }>(this.url(), body, { delay: 250 });
   }
 
-  async updateRole(id: number, body: RoleAdminUpdateBody) {
+  async updateRole(id: number, body: Partial<RoleAdminUpdateBody>) {
     return this.patch<{ id: number }>(this.url(id), body, { delay: 250 });
   }
 

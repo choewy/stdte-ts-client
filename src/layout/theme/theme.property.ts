@@ -11,6 +11,7 @@ export class ThemeProperty implements ThemeOptions {
       : { primary: { main: color } };
 
     this.typography = { fontSize: 13 };
+
     this.components = {
       MuiFormControl: {
         defaultProps: {
@@ -67,6 +68,11 @@ export class ThemeProperty implements ThemeOptions {
       MuiDialogActions: {
         defaultProps: {
           sx: { borderTop: 0.5, borderColor: 'GrayText' },
+        },
+      },
+      MuiLink: {
+        defaultProps: {
+          sx: { fontSize: 13, cursor: 'pointer' },
         },
       },
     };

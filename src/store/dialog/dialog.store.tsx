@@ -2,6 +2,8 @@ import { RecoilStore } from '@core';
 
 import { DialogStoreProps } from './types';
 
+import { DIALOG_DEFAULT_ROLE_ROW } from './constants';
+
 export class DialogStore extends RecoilStore<DialogStoreProps> {
   constructor() {
     super(DialogStore.name, {
@@ -9,13 +11,25 @@ export class DialogStore extends RecoilStore<DialogStoreProps> {
         updatePassword: { open: false },
       },
       credentials: {
-        updatePassword: { id: 0, open: false },
+        updatePassword: {
+          id: 0,
+          open: false,
+        },
       },
       role: {
         create: { open: false },
-        users: { id: 0, open: false },
-        update: { id: 0, open: false },
-        delete: { id: 0, open: false },
+        users: {
+          open: false,
+          row: DIALOG_DEFAULT_ROLE_ROW,
+        },
+        update: {
+          open: false,
+          row: DIALOG_DEFAULT_ROLE_ROW,
+        },
+        delete: {
+          open: false,
+          row: DIALOG_DEFAULT_ROLE_ROW,
+        },
       },
     });
   }

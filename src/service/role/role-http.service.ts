@@ -1,6 +1,12 @@
 import { HttpService } from '@core';
 
-import { RoleAdminCreateBody, RoleAdminListQuery, RoleAdminListResponse, RoleAdminRowResponse } from './types';
+import {
+  RoleAdminCreateBody,
+  RoleAdminListQuery,
+  RoleAdminListResponse,
+  RoleAdminRowResponse,
+  RoleAdminUpdateBody,
+} from './types';
 
 export class RoleHttpService extends HttpService {
   async getListByAdmin(query: RoleAdminListQuery) {
@@ -13,6 +19,10 @@ export class RoleHttpService extends HttpService {
 
   async createRole(body: RoleAdminCreateBody) {
     return this.post<{ id: number }>(this.url(), body, { delay: 250 });
+  }
+
+  async updateRole(id: number, body: RoleAdminUpdateBody) {
+    return this.patch<{ id: number }>(this.url(id), body, { delay: 250 });
   }
 
   async deleteRole(id: number) {

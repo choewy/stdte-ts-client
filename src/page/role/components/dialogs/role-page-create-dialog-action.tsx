@@ -10,7 +10,6 @@ export const RolePageCreateDialogAction: FunctionComponent<{ body: RoleAdminCrea
   onClose,
 }) => {
   const createRole = roleHook.useRoleCreateCallback(body);
-
   const onCreate = useCallback(async () => {
     const ok = await createRole();
 

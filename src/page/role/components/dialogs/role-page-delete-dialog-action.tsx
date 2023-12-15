@@ -2,11 +2,14 @@ import { FunctionComponent, useCallback } from 'react';
 
 import { Box, Button } from '@mui/material';
 
+import { RoleAdminRowResponse } from '@service';
 import { roleHook } from '@hook';
 
-export const RolePageDeleteDialogAction: FunctionComponent<{ id: number; onClose: () => void }> = ({ id, onClose }) => {
-  const deleteRole = roleHook.useDeleteRoleCallback(id);
-
+export const RolePageDeleteDialogAction: FunctionComponent<{ row: RoleAdminRowResponse; onClose: () => void }> = ({
+  row,
+  onClose,
+}) => {
+  const deleteRole = roleHook.useDeleteRoleCallback(row.id);
   const onClickDelete = useCallback(async () => {
     await deleteRole();
     onClose();

@@ -45,8 +45,8 @@ export const RolePageTableBodyRow: FunctionComponent<{ row: RoleAdminRowResponse
         sx={tableService.getWidthByButtonTextLength(['수정', '삭제'], { width: true, minWidth: true })}
       >
         <Box sx={{ gap: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <RolePageTableBodyRowUpdateButton {...{ id: row.id }} />
-          <RolePageTableBodyRowDeleteButton {...{ id: row.id }} />
+          <RolePageTableBodyRowUpdateButton {...{ row }} />
+          <RolePageTableBodyRowDeleteButton {...{ row }} />
         </Box>
       </TableCell>
     </TableRow>

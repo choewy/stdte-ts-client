@@ -3,9 +3,10 @@ import { FunctionComponent } from 'react';
 import { Button } from '@mui/material';
 
 import { dialogHook } from '@hook';
+import { RoleAdminRowResponse } from '@service';
 
-export const RolePageTableBodyRowDeleteButton: FunctionComponent<{ id: number }> = ({ id }) => {
-  const onClick = dialogHook.useRolePageDialogsCallback('delete', id, true);
+export const RolePageTableBodyRowDeleteButton: FunctionComponent<{ row: RoleAdminRowResponse }> = ({ row }) => {
+  const onClick = dialogHook.useRolePageDialogsCallback('delete', row, true);
 
   return (
     <Button

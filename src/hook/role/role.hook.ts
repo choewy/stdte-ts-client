@@ -129,7 +129,7 @@ export class RoleHook {
     }, [body, setAdminRole]);
   }
 
-  useRoleUpdateState(role: RoleAdminRowResponse): [RoleAdminUpdateBody, SetterOrUpdater<RoleAdminUpdateBody>] {
+  useRoleUpdateState(role?: RoleAdminRowResponse | null): [RoleAdminUpdateBody, SetterOrUpdater<RoleAdminUpdateBody>] {
     const [body, setBody] = useState<RoleAdminUpdateBody>({
       name: '',
       rolePolicy: {
@@ -146,6 +146,10 @@ export class RoleHook {
     });
 
     useEffect(() => {
+      if (role == null) {
+        return;
+      }
+
       setBody({
         name: role.name,
         rolePolicy: role.rolePolicy,
@@ -153,6 +157,32 @@ export class RoleHook {
     }, [role, setBody]);
 
     return [body, setBody];
+  }
+
+  useRoleUpdateCallback(id: number, body: RoleAdminUpdateBody) {
+    const setAdminRole = adminRoleStore.useSetState();
+
+    return useCallback(async () => {
+      const res = await roleHttpService.updateRole(id, body);
+
+      if (res.ok === false) {
+        SnackEvent.dispatchByException(new RoleException(res.exception));
+        return false;
+      }
+
+      SnackEvent.dispatchBySuccess('역할이 수정되었습니다.');
+
+      setAdminRole((prev) => ({
+        ...prev,
+        list: {
+          ...prev.list,
+          total: prev.list.total + 1,
+          rows: prev.list.rows.map((row) => (row.id === id ? { ...row, ...body } : row)),
+        },
+      }));
+
+      return true;
+    }, [id, body, setAdminRole]);
   }
 
   useDeleteRoleCallback(id: number) {

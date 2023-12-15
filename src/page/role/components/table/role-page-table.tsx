@@ -11,6 +11,7 @@ import { RolePageTableBody } from './role-page-table-body';
 export const RolePageTable: FunctionComponent<{ maxWidth: number }> = ({ maxWidth }) => {
   const size = layoutStore.useValue().size;
   const scroll = scrollHook.useDivScrollRefObject();
+  const onScroll = scrollHook.useOnScroll(scroll.ref, scroll.setEnd);
 
   roleHook.useRoleScrollEnd(scroll.end);
 
@@ -19,6 +20,7 @@ export const RolePageTable: FunctionComponent<{ maxWidth: number }> = ({ maxWidt
       ref={scroll.ref}
       component={Paper}
       elevation={2}
+      onScroll={onScroll}
       sx={{
         height: size.innerHeight - 150,
         overflow: 'scroll',

@@ -1,4 +1,4 @@
-import { regExpService } from '../regexp';
+import { regExpService } from '../common';
 import { UserUpdateBody } from './types';
 
 export class UserValidator {

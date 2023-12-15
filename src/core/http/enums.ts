@@ -2,7 +2,6 @@ export enum HttpException {
   InternalServerException = 'InternalServerException',
   InvalidCredentialsException = 'InvalidCredentialsException',
   IncorrectPasswordException = 'IncorrectPasswordException',
-  CannotAccessException = 'CannotAccessException',
   ValidationException = 'ValidationException',
   AlreadyExistUserEmailException = 'AlreadyExistUserEmailException',
   AlreadyExistRoleException = 'AlreadyExistRoleException',
@@ -21,8 +20,14 @@ export enum HttpException {
   NotFoundProjectException = 'NotFoundProjectException',
   NotFoundTimeRecordException = 'NotFoundTimeRecordException',
   NotFoundTimeMemoException = 'NotFoundTimeMemoException',
+  CannotAccessException = 'CannotAccessException',
   CannotUpdateTimeRecordException = 'CannotUpdateTimeRecordException',
   CannotDeleteTimeRecordException = 'CannotDeleteTimeRecordException',
   CannotUpdateTimeMemoException = 'CannotUpdateTimeMemoException',
   CannotDeleteTimeMemoException = 'CannotDeleteTimeMemoException',
+}
+
+export enum HttpErrorMessage {
+  CannotAccess = '접근 권한이 없습니다.',
+  InvalidCredentials = '인증에 실패하였습니다.',
 }

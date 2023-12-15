@@ -8,6 +8,5 @@ export enum CredentialsErrorMessage {
   AlreadyExistUserEmail = '이미 등록된 이메일 계정입니다.',
   InvalidEmail = '이메일을 확인하세요.',
   IncorrectPassword = '비밀번호가 일치하지 않습니다.',
-  InvalidCredentials = '인증에 실패하였습니다.',
   NotFoundUser = '사용자 계정을 찾을 수 없습니다.',
 }

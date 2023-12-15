@@ -11,6 +11,7 @@ import { CredentialsPageTableBody } from './credentials-page-table-body';
 export const CredentialsPageTable: FunctionComponent<{ maxWidth: number }> = ({ maxWidth }) => {
   const size = layoutStore.useValue().size;
   const scroll = scrollHook.useDivScrollRefObject();
+  const onScroll = scrollHook.useOnScroll(scroll.ref, scroll.setEnd);
 
   credentialsHook.useCredentialsScrollEnd(scroll.end);
 
@@ -19,6 +20,7 @@ export const CredentialsPageTable: FunctionComponent<{ maxWidth: number }> = ({ 
       ref={scroll.ref}
       component={Paper}
       elevation={2}
+      onScroll={onScroll}
       sx={{
         height: size.innerHeight - 150,
         overflow: 'scroll',

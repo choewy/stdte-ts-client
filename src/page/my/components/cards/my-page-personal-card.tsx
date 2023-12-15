@@ -20,7 +20,7 @@ export const MyPagePersinalCard: FunctionComponent = () => {
   const onChangeEnteringDay = textFieldHook.useOnChangeObjectStrProperty('enteringDay', setBody);
   const onChangeResignationDay = textFieldHook.useOnChangeObjectStrProperty('resignationDay', setBody);
 
-  const disabled = buttonHook.useDisabled(profile, body);
+  const disabled = buttonHook.useDisabledByObject(profile, body);
   const onClick = profileHook.useUpdatePersonal(body);
 
   return (

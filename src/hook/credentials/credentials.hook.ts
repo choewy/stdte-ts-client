@@ -319,7 +319,11 @@ export class CredentialsHook {
   useCredentialsScrollEnd(scrollEnd: boolean) {
     const setAdminCredentials = adminCredentialsStore.useSetState();
 
-    const setQuerySkip = useCallback(() => {
+    useEffect(() => {
+      if (scrollEnd === false) {
+        return;
+      }
+
       setAdminCredentials((prev) => {
         const skip = prev.query.skip + prev.query.take;
 
@@ -329,15 +333,7 @@ export class CredentialsHook {
 
         return prev;
       });
-    }, [setAdminCredentials]);
-
-    useEffect(() => {
-      if (scrollEnd === false) {
-        return;
-      }
-
-      setQuerySkip();
-    }, [scrollEnd, setQuerySkip]);
+    }, [scrollEnd, setAdminCredentials]);
   }
 
   useMountCredentialsPage() {

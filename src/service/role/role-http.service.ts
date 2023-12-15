@@ -6,6 +6,7 @@ import {
   RoleAdminListResponse,
   RoleAdminRowResponse,
   RoleAdminUpdateBody,
+  RoleAdminUpdateUsersBody,
 } from './types';
 
 export class RoleHttpService extends HttpService {
@@ -13,16 +14,16 @@ export class RoleHttpService extends HttpService {
     return this.get<RoleAdminListResponse>(this.url(), { params: query, delay: 500 });
   }
 
-  async getRole(id: number) {
-    return this.get<RoleAdminRowResponse>(this.url(id));
-  }
-
   async createRole(body: RoleAdminCreateBody) {
-    return this.post<{ id: number }>(this.url(), body, { delay: 250 });
+    return this.post<RoleAdminRowResponse>(this.url(), body, { delay: 250 });
   }
 
-  async updateRole(id: number, body: RoleAdminUpdateBody) {
-    return this.patch<{ id: number }>(this.url(id), body, { delay: 250 });
+  async updateRole(id: number, body: Partial<RoleAdminUpdateBody>) {
+    return this.patch<RoleAdminRowResponse>(this.url(id), body, { delay: 250 });
+  }
+
+  async updateRoleUsers(id: number, body: Partial<RoleAdminUpdateUsersBody>) {
+    return this.put<RoleAdminRowResponse[]>(this.url(id, 'users'), body, { delay: 250 });
   }
 
   async deleteRole(id: number) {

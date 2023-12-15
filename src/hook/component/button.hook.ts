@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 export class ButtonHook {
-  private checkSame(origin: object, value: object) {
+  private checkSameObject(origin: object, value: object) {
     let disabled = true;
 
     const keys = Object.keys(value) as Array<keyof object>;
@@ -16,27 +16,27 @@ export class ButtonHook {
     return disabled;
   }
 
-  useDisabled(origin: object, data: object) {
+  useDisabledByObject(origin: object, value: object) {
     const [disabled, setDisabled] = useState<boolean>(true);
 
     useEffect(() => {
-      const keys = Object.keys(data) as Array<keyof object>;
+      const keys = Object.keys(value) as Array<keyof object>;
 
       let disabled = true;
 
       for (const key of keys) {
         if (
           typeof origin[key] === 'object' &&
-          typeof data[key] === 'object' &&
-          typeof origin[key] === typeof data[key]
+          typeof value[key] === 'object' &&
+          typeof origin[key] === typeof value[key]
         ) {
-          disabled = this.checkSame(origin[key], data[key]);
+          disabled = this.checkSameObject(origin[key], value[key]);
 
           if (disabled === false) {
             break;
           }
         } else {
-          disabled = data[key] === origin[key];
+          disabled = value[key] === origin[key];
 
           if (disabled === false) {
             break;
@@ -45,7 +45,30 @@ export class ButtonHook {
       }
 
       setDisabled(disabled);
-    }, [origin, data, setDisabled]);
+    }, [origin, value, setDisabled]);
+
+    return disabled;
+  }
+
+  useDiabledByArray<T>(origins: T[], values: T[]) {
+    const [disabled, setDisabled] = useState<boolean>(true);
+
+    useEffect(() => {
+      if (origins.length !== values.length) {
+        return setDisabled(false);
+      }
+
+      let disabled = true;
+
+      for (const origin of origins) {
+        if (values.includes(origin) === false) {
+          disabled = false;
+          break;
+        }
+      }
+
+      setDisabled(disabled);
+    }, [origins, values, setDisabled]);
 
     return disabled;
   }

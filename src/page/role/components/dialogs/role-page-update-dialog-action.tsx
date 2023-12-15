@@ -10,7 +10,7 @@ export const RolePageUpdateDialogAction: FunctionComponent<{
   body: RoleAdminUpdateBody;
   onClose: () => void;
 }> = ({ row, body, onClose }) => {
-  const disabled = buttonHook.useDisabled(row, body);
+  const disabled = buttonHook.useDisabledByObject(row, body);
   const updateRole = roleHook.useRoleUpdateCallback(row.id, body);
   const onClickUpdate = useCallback(async () => {
     const ok = await updateRole();

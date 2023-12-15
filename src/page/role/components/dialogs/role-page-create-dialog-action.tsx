@@ -2,25 +2,26 @@ import { FunctionComponent, useCallback } from 'react';
 
 import { Box, Button } from '@mui/material';
 
-import { dialogHook, roleHook } from '@hook';
+import { roleHook } from '@hook';
 import { RoleAdminCreateBody } from '@service';
 
-export const RolePageCreateDialogAction: FunctionComponent<{ body: RoleAdminCreateBody }> = ({ body }) => {
+export const RolePageCreateDialogAction: FunctionComponent<{ body: RoleAdminCreateBody; onClose: () => void }> = ({
+  body,
+  onClose,
+}) => {
   const createRole = roleHook.useRoleCreateCallback(body);
-
-  const onCancel = dialogHook.useRolePageCreateDialogCallback(false);
   const onCreate = useCallback(async () => {
     const ok = await createRole();
 
     if (ok) {
-      onCancel();
+      onClose();
     }
-  }, [createRole, onCancel]);
+  }, [createRole, onClose]);
 
   return (
     <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
       <Button {...{ children: '생성', variant: 'text', onClick: onCreate }} />
-      <Button {...{ children: '취소', variant: 'text', onClick: onCancel }} />
+      <Button {...{ children: '취소', variant: 'text', onClick: onClose }} />
     </Box>
   );
 };

@@ -9,7 +9,9 @@ import { RolePageDeleteDialogAction } from './role-page-delete-dialog-action';
 
 export const RolePageDeleteDialog: FunctionComponent = () => {
   const dialog = dialogStore.useValue();
-  const onClose = dialogHook.useRolePageDialogsCallback('delete', dialog.role.delete.id, false);
+  const row = dialog.role.update.row;
+
+  const onClose = dialogHook.useRolePageDialogsCallback('delete', row, false);
 
   return (
     <DialogBoxy
@@ -17,7 +19,7 @@ export const RolePageDeleteDialog: FunctionComponent = () => {
       onClose={onClose}
       title="역할을 삭제하시겠습니까?"
       contents={<RolePageDeleteDialogContent />}
-      actions={<RolePageDeleteDialogAction id={dialog.role.delete.id} />}
+      actions={<RolePageDeleteDialogAction {...{ row, onClose }} />}
     />
   );
 };

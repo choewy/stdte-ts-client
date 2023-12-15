@@ -21,8 +21,10 @@ export const CredentialsPageUpdatePasswordDialog: FunctionComponent = () => {
       open={dialog.credentials.updatePassword.open}
       title="비밀번호 변경"
       onClose={onClose}
-      contents={<CredentialsPageUpdatePasswordDialogContent body={body} setBody={setBody} />}
-      actions={<CredentialsPageUpdatePasswordDialogAction id={dialog.credentials.updatePassword.id} body={body} />}
+      contents={<CredentialsPageUpdatePasswordDialogContent {...{ body, setBody }} />}
+      actions={
+        <CredentialsPageUpdatePasswordDialogAction {...{ id: dialog.credentials.updatePassword.id, body, onClose }} />
+      }
     />
   );
 };

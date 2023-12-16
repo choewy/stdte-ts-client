@@ -6,7 +6,7 @@ import { CredentialsStatus } from '@common';
 import { adminCredentialsStore } from '@store';
 import { tabHook } from '@hook';
 
-export const CredentialsPageTabs: FunctionComponent<{ maxWidth: number }> = ({ maxWidth }) => {
+export const CredentialsPageTabs: FunctionComponent = () => {
   const initQuery = adminCredentialsStore.useInit().query;
 
   const [{ stats, query }, setAdminCredentials] = adminCredentialsStore.useState();
@@ -23,7 +23,6 @@ export const CredentialsPageTabs: FunctionComponent<{ maxWidth: number }> = ({ m
   return (
     <Box
       sx={{
-        maxWidth,
         display: 'flex',
         width: '100%',
         justifyContent: 'space-between',
@@ -44,7 +43,7 @@ export const CredentialsPageTabs: FunctionComponent<{ maxWidth: number }> = ({ m
           alignItems: 'flex-end',
         }}
       >
-        <Button {...{ children: '내보내기', size: 'small', sx: { width: 64 } }} />
+        <Button {...{ children: '다운로드', size: 'small', sx: { width: 64 } }} />
       </ButtonGroup>
     </Box>
   );

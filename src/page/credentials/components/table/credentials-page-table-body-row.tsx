@@ -22,21 +22,35 @@ export const CredentialsPageTableBodyRow: FunctionComponent<{ row: CredentialsAd
       <TableCell align="center" sx={sizeService.getWidthByTextLength(index + 1, { width: true, minWidth: true })}>
         {index + 1}
       </TableCell>
-      <TableCell align="center" sx={sizeService.getWidthByTextLength(row.email, { minWidth: true }, { width: '100%' })}>
+      <TableCell
+        align="center"
+        sx={sizeService.getWidthByTextLength(row.email, { minWidth: true }, { width: '100%', textWrap: 'nowrap' })}
+      >
         {row.email}
       </TableCell>
-      <TableCell align="center" sx={sizeService.getWidthByTextLength(row.name, { width: true, minWidth: true })}>
+      <TableCell
+        align="center"
+        sx={sizeService.getWidthByTextLength(row.name, { width: true, minWidth: true }, { textWrap: 'nowrap' })}
+      >
         {row.name}
       </TableCell>
       <TableCell
         align="center"
-        sx={sizeService.getWidthByTextLength(updatedAt, { width: true, minWidth: true, maxWidth: true })}
+        sx={sizeService.getWidthByTextLength(
+          updatedAt,
+          { width: true, minWidth: true, maxWidth: true },
+          { textWrap: 'nowrap' },
+        )}
       >
         {createdAt}
       </TableCell>
       <TableCell
         align="center"
-        sx={sizeService.getWidthByTextLength(createdAt, { width: true, minWidth: true, maxWidth: true })}
+        sx={sizeService.getWidthByTextLength(
+          createdAt,
+          { width: true, minWidth: true, maxWidth: true },
+          { textWrap: 'nowrap' },
+        )}
       >
         {updatedAt}
       </TableCell>

@@ -17,7 +17,11 @@ export const CredentialsPageTableBodyRowChangePasswordButton: FunctionComponent<
       {...{
         children: text,
         onClick,
-        sx: sizeService.getWidthByTextLength(text, { width: true, minWidth: true }, { cursor: 'pointer' }),
+        sx: sizeService.getWidthByTextLength(
+          text,
+          { width: true, minWidth: true },
+          { cursor: 'pointer', textWrap: 'nowrap' },
+        ),
       }}
     />
   );

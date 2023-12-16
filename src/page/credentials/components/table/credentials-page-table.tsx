@@ -8,7 +8,7 @@ import { credentialsHook, scrollHook } from '@hook';
 import { CredentialsPageTableHead } from './credentials-page-table-head';
 import { CredentialsPageTableBody } from './credentials-page-table-body';
 
-export const CredentialsPageTable: FunctionComponent<{ maxWidth: number }> = ({ maxWidth }) => {
+export const CredentialsPageTable: FunctionComponent = () => {
   const size = layoutStore.useValue().size;
   const scroll = scrollHook.useDivScrollRefObject();
   const onScroll = scrollHook.useOnScroll(scroll.ref, scroll.setEnd);
@@ -24,7 +24,6 @@ export const CredentialsPageTable: FunctionComponent<{ maxWidth: number }> = ({ 
       sx={{
         height: size.innerHeight - 150,
         overflow: 'scroll',
-        maxWidth,
       }}
     >
       <Table stickyHeader>

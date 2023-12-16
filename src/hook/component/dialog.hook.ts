@@ -76,6 +76,20 @@ export class DialogHook {
       }));
     }, [key, row, open, setDialog]);
   }
+
+  useBusinessCategoryPageCreateDialogCallback(open: boolean) {
+    const setDialog = dialogStore.useSetState();
+
+    return useCallback(() => {
+      setDialog((prev) => ({
+        ...prev,
+        businessCategory: {
+          ...prev.businessCategory,
+          create: { open },
+        },
+      }));
+    }, [open, setDialog]);
+  }
 }
 
 export const dialogHook = new DialogHook();

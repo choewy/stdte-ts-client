@@ -6,6 +6,7 @@ import { AdminCredentialsStoreProps } from './types';
 export class AdminCredentialsStore extends RecoilStore<AdminCredentialsStoreProps> {
   constructor() {
     super(AdminCredentialsStore.name, {
+      load: true,
       stats: [],
       list: {
         total: 0,

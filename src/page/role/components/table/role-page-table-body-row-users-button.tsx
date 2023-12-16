@@ -1,27 +1,11 @@
 import { FunctionComponent } from 'react';
 
-import { Link } from '@mui/material';
-
 import { dialogHook } from '@hook';
-import { RoleAdminRowResponse, sizeService } from '@service';
+import { RoleAdminRowResponse } from '@service';
+import { TableCellButton } from '@component';
 
 export const RolePageTableBodyRowUsersButton: FunctionComponent<{ row: RoleAdminRowResponse }> = ({ row }) => {
-  const text = `${row.users.length}명`;
-
   const onClick = dialogHook.useRolePageDialogsCallback('users', row, true);
 
-  return (
-    <Link
-      {...{
-        children: text,
-        onClick,
-        sx: sizeService.getWidthByTextLength(
-          text,
-          { width: true, minWidth: true },
-          { cursor: 'pointer', textWrap: 'nowrap' },
-          56,
-        ),
-      }}
-    />
-  );
+  return <TableCellButton text={`${row.users.length}명`} onClick={onClick} />;
 };

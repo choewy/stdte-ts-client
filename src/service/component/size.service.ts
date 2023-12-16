@@ -29,7 +29,7 @@ export class SizeService {
 
     const length = this.getTextLengthByBytes(String(value));
 
-    width = 10 * length;
+    width = 9 * length;
 
     if (typeof min === 'number' && width < min) {
       width = min;

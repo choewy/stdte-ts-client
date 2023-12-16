@@ -22,7 +22,7 @@ export const RolePageUpdateDialogAction: FunctionComponent<{
 
   return (
     <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-      <Button {...{ children: '수정', variant: 'text', onClick: onClickUpdate, disabled }} />
+      <Button {...{ children: '저장', variant: 'text', onClick: onClickUpdate, disabled }} />
       <Button {...{ children: '취소', variant: 'text', onClick: onClose }} />
     </Box>
   );

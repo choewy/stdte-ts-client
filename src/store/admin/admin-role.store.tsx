@@ -5,6 +5,7 @@ import { AdminRoleStoreProps } from './types';
 export class AdminRoleStore extends RecoilStore<AdminRoleStoreProps> {
   constructor() {
     super(AdminRoleStore.name, {
+      load: true,
       list: {
         total: 0,
         rows: [],

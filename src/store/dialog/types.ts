@@ -1,4 +1,4 @@
-import { RoleAdminRowResponse } from '@service';
+import { RoleAdminRowResponse, UserRowResponse } from '@service';
 
 export type DialogStoreProps = {
   mypage: {
@@ -13,4 +13,5 @@ export type DialogStoreProps = {
     update: { open: boolean; row: RoleAdminRowResponse };
     delete: { open: boolean; row: RoleAdminRowResponse };
   };
+  user: { update: { open: boolean; row: UserRowResponse } };
 };

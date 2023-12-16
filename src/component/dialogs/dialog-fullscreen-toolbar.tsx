@@ -5,11 +5,7 @@ import { AppBar, IconButton, Toolbar, Typography } from '@mui/material';
 
 import { DialogFullScreenToolbarProps } from './types';
 
-export const DialogFullScreenToolbar: FunctionComponent<DialogFullScreenToolbarProps> = ({
-  title,
-  onClose,
-  actions,
-}) => {
+export const DialogFullScreenToolbar: FunctionComponent<DialogFullScreenToolbarProps> = ({ title, onClose }) => {
   return (
     <AppBar sx={{ position: 'relative' }}>
       <Toolbar>
@@ -19,7 +15,6 @@ export const DialogFullScreenToolbar: FunctionComponent<DialogFullScreenToolbarP
         <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
           {title ?? null}
         </Typography>
-        {actions ?? null}
       </Toolbar>
     </AppBar>
   );

@@ -19,4 +19,9 @@ export type DialogStoreProps = {
     update: { open: boolean; row: BusinessCategoryRowResponse };
     delete: { open: boolean; row: BusinessCategoryRowResponse };
   };
+  industryCategory: {
+    create: { open: boolean };
+    update: { open: boolean; row: BusinessCategoryRowResponse };
+    delete: { open: boolean; row: BusinessCategoryRowResponse };
+  };
 };

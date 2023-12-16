@@ -28,7 +28,6 @@ export const MyPagePersinalCard: FunctionComponent = () => {
       <FormControl {...{ sx: { flex: 1 } }}>
         <TextField
           {...{
-            type: 'text',
             label: '이름',
             value: body.name,
             onChange: onChangeName,
@@ -51,7 +50,6 @@ export const MyPagePersinalCard: FunctionComponent = () => {
         />
         <TextField
           {...{
-            type: 'text',
             label: '과학기술인등록번호',
             value: body.scienceNumber,
             placeholder: '00000000',

@@ -24,7 +24,7 @@ export const RolePageUsersDialogContentListItem: FunctionComponent<{
   }, [row, setBody]);
 
   return (
-    <ListItem sx={{ paddingY: 0 }}>
+    <ListItem sx={{ paddingY: 0.5 }}>
       <ListItemButton
         {...{
           onClick,
@@ -45,7 +45,7 @@ export const RolePageUsersDialogContentListItem: FunctionComponent<{
             }}
           />
         </ListItemIcon>
-        <ListItemText {...{ primary: row.name, sx: { fontSize: 13 } }} />
+        <ListItemText {...{ primary: row.name, primaryTypographyProps: { sx: { fontSize: 13 } } }} />
         {row.description && row.description !== name && <Chip label={row.description} />}
       </ListItemButton>
     </ListItem>

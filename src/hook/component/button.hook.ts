@@ -26,6 +26,8 @@ export class ButtonHook {
 
       for (const key of keys) {
         if (
+          origin[key] &&
+          value[key] &&
           typeof origin[key] === 'object' &&
           typeof value[key] === 'object' &&
           typeof origin[key] === typeof value[key]
@@ -50,7 +52,7 @@ export class ButtonHook {
     return disabled;
   }
 
-  useDiabledByArray<T>(origins: T[], values: T[]) {
+  useDisabledByArray<T>(origins: T[], values: T[]) {
     const [disabled, setDisabled] = useState<boolean>(true);
 
     useEffect(() => {

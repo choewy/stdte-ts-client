@@ -1,27 +1,19 @@
 import { FunctionComponent } from 'react';
 
-import { TableCell, TableHead, TableRow } from '@mui/material';
+import { TableHead, TableRow } from '@mui/material';
 
-import { sizeService } from '@service';
+import { TableValueCell } from '@component';
 
 export const RolePageTableHead: FunctionComponent = () => {
   return (
     <TableHead>
       <TableRow>
-        <TableCell align="center" />
-        <TableCell align="center" sx={sizeService.getWidthByTextLength('이름', { minWidth: true })}>
-          이름
-        </TableCell>
-        <TableCell align="center" sx={sizeService.getWidthByTextLength('인원', { minWidth: true })}>
-          인원
-        </TableCell>
-        <TableCell align="center" sx={sizeService.getWidthByTextLength('생성일시', { minWidth: true })}>
-          생성일시
-        </TableCell>
-        <TableCell align="center" sx={sizeService.getWidthByTextLength('수정일시', { minWidth: true })}>
-          수정일시
-        </TableCell>
-        <TableCell align="center" />
+        <TableValueCell />
+        <TableValueCell value="이름" />
+        <TableValueCell value="인원" />
+        <TableValueCell value="생성일시" />
+        <TableValueCell value="수정일시" />
+        <TableValueCell />
       </TableRow>
     </TableHead>
   );

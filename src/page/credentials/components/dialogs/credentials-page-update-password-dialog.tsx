@@ -18,8 +18,8 @@ export const CredentialsPageUpdatePasswordDialog: FunctionComponent = () => {
 
   return (
     <DialogBoxy
-      open={dialog.credentials.updatePassword.open}
       title="비밀번호 변경"
+      open={dialog.credentials.updatePassword.open}
       onClose={onClose}
       contents={<CredentialsPageUpdatePasswordDialogContent {...{ body, setBody }} />}
       actions={

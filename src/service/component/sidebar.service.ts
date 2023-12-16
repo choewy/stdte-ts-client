@@ -28,6 +28,7 @@ export class SidebarService {
       divider: true,
     },
     {
+      hidden: true,
       name: '개발자',
       type: SidebarMenuType.Collapse,
       scope: SidebarMenuScope.UserOnly,
@@ -82,6 +83,74 @@ export class SidebarService {
           path: PagePath.AdminRole,
           policy: { roleAndPolicy: RolePolicyLevel.Admin },
         },
+        {
+          name: '공통설정',
+          type: SidebarMenuType.Navigate,
+          scope: SidebarMenuScope.UserOnly,
+          Icon: History,
+          path: PagePath.AdminSetting,
+          policy: { setting: RolePolicyLevel.Admin },
+        },
+      ],
+    },
+    {
+      name: '구성원',
+      type: SidebarMenuType.Navigate,
+      scope: SidebarMenuScope.UserOnly,
+      Icon: History,
+      path: PagePath.User,
+      policy: { user: RolePolicyLevel.Read },
+      divider: true,
+    },
+    {
+      name: '사업관리',
+      type: SidebarMenuType.Collapse,
+      scope: SidebarMenuScope.UserOnly,
+      Icon: History,
+      prefix: PagePath.Project,
+      divider: true,
+      policy: {},
+      children: [
+        {
+          name: '사업목록',
+          type: SidebarMenuType.Navigate,
+          scope: SidebarMenuScope.UserOnly,
+          Icon: CalendarMonth,
+          path: PagePath.ProjectList,
+          policy: { project: RolePolicyLevel.Read },
+        },
+        {
+          name: '고객사',
+          type: SidebarMenuType.Navigate,
+          scope: SidebarMenuScope.UserOnly,
+          Icon: History,
+          path: PagePath.ProjectCustomer,
+          policy: { customer: RolePolicyLevel.Read },
+        },
+        {
+          name: '사업구분',
+          type: SidebarMenuType.Navigate,
+          scope: SidebarMenuScope.UserOnly,
+          Icon: CalendarMonth,
+          path: PagePath.ProjectBusinessCategory,
+          policy: { businessCategory: RolePolicyLevel.Read },
+        },
+        {
+          name: '산업분야',
+          type: SidebarMenuType.Navigate,
+          scope: SidebarMenuScope.UserOnly,
+          Icon: CalendarMonth,
+          path: PagePath.ProjectIndustryCategory,
+          policy: { industryCategory: RolePolicyLevel.Read },
+        },
+        {
+          name: '수행업무구분',
+          type: SidebarMenuType.Navigate,
+          scope: SidebarMenuScope.UserOnly,
+          Icon: CalendarMonth,
+          path: PagePath.ProjectTaskCategory,
+          policy: { taskCategory: RolePolicyLevel.Read },
+        },
       ],
     },
     {
@@ -117,6 +186,10 @@ export class SidebarService {
 
     const items = this.items.filter((item, i) => {
       item.id = [this.id, item.type, item.scope, i].join('-');
+
+      if (item.hidden === true) {
+        return false;
+      }
 
       if (item.scope === null) {
         return true;

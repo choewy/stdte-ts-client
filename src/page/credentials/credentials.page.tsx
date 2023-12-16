@@ -7,8 +7,6 @@ import { credentialsHook } from '@hook';
 import { CredentialsPageUpdatePasswordDialog, CredentialsPageTabs, CredentialsPageTable } from './components';
 
 export const CredentialsPage: FunctionComponent = () => {
-  const maxWidth = 1080;
-
   credentialsHook.useMountCredentialsPage();
   credentialsHook.useUnmountCredentialsPage();
 
@@ -16,6 +14,7 @@ export const CredentialsPage: FunctionComponent = () => {
     <Box
       sx={{
         mt: 2,
+        paddingX: 3,
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
@@ -23,8 +22,8 @@ export const CredentialsPage: FunctionComponent = () => {
       }}
     >
       <CredentialsPageUpdatePasswordDialog />
-      <CredentialsPageTabs {...{ maxWidth }} />
-      <CredentialsPageTable {...{ maxWidth }} />
+      <CredentialsPageTabs />
+      <CredentialsPageTable />
     </Box>
   );
 };

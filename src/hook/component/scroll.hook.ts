@@ -4,7 +4,6 @@ import { SetterOrUpdater } from 'recoil';
 export class ScrollHook {
   useOnScroll(ref: RefObject<HTMLDivElement>, setEnd: SetterOrUpdater<boolean>) {
     return useCallback(() => {
-      console.log('scroll');
       if (ref.current == null) {
         return;
       }

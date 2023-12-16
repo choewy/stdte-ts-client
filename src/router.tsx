@@ -2,7 +2,7 @@ import { Navigate, createBrowserRouter } from 'react-router-dom';
 
 import { PagePath } from '@common';
 import { Layout } from '@layout';
-import { MyPage } from './page/my/my.page';
+import { BusinessCategoryPage } from './page/buiness-category/business-category.page';
 import {
   AllowGuestOnlyGuardPage,
   AllowUserOnlyGuardPage,
@@ -11,10 +11,12 @@ import {
   HomePage,
   NotFoundPage,
   SignInPage,
-  SignOutPage,
   SignUpPage,
+  SignOutPage,
+  MyPage,
   RolePage,
   CredentialsPage,
+  UserPage,
 } from '@page';
 
 export const router = createBrowserRouter(
@@ -80,6 +82,42 @@ export const router = createBrowserRouter(
               element: <CredentialsPage />,
             },
             {
+              path: PagePath.User,
+              element: <UserPage />,
+            },
+            {
+              path: PagePath.Project,
+              element: <Navigate to={PagePath.ProjectList} />,
+            },
+            {
+              path: PagePath.ProjectList,
+              element: <EmptyPage title="프로젝트 목록" />,
+            },
+            {
+              path: PagePath.ProjectCustomer,
+              element: <EmptyPage title="프로젝트 고객사 목록" />,
+            },
+            {
+              path: PagePath.ProjectCategory,
+              element: <Navigate to={PagePath.ProjectBusinessCategory} />,
+            },
+            {
+              path: PagePath.ProjectBusinessCategory,
+              element: <BusinessCategoryPage />,
+            },
+            {
+              path: PagePath.ProjectIndustryCategory,
+              element: <EmptyPage title="프로젝트 산업분야" />,
+            },
+            {
+              path: PagePath.ProjectTaskCategory,
+              element: <EmptyPage title="프로젝트 수행업무" />,
+            },
+            {
+              path: PagePath.AdminSetting,
+              element: <EmptyPage title="공통설정" />,
+            },
+            {
               path: PagePath.Time,
               element: <Navigate to={PagePath.TimeRecord} />,
             },
@@ -94,38 +132,6 @@ export const router = createBrowserRouter(
             {
               path: PagePath.TimeAnalysis,
               element: <EmptyPage title="시간관리 통계" />,
-            },
-            {
-              path: PagePath.User,
-              element: <EmptyPage title="구성원 목록" />,
-            },
-            {
-              path: PagePath.Project,
-              element: <EmptyPage title="프로젝트 목록" />,
-            },
-            {
-              path: PagePath.ProjectCustomer,
-              element: <EmptyPage title="프로젝트 고객사 목록" />,
-            },
-            {
-              path: PagePath.ProjectCategory,
-              element: <Navigate to={PagePath.ProjectBusinessCategory} />,
-            },
-            {
-              path: PagePath.ProjectBusinessCategory,
-              element: <EmptyPage title="프로젝트 사업구분" />,
-            },
-            {
-              path: PagePath.ProjectIndustryCategory,
-              element: <EmptyPage title="프로젝트 산업분야" />,
-            },
-            {
-              path: PagePath.ProjectTaskCategory,
-              element: <EmptyPage title="프로젝트 수행업무" />,
-            },
-            {
-              path: PagePath.Setting,
-              element: <EmptyPage title="설정" />,
             },
           ],
         },

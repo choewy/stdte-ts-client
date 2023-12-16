@@ -32,8 +32,10 @@ export class TextFieldHook {
       (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
 
-        if (regExpService.PHONE_PARTIAL.test(value) === false) {
-          return;
+        if (value.length > 0) {
+          if (regExpService.PHONE_PARTIAL.test(value) === false) {
+            return;
+          }
         }
 
         setState((prev) => ({ ...prev, [key]: value }));

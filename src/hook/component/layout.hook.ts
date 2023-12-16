@@ -43,34 +43,34 @@ export class LayoutHook {
           return '마이페이지';
 
         case PagePath.AdminRole:
-          return '역할 관리';
+          return '역할관리';
 
         case PagePath.AdminCredentials:
-          return '계정 관리';
+          return '계정관리';
+
+        case PagePath.AdminSetting:
+          return '공통설정';
 
         case PagePath.User:
           return '구성원';
 
-        case PagePath.Project:
+        case PagePath.ProjectList:
           return '사업';
 
         case PagePath.ProjectCustomer:
           return '고객사';
 
         case PagePath.ProjectBusinessCategory:
-          return '사업 구분';
+          return '사업구분';
 
         case PagePath.ProjectIndustryCategory:
-          return '산업 분야';
+          return '산업분야';
 
         case PagePath.ProjectTaskCategory:
-          return '수행 업무 구분';
+          return '수행업무구분';
 
         case PagePath.TimeAnalysis:
           return '시간 집계';
-
-        case PagePath.Setting:
-          return '설정';
       }
 
       if (PagePath.TimeRecord.startsWith(pathname)) {

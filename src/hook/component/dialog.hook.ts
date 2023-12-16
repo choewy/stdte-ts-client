@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
-import { DIALOG_DEFAULT_ROLE_ROW, dialogStore } from '@store';
-import { RoleAdminRowResponse } from '@service';
+import { DIALOG_DEFAULT_ROLE_ROW, DIALOG_DEFAULT_USER_ROW, dialogStore } from '@store';
+import { BUSINESS_CATEGORY_ROW, BusinessCategoryRowResponse, RoleAdminRowResponse, UserRowResponse } from '@service';
 
 export class DialogHook {
   useMyPageUpdatePasswordDialogCallback(open: boolean) {
@@ -58,6 +58,48 @@ export class DialogHook {
         role: {
           ...prev.role,
           [key]: { open, row: open === true ? row : DIALOG_DEFAULT_ROLE_ROW },
+        },
+      }));
+    }, [key, row, open, setDialog]);
+  }
+
+  useUserPageDialogCallback(key: 'update', row: UserRowResponse, open: boolean) {
+    const setDialog = dialogStore.useSetState();
+
+    return useCallback(() => {
+      setDialog((prev) => ({
+        ...prev,
+        user: {
+          ...prev.user,
+          [key]: { open, row: open === false ? DIALOG_DEFAULT_USER_ROW : row },
+        },
+      }));
+    }, [key, row, open, setDialog]);
+  }
+
+  useBusinessCategoryPageCreateDialogCallback(open: boolean) {
+    const setDialog = dialogStore.useSetState();
+
+    return useCallback(() => {
+      setDialog((prev) => ({
+        ...prev,
+        businessCategory: {
+          ...prev.businessCategory,
+          create: { open },
+        },
+      }));
+    }, [open, setDialog]);
+  }
+
+  useBusinessCategoryPageDialogCallback(key: 'update' | 'delete', row: BusinessCategoryRowResponse, open: boolean) {
+    const setDialog = dialogStore.useSetState();
+
+    return useCallback(() => {
+      setDialog((prev) => ({
+        ...prev,
+        businessCategory: {
+          ...prev.businessCategory,
+          [key]: { open, row: open === false ? BUSINESS_CATEGORY_ROW : row },
         },
       }));
     }, [key, row, open, setDialog]);

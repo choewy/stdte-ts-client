@@ -1,12 +1,12 @@
 import { FunctionComponent, SyntheticEvent, useCallback } from 'react';
 
-import { Box, Tab, Tabs } from '@mui/material';
+import { Box, Button, ButtonGroup, Tab, Tabs } from '@mui/material';
 
 import { CredentialsStatus } from '@common';
 import { adminCredentialsStore } from '@store';
 import { tabHook } from '@hook';
 
-export const CredentialsPageTabs: FunctionComponent<{ maxWidth: number }> = ({ maxWidth }) => {
+export const CredentialsPageTabs: FunctionComponent = () => {
   const initQuery = adminCredentialsStore.useInit().query;
 
   const [{ stats, query }, setAdminCredentials] = adminCredentialsStore.useState();
@@ -21,12 +21,30 @@ export const CredentialsPageTabs: FunctionComponent<{ maxWidth: number }> = ({ m
   );
 
   return (
-    <Box sx={{ maxWidth, mb: 1, height: 40 }}>
+    <Box
+      sx={{
+        display: 'flex',
+        width: '100%',
+        justifyContent: 'space-between',
+        height: 40,
+        mb: 1,
+      }}
+    >
       <Tabs value={query.status} onChange={onChange}>
         {tabProps.map((props) => (
           <Tab {...props} />
         ))}
       </Tabs>
+      <ButtonGroup
+        variant="outlined"
+        sx={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+          alignItems: 'flex-end',
+        }}
+      >
+        <Button {...{ children: '다운로드', size: 'small', sx: { width: 64 } }} />
+      </ButtonGroup>
     </Box>
   );
 };

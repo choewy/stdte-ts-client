@@ -10,7 +10,10 @@ export type DialogBoxyProps = DialogProps & {
 export type DialogFullScreenToolbarProps = {
   onClose: Pick<IconButtonProps, 'onClick'>['onClick'];
   title?: string;
-  actions?: ReactElement;
 };
 
-export type DialogFullScreenProps = DialogProps & DialogFullScreenToolbarProps;
+export type DialogFullScreenProps = DialogProps &
+  DialogFullScreenToolbarProps & {
+    contents?: ReactElement;
+    actions?: ReactElement;
+  };

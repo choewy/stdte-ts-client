@@ -293,9 +293,13 @@ export class CredentialsHook {
   }
 
   useGetCredentialsListCallback() {
-    const [{ query }, setAdminCredentials] = adminCredentialsStore.useState();
+    const [{ load, query }, setAdminCredentials] = adminCredentialsStore.useState();
 
     return useCallback(async () => {
+      if (load === false) {
+        return;
+      }
+
       const res = await credentialsHttpService.getListByAdmin(query);
 
       if (res.ok === false) {
@@ -304,6 +308,7 @@ export class CredentialsHook {
 
       setAdminCredentials((prev) => ({
         ...prev,
+        load: false,
         list:
           res.data.query.skip === 0
             ? res.data
@@ -313,7 +318,7 @@ export class CredentialsHook {
                 query: res.data.query,
               },
       }));
-    }, [query, setAdminCredentials]);
+    }, [load, query, setAdminCredentials]);
   }
 
   useCredentialsScrollEnd(scrollEnd: boolean) {
@@ -328,7 +333,7 @@ export class CredentialsHook {
         const skip = prev.query.skip + prev.query.take;
 
         if (prev.list.total > skip) {
-          return { ...prev, query: { ...prev.query, skip } };
+          return { ...prev, load: true, query: { ...prev.query, skip } };
         }
 
         return prev;
@@ -373,13 +378,12 @@ export class CredentialsHook {
 
       SnackEvent.dispatchBySuccess(property.message);
 
-      setAdminCredentials((prev) => ({
-        ...prev,
-        list: {
-          ...prev.list,
-          rows: prev.list.rows.filter((row) => row.id !== id),
-        },
-      }));
+      setAdminCredentials((prev) => {
+        const rows = prev.list.rows.filter((row) => row.id !== id);
+        const load = rows.length < prev.query.take;
+
+        return { ...prev, load, list: { ...prev.list, rows } };
+      });
 
       await getCredentialsStats();
     }, [id, property, setAdminCredentials, getCredentialsStats]);

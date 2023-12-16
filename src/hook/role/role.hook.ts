@@ -16,9 +16,13 @@ import { RolePolicyLevel } from '@common';
 
 export class RoleHook {
   useGetRoleListCallback() {
-    const [{ query }, setAdminRole] = adminRoleStore.useState();
+    const [{ load, query }, setAdminRole] = adminRoleStore.useState();
 
     return useCallback(async () => {
+      if (load === false) {
+        return;
+      }
+
       const res = await roleHttpService.getListByAdmin(query);
 
       if (res.ok === false) {
@@ -27,6 +31,7 @@ export class RoleHook {
 
       setAdminRole((prev) => ({
         ...prev,
+        load: false,
         list:
           res.data.query.skip === 0
             ? res.data
@@ -36,7 +41,7 @@ export class RoleHook {
                 query: res.data.query,
               },
       }));
-    }, [query, setAdminRole]);
+    }, [load, query, setAdminRole]);
   }
 
   useMountRolePage() {
@@ -71,7 +76,7 @@ export class RoleHook {
         const skip = prev.query.skip + prev.query.take;
 
         if (prev.list.total > skip) {
-          return { ...prev, query: { ...prev.query, skip } };
+          return { ...prev, load: true, query: { ...prev.query, skip } };
         }
 
         return prev;
@@ -159,7 +164,7 @@ export class RoleHook {
         return false;
       }
 
-      SnackEvent.dispatchBySuccess('역할이 수정되었습니다.');
+      SnackEvent.dispatchBySuccess('역할이 저장되었습니다.');
 
       setAdminRole((prev) => ({
         ...prev,
@@ -196,7 +201,7 @@ export class RoleHook {
         return false;
       }
 
-      SnackEvent.dispatchBySuccess('역할이 수정되었습니다.');
+      SnackEvent.dispatchBySuccess('역할이 저장되었습니다.');
 
       setAdminRole((prev) => {
         if (res.data.length === 0) {
@@ -235,14 +240,13 @@ export class RoleHook {
 
       SnackEvent.dispatchBySuccess('역할이 삭제되었습니다.');
 
-      setAdminRole((prev) => ({
-        ...prev,
-        list: {
-          ...prev.list,
-          total: prev.list.total - 1,
-          rows: prev.list.rows.filter((row) => row.id !== id),
-        },
-      }));
+      setAdminRole((prev) => {
+        const total = prev.list.total - 1;
+        const rows = prev.list.rows.filter((row) => row.id !== id);
+        const load = rows.length < prev.query.take;
+
+        return { ...prev, load, list: { ...prev.list, total, rows } };
+      });
 
       return true;
     }, [id, setAdminRole]);

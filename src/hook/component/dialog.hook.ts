@@ -71,7 +71,7 @@ export class DialogHook {
         ...prev,
         user: {
           ...prev.user,
-          [key]: { open, row: open === true ? row : DIALOG_DEFAULT_USER_ROW },
+          [key]: { open, row: open === false ? DIALOG_DEFAULT_USER_ROW : row },
         },
       }));
     }, [key, row, open, setDialog]);

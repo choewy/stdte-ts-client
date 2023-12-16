@@ -12,3 +12,4 @@ export * from './credentials';
 export * from './not-found';
 export * from './buiness-category';
 export * from './industry-category';
+export * from './task-category';

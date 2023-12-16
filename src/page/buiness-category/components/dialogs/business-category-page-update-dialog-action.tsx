@@ -12,7 +12,7 @@ export const BusinessCategoryPageUpdateDialogAction: FunctionComponent<{
 }> = ({ row, body, onClose }) => {
   const disabled = buttonHook.useDisabledByObject(row, body);
   const updateCallback = businessCategoryHook.useUpdateCallback(row.id, body);
-  const onClickCreate = useCallback(async () => {
+  const onClickUpdate = useCallback(async () => {
     const ok = await updateCallback();
 
     if (ok) {
@@ -22,7 +22,7 @@ export const BusinessCategoryPageUpdateDialogAction: FunctionComponent<{
 
   return (
     <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-      <Button {...{ children: '저장', variant: 'text', onClick: onClickCreate, disabled }} />
+      <Button {...{ children: '저장', variant: 'text', onClick: onClickUpdate, disabled }} />
       <Button {...{ children: '취소', variant: 'text', onClick: onClose }} />
     </Box>
   );

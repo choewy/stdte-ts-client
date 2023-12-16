@@ -13,6 +13,7 @@ export const TableComponentCell: FunctionComponent<
       children={
         <Box
           sx={{
+            marginX: 2,
             gap: 1,
             display: 'flex',
             justifyContent: 'center',

@@ -8,14 +8,19 @@ export const TableValueCell: FunctionComponent<
   Omit<TableCellProps, 'children'> & {
     value?: string | number | boolean;
     fullWidth?: boolean;
+    fixedWidth?: boolean;
   }
-> = ({ value, fullWidth, ...props }) => {
+> = ({ value, fullWidth, fixedWidth, ...props }) => {
   return (
     <TableCell
       {...props}
       children={value ?? ''}
       align={props.align ?? 'center'}
-      sx={sizeService.getWidthByTextLength(value ?? '', { width: fullWidth, minWidth: true }, { textWrap: 'nowrap' })}
+      sx={sizeService.getWidthByTextLength(
+        value ?? '',
+        { width: fixedWidth, maxWidth: fixedWidth, minWidth: true },
+        { textWrap: 'nowrap', width: fullWidth === true ? '100%' : undefined },
+      )}
     />
   );
 };

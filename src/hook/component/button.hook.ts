@@ -26,6 +26,8 @@ export class ButtonHook {
 
       for (const key of keys) {
         if (
+          origin[key] &&
+          value[key] &&
           typeof origin[key] === 'object' &&
           typeof value[key] === 'object' &&
           typeof origin[key] === typeof value[key]

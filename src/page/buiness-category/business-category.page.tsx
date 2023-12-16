@@ -7,7 +7,13 @@ import { credentialsStore } from '@store';
 import { roleService } from '@service';
 import { businessCategoryHook } from '@hook';
 
-import { BusinessCategoryPageTable, BusinessCategoryPageToolbar } from './components';
+import {
+  BusinessCategoryPageCreateDialog,
+  BusinessCategoryPageUpdateDialog,
+  BusinessCategoryPageDeleteDialog,
+  BusinessCategoryPageToolbar,
+  BusinessCategoryPageTable,
+} from './components';
 
 export const BusinessCategoryPage: FunctionComponent = () => {
   const credentials = credentialsStore.useValue();
@@ -30,6 +36,9 @@ export const BusinessCategoryPage: FunctionComponent = () => {
         alignItems: 'center',
       }}
     >
+      <BusinessCategoryPageCreateDialog />
+      <BusinessCategoryPageUpdateDialog />
+      <BusinessCategoryPageDeleteDialog />
       <BusinessCategoryPageToolbar {...{ canCreate }} />
       <BusinessCategoryPageTable {...{ canUpdate, canDelete }} />
     </Box>

@@ -15,7 +15,12 @@ export const RolePageTableBodyRowUsersButton: FunctionComponent<{ row: RoleAdmin
       {...{
         children: text,
         onClick,
-        sx: sizeService.getWidthByTextLength(text, { width: true, minWidth: true }, { cursor: 'pointer' }, 56),
+        sx: sizeService.getWidthByTextLength(
+          text,
+          { width: true, minWidth: true },
+          { cursor: 'pointer', textWrap: 'nowrap' },
+          56,
+        ),
       }}
     />
   );

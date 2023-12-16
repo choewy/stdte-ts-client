@@ -14,8 +14,6 @@ import {
 } from './components';
 
 export const RolePage: FunctionComponent = () => {
-  const maxWidth = 1080;
-
   roleHook.useMountRolePage();
   roleHook.useUnmountRolePage();
 
@@ -23,6 +21,7 @@ export const RolePage: FunctionComponent = () => {
     <Box
       sx={{
         mt: 2,
+        paddingX: 3,
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
@@ -33,8 +32,8 @@ export const RolePage: FunctionComponent = () => {
       <RolePageUpdateDialog />
       <RolePageDeleteDialog />
       <RolePageUsersDialog />
-      <RolePageToolbar {...{ maxWidth }} />
-      <RolePageTable {...{ maxWidth }} />
+      <RolePageToolbar />
+      <RolePageTable />
     </Box>
   );
 };

@@ -21,7 +21,10 @@ export const RolePageTableBodyRow: FunctionComponent<{ row: RoleAdminRowResponse
       <TableCell align="center" sx={sizeService.getWidthByTextLength(index + 1, { width: true, minWidth: true })}>
         {index + 1}
       </TableCell>
-      <TableCell align="center" sx={sizeService.getWidthByTextLength(row.name, { minWidth: true }, { width: '100%' })}>
+      <TableCell
+        align="center"
+        sx={sizeService.getWidthByTextLength(row.name, { minWidth: true }, { width: '100%', textWrap: 'nowrap' })}
+      >
         {row.name}
       </TableCell>
       <TableCell align="center">
@@ -31,13 +34,21 @@ export const RolePageTableBodyRow: FunctionComponent<{ row: RoleAdminRowResponse
       </TableCell>
       <TableCell
         align="center"
-        sx={sizeService.getWidthByTextLength(updatedAt, { width: true, minWidth: true, maxWidth: true })}
+        sx={sizeService.getWidthByTextLength(
+          updatedAt,
+          { width: true, minWidth: true, maxWidth: true },
+          { textWrap: 'nowrap' },
+        )}
       >
         {createdAt}
       </TableCell>
       <TableCell
         align="center"
-        sx={sizeService.getWidthByTextLength(createdAt, { width: true, minWidth: true, maxWidth: true })}
+        sx={sizeService.getWidthByTextLength(
+          createdAt,
+          { width: true, minWidth: true, maxWidth: true },
+          { textWrap: 'nowrap' },
+        )}
       >
         {updatedAt}
       </TableCell>

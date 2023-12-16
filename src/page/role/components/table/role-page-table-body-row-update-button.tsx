@@ -15,7 +15,11 @@ export const RolePageTableBodyRowUpdateButton: FunctionComponent<{ row: RoleAdmi
       {...{
         children: text,
         onClick,
-        sx: sizeService.getWidthByTextLength(text, { width: true, minWidth: true }, { cursor: 'pointer' }),
+        sx: sizeService.getWidthByTextLength(
+          text,
+          { width: true, minWidth: true },
+          { cursor: 'pointer', textWrap: 'nowrap' },
+        ),
       }}
     />
   );

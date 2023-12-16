@@ -4,13 +4,12 @@ import { Box, Button, ButtonGroup } from '@mui/material';
 
 import { dialogHook } from '@hook';
 
-export const RolePageToolbar: FunctionComponent<{ maxWidth: number }> = ({ maxWidth }) => {
+export const RolePageToolbar: FunctionComponent = () => {
   const onClick = dialogHook.useRolePageCreateDialogCallback(true);
 
   return (
     <Box
       sx={{
-        maxWidth,
         display: 'flex',
         width: '100%',
         justifyContent: 'flex-end',
@@ -21,7 +20,7 @@ export const RolePageToolbar: FunctionComponent<{ maxWidth: number }> = ({ maxWi
     >
       <ButtonGroup variant="outlined">
         <Button {...{ children: '생성', onClick, size: 'small', sx: { width: 64 } }} />
-        <Button {...{ children: '내보내기', size: 'small', sx: { width: 64 } }} />
+        <Button {...{ children: '다운로드', size: 'small', sx: { width: 64 } }} />
       </ButtonGroup>
     </Box>
   );

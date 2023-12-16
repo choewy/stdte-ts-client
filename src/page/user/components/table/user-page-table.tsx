@@ -8,7 +8,7 @@ import { scrollHook, userHook } from '@hook';
 import { UserPageTableHead } from './user-page-table-head';
 import { UserPageTableBody } from './user-page-table-body';
 
-export const UserPageTable: FunctionComponent = () => {
+export const UserPageTable: FunctionComponent<{ canUpdate: boolean }> = ({ canUpdate }) => {
   const size = layoutStore.useValue().size;
   const scroll = scrollHook.useDivScrollRefObject();
   const onScroll = scrollHook.useOnScroll(scroll.ref, scroll.setEnd);
@@ -27,8 +27,8 @@ export const UserPageTable: FunctionComponent = () => {
       }}
     >
       <Table stickyHeader>
-        <UserPageTableHead />
-        <UserPageTableBody />
+        <UserPageTableHead canUpdate={canUpdate} />
+        <UserPageTableBody canUpdate={canUpdate} />
       </Table>
     </TableContainer>
   );

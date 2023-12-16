@@ -5,6 +5,7 @@ import { Box } from '@mui/material';
 import { RolePolicyLevel } from '@common';
 import { credentialsStore } from '@store';
 import { roleService } from '@service';
+import { businessCategoryHook } from '@hook';
 
 import { BusinessCategoryPageTable, BusinessCategoryPageToolbar } from './components';
 
@@ -14,6 +15,9 @@ export const BusinessCategoryPage: FunctionComponent = () => {
   const canCreate = roleService.can(credentials, 'businessCategory', RolePolicyLevel.Create);
   const canUpdate = roleService.can(credentials, 'businessCategory', RolePolicyLevel.Update);
   const canDelete = roleService.can(credentials, 'businessCategory', RolePolicyLevel.Delete);
+
+  businessCategoryHook.useMount();
+  businessCategoryHook.useUnMount();
 
   return (
     <Box
@@ -27,7 +31,7 @@ export const BusinessCategoryPage: FunctionComponent = () => {
       }}
     >
       <BusinessCategoryPageToolbar {...{ canCreate }} />
-      <BusinessCategoryPageTable {...{ canCreate, canUpdate, canDelete }} />
+      <BusinessCategoryPageTable {...{ canUpdate, canDelete }} />
     </Box>
   );
 };

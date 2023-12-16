@@ -106,6 +106,8 @@ export class BusinessCategoryHook {
           rows: [res.data, ...prev.list.rows],
         },
       }));
+
+      return true;
     }, [body, setState]);
   }
 

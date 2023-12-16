@@ -21,7 +21,7 @@ export const BusinessCategoryPageToolbar: FunctionComponent<{
       }}
     >
       <ButtonGroup variant="outlined">
-        {canCreate && <Button {...{ children: '생성', size: 'small', sx: { width: 64 }, onClick: onClickCreate }} />}
+        {canCreate && <Button {...{ children: '등록', size: 'small', sx: { width: 64 }, onClick: onClickCreate }} />}
         <Button {...{ children: '다운로드', size: 'small', sx: { width: 64 } }} />
       </ButtonGroup>
     </Box>

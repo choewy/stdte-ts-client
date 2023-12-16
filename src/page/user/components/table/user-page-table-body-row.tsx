@@ -25,8 +25,8 @@ export const UserPageTableBodyRow: FunctionComponent<{ index: number; row: UserR
       <TableValueCell value={row.major === '' ? '-' : row.major} />
       <TableValueCell value={row.carType === '' ? '-' : row.carType} />
       <TableValueCell value={row.carNumber === '' ? '-' : row.carNumber} />
-      <TableValueCell value={DateTime.fromJSDate(new Date(row.createdAt)).toFormat('yyyy-MM-dd HH:mm:ss')} />
-      <TableValueCell value={DateTime.fromJSDate(new Date(row.updatedAt)).toFormat('yyyy-MM-dd HH:mm:ss')} />
+      <TableValueCell value={DateTime.fromJSDate(new Date(row.createdAt)).toFormat('yyyy-MM-dd HH:mm:ss')} fixedWidth />
+      <TableValueCell value={DateTime.fromJSDate(new Date(row.updatedAt)).toFormat('yyyy-MM-dd HH:mm:ss')} fixedWidth />
       <TableComponentCell
         components={[
           <UserPageTableBodyRowUpdateButton

@@ -17,6 +17,7 @@ import {
   RolePage,
   CredentialsPage,
   UserPage,
+  IndustryCategoryPage,
 } from '@page';
 
 export const router = createBrowserRouter(
@@ -107,7 +108,7 @@ export const router = createBrowserRouter(
             },
             {
               path: PagePath.ProjectIndustryCategory,
-              element: <EmptyPage title="프로젝트 산업분야" />,
+              element: <IndustryCategoryPage />,
             },
             {
               path: PagePath.ProjectTaskCategory,

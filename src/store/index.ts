@@ -7,3 +7,4 @@ export * from './admin';
 export * from './select';
 export * from './user';
 export * from './business-category';
+export * from './industry-category';

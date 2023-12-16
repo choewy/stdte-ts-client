@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { SetterOrUpdater } from 'recoil';
 
+import { RolePolicyLevel } from '@common';
 import { adminRoleStore, selectStore } from '@store';
 import {
   RoleAdminCreateBody,
@@ -11,8 +12,6 @@ import {
   SnackEvent,
   roleHttpService,
 } from '@service';
-
-import { RolePolicyLevel } from '@common';
 
 export class RoleHook {
   useGetRoleListCallback() {

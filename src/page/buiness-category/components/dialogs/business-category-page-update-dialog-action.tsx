@@ -2,27 +2,23 @@ import { FunctionComponent, useCallback } from 'react';
 
 import { Box, Button } from '@mui/material';
 
-import { RoleAdminRowResponse, RoleAdminUsersBody } from '@service';
-import { buttonHook, roleHook } from '@hook';
+import { BusinessCategoryCreateBody, BusinessCategoryRowResponse } from '@service';
+import { businessCategoryHook, buttonHook } from '@hook';
 
-export const RolePageUsersDialogAction: FunctionComponent<{
-  row: RoleAdminRowResponse;
-  body: RoleAdminUsersBody;
+export const BusinessCategoryPageUpdateDialogAction: FunctionComponent<{
+  row: BusinessCategoryRowResponse;
+  body: BusinessCategoryCreateBody;
   onClose: () => void;
 }> = ({ row, body, onClose }) => {
-  const disabled = buttonHook.useDisabledByArray(
-    row.users.map((user) => user.id),
-    body.map((user) => user.id),
-  );
-
-  const updateRole = roleHook.useRoleUsersUpdateCallback(row.id, body);
+  const disabled = buttonHook.useDisabledByObject(row, body);
+  const updateCallback = businessCategoryHook.useUpdateCallback(row.id, body);
   const onClickUpdate = useCallback(async () => {
-    const ok = await updateRole();
+    const ok = await updateCallback();
 
     if (ok) {
       onClose();
     }
-  }, [updateRole, onClose]);
+  }, [updateCallback, onClose]);
 
   return (
     <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>

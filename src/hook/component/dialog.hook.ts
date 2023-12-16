@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
 import { DIALOG_DEFAULT_ROLE_ROW, DIALOG_DEFAULT_USER_ROW, dialogStore } from '@store';
-import { RoleAdminRowResponse, UserRowResponse } from '@service';
+import { BUSINESS_CATEGORY_ROW, BusinessCategoryRowResponse, RoleAdminRowResponse, UserRowResponse } from '@service';
 
 export class DialogHook {
   useMyPageUpdatePasswordDialogCallback(open: boolean) {
@@ -72,6 +72,34 @@ export class DialogHook {
         user: {
           ...prev.user,
           [key]: { open, row: open === false ? DIALOG_DEFAULT_USER_ROW : row },
+        },
+      }));
+    }, [key, row, open, setDialog]);
+  }
+
+  useBusinessCategoryPageCreateDialogCallback(open: boolean) {
+    const setDialog = dialogStore.useSetState();
+
+    return useCallback(() => {
+      setDialog((prev) => ({
+        ...prev,
+        businessCategory: {
+          ...prev.businessCategory,
+          create: { open },
+        },
+      }));
+    }, [open, setDialog]);
+  }
+
+  useBusinessCategoryPageDialogCallback(key: 'update' | 'delete', row: BusinessCategoryRowResponse, open: boolean) {
+    const setDialog = dialogStore.useSetState();
+
+    return useCallback(() => {
+      setDialog((prev) => ({
+        ...prev,
+        businessCategory: {
+          ...prev.businessCategory,
+          [key]: { open, row: open === false ? BUSINESS_CATEGORY_ROW : row },
         },
       }));
     }, [key, row, open, setDialog]);

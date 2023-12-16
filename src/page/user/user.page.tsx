@@ -2,16 +2,15 @@ import { FunctionComponent } from 'react';
 
 import { Box } from '@mui/material';
 
+import { RolePolicyLevel } from '@common';
 import { userHook } from '@hook';
-
-import { UserPageUpdateDialog, UserPageToolbar, UserPageTable } from './components';
 import { credentialsStore } from '@store';
 import { roleService } from '@service';
-import { RolePolicyLevel } from '@common';
+
+import { UserPageUpdateDialog, UserPageToolbar, UserPageTable } from './components';
 
 export const UserPage: FunctionComponent = () => {
   const credentials = credentialsStore.useValue();
-
   const canUpdate = roleService.can(credentials, 'user', RolePolicyLevel.Update);
 
   userHook.useMount();

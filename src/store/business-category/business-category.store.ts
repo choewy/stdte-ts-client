@@ -1,14 +1,15 @@
 import { RecoilStore } from '@core';
 
+import { BUSINESS_CATEGORY_LIST, BUSINESS_CATEGORY_QUERY } from '@service';
+
 import { BusinessCategoryStoreProps } from './types';
-import { BUSINESS_CATEGORY_STORE_DEFAULT_LIST, BUSINESS_CATEGORY_STORE_DEFAULT_QUERY } from './constants';
 
 export class BusinessCategoryStore extends RecoilStore<BusinessCategoryStoreProps> {
   constructor() {
     super(BusinessCategoryStore.name, {
       load: true,
-      list: BUSINESS_CATEGORY_STORE_DEFAULT_LIST,
-      query: BUSINESS_CATEGORY_STORE_DEFAULT_QUERY,
+      list: BUSINESS_CATEGORY_LIST,
+      query: BUSINESS_CATEGORY_QUERY,
     });
   }
 }

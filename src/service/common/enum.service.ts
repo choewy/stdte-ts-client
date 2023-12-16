@@ -1,4 +1,4 @@
-import { CredentialsStatus, Degree, RolePolicyKey, RolePolicyLevel } from '@common';
+import { CredentialsStatus, Degree, RolePolicyKey, RolePolicyLevel, UserStatus } from '@common';
 import { CredentialsChangeStatusComponentProperty } from './types';
 
 export class EnumService {
@@ -83,7 +83,7 @@ export class EnumService {
     return props;
   }
 
-  degreeToText(degree: Degree | string): string {
+  degreeToText(degree: Degree | string, defaultValue = ''): string {
     switch (degree) {
       case Degree.HighSchool:
         return '고졸';
@@ -101,7 +101,7 @@ export class EnumService {
         return '박사';
 
       default:
-        return '';
+        return defaultValue;
     }
   }
 
@@ -161,6 +161,25 @@ export class EnumService {
 
       default:
         return '';
+    }
+  }
+
+  usetStatusToText(status: UserStatus, defaultValue = '') {
+    switch (status) {
+      case UserStatus.Wating:
+        return '-';
+
+      case UserStatus.Active:
+        return '재직';
+
+      case UserStatus.Vacate:
+        return '휴직';
+
+      case UserStatus.Retire:
+        return '퇴직';
+
+      default:
+        return defaultValue;
     }
   }
 }

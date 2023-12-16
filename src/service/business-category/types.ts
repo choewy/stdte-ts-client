@@ -13,3 +13,13 @@ export type BusinessCategoryListResponse = HttpClientListResponse<
   BusinessCategoryRowResponse,
   BusinessCategoryListQuery
 >;
+
+export type BusinessCategoryCreateBody = {
+  name: string;
+  description: string;
+};
+
+export type BusinessCategoryUpdateBody = {
+  name: string;
+  description: string;
+};

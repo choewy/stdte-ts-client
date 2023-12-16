@@ -54,7 +54,7 @@ export class LayoutHook {
         case PagePath.User:
           return '구성원';
 
-        case PagePath.Project:
+        case PagePath.ProjectList:
           return '사업';
 
         case PagePath.ProjectCustomer:

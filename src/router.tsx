@@ -2,6 +2,7 @@ import { Navigate, createBrowserRouter } from 'react-router-dom';
 
 import { PagePath } from '@common';
 import { Layout } from '@layout';
+import { BusinessCategoryPage } from './page/buiness-category/business-category.page';
 import {
   AllowGuestOnlyGuardPage,
   AllowUserOnlyGuardPage,
@@ -102,7 +103,7 @@ export const router = createBrowserRouter(
             },
             {
               path: PagePath.ProjectBusinessCategory,
-              element: <EmptyPage title="프로젝트 사업구분" />,
+              element: <BusinessCategoryPage />,
             },
             {
               path: PagePath.ProjectIndustryCategory,

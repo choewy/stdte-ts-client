@@ -14,30 +14,21 @@ export const RolePageTableBodyRow: FunctionComponent<{ row: RoleAdminRowResponse
   row,
   index,
 }) => {
-  const keyPrefix = 'role-page-table-row';
-
   return (
     <TableRow hover>
       <TableValueCell value={index + 1} />
       <TableValueCell value={row.name} fullWidth />
-      <TableComponentCell
-        components={[
-          <RolePageTableBodyRowUsersButton
-            {...{
-              key: [keyPrefix, 'users-button', row.id, index].join('-'),
-              row,
-            }}
-          />,
-        ]}
-      />
+      <TableComponentCell components={<RolePageTableBodyRowUsersButton {...{ row }} />} />
 
       <TableValueCell value={DateTime.fromJSDate(new Date(row.createdAt)).toFormat('yyyy-MM-dd HH:mm:ss')} fixedWidth />
       <TableValueCell value={DateTime.fromJSDate(new Date(row.updatedAt)).toFormat('yyyy-MM-dd HH:mm:ss')} fixedWidth />
       <TableComponentCell
-        components={[
-          <RolePageTableBodyRowUpdateButton {...{ key: [keyPrefix, 'update-button', row.id, index].join('-'), row }} />,
-          <RolePageTableBodyRowDeleteButton {...{ key: [keyPrefix, 'delete-button', row.id, index].join('-'), row }} />,
-        ]}
+        components={
+          <>
+            <RolePageTableBodyRowUpdateButton {...{ row }} />
+            <RolePageTableBodyRowDeleteButton {...{ row }} />
+          </>
+        }
       />
     </TableRow>
   );

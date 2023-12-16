@@ -25,17 +25,28 @@ export const CredentialsPageTableBodyRow: FunctionComponent<{ row: CredentialsAd
       <TableValueCell value={DateTime.fromJSDate(new Date(row.createdAt)).toFormat('yyyy-MM-dd HH:mm:ss')} fixedWidth />
       <TableValueCell value={DateTime.fromJSDate(new Date(row.updatedAt)).toFormat('yyyy-MM-dd HH:mm:ss')} fixedWidth />
       <TableComponentCell
-        components={buttonProperties
-          .map((property, i) => (
-            <CredentialsPageTableBodyRowChangeStatusButton
-              {...{
-                key: [keyPrefix, 'button', row.id, property.status.next, i].join('-'),
-                id: row.id,
-                property,
-              }}
-            />
-          ))
-          .concat([<CredentialsPageTableBodyRowChangePasswordButton {...{ id: row.id }} />])}
+        components={
+          <>
+            {buttonProperties
+              .map((property, i) => (
+                <CredentialsPageTableBodyRowChangeStatusButton
+                  {...{
+                    key: [keyPrefix, 'status-button', row.id, property.status.next, i].join('-'),
+                    id: row.id,
+                    property,
+                  }}
+                />
+              ))
+              .concat([
+                <CredentialsPageTableBodyRowChangePasswordButton
+                  {...{
+                    key: [keyPrefix, 'password-button', row.id].join('-'),
+                    id: row.id,
+                  }}
+                />,
+              ])}
+          </>
+        }
       />
     </TableRow>
   );

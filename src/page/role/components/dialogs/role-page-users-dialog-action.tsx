@@ -10,7 +10,7 @@ export const RolePageUsersDialogAction: FunctionComponent<{
   body: RoleAdminUsersBody;
   onClose: () => void;
 }> = ({ row, body, onClose }) => {
-  const disabled = buttonHook.useDiabledByArray(
+  const disabled = buttonHook.useDisabledByArray(
     row.users.map((user) => user.id),
     body.map((user) => user.id),
   );

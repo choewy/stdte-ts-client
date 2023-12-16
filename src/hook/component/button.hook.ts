@@ -52,7 +52,7 @@ export class ButtonHook {
     return disabled;
   }
 
-  useDiabledByArray<T>(origins: T[], values: T[]) {
+  useDisabledByArray<T>(origins: T[], values: T[]) {
     const [disabled, setDisabled] = useState<boolean>(true);
 
     useEffect(() => {

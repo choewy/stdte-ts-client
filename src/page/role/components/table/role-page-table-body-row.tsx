@@ -1,9 +1,10 @@
 import { DateTime } from 'luxon';
 import { FunctionComponent } from 'react';
 
-import { Box, TableCell, TableRow } from '@mui/material';
+import { TableRow } from '@mui/material';
 
-import { RoleAdminRowResponse, sizeService } from '@service';
+import { TableComponentCell, TableValueCell } from '@component';
+import { RoleAdminRowResponse } from '@service';
 
 import { RolePageTableBodyRowUpdateButton } from './role-page-table-body-row-update-button';
 import { RolePageTableBodyRowDeleteButton } from './role-page-table-body-row-delete-button';
@@ -13,51 +14,31 @@ export const RolePageTableBodyRow: FunctionComponent<{ row: RoleAdminRowResponse
   row,
   index,
 }) => {
-  const createdAt = DateTime.fromJSDate(new Date(row.createdAt)).toFormat('yyyy-MM-dd HH:mm:ss');
-  const updatedAt = DateTime.fromJSDate(new Date(row.updatedAt)).toFormat('yyyy-MM-dd HH:mm:ss');
+  const keyPrefix = 'role-page-table-row';
 
   return (
-    <TableRow key={['credentials-tbl-row', row.id].join('-')} hover>
-      <TableCell align="center" sx={sizeService.getWidthByTextLength(index + 1, { width: true, minWidth: true })}>
-        {index + 1}
-      </TableCell>
-      <TableCell
-        align="center"
-        sx={sizeService.getWidthByTextLength(row.name, { minWidth: true }, { width: '100%', textWrap: 'nowrap' })}
-      >
-        {row.name}
-      </TableCell>
-      <TableCell align="center">
-        <Box sx={{ gap: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <RolePageTableBodyRowUsersButton {...{ row }} />
-        </Box>
-      </TableCell>
-      <TableCell
-        align="center"
-        sx={sizeService.getWidthByTextLength(
-          updatedAt,
-          { width: true, minWidth: true, maxWidth: true },
-          { textWrap: 'nowrap' },
-        )}
-      >
-        {createdAt}
-      </TableCell>
-      <TableCell
-        align="center"
-        sx={sizeService.getWidthByTextLength(
-          createdAt,
-          { width: true, minWidth: true, maxWidth: true },
-          { textWrap: 'nowrap' },
-        )}
-      >
-        {updatedAt}
-      </TableCell>
-      <TableCell align="center">
-        <Box sx={{ gap: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <RolePageTableBodyRowUpdateButton {...{ row }} />
-          <RolePageTableBodyRowDeleteButton {...{ row }} />
-        </Box>
-      </TableCell>
+    <TableRow hover>
+      <TableValueCell value={index + 1} />
+      <TableValueCell value={row.name} fullWidth />
+      <TableComponentCell
+        components={[
+          <RolePageTableBodyRowUsersButton
+            {...{
+              key: [keyPrefix, 'users-button', row.id, index].join('-'),
+              row,
+            }}
+          />,
+        ]}
+      />
+
+      <TableValueCell value={DateTime.fromJSDate(new Date(row.createdAt)).toFormat('yyyy-MM-dd HH:mm:ss')} fixedWidth />
+      <TableValueCell value={DateTime.fromJSDate(new Date(row.updatedAt)).toFormat('yyyy-MM-dd HH:mm:ss')} fixedWidth />
+      <TableComponentCell
+        components={[
+          <RolePageTableBodyRowUpdateButton {...{ key: [keyPrefix, 'update-button', row.id, index].join('-'), row }} />,
+          <RolePageTableBodyRowDeleteButton {...{ key: [keyPrefix, 'delete-button', row.id, index].join('-'), row }} />,
+        ]}
+      />
     </TableRow>
   );
 };

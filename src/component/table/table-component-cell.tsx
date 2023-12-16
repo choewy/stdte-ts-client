@@ -1,10 +1,10 @@
-import { FunctionComponent, ReactNode } from 'react';
+import { FunctionComponent, ReactElement } from 'react';
 
 import { Box, TableCell, TableCellProps } from '@mui/material';
 
 export const TableComponentCell: FunctionComponent<
   Omit<TableCellProps, 'children'> & {
-    components: ReactNode[];
+    components: ReactElement;
   }
 > = ({ components, ...props }) => {
   return (
@@ -20,7 +20,7 @@ export const TableComponentCell: FunctionComponent<
             alignItems: 'center',
           }}
         >
-          {components.map((component) => component)}
+          {components}
         </Box>
       }
     />

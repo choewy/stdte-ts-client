@@ -53,3 +53,18 @@ export type UserUpdateBody = {
 export type UserRowResponse = UserResponse;
 export type UserListQuery = HttpClientListQuery;
 export type UserListResponse = HttpClientListResponse<UserRowResponse, UserListQuery>;
+export type UserRowUpdateBody = {
+  name: string;
+  phone: string;
+  birthday: string;
+  scienceNumber: string;
+  degree: Degree | string;
+  school: string;
+  major: string;
+  carType: string;
+  carNumber: string;
+  enteringDay: string;
+  resignationDay: string;
+  status: UserStatus;
+  role: number | null;
+};

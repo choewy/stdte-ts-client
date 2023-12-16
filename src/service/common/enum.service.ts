@@ -164,10 +164,10 @@ export class EnumService {
     }
   }
 
-  usetStatusToText(status: UserStatus, defaultValue = '') {
+  userStatusToText(status: UserStatus, defaultValue = '') {
     switch (status) {
       case UserStatus.Wating:
-        return '-';
+        return '대기';
 
       case UserStatus.Active:
         return '재직';

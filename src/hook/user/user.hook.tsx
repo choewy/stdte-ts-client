@@ -1,7 +1,9 @@
-import { SnackEvent, UserException, userHttpService } from '@service';
-import { userStore } from '@store';
+import { useCallback, useEffect, useState } from 'react';
+import { SetterOrUpdater } from 'recoil';
 
-import { useCallback, useEffect } from 'react';
+import { UserStatus } from '@common';
+import { userStore } from '@store';
+import { SnackEvent, UserException, UserRowResponse, UserRowUpdateBody, userHttpService } from '@service';
 
 export class UserHook {
   useGetListCallback() {
@@ -64,6 +66,68 @@ export class UserHook {
         return prev;
       });
     }, [scrollEnd, setState]);
+  }
+
+  useUpdateState(row: UserRowResponse): [UserRowUpdateBody, SetterOrUpdater<UserRowUpdateBody>] {
+    const [body, setBody] = useState<UserRowUpdateBody>({
+      name: '',
+      phone: '',
+      birthday: '',
+      scienceNumber: '',
+      degree: '',
+      school: '',
+      major: '',
+      carType: '',
+      carNumber: '',
+      enteringDay: '',
+      resignationDay: '',
+      role: null,
+      status: UserStatus.Wating,
+    });
+
+    useEffect(() => {
+      setBody({
+        name: row.name,
+        phone: row.phone,
+        birthday: row.birthday,
+        scienceNumber: row.scienceNumber,
+        degree: row.degree,
+        school: row.school,
+        major: row.major,
+        carType: row.carType,
+        carNumber: row.carNumber,
+        enteringDay: row.enteringDay,
+        resignationDay: row.resignationDay,
+        role: row.role?.id ?? null,
+        status: row.status,
+      });
+    }, [row, setBody]);
+
+    return [body, setBody];
+  }
+
+  useUpdateCallback(id: number, body: UserRowUpdateBody) {
+    const setUser = userStore.useSetState();
+
+    return useCallback(async () => {
+      const res = await userHttpService.update(id, body);
+
+      if (res.ok === false) {
+        SnackEvent.dispatchByException(new UserException(res.exception));
+        return false;
+      }
+
+      SnackEvent.dispatchBySuccess('구성원 정보가 저장되었습니다.');
+      setUser((prev) => ({
+        ...prev,
+        list: {
+          ...prev.list,
+          rows: prev.list.rows.map((row) => (row.id === res.data.id ? res.data : row)),
+        },
+      }));
+
+      return true;
+    }, [id, body, setUser]);
   }
 }
 

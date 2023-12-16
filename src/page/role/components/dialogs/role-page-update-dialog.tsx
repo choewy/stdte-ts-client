@@ -17,9 +17,9 @@ export const RolePageUpdateDialog: FunctionComponent = () => {
 
   return (
     <DialogBoxy
+      title="역할 수정"
       open={dialog.role.update.open}
       onClose={onClose}
-      title="역할 수정"
       contents={<RolePageUpdateDialogContent {...{ body, setBody }} />}
       actions={<RolePageUpdateDialogAction {...{ row, body, onClose }} />}
     />

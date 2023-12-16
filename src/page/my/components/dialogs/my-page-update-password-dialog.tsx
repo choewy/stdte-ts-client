@@ -15,8 +15,8 @@ export const MyPageUpdatePasswordDialog: FunctionComponent = () => {
 
   return (
     <DialogBoxy
-      open={dialog.mypage.updatePassword.open}
       title="비밀번호 변경"
+      open={dialog.mypage.updatePassword.open}
       onClose={onClose}
       contents={<MyPageUpdatePasswordDialogContent {...{ body, setBody }} />}
       actions={<MyPageUpdatePasswordDialogAction {...{ body, onClose }} />}

@@ -35,6 +35,7 @@ export type DialogStoreProps = {
     create: { open: boolean };
     update: { open: boolean; row: TaskCategoryRow };
     delete: { open: boolean; row: TaskCategoryRow };
+    children: { open: boolean; row: TaskCategoryRow };
     child: {
       create: { open: boolean; parant: TaskCategoryRow };
       update: { open: boolean; row: TaskCategoryRowChild };

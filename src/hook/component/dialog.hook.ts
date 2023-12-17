@@ -190,7 +190,7 @@ export class DialogHook {
     }, [open, setDialog]);
   }
 
-  useTaskCategoryPageDialogCallback(key: 'update' | 'delete', row: TaskCategoryRow, open: boolean) {
+  useTaskCategoryPageDialogCallback(key: 'update' | 'delete' | 'children', row: TaskCategoryRow, open: boolean) {
     const setDialog = dialogStore.useSetState();
 
     return useCallback(() => {

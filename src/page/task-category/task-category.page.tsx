@@ -5,6 +5,16 @@ import { Box } from '@mui/material';
 import { RolePolicyLevel } from '@common';
 import { authorizeStore } from '@store';
 import { roleService } from '@service';
+import { taskCategoryHook } from '@hook';
+
+import {
+  TaskCategoryPageCreateDialog,
+  TaskCategoryPageChildrenDialog,
+  TaskCategoryPageUpdateDialog,
+  TaskCategoryPageDeleteDialog,
+  TaskCategoryPageToolbar,
+  TaskCategoryPageTable,
+} from './components';
 
 export const TaskCategoryPage: FunctionComponent = () => {
   const authorize = authorizeStore.useValue();
@@ -12,6 +22,9 @@ export const TaskCategoryPage: FunctionComponent = () => {
   const canCreate = roleService.can(authorize, 'taskCategory', RolePolicyLevel.Create);
   const canUpdate = roleService.can(authorize, 'taskCategory', RolePolicyLevel.Update);
   const canDelete = roleService.can(authorize, 'taskCategory', RolePolicyLevel.Delete);
+
+  taskCategoryHook.useMount();
+  taskCategoryHook.useUnMount();
 
   return (
     <Box
@@ -23,6 +36,13 @@ export const TaskCategoryPage: FunctionComponent = () => {
         flexDirection: 'column',
         alignItems: 'center',
       }}
-    ></Box>
+    >
+      <TaskCategoryPageCreateDialog />
+      <TaskCategoryPageChildrenDialog />
+      <TaskCategoryPageUpdateDialog />
+      <TaskCategoryPageDeleteDialog />
+      <TaskCategoryPageToolbar {...{ canCreate }} />
+      <TaskCategoryPageTable {...{ canUpdate, canDelete }} />
+    </Box>
   );
 };

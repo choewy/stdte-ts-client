@@ -1,11 +1,12 @@
 import { useCallback, useEffect } from 'react';
 
-import { SelectException, SnackEvent, selectHttpService } from '@service';
-import { SELECT_STORE_DEFALUT_LIST, SELECT_STORE_DEFALUT_QUERY, selectStore } from '@store';
+import { SELECT_LIST, SELECT_LIST_QUERY, SelectException, SnackEvent, selectHttpService } from '@service';
+import { selectStore } from '@store';
 
 export class SelectHook {
   useGetSelectUserListCallback() {
     const [{ users }, setSelect] = selectStore.useState();
+
     return useCallback(async () => {
       const res = await selectHttpService.getUsers(users.query);
 
@@ -67,8 +68,8 @@ export class SelectHook {
         setSelect((prev) => ({
           ...prev,
           users: {
-            list: SELECT_STORE_DEFALUT_LIST,
-            query: SELECT_STORE_DEFALUT_QUERY,
+            list: SELECT_LIST,
+            query: SELECT_LIST_QUERY,
           },
         }));
       };

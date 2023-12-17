@@ -1,25 +1,25 @@
-import { SelectListQuery, SelectListResponse } from '@service';
+import { SelectListQuery, SelectList } from '@service';
 
 export type SelectStoreProps = {
   users: {
-    list: SelectListResponse;
+    list: SelectList;
     query: SelectListQuery;
   };
   roles: {
-    list: SelectListResponse;
+    list: SelectList;
     query: SelectListQuery;
   };
   category: {
     businesses: {
-      list: SelectListResponse;
+      list: SelectList;
       query: SelectListQuery;
     };
     industries: {
-      list: SelectListResponse;
+      list: SelectList;
       query: SelectListQuery;
     };
     tasks: {
-      list: SelectListResponse;
+      list: SelectList;
       query: SelectListQuery;
     };
   };

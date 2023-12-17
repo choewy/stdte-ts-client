@@ -11,7 +11,7 @@ export const RolePageCreateDialog: FunctionComponent = () => {
   const dialog = dialogStore.useValue();
   const onClose = dialogHook.useRolePageCreateDialogCallback(false);
 
-  const [body, setBody] = roleHook.useRoleCreateState();
+  const [body, setBody] = roleHook.useCreateState();
 
   return (
     <DialogBoxy

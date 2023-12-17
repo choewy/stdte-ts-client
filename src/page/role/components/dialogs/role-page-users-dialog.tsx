@@ -12,7 +12,7 @@ export const RolePageUsersDialog: FunctionComponent = () => {
 
   const onClose = dialogHook.useRolePageDialogsCallback('users', row, false);
 
-  const [body, setBody] = roleHook.useRoleUsersState(row);
+  const [body, setBody] = roleHook.useUpdateUsersState(row);
 
   return (
     <DialogBoxy

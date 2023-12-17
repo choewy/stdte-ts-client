@@ -1,7 +1,7 @@
 import { HttpClientListQuery, HttpClientListResponse } from '@core';
 
 export type IndustryCategoryListQuery = HttpClientListQuery;
-export type IndustryCategoryRowResponse = {
+export type IndustryCategoryRow = {
   id: number;
   name: string;
   description: string;
@@ -9,10 +9,7 @@ export type IndustryCategoryRowResponse = {
   updatedAt: string;
 };
 
-export type IndustryCategoryListResponse = HttpClientListResponse<
-  IndustryCategoryRowResponse,
-  IndustryCategoryListQuery
->;
+export type IndustryCategoryList = HttpClientListResponse<IndustryCategoryRow, IndustryCategoryListQuery>;
 
 export type IndustryCategoryCreateBody = {
   name: string;

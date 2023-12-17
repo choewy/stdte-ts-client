@@ -1,13 +1,13 @@
 import { HttpService } from '@core';
 
-import { SettingResponse, SettingUpdateBody } from './types';
+import { SettingRow, SettingUpdateBody } from './types';
 
 export class SettingHttpService extends HttpService {
-  async getSetting() {
-    return this.get<SettingResponse>(this.url());
+  async getRow() {
+    return this.get<SettingRow>(this.url());
   }
 
-  async updateSetting(body: SettingUpdateBody) {
+  async updateRow(body: SettingUpdateBody) {
     return this.patch<null>(this.url(), body);
   }
 }

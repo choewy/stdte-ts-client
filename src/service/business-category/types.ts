@@ -1,7 +1,6 @@
 import { HttpClientListQuery, HttpClientListResponse } from '@core';
 
-export type BusinessCategoryListQuery = HttpClientListQuery;
-export type BusinessCategoryRowResponse = {
+export type BusinessCategoryRow = {
   id: number;
   name: string;
   description: string;
@@ -9,10 +8,8 @@ export type BusinessCategoryRowResponse = {
   updatedAt: string;
 };
 
-export type BusinessCategoryListResponse = HttpClientListResponse<
-  BusinessCategoryRowResponse,
-  BusinessCategoryListQuery
->;
+export type BusinessCategoryListQuery = HttpClientListQuery;
+export type BusinessCategoryList = HttpClientListResponse<BusinessCategoryRow, BusinessCategoryListQuery>;
 
 export type BusinessCategoryCreateBody = {
   name: string;

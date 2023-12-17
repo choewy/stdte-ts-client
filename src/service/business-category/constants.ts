@@ -1,6 +1,6 @@
-import { BusinessCategoryListQuery, BusinessCategoryListResponse, BusinessCategoryRowResponse } from './types';
+import { BusinessCategoryListQuery, BusinessCategoryList, BusinessCategoryRow } from './types';
 
-export const BUSINESS_CATEGORY_ROW: BusinessCategoryRowResponse = {
+export const BUSINESS_CATEGORY_ROW: BusinessCategoryRow = {
   id: 0,
   name: '',
   description: '',
@@ -8,13 +8,13 @@ export const BUSINESS_CATEGORY_ROW: BusinessCategoryRowResponse = {
   updatedAt: '',
 };
 
-export const BUSINESS_CATEGORY_QUERY: BusinessCategoryListQuery = {
+export const BUSINESS_CATEGORY_LIST_QUERY: BusinessCategoryListQuery = {
   skip: 0,
   take: 20,
 };
 
-export const BUSINESS_CATEGORY_LIST: BusinessCategoryListResponse = {
+export const BUSINESS_CATEGORY_LIST: BusinessCategoryList = {
   total: 0,
   rows: [],
-  query: BUSINESS_CATEGORY_QUERY,
+  query: BUSINESS_CATEGORY_LIST_QUERY,
 };

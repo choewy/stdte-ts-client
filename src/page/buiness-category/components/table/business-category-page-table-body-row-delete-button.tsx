@@ -1,11 +1,11 @@
 import { FunctionComponent } from 'react';
 
-import { BusinessCategoryRowResponse } from '@service';
+import { BusinessCategoryRow } from '@service';
 import { TableCellButton } from '@component';
 import { dialogHook } from '@hook';
 
 export const BusinessCategoryPageTableBodyRowDeleteButton: FunctionComponent<{
-  row: BusinessCategoryRowResponse;
+  row: BusinessCategoryRow;
 }> = ({ row }) => {
   const onClick = dialogHook.useBusinessCategoryPageDialogCallback('delete', row, true);
 

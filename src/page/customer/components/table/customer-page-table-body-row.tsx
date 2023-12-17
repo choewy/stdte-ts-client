@@ -3,7 +3,7 @@ import { FunctionComponent } from 'react';
 
 import { TableRow } from '@mui/material';
 
-import { CustomerRowResponse } from '@service';
+import { CustomerRow } from '@service';
 import { TableComponentCell, TableValueCell } from '@component';
 
 import { CustomerPageTableBodyRowUpdateButton } from './customer-page-table-body-row-update-button';
@@ -11,7 +11,7 @@ import { CustomerPageTableBodyRowDeleteButton } from './customer-page-table-body
 
 export const CustomerPageTableBodyRow: FunctionComponent<{
   index: number;
-  row: CustomerRowResponse;
+  row: CustomerRow;
   canUpdate: boolean;
   canDelete: boolean;
 }> = ({ index, row, canUpdate, canDelete }) => {

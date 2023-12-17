@@ -1,11 +1,11 @@
 import { FunctionComponent } from 'react';
 
-import { CustomerRowResponse } from '@service';
+import { CustomerRow } from '@service';
 import { TableCellButton } from '@component';
 import { dialogHook } from '@hook';
 
 export const CustomerPageTableBodyRowUpdateButton: FunctionComponent<{
-  row: CustomerRowResponse;
+  row: CustomerRow;
 }> = ({ row }) => {
   const onClick = dialogHook.useCustomerPageDialogCallback('update', row, true);
 

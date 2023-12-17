@@ -1,35 +1,31 @@
 import { RolePolicyProperty } from '@common';
 import { HttpClientListQuery, HttpClientListResponse } from '@core';
 
-export type RoleAdminUserResponse = {
+export type RoleRowUser = {
   id: number;
   name: string;
 };
 
-export type RoleAdminListQuery = HttpClientListQuery;
-export type RoleAdminRowResponse = {
+export type RoleRow = {
   id: number;
   name: string;
-  users: RoleAdminUserResponse[];
+  users: RoleRowUser[];
   rolePolicy: RolePolicyProperty;
   createdAt: string;
   updatedAt: string;
 };
 
-export type RoleAdminListResponse = HttpClientListResponse<RoleAdminRowResponse, RoleAdminListQuery>;
+export type RoleListQuery = HttpClientListQuery;
+export type RoleList = HttpClientListResponse<RoleRow, RoleListQuery>;
 
-export type RoleAdminCreateBody = {
+export type RoleCreateBody = {
   name: string;
   rolePolicy: RolePolicyProperty;
 };
 
-export type RoleAdminUpdateBody = {
+export type RoleUpdateBody = {
   name: string;
   rolePolicy: RolePolicyProperty;
 };
 
-export type RoleAdminUpdateUsersBody = {
-  users?: number[];
-};
-
-export type RoleAdminUsersBody = RoleAdminUserResponse[];
+export type RoleUpdateUsersBody = RoleRowUser[];

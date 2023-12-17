@@ -1,15 +1,21 @@
 import { useCallback } from 'react';
 
-import { DIALOG_DEFAULT_ROLE_ROW, DIALOG_DEFAULT_USER_ROW, dialogStore } from '@store';
+import { dialogStore } from '@store';
 import {
   BUSINESS_CATEGORY_ROW,
-  BusinessCategoryRowResponse,
+  BusinessCategoryRow,
   CUSTOMER_ROW,
-  CustomerRowResponse,
+  CustomerRow,
   INDUSTRY_CATEGORY_ROW,
-  IndustryCategoryRowResponse,
-  RoleAdminRowResponse,
-  UserRowResponse,
+  IndustryCategoryRow,
+  USER_ROW,
+  ROLE_ROW,
+  RoleRow,
+  UserRow,
+  TASK_CATEGORY_ROW,
+  TaskCategoryRow,
+  TaskCategoryRowChild,
+  TASK_CATEGORY_ROW_CHILD,
 } from '@service';
 
 export class DialogHook {
@@ -58,7 +64,7 @@ export class DialogHook {
     }, [open, setDialog]);
   }
 
-  useRolePageDialogsCallback(key: 'update' | 'delete' | 'users', row: RoleAdminRowResponse, open: boolean) {
+  useRolePageDialogsCallback(key: 'update' | 'delete' | 'users', row: RoleRow, open: boolean) {
     const setDialog = dialogStore.useSetState();
 
     return useCallback(() => {
@@ -66,13 +72,13 @@ export class DialogHook {
         ...prev,
         role: {
           ...prev.role,
-          [key]: { open, row: open === true ? row : DIALOG_DEFAULT_ROLE_ROW },
+          [key]: { open, row: open === true ? row : ROLE_ROW },
         },
       }));
     }, [key, row, open, setDialog]);
   }
 
-  useUserPageDialogCallback(key: 'update', row: UserRowResponse, open: boolean) {
+  useUserPageDialogCallback(key: 'update', row: UserRow, open: boolean) {
     const setDialog = dialogStore.useSetState();
 
     return useCallback(() => {
@@ -80,7 +86,35 @@ export class DialogHook {
         ...prev,
         user: {
           ...prev.user,
-          [key]: { open, row: open === false ? DIALOG_DEFAULT_USER_ROW : row },
+          [key]: { open, row: open === false ? USER_ROW : row },
+        },
+      }));
+    }, [key, row, open, setDialog]);
+  }
+
+  useCustomerPageCreateDialogCallback(open: boolean) {
+    const setDialog = dialogStore.useSetState();
+
+    return useCallback(() => {
+      setDialog((prev) => ({
+        ...prev,
+        customer: {
+          ...prev.customer,
+          create: { open },
+        },
+      }));
+    }, [open, setDialog]);
+  }
+
+  useCustomerPageDialogCallback(key: 'update' | 'delete', row: CustomerRow, open: boolean) {
+    const setDialog = dialogStore.useSetState();
+
+    return useCallback(() => {
+      setDialog((prev) => ({
+        ...prev,
+        customer: {
+          ...prev.customer,
+          [key]: { open, row: open === false ? CUSTOMER_ROW : row },
         },
       }));
     }, [key, row, open, setDialog]);
@@ -100,7 +134,7 @@ export class DialogHook {
     }, [open, setDialog]);
   }
 
-  useBusinessCategoryPageDialogCallback(key: 'update' | 'delete', row: BusinessCategoryRowResponse, open: boolean) {
+  useBusinessCategoryPageDialogCallback(key: 'update' | 'delete', row: BusinessCategoryRow, open: boolean) {
     const setDialog = dialogStore.useSetState();
 
     return useCallback(() => {
@@ -128,7 +162,7 @@ export class DialogHook {
     }, [open, setDialog]);
   }
 
-  useIndustryCategoryPageDialogCallback(key: 'update' | 'delete', row: IndustryCategoryRowResponse, open: boolean) {
+  useIndustryCategoryPageDialogCallback(key: 'update' | 'delete', row: IndustryCategoryRow, open: boolean) {
     const setDialog = dialogStore.useSetState();
 
     return useCallback(() => {
@@ -142,32 +176,75 @@ export class DialogHook {
     }, [key, row, open, setDialog]);
   }
 
-  useCustomerPageCreateDialogCallback(open: boolean) {
+  useTaskCategoryPageCreateDialogCallback(open: boolean) {
     const setDialog = dialogStore.useSetState();
 
     return useCallback(() => {
       setDialog((prev) => ({
         ...prev,
-        customer: {
-          ...prev.customer,
+        taskCategory: {
+          ...prev.taskCategory,
           create: { open },
         },
       }));
     }, [open, setDialog]);
   }
 
-  useCustomerPageDialogCallback(key: 'update' | 'delete', row: CustomerRowResponse, open: boolean) {
+  useTaskCategoryPageDialogCallback(key: 'update' | 'delete' | 'children', row: TaskCategoryRow, open: boolean) {
     const setDialog = dialogStore.useSetState();
 
     return useCallback(() => {
       setDialog((prev) => ({
         ...prev,
-        customer: {
-          ...prev.customer,
-          [key]: { open, row: open === false ? CUSTOMER_ROW : row },
+        taskCategory: {
+          ...prev.taskCategory,
+          [key]: { open, row: open === false ? TASK_CATEGORY_ROW : row },
         },
       }));
     }, [key, row, open, setDialog]);
+  }
+
+  useTaskCategoryPageCreateChildDialogCallback(parent: TaskCategoryRow, open: boolean) {
+    const setDialog = dialogStore.useSetState();
+
+    return useCallback(() => {
+      setDialog((prev) => ({
+        ...prev,
+        taskCategory: {
+          ...prev.taskCategory,
+          child: {
+            ...prev.taskCategory.child,
+            create: { open, parent: open === false ? TASK_CATEGORY_ROW : parent },
+          },
+        },
+      }));
+    }, [parent, open, setDialog]);
+  }
+
+  useTaskCategoryPageChildDialogCallback(
+    key: 'update' | 'delete',
+    parent: TaskCategoryRow,
+    child: TaskCategoryRowChild,
+    open: boolean,
+  ) {
+    const setDialog = dialogStore.useSetState();
+
+    return useCallback(() => {
+      setDialog((prev) => ({
+        ...prev,
+        taskCategory: {
+          ...prev.taskCategory,
+          child: {
+            ...prev.taskCategory.child,
+            [key]: {
+              open,
+              parent: open === false ? TASK_CATEGORY_ROW : parent,
+              child: open === false ? TASK_CATEGORY_ROW_CHILD : child,
+            },
+          },
+        },
+      }));
+    }, [key, parent, child, open, setDialog]);
   }
 }
 

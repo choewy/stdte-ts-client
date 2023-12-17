@@ -13,7 +13,7 @@ export const CredentialsPageTable: FunctionComponent = () => {
   const scroll = scrollHook.useDivScrollRefObject();
   const onScroll = scrollHook.useOnScroll(scroll.ref, scroll.setEnd);
 
-  credentialsHook.useCredentialsScrollEnd(scroll.end);
+  credentialsHook.useScrollEnd(scroll.end);
 
   return (
     <TableContainer

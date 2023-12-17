@@ -3,7 +3,7 @@ import { SetterOrUpdater } from 'recoil';
 
 import { UserStatus } from '@common';
 import { userStore } from '@store';
-import { SnackEvent, UserException, UserRowResponse, UserRowUpdateBody, userHttpService } from '@service';
+import { SnackEvent, UserException, UserRow, UserRowUpdateBody, userHttpService } from '@service';
 
 export class UserHook {
   useGetListCallback() {
@@ -68,7 +68,7 @@ export class UserHook {
     }, [scrollEnd, setState]);
   }
 
-  useUpdateState(row: UserRowResponse): [UserRowUpdateBody, SetterOrUpdater<UserRowUpdateBody>] {
+  useUpdateState(row: UserRow): [UserRowUpdateBody, SetterOrUpdater<UserRowUpdateBody>] {
     const [body, setBody] = useState<UserRowUpdateBody>({
       name: '',
       phone: '',
@@ -110,7 +110,7 @@ export class UserHook {
     const setUser = userStore.useSetState();
 
     return useCallback(async () => {
-      const res = await userHttpService.update(id, body);
+      const res = await userHttpService.updateRow(id, body);
 
       if (res.ok === false) {
         SnackEvent.dispatchByException(new UserException(res.exception));

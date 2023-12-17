@@ -3,12 +3,12 @@ import { FunctionComponent } from 'react';
 import { TextField } from '@mui/material';
 
 import { textFieldHook } from '@hook';
-import { CredentialsAdminUpdatePasswordBody } from '@service';
+import { CredentialsUpdatePasswordByIdBody } from '@service';
 import { SetterOrUpdater } from 'recoil';
 
 export const CredentialsPageUpdatePasswordDialogContent: FunctionComponent<{
-  body: CredentialsAdminUpdatePasswordBody;
-  setBody: SetterOrUpdater<CredentialsAdminUpdatePasswordBody>;
+  body: CredentialsUpdatePasswordByIdBody;
+  setBody: SetterOrUpdater<CredentialsUpdatePasswordByIdBody>;
 }> = ({ body, setBody }) => {
   const onChangeNewPassword = textFieldHook.useOnChangeObjectStrProperty('newPassword', setBody);
   const onChangeConfirmPassword = textFieldHook.useOnChangeObjectStrProperty('confirmPassword', setBody);

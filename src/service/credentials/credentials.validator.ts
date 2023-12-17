@@ -1,7 +1,7 @@
 import { isEmail, isEmpty } from 'class-validator';
 
 import {
-  CredentialsAdminUpdatePasswordBody,
+  CredentialsUpdatePasswordByIdBody,
   CredentialsSignInBody,
   CredentialsSignUpBody,
   CredentialsUpdatePasswordBody,
@@ -67,7 +67,7 @@ export class CredentialsValidator {
     }
   }
 
-  updatePasswordByAdmin(body: CredentialsAdminUpdatePasswordBody) {
+  updatePasswordById(body: CredentialsUpdatePasswordByIdBody) {
     if (isEmpty(body.newPassword)) {
       return CredentialsErrorMessage.EmptyNewPassword;
     }

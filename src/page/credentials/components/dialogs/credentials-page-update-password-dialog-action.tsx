@@ -2,11 +2,11 @@ import { FunctionComponent, useCallback } from 'react';
 
 import { Box, Button } from '@mui/material';
 import { credentialsHook } from '@hook';
-import { CredentialsAdminUpdatePasswordBody } from '@service';
+import { CredentialsUpdatePasswordByIdBody } from '@service';
 
 export const CredentialsPageUpdatePasswordDialogAction: FunctionComponent<{
   id: number;
-  body: CredentialsAdminUpdatePasswordBody;
+  body: CredentialsUpdatePasswordByIdBody;
   onClose: () => void;
 }> = ({ id, body, onClose }) => {
   const updatePassword = credentialsHook.useUpdatePasswordByAdminCallback(id, body);

@@ -1,6 +1,6 @@
 import { RecoilStore } from '@core';
 
-import { INDUSTRY_CATEGORY_LIST, INDUSTRY_CATEGORY_QUERY } from '@service';
+import { INDUSTRY_CATEGORY_LIST, INDUSTRY_CATEGORY_LIST_QUERY } from '@service';
 
 import { IndustryCategoryStoreProps } from './types';
 
@@ -9,7 +9,7 @@ export class IndustryCategoryStore extends RecoilStore<IndustryCategoryStoreProp
     super(IndustryCategoryStore.name, {
       load: true,
       list: INDUSTRY_CATEGORY_LIST,
-      query: INDUSTRY_CATEGORY_QUERY,
+      query: INDUSTRY_CATEGORY_LIST_QUERY,
     });
   }
 }

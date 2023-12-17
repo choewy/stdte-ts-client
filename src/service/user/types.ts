@@ -1,12 +1,12 @@
 import { CredentialsStatus, Degree, GenderCode, RolePolicyProperty, UserStatus } from '@common';
 import { HttpClientListQuery, HttpClientListResponse } from '@core';
 
-export type UserCredentialsResponse = {
+export type UserRowCredentials = {
   email: string;
   status: CredentialsStatus;
 };
 
-export type UserRoleResponse = {
+export type UserRowRole = {
   id: number;
   name: string;
   rolePolicy: RolePolicyProperty;
@@ -14,7 +14,7 @@ export type UserRoleResponse = {
   updatedAt: string | null;
 };
 
-export type UserResponse = {
+export type UserRow = {
   id: number;
   name: string;
   phone: string;
@@ -29,8 +29,8 @@ export type UserResponse = {
   enteringDay: string;
   resignationDay: string;
   status: UserStatus;
-  credentials: UserCredentialsResponse;
-  role: UserRoleResponse | null;
+  credentials: UserRowCredentials;
+  role: UserRowRole | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -50,9 +50,8 @@ export type UserUpdateBody = {
   resignationDay: string;
 };
 
-export type UserRowResponse = UserResponse;
 export type UserListQuery = HttpClientListQuery;
-export type UserListResponse = HttpClientListResponse<UserRowResponse, UserListQuery>;
+export type UserList = HttpClientListResponse<UserRow, UserListQuery>;
 export type UserRowUpdateBody = {
   name: string;
   phone: string;

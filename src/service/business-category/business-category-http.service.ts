@@ -3,22 +3,22 @@ import { HttpService } from '@core';
 import {
   BusinessCategoryCreateBody,
   BusinessCategoryListQuery,
-  BusinessCategoryListResponse,
-  BusinessCategoryRowResponse,
+  BusinessCategoryList,
+  BusinessCategoryRow,
   BusinessCategoryUpdateBody,
 } from './types';
 
 export class BusinessCategoryHttpService extends HttpService {
   async getList(query: BusinessCategoryListQuery) {
-    return this.get<BusinessCategoryListResponse>(this.url(), { params: query, delay: 250 });
+    return this.get<BusinessCategoryList>(this.url(), { params: query, delay: 250 });
   }
 
   async createRow(body: BusinessCategoryCreateBody) {
-    return this.post<BusinessCategoryRowResponse>(this.url(), body, { delay: 250 });
+    return this.post<BusinessCategoryRow>(this.url(), body, { delay: 250 });
   }
 
   async updateRow(id: number, body: Partial<BusinessCategoryUpdateBody>) {
-    return this.patch<BusinessCategoryRowResponse>(this.url(id), body, { delay: 250 });
+    return this.patch<BusinessCategoryRow>(this.url(id), body, { delay: 250 });
   }
 
   async deleteRow(id: number) {

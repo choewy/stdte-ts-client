@@ -1,9 +1,15 @@
 import { RecoilStore } from '@core';
-
-import { BUSINESS_CATEGORY_ROW, CUSTOMER_ROW, INDUSTRY_CATEGORY_ROW } from '@service';
+import {
+  BUSINESS_CATEGORY_ROW,
+  CUSTOMER_ROW,
+  INDUSTRY_CATEGORY_ROW,
+  ROLE_ROW,
+  TASK_CATEGORY_ROW,
+  TASK_CATEGORY_ROW_CHILD,
+  USER_ROW,
+} from '@service';
 
 import { DialogStoreProps } from './types';
-import { DIALOG_DEFAULT_ROLE_ROW, DIALOG_DEFAULT_USER_ROW } from './constants';
 
 export class DialogStore extends RecoilStore<DialogStoreProps> {
   constructor() {
@@ -21,19 +27,24 @@ export class DialogStore extends RecoilStore<DialogStoreProps> {
         create: { open: false },
         users: {
           open: false,
-          row: DIALOG_DEFAULT_ROLE_ROW,
+          row: ROLE_ROW,
         },
         update: {
           open: false,
-          row: DIALOG_DEFAULT_ROLE_ROW,
+          row: ROLE_ROW,
         },
         delete: {
           open: false,
-          row: DIALOG_DEFAULT_ROLE_ROW,
+          row: ROLE_ROW,
         },
       },
       user: {
-        update: { open: false, row: DIALOG_DEFAULT_USER_ROW },
+        update: { open: false, row: USER_ROW },
+      },
+      customer: {
+        create: { open: false },
+        update: { open: false, row: CUSTOMER_ROW },
+        delete: { open: false, row: CUSTOMER_ROW },
       },
       businessCategory: {
         create: { open: false },
@@ -45,10 +56,16 @@ export class DialogStore extends RecoilStore<DialogStoreProps> {
         update: { open: false, row: INDUSTRY_CATEGORY_ROW },
         delete: { open: false, row: INDUSTRY_CATEGORY_ROW },
       },
-      customer: {
+      taskCategory: {
         create: { open: false },
-        update: { open: false, row: CUSTOMER_ROW },
-        delete: { open: false, row: CUSTOMER_ROW },
+        update: { open: false, row: TASK_CATEGORY_ROW },
+        delete: { open: false, row: TASK_CATEGORY_ROW },
+        children: { open: false, row: TASK_CATEGORY_ROW },
+        child: {
+          create: { open: false, parent: TASK_CATEGORY_ROW },
+          update: { open: false, parent: TASK_CATEGORY_ROW, child: TASK_CATEGORY_ROW_CHILD },
+          delete: { open: false, parent: TASK_CATEGORY_ROW, child: TASK_CATEGORY_ROW_CHILD },
+        },
       },
     });
   }

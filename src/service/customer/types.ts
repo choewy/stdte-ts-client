@@ -1,7 +1,6 @@
 import { HttpClientListQuery, HttpClientListResponse } from '@core';
 
-export type CustomerListQuery = HttpClientListQuery;
-export type CustomerRowResponse = {
+export type CustomerRow = {
   id: number;
   kr: string;
   en: string;
@@ -11,7 +10,8 @@ export type CustomerRowResponse = {
   updatedAt: string;
 };
 
-export type CustomerListResponse = HttpClientListResponse<CustomerRowResponse, CustomerListQuery>;
+export type CustomerListQuery = HttpClientListQuery;
+export type CustomerList = HttpClientListResponse<CustomerRow, CustomerListQuery>;
 
 export type CustomerCreateBody = {
   kr: string;

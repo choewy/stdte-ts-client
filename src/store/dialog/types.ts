@@ -1,7 +1,7 @@
 import {
   BusinessCategoryRowResponse,
   CustomerRowResponse,
-  RoleAdminRowResponse,
+  RoleRow,
   TaskCategoryRowChild,
   TaskCategoryRowResponse,
   UserRowResponse,
@@ -16,9 +16,9 @@ export type DialogStoreProps = {
   };
   role: {
     create: { open: boolean };
-    users: { open: boolean; row: RoleAdminRowResponse };
-    update: { open: boolean; row: RoleAdminRowResponse };
-    delete: { open: boolean; row: RoleAdminRowResponse };
+    users: { open: boolean; row: RoleRow };
+    update: { open: boolean; row: RoleRow };
+    delete: { open: boolean; row: RoleRow };
   };
   user: {
     update: { open: boolean; row: UserRowResponse };

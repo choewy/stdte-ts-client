@@ -4,14 +4,14 @@ import { SetterOrUpdater } from 'recoil';
 import { Box, TextField } from '@mui/material';
 
 import { ROLE_POLICY_KEY } from '@common';
-import { RoleAdminCreateBody } from '@service';
+import { RoleCreateBody } from '@service';
 import { textFieldHook } from '@hook';
 
 import { RolePageRolePolicySelectGroup } from './role-page-role-policy-select-group';
 
 export const RolePageCreateDialogContent: FunctionComponent<{
-  body: RoleAdminCreateBody;
-  setBody: SetterOrUpdater<RoleAdminCreateBody>;
+  body: RoleCreateBody;
+  setBody: SetterOrUpdater<RoleCreateBody>;
 }> = ({ body, setBody }) => {
   const length = ROLE_POLICY_KEY.length;
   const half = Math.ceil(length / 2);

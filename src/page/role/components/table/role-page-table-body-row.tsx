@@ -4,16 +4,13 @@ import { FunctionComponent } from 'react';
 import { TableRow } from '@mui/material';
 
 import { TableComponentCell, TableValueCell } from '@component';
-import { RoleAdminRowResponse } from '@service';
+import { RoleRow } from '@service';
 
 import { RolePageTableBodyRowUpdateButton } from './role-page-table-body-row-update-button';
 import { RolePageTableBodyRowDeleteButton } from './role-page-table-body-row-delete-button';
 import { RolePageTableBodyRowUsersButton } from './role-page-table-body-row-users-button';
 
-export const RolePageTableBodyRow: FunctionComponent<{ row: RoleAdminRowResponse; index: number }> = ({
-  row,
-  index,
-}) => {
+export const RolePageTableBodyRow: FunctionComponent<{ row: RoleRow; index: number }> = ({ row, index }) => {
   return (
     <TableRow hover>
       <TableValueCell value={index + 1} />

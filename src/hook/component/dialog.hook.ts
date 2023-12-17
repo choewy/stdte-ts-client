@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import { DIALOG_DEFAULT_ROLE_ROW, DIALOG_DEFAULT_USER_ROW, dialogStore } from '@store';
+import { DIALOG_DEFAULT_USER_ROW, dialogStore } from '@store';
 import {
   BUSINESS_CATEGORY_ROW,
   BusinessCategoryRowResponse,
@@ -8,7 +8,8 @@ import {
   CustomerRowResponse,
   INDUSTRY_CATEGORY_ROW,
   IndustryCategoryRowResponse,
-  RoleAdminRowResponse,
+  ROLE_ROW,
+  RoleRow,
   UserRowResponse,
 } from '@service';
 
@@ -58,7 +59,7 @@ export class DialogHook {
     }, [open, setDialog]);
   }
 
-  useRolePageDialogsCallback(key: 'update' | 'delete' | 'users', row: RoleAdminRowResponse, open: boolean) {
+  useRolePageDialogsCallback(key: 'update' | 'delete' | 'users', row: RoleRow, open: boolean) {
     const setDialog = dialogStore.useSetState();
 
     return useCallback(() => {
@@ -66,7 +67,7 @@ export class DialogHook {
         ...prev,
         role: {
           ...prev.role,
-          [key]: { open, row: open === true ? row : DIALOG_DEFAULT_ROLE_ROW },
+          [key]: { open, row: open === true ? row : ROLE_ROW },
         },
       }));
     }, [key, row, open, setDialog]);

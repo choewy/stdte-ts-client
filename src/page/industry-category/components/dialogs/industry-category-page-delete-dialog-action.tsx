@@ -9,18 +9,18 @@ export const IndustryCategoryPageDeleteDialogAction: FunctionComponent<{
   row: IndustryCategoryRowResponse;
   onClose: () => void;
 }> = ({ row, onClose }) => {
-  const deleteCallback = industryCategoryHook.useDeleteCallback(row.id);
-  const onClickDelete = useCallback(async () => {
-    const ok = await deleteCallback();
+  const callback = industryCategoryHook.useDeleteCallback(row.id);
+  const onClick = useCallback(async () => {
+    const ok = await callback();
 
     if (ok) {
       onClose();
     }
-  }, [deleteCallback, onClose]);
+  }, [callback, onClose]);
 
   return (
     <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-      <Button {...{ children: '삭제', variant: 'text', onClick: onClickDelete }} />
+      <Button {...{ children: '삭제', variant: 'text', onClick }} />
       <Button {...{ children: '취소', variant: 'text', onClick: onClose, autoFocus: true }} />
     </Box>
   );

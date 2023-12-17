@@ -11,18 +11,18 @@ export const CustomerPageUpdateDialogAction: FunctionComponent<{
   onClose: () => void;
 }> = ({ row, body, onClose }) => {
   const disabled = buttonHook.useDisabledByObject(row, body);
-  const updateCallback = customerHook.useUpdateCallback(row.id, body);
-  const onClickUpdate = useCallback(async () => {
-    const ok = await updateCallback();
+  const callback = customerHook.useUpdateCallback(row.id, body);
+  const onClick = useCallback(async () => {
+    const ok = await callback();
 
     if (ok) {
       onClose();
     }
-  }, [updateCallback, onClose]);
+  }, [callback, onClose]);
 
   return (
     <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-      <Button {...{ children: '저장', variant: 'text', onClick: onClickUpdate, disabled }} />
+      <Button {...{ children: '저장', variant: 'text', onClick, disabled }} />
       <Button {...{ children: '취소', variant: 'text', onClick: onClose }} />
     </Box>
   );

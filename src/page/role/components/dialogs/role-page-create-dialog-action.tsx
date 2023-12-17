@@ -3,20 +3,20 @@ import { FunctionComponent, useCallback } from 'react';
 import { Box, Button } from '@mui/material';
 
 import { roleHook } from '@hook';
-import { RoleAdminCreateBody } from '@service';
+import { RoleCreateBody } from '@service';
 
-export const RolePageCreateDialogAction: FunctionComponent<{ body: RoleAdminCreateBody; onClose: () => void }> = ({
+export const RolePageCreateDialogAction: FunctionComponent<{ body: RoleCreateBody; onClose: () => void }> = ({
   body,
   onClose,
 }) => {
-  const createRole = roleHook.useRoleCreateCallback(body);
+  const callback = roleHook.useCreateCallback(body);
   const onCreate = useCallback(async () => {
-    const ok = await createRole();
+    const ok = await callback();
 
     if (ok) {
       onClose();
     }
-  }, [createRole, onClose]);
+  }, [callback, onClose]);
 
   return (
     <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>

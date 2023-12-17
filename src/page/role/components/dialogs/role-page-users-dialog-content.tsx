@@ -3,7 +3,7 @@ import { SetterOrUpdater } from 'recoil';
 
 import { Box, List } from '@mui/material';
 
-import { RoleAdminUsersBody } from '@service';
+import { RoleUpdateUsersBody } from '@service';
 import { scrollHook, selectHook } from '@hook';
 import { selectStore } from '@store';
 
@@ -11,8 +11,8 @@ import { RolePageUsersDialogContentListItem } from './role-page-users-dialog-con
 
 export const RolePageUsersDialogContent: FunctionComponent<{
   name: string;
-  body: RoleAdminUsersBody;
-  setBody: SetterOrUpdater<RoleAdminUsersBody>;
+  body: RoleUpdateUsersBody;
+  setBody: SetterOrUpdater<RoleUpdateUsersBody>;
 }> = ({ name, body, setBody }) => {
   const { users } = selectStore.useValue();
 

@@ -1,16 +1,4 @@
-import {
-  RoleAdminListQuery,
-  RoleAdminListResponse,
-  CredentialsAdminListQuery,
-  CredentialsAdminListResponse,
-  CredentialsAdminStatsResposne,
-} from '@service';
-
-export type AdminRoleStoreProps = {
-  load: boolean;
-  list: RoleAdminListResponse;
-  query: RoleAdminListQuery;
-};
+import { CredentialsAdminListQuery, CredentialsAdminListResponse, CredentialsAdminStatsResposne } from '@service';
 
 export type AdminCredentialsStoreProps = {
   load: boolean;

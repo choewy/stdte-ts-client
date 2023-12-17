@@ -4,7 +4,7 @@ import { TableHead, TableRow } from '@mui/material';
 
 import { TableValueCell } from '@component';
 
-export const TaskCategoryPageTableHead: FunctionComponent<{
+export const TaskCategoryPageChildrenDialogContentTableHead: FunctionComponent<{
   canUpdate: boolean;
   canDelete: boolean;
 }> = ({ canUpdate, canDelete }) => {
@@ -12,8 +12,7 @@ export const TaskCategoryPageTableHead: FunctionComponent<{
     <TableHead>
       <TableRow>
         <TableValueCell />
-        <TableValueCell value="대분류명" />
-        <TableValueCell value="소분류" />
+        <TableValueCell value="소분류명" />
         <TableValueCell value="비고" />
         <TableValueCell value="등록일시" />
         <TableValueCell value="수정일시" />

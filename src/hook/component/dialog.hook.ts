@@ -16,6 +16,8 @@ import {
   TaskCategoryRow,
   TaskCategoryRowChild,
   TASK_CATEGORY_ROW_CHILD,
+  ProjectRow,
+  PROJECT_ROW,
 } from '@service';
 
 export class DialogHook {
@@ -245,6 +247,38 @@ export class DialogHook {
         },
       }));
     }, [key, parent, child, open, setDialog]);
+  }
+
+  useProjectPageCreateDialogCallback(open: boolean) {
+    const setDialog = dialogStore.useSetState();
+
+    return useCallback(() => {
+      setDialog((prev) => ({
+        ...prev,
+        project: {
+          ...prev.project,
+          create: { open },
+        },
+      }));
+    }, [open, setDialog]);
+  }
+
+  useProjectPageDialogCallback(
+    key: 'update' | 'delete' | 'orderRecord' | 'saleRecord',
+    row: ProjectRow,
+    open: boolean,
+  ) {
+    const setDialog = dialogStore.useSetState();
+
+    return useCallback(() => {
+      setDialog((prev) => ({
+        ...prev,
+        project: {
+          ...prev.project,
+          [key]: { open, row: open === false ? PROJECT_ROW : row },
+        },
+      }));
+    }, [key, row, open, setDialog]);
   }
 }
 

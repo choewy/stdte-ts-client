@@ -1,4 +1,11 @@
-import { BusinessCategoryRowResponse, CustomerRowResponse, RoleAdminRowResponse, UserRowResponse } from '@service';
+import {
+  BusinessCategoryRowResponse,
+  CustomerRowResponse,
+  RoleAdminRowResponse,
+  TaskCategoryRowChild,
+  TaskCategoryRowResponse,
+  UserRowResponse,
+} from '@service';
 
 export type DialogStoreProps = {
   mypage: {
@@ -13,7 +20,14 @@ export type DialogStoreProps = {
     update: { open: boolean; row: RoleAdminRowResponse };
     delete: { open: boolean; row: RoleAdminRowResponse };
   };
-  user: { update: { open: boolean; row: UserRowResponse } };
+  user: {
+    update: { open: boolean; row: UserRowResponse };
+  };
+  customer: {
+    create: { open: boolean };
+    update: { open: boolean; row: CustomerRowResponse };
+    delete: { open: boolean; row: CustomerRowResponse };
+  };
   businessCategory: {
     create: { open: boolean };
     update: { open: boolean; row: BusinessCategoryRowResponse };
@@ -24,9 +38,14 @@ export type DialogStoreProps = {
     update: { open: boolean; row: BusinessCategoryRowResponse };
     delete: { open: boolean; row: BusinessCategoryRowResponse };
   };
-  customer: {
+  taskCategory: {
     create: { open: boolean };
-    update: { open: boolean; row: CustomerRowResponse };
-    delete: { open: boolean; row: CustomerRowResponse };
+    update: { open: boolean; row: TaskCategoryRowResponse };
+    delete: { open: boolean; row: TaskCategoryRowResponse };
+    child: {
+      create: { open: boolean; parant: TaskCategoryRowResponse };
+      update: { open: boolean; row: TaskCategoryRowChild };
+      delete: { open: boolean; row: TaskCategoryRowChild };
+    };
   };
 };

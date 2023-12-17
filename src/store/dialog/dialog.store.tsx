@@ -1,6 +1,12 @@
 import { RecoilStore } from '@core';
 
-import { BUSINESS_CATEGORY_ROW, CUSTOMER_ROW, INDUSTRY_CATEGORY_ROW } from '@service';
+import {
+  BUSINESS_CATEGORY_ROW,
+  CUSTOMER_ROW,
+  INDUSTRY_CATEGORY_ROW,
+  TASK_CATEGORY_ROW,
+  TASK_CATEGORY_ROW_CHILD,
+} from '@service';
 
 import { DialogStoreProps } from './types';
 import { DIALOG_DEFAULT_ROLE_ROW, DIALOG_DEFAULT_USER_ROW } from './constants';
@@ -35,6 +41,11 @@ export class DialogStore extends RecoilStore<DialogStoreProps> {
       user: {
         update: { open: false, row: DIALOG_DEFAULT_USER_ROW },
       },
+      customer: {
+        create: { open: false },
+        update: { open: false, row: CUSTOMER_ROW },
+        delete: { open: false, row: CUSTOMER_ROW },
+      },
       businessCategory: {
         create: { open: false },
         update: { open: false, row: BUSINESS_CATEGORY_ROW },
@@ -45,10 +56,15 @@ export class DialogStore extends RecoilStore<DialogStoreProps> {
         update: { open: false, row: INDUSTRY_CATEGORY_ROW },
         delete: { open: false, row: INDUSTRY_CATEGORY_ROW },
       },
-      customer: {
+      taskCategory: {
         create: { open: false },
-        update: { open: false, row: CUSTOMER_ROW },
-        delete: { open: false, row: CUSTOMER_ROW },
+        update: { open: false, row: TASK_CATEGORY_ROW },
+        delete: { open: false, row: TASK_CATEGORY_ROW },
+        child: {
+          create: { open: false, parant: TASK_CATEGORY_ROW },
+          update: { open: false, row: TASK_CATEGORY_ROW_CHILD },
+          delete: { open: false, row: TASK_CATEGORY_ROW_CHILD },
+        },
       },
     });
   }

@@ -3,15 +3,15 @@ import { FunctionComponent } from 'react';
 import { Box } from '@mui/material';
 
 import { RolePolicyLevel } from '@common';
-import { credentialsStore } from '@store';
+import { authorizeStore } from '@store';
 import { roleService } from '@service';
 
 export const TaskCategoryPage: FunctionComponent = () => {
-  const credentials = credentialsStore.useValue();
+  const authorize = authorizeStore.useValue();
 
-  const canCreate = roleService.can(credentials, 'taskCategory', RolePolicyLevel.Create);
-  const canUpdate = roleService.can(credentials, 'taskCategory', RolePolicyLevel.Update);
-  const canDelete = roleService.can(credentials, 'taskCategory', RolePolicyLevel.Delete);
+  const canCreate = roleService.can(authorize, 'taskCategory', RolePolicyLevel.Create);
+  const canUpdate = roleService.can(authorize, 'taskCategory', RolePolicyLevel.Update);
+  const canDelete = roleService.can(authorize, 'taskCategory', RolePolicyLevel.Delete);
 
   return (
     <Box

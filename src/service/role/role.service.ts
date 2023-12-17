@@ -1,17 +1,17 @@
 import { RolePolicyKey, RolePolicyLevel } from '@common';
-import { CredentialsStoreProps } from '@store';
+import { AuzhorizeStoreProps } from '@store';
 
 export class RoleService {
-  can(credentials: CredentialsStoreProps, roleKey: RolePolicyKey, rolePolicyLevel: RolePolicyLevel) {
-    if (credentials === null || credentials === false) {
+  can(authorize: AuzhorizeStoreProps, roleKey: RolePolicyKey, rolePolicyLevel: RolePolicyLevel) {
+    if (authorize === null || authorize === false) {
       return false;
     }
 
-    if (credentials.role == null) {
+    if (authorize.role == null) {
       return false;
     }
 
-    return credentials.role.rolePolicy[roleKey] >= rolePolicyLevel;
+    return authorize.role.rolePolicy[roleKey] >= rolePolicyLevel;
   }
 }
 

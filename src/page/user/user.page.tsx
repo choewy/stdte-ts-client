@@ -4,14 +4,15 @@ import { Box } from '@mui/material';
 
 import { RolePolicyLevel } from '@common';
 import { userHook } from '@hook';
-import { credentialsStore } from '@store';
+import { authorizeStore } from '@store';
 import { roleService } from '@service';
 
 import { UserPageUpdateDialog, UserPageToolbar, UserPageTable } from './components';
 
 export const UserPage: FunctionComponent = () => {
-  const credentials = credentialsStore.useValue();
-  const canUpdate = roleService.can(credentials, 'user', RolePolicyLevel.Update);
+  const authorize = authorizeStore.useValue();
+
+  const canUpdate = roleService.can(authorize, 'user', RolePolicyLevel.Update);
 
   userHook.useMount();
   userHook.useUnMount();

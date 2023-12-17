@@ -11,7 +11,7 @@ import {
 } from '@mui/icons-material';
 
 import { PagePath, RolePolicyKey, RolePolicyLevel } from '@common';
-import { CredentialsStoreProps } from '@store';
+import { AuzhorizeStoreProps } from '@store';
 
 import { SidebarMenuScope, SidebarMenuType } from './enums';
 import { SidebarMenuItemProperty } from './types';
@@ -180,9 +180,8 @@ export class SidebarService {
     },
   ];
 
-  filterItems(credentials: CredentialsStoreProps) {
-    const scope =
-      credentials === null || credentials === false ? SidebarMenuScope.GuestOnly : SidebarMenuScope.UserOnly;
+  filterItems(authorize: AuzhorizeStoreProps) {
+    const scope = authorize === null || authorize === false ? SidebarMenuScope.GuestOnly : SidebarMenuScope.UserOnly;
 
     const items = this.items.filter((item, i) => {
       item.id = [this.id, item.type, item.scope, i].join('-');
@@ -203,11 +202,11 @@ export class SidebarService {
         return true;
       }
 
-      if (credentials === null || credentials === false) {
+      if (authorize === null || authorize === false) {
         return false;
       }
 
-      if (credentials.role == null) {
+      if (authorize.role == null) {
         return;
       }
 
@@ -220,7 +219,7 @@ export class SidebarService {
           continue;
         }
 
-        if (credentials.role.rolePolicy[key] < policy) {
+        if (authorize.role.rolePolicy[key] < policy) {
           return false;
         }
       }

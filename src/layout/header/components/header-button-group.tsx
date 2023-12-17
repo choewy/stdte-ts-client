@@ -6,12 +6,12 @@ import { useNavigate } from 'react-router-dom';
 import { Box, Button } from '@mui/material';
 
 import { PagePath } from '@common';
-import { credentialsStore } from '@store';
+import { authorizeStore } from '@store';
 import { HeaderThemeSwitch } from './header-theme-switch';
 
 export const HeaderButtonGroup: FunctionComponent = () => {
   const navigate = useNavigate();
-  const credentials = credentialsStore.useValue();
+  const credentials = authorizeStore.useValue();
 
   const elements: ReactElement[] = [<HeaderThemeSwitch key={v4()} />];
 

@@ -1,7 +1,7 @@
-import { BusinessCategoryListQuery, BusinessCategoryListResponse } from '@service';
+import { BusinessCategoryListQuery, BusinessCategoryList } from '@service';
 
 export type BusinessCategoryStoreProps = {
   load: boolean;
-  list: BusinessCategoryListResponse;
+  list: BusinessCategoryList;
   query: BusinessCategoryListQuery;
 };

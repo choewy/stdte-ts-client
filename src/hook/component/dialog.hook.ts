@@ -3,7 +3,7 @@ import { useCallback } from 'react';
 import { dialogStore } from '@store';
 import {
   BUSINESS_CATEGORY_ROW,
-  BusinessCategoryRowResponse,
+  BusinessCategoryRow,
   CUSTOMER_ROW,
   CustomerRow,
   INDUSTRY_CATEGORY_ROW,
@@ -102,7 +102,7 @@ export class DialogHook {
     }, [open, setDialog]);
   }
 
-  useBusinessCategoryPageDialogCallback(key: 'update' | 'delete', row: BusinessCategoryRowResponse, open: boolean) {
+  useBusinessCategoryPageDialogCallback(key: 'update' | 'delete', row: BusinessCategoryRow, open: boolean) {
     const setDialog = dialogStore.useSetState();
 
     return useCallback(() => {

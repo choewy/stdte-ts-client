@@ -5,7 +5,7 @@ import { businessCategoryStore } from '@store';
 import {
   BusinessCategoryCreateBody,
   BusinessCategoryException,
-  BusinessCategoryRowResponse,
+  BusinessCategoryRow,
   BusinessCategoryUpdateBody,
   SnackEvent,
   businessCategoryHttpService,
@@ -111,9 +111,7 @@ export class BusinessCategoryHook {
     }, [body, setState]);
   }
 
-  useUpdateState(
-    row: BusinessCategoryRowResponse,
-  ): [BusinessCategoryUpdateBody, SetterOrUpdater<BusinessCategoryUpdateBody>] {
+  useUpdateState(row: BusinessCategoryRow): [BusinessCategoryUpdateBody, SetterOrUpdater<BusinessCategoryUpdateBody>] {
     const [body, setBody] = useState<BusinessCategoryUpdateBody>({
       name: '',
       description: '',

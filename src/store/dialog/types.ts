@@ -1,5 +1,5 @@
 import {
-  BusinessCategoryRowResponse,
+  BusinessCategoryRow,
   CustomerRow,
   RoleRow,
   TaskCategoryRowChild,
@@ -30,13 +30,13 @@ export type DialogStoreProps = {
   };
   businessCategory: {
     create: { open: boolean };
-    update: { open: boolean; row: BusinessCategoryRowResponse };
-    delete: { open: boolean; row: BusinessCategoryRowResponse };
+    update: { open: boolean; row: BusinessCategoryRow };
+    delete: { open: boolean; row: BusinessCategoryRow };
   };
   industryCategory: {
     create: { open: boolean };
-    update: { open: boolean; row: BusinessCategoryRowResponse };
-    delete: { open: boolean; row: BusinessCategoryRowResponse };
+    update: { open: boolean; row: BusinessCategoryRow };
+    delete: { open: boolean; row: BusinessCategoryRow };
   };
   taskCategory: {
     create: { open: boolean };

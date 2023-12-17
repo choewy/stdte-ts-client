@@ -2,11 +2,11 @@ import { FunctionComponent, useCallback } from 'react';
 
 import { Box, Button } from '@mui/material';
 
-import { BusinessCategoryCreateBody, BusinessCategoryRowResponse } from '@service';
+import { BusinessCategoryCreateBody, BusinessCategoryRow } from '@service';
 import { businessCategoryHook, buttonHook } from '@hook';
 
 export const BusinessCategoryPageUpdateDialogAction: FunctionComponent<{
-  row: BusinessCategoryRowResponse;
+  row: BusinessCategoryRow;
   body: BusinessCategoryCreateBody;
   onClose: () => void;
 }> = ({ row, body, onClose }) => {

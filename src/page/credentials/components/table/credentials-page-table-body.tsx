@@ -1,12 +1,12 @@
 import { FunctionComponent } from 'react';
 import { TableBody } from '@mui/material';
 
-import { adminCredentialsStore } from '@store';
+import { credentialsStore } from '@store';
 
 import { CredentialsPageTableBodyRow } from './credentials-page-table-body-row';
 
 export const CredentialsPageTableBody: FunctionComponent = () => {
-  const { list } = adminCredentialsStore.useValue();
+  const { list } = credentialsStore.useValue();
 
   return (
     <TableBody>

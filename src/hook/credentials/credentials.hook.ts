@@ -1,7 +1,7 @@
 import { FormEvent, useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { adminCredentialsStore, authorizeStore } from '@store';
+import { credentialsStore, authorizeStore } from '@store';
 import {
   CredentialsException,
   CredentialsSignInBody,
@@ -140,7 +140,7 @@ export class CredentialsHook {
   }
 
   useGetCredentialsStatsCallback() {
-    const setAdminCredentials = adminCredentialsStore.useSetState();
+    const setCredentials = credentialsStore.useSetState();
 
     return useCallback(async () => {
       const res = await credentialsHttpService.getStatsRows();
@@ -149,12 +149,12 @@ export class CredentialsHook {
         return SnackEvent.dispatchByException(new CredentialsException(res.exception));
       }
 
-      setAdminCredentials((prev) => ({ ...prev, stats: res.data }));
-    }, [setAdminCredentials]);
+      setCredentials((prev) => ({ ...prev, stats: res.data }));
+    }, [setCredentials]);
   }
 
   useGetCredentialsListCallback() {
-    const [{ load, query }, setAdminCredentials] = adminCredentialsStore.useState();
+    const [{ load, query }, setCredentials] = credentialsStore.useState();
 
     return useCallback(async () => {
       if (load === false) {
@@ -167,7 +167,7 @@ export class CredentialsHook {
         return SnackEvent.dispatchByException(new CredentialsException(res.exception));
       }
 
-      setAdminCredentials((prev) => ({
+      setCredentials((prev) => ({
         ...prev,
         load: false,
         list:
@@ -179,18 +179,18 @@ export class CredentialsHook {
                 query: res.data.query,
               },
       }));
-    }, [load, query, setAdminCredentials]);
+    }, [load, query, setCredentials]);
   }
 
   useCredentialsScrollEnd(scrollEnd: boolean) {
-    const setAdminCredentials = adminCredentialsStore.useSetState();
+    const setCredentials = credentialsStore.useSetState();
 
     useEffect(() => {
       if (scrollEnd === false) {
         return;
       }
 
-      setAdminCredentials((prev) => {
+      setCredentials((prev) => {
         const skip = prev.query.skip + prev.query.take;
 
         if (prev.list.total > skip) {
@@ -199,7 +199,7 @@ export class CredentialsHook {
 
         return prev;
       });
-    }, [scrollEnd, setAdminCredentials]);
+    }, [scrollEnd, setCredentials]);
   }
 
   useMountCredentialsPage() {
@@ -216,7 +216,7 @@ export class CredentialsHook {
   }
 
   useUnmountCredentialsPage() {
-    const resetAdminCredentials = adminCredentialsStore.useResetState();
+    const resetAdminCredentials = credentialsStore.useResetState();
 
     useEffect(() => {
       return () => {
@@ -228,7 +228,7 @@ export class CredentialsHook {
   useUpdateCredentialsStatusByAdminCallback(id: number, property: CredentialsChangeStatusComponentProperty) {
     const getCredentialsStats = this.useGetCredentialsStatsCallback();
 
-    const setAdminCredentials = adminCredentialsStore.useSetState();
+    const setCredentials = credentialsStore.useSetState();
 
     return useCallback(async () => {
       const res = await credentialsHttpService.updateStatusById(id, { status: property.status.next });
@@ -239,7 +239,7 @@ export class CredentialsHook {
 
       SnackEvent.dispatchBySuccess(property.message);
 
-      setAdminCredentials((prev) => {
+      setCredentials((prev) => {
         const rows = prev.list.rows.filter((row) => row.id !== id);
         const load = rows.length < prev.query.take;
 
@@ -247,7 +247,7 @@ export class CredentialsHook {
       });
 
       await getCredentialsStats();
-    }, [id, property, setAdminCredentials, getCredentialsStats]);
+    }, [id, property, setCredentials, getCredentialsStats]);
   }
 
   useUpdatePasswordByAdminState() {

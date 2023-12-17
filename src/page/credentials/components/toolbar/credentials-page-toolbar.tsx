@@ -3,21 +3,21 @@ import { FunctionComponent, SyntheticEvent, useCallback } from 'react';
 import { Box, Button, ButtonGroup, Tab, Tabs } from '@mui/material';
 
 import { CredentialsStatus } from '@common';
-import { adminCredentialsStore } from '@store';
+import { credentialsStore } from '@store';
 import { tabHook } from '@hook';
 
 export const CredentialsPageTabs: FunctionComponent = () => {
-  const initQuery = adminCredentialsStore.useInit().query;
+  const initQuery = credentialsStore.useInit().query;
 
-  const [{ stats, query }, setAdminCredentials] = adminCredentialsStore.useState();
+  const [{ stats, query }, setCredentials] = credentialsStore.useState();
 
   const tabProps = tabHook.useCredentialsTabProps(stats);
 
   const onChange = useCallback(
     (_: SyntheticEvent<Element, Event>, status: CredentialsStatus) => {
-      setAdminCredentials((prev) => ({ ...prev, query: { ...initQuery, status } }));
+      setCredentials((prev) => ({ ...prev, query: { ...initQuery, status } }));
     },
-    [setAdminCredentials],
+    [setCredentials],
   );
 
   return (

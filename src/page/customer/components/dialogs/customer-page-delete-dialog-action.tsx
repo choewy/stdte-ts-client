@@ -2,11 +2,11 @@ import { FunctionComponent, useCallback } from 'react';
 
 import { Box, Button } from '@mui/material';
 
-import { CustomerRowResponse } from '@service';
+import { CustomerRow } from '@service';
 import { customerHook } from '@hook';
 
 export const CustomerPageDeleteDialogAction: FunctionComponent<{
-  row: CustomerRowResponse;
+  row: CustomerRow;
   onClose: () => void;
 }> = ({ row, onClose }) => {
   const callback = customerHook.useDeleteCallback(row.id);

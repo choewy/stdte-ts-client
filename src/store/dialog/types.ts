@@ -1,6 +1,6 @@
 import {
   BusinessCategoryRowResponse,
-  CustomerRowResponse,
+  CustomerRow,
   RoleRow,
   TaskCategoryRowChild,
   TaskCategoryRowResponse,
@@ -25,8 +25,8 @@ export type DialogStoreProps = {
   };
   customer: {
     create: { open: boolean };
-    update: { open: boolean; row: CustomerRowResponse };
-    delete: { open: boolean; row: CustomerRowResponse };
+    update: { open: boolean; row: CustomerRow };
+    delete: { open: boolean; row: CustomerRow };
   };
   businessCategory: {
     create: { open: boolean };

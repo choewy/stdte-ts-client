@@ -5,7 +5,7 @@ import { customerStore } from '@store';
 import {
   CustomerCreateBody,
   CustomerException,
-  CustomerRowResponse,
+  CustomerRow,
   CustomerUpdateBody,
   SnackEvent,
   customerHttpService,
@@ -113,7 +113,7 @@ export class CustomerHook {
     }, [body, setState]);
   }
 
-  useUpdateState(row: CustomerRowResponse): [CustomerUpdateBody, SetterOrUpdater<CustomerUpdateBody>] {
+  useUpdateState(row: CustomerRow): [CustomerUpdateBody, SetterOrUpdater<CustomerUpdateBody>] {
     const [body, setBody] = useState<CustomerUpdateBody>({
       kr: '',
       en: '',

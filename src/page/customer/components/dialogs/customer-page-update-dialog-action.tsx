@@ -2,11 +2,11 @@ import { FunctionComponent, useCallback } from 'react';
 
 import { Box, Button } from '@mui/material';
 
-import { CustomerRowResponse, CustomerUpdateBody } from '@service';
+import { CustomerRow, CustomerUpdateBody } from '@service';
 import { buttonHook, customerHook } from '@hook';
 
 export const CustomerPageUpdateDialogAction: FunctionComponent<{
-  row: CustomerRowResponse;
+  row: CustomerRow;
   body: CustomerUpdateBody;
   onClose: () => void;
 }> = ({ row, body, onClose }) => {

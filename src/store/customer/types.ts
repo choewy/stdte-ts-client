@@ -1,7 +1,7 @@
-import { CustomerListQuery, CustomerListResponse } from '@service';
+import { CustomerListQuery, CustomerList } from '@service';
 
 export type CustomerStoreProps = {
   load: boolean;
-  list: CustomerListResponse;
+  list: CustomerList;
   query: CustomerListQuery;
 };

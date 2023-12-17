@@ -270,6 +270,32 @@ export class TaskCategoryHook {
       return true;
     }, [parentId, childId, body, setState]);
   }
+
+  useDeleteChildCallback(parentId: number, childId: number) {
+    const setState = taskCategoryStore.useSetState();
+
+    return useCallback(async () => {
+      const res = await taskCategoryHttpService.deleteChild(childId);
+
+      if (res.ok === false) {
+        SnackEvent.dispatchByException(new TaskCategoryException(res.exception));
+        return false;
+      }
+
+      SnackEvent.dispatchBySuccess('수행업무구분 소분류가 삭제되었습니다.');
+      setState((prev) => ({
+        ...prev,
+        list: {
+          ...prev.list,
+          rows: prev.list.rows.map((row) =>
+            row.id === parentId ? { ...row, children: row.children.filter((child) => child.id !== childId) } : row,
+          ),
+        },
+      }));
+
+      return true;
+    }, [parentId, childId, setState]);
+  }
 }
 
 export const taskCategoryHook = new TaskCategoryHook();

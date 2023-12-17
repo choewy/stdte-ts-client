@@ -4,18 +4,16 @@ import { Box, Button, ButtonGroup, Tab, Tabs } from '@mui/material';
 
 import { CredentialsStatus } from '@common';
 import { credentialsStore } from '@store';
+import { CREDENTIALS_LIST_QUERY } from '@service';
 import { tabHook } from '@hook';
 
 export const CredentialsPageTabs: FunctionComponent = () => {
-  const initQuery = credentialsStore.useInit().query;
-
   const [{ stats, query }, setCredentials] = credentialsStore.useState();
 
   const tabProps = tabHook.useCredentialsTabProps(stats);
-
   const onChange = useCallback(
     (_: SyntheticEvent<Element, Event>, status: CredentialsStatus) => {
-      setCredentials((prev) => ({ ...prev, query: { ...initQuery, status } }));
+      setCredentials((prev) => ({ ...prev, load: true, query: { ...CREDENTIALS_LIST_QUERY, status } }));
     },
     [setCredentials],
   );

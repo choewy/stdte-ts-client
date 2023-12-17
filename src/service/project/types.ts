@@ -69,6 +69,7 @@ export type ProjectRow = {
   externalOwners: ProjectRowUser[];
   externalManagers: ProjectRowUser[];
   externalLeaders: ProjectRowUser[];
+  canExpose: boolean;
   createdAt: string;
   updatedAt: string;
 };

@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
+import { SetterOrUpdater } from 'recoil';
 
+import { customerStore } from '@store';
 import {
   CustomerCreateBody,
   CustomerException,
@@ -8,8 +10,6 @@ import {
   SnackEvent,
   customerHttpService,
 } from '@service';
-import { customerStore } from '@store';
-import { SetterOrUpdater } from 'recoil';
 
 export class CustomerHook {
   useGetListCallback() {

@@ -84,7 +84,7 @@ export class ThemeProperty implements ThemeOptions {
         defaultProps: {
           sx: {
             textWrap: 'nowrap',
-            border: '1px solid rgba(224, 224, 224, 1)',
+            border: `1px solid ${color === 'dark' ? 'rgba(50, 50, 50, 1)' : 'rgba(225, 225, 225, 1)'}`,
           },
         },
       },

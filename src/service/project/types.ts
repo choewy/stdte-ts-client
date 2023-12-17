@@ -4,15 +4,15 @@ import { HttpClientListQuery, HttpClientListResponse } from '@core';
 export type ProjectRowOrderRecord = {
   date: string;
   amount: string;
-  createdAt: string | null;
-  updatedAt: string | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type ProjectRowSaleRecord = {
   date: string;
   amount: string;
-  createdAt: string | null;
-  updatedAt: string | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type ProjectRowBusinessCategory = {

@@ -13,12 +13,13 @@ export const TaskCategoryPageChildrenDialogContentTableBody: FunctionComponent<{
 }> = ({ parent, canUpdate, canDelete }) => {
   return (
     <TableBody>
-      {parent.children.map((row, index) => (
+      {parent.children.map((child, index) => (
         <TaskCategoryPageChildrenDialogContentTableBodyRow
           {...{
-            key: ['task-category-page-children-table-row', row.id, index].join('-'),
+            key: ['task-category-page-children-table-row', parent.id, child.id, index].join('-'),
             index,
-            row,
+            parent,
+            child,
             canUpdate,
             canDelete,
           }}

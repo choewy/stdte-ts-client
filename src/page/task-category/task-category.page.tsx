@@ -13,6 +13,7 @@ import {
   TaskCategoryPageDeleteDialog,
   TaskCategoryPageChildrenDialog,
   TaskCategoryPageChildCreateDialog,
+  TaskCategoryPageChildUpdateDialog,
   TaskCategoryPageToolbar,
   TaskCategoryPageTable,
 } from './components';
@@ -43,6 +44,7 @@ export const TaskCategoryPage: FunctionComponent = () => {
       <TaskCategoryPageDeleteDialog />
       <TaskCategoryPageChildrenDialog />
       <TaskCategoryPageChildCreateDialog />
+      <TaskCategoryPageChildUpdateDialog />
       <TaskCategoryPageToolbar {...{ canCreate }} />
       <TaskCategoryPageTable {...{ canUpdate, canDelete }} />
     </Box>

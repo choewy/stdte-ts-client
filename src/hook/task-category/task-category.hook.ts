@@ -8,7 +8,9 @@ import {
   TaskCategoryCreateChildBody,
   TaskCategoryException,
   TaskCategoryRow,
+  TaskCategoryRowChild,
   TaskCategoryUpdateBody,
+  TaskCategoryUpdateChildBody,
   taskCategoryHttpService,
 } from '@service';
 
@@ -85,26 +87,6 @@ export class TaskCategoryHook {
       name: '',
       description: '',
     });
-  }
-
-  useCreateChildState(
-    parent: TaskCategoryRow,
-  ): [TaskCategoryCreateChildBody, SetterOrUpdater<TaskCategoryCreateChildBody>] {
-    const [body, setBody] = useState<TaskCategoryCreateChildBody>({
-      parent: 0,
-      name: '',
-      description: '',
-    });
-
-    useEffect(() => {
-      setBody({
-        parent: parent.id,
-        name: '',
-        description: '',
-      });
-    }, [parent, setBody]);
-
-    return [body, setBody];
   }
 
   useCreateCallback(body: TaskCategoryCreateBody) {
@@ -197,6 +179,26 @@ export class TaskCategoryHook {
     }, [id, setState]);
   }
 
+  useCreateChildState(
+    parent: TaskCategoryRow,
+  ): [TaskCategoryCreateChildBody, SetterOrUpdater<TaskCategoryCreateChildBody>] {
+    const [body, setBody] = useState<TaskCategoryCreateChildBody>({
+      parent: 0,
+      name: '',
+      description: '',
+    });
+
+    useEffect(() => {
+      setBody({
+        parent: parent.id,
+        name: '',
+        description: '',
+      });
+    }, [parent, setBody]);
+
+    return [body, setBody];
+  }
+
   useCreateChildCallback(body: TaskCategoryCreateChildBody) {
     const setState = taskCategoryStore.useSetState();
 
@@ -214,13 +216,59 @@ export class TaskCategoryHook {
         list: {
           ...prev.list,
           rows: prev.list.rows.map((row) =>
-            row.id === body.parent ? { ...row, children: [res.data, ...row.children] } : row,
+            row.id === body.parent ? { ...row, children: [...row.children, res.data] } : row,
           ),
         },
       }));
 
       return true;
     }, [body, setState]);
+  }
+
+  useUpdateChildState(
+    row: TaskCategoryRowChild,
+  ): [TaskCategoryUpdateChildBody, SetterOrUpdater<TaskCategoryUpdateChildBody>] {
+    const [body, setBody] = useState<TaskCategoryUpdateChildBody>({
+      name: '',
+      description: '',
+    });
+
+    useEffect(() => {
+      setBody({
+        name: row.name,
+        description: row.description,
+      });
+    }, [row, setBody]);
+
+    return [body, setBody];
+  }
+
+  useUpdateChildCallback(parentId: number, childId: number, body: TaskCategoryUpdateBody) {
+    const setState = taskCategoryStore.useSetState();
+
+    return useCallback(async () => {
+      const res = await taskCategoryHttpService.updateChild(childId, body);
+
+      if (res.ok === false) {
+        SnackEvent.dispatchByException(new TaskCategoryException(res.exception));
+        return false;
+      }
+
+      SnackEvent.dispatchBySuccess('수행업무구분 소분류가 저장되었습니다.');
+      setState((prev) => ({
+        ...prev,
+        list: {
+          ...prev.list,
+          rows: prev.list.rows.map((row) =>
+            row.id === parentId
+              ? { ...row, children: row.children.map((child) => (child.id === childId ? res.data : child)) }
+              : row,
+          ),
+        },
+      }));
+
+      return true;
+    }, [parentId, childId, body, setState]);
   }
 }
 

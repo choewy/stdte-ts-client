@@ -62,9 +62,9 @@ export class DialogStore extends RecoilStore<DialogStoreProps> {
         delete: { open: false, row: TASK_CATEGORY_ROW },
         children: { open: false, row: TASK_CATEGORY_ROW },
         child: {
-          create: { open: false, parant: TASK_CATEGORY_ROW },
-          update: { open: false, row: TASK_CATEGORY_ROW_CHILD },
-          delete: { open: false, row: TASK_CATEGORY_ROW_CHILD },
+          create: { open: false, parent: TASK_CATEGORY_ROW },
+          update: { open: false, parent: TASK_CATEGORY_ROW, child: TASK_CATEGORY_ROW_CHILD },
+          delete: { open: false, parent: TASK_CATEGORY_ROW, child: TASK_CATEGORY_ROW_CHILD },
         },
       },
     });

@@ -2,22 +2,22 @@ import { FunctionComponent } from 'react';
 
 import { TableBody } from '@mui/material';
 
-import { businessCategoryStore } from '@store';
+import { customerStore } from '@store';
 
-import { BusinessCategoryPageTableBodyRow } from './business-category-page-table-body-row';
+import { CustomerPageTableBodyRow } from './customer-page-table-body-row';
 
-export const BusinessCategoryPageTableBody: FunctionComponent<{
+export const CustomerPageTableBody: FunctionComponent<{
   canUpdate: boolean;
   canDelete: boolean;
 }> = ({ canUpdate, canDelete }) => {
-  const { list } = businessCategoryStore.useValue();
+  const { list } = customerStore.useValue();
 
   return (
     <TableBody>
       {list.rows.map((row, index) => (
-        <BusinessCategoryPageTableBodyRow
+        <CustomerPageTableBodyRow
           {...{
-            key: ['business-category-page-table-row', row.id, index].join('-'),
+            key: ['customer-page-table-row', row.id, index].join('-'),
             index,
             row,
             canUpdate,

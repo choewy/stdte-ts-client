@@ -10,4 +10,7 @@ export * from './role';
 export * from './user';
 export * from './credentials';
 export * from './not-found';
+export * from './customer';
 export * from './buiness-category';
+export * from './industry-category';
+export * from './task-category';

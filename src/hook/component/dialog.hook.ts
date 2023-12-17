@@ -1,7 +1,16 @@
 import { useCallback } from 'react';
 
 import { DIALOG_DEFAULT_ROLE_ROW, DIALOG_DEFAULT_USER_ROW, dialogStore } from '@store';
-import { BUSINESS_CATEGORY_ROW, BusinessCategoryRowResponse, RoleAdminRowResponse, UserRowResponse } from '@service';
+import {
+  BUSINESS_CATEGORY_ROW,
+  BusinessCategoryRowResponse,
+  CUSTOMER_ROW,
+  CustomerRowResponse,
+  INDUSTRY_CATEGORY_ROW,
+  IndustryCategoryRowResponse,
+  RoleAdminRowResponse,
+  UserRowResponse,
+} from '@service';
 
 export class DialogHook {
   useMyPageUpdatePasswordDialogCallback(open: boolean) {
@@ -100,6 +109,62 @@ export class DialogHook {
         businessCategory: {
           ...prev.businessCategory,
           [key]: { open, row: open === false ? BUSINESS_CATEGORY_ROW : row },
+        },
+      }));
+    }, [key, row, open, setDialog]);
+  }
+
+  useIndustryCategoryPageCreateDialogCallback(open: boolean) {
+    const setDialog = dialogStore.useSetState();
+
+    return useCallback(() => {
+      setDialog((prev) => ({
+        ...prev,
+        industryCategory: {
+          ...prev.industryCategory,
+          create: { open },
+        },
+      }));
+    }, [open, setDialog]);
+  }
+
+  useIndustryCategoryPageDialogCallback(key: 'update' | 'delete', row: IndustryCategoryRowResponse, open: boolean) {
+    const setDialog = dialogStore.useSetState();
+
+    return useCallback(() => {
+      setDialog((prev) => ({
+        ...prev,
+        industryCategory: {
+          ...prev.industryCategory,
+          [key]: { open, row: open === false ? INDUSTRY_CATEGORY_ROW : row },
+        },
+      }));
+    }, [key, row, open, setDialog]);
+  }
+
+  useCustomerPageCreateDialogCallback(open: boolean) {
+    const setDialog = dialogStore.useSetState();
+
+    return useCallback(() => {
+      setDialog((prev) => ({
+        ...prev,
+        customer: {
+          ...prev.customer,
+          create: { open },
+        },
+      }));
+    }, [open, setDialog]);
+  }
+
+  useCustomerPageDialogCallback(key: 'update' | 'delete', row: CustomerRowResponse, open: boolean) {
+    const setDialog = dialogStore.useSetState();
+
+    return useCallback(() => {
+      setDialog((prev) => ({
+        ...prev,
+        customer: {
+          ...prev.customer,
+          [key]: { open, row: open === false ? CUSTOMER_ROW : row },
         },
       }));
     }, [key, row, open, setDialog]);

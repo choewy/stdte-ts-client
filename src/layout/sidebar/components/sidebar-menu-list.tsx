@@ -9,8 +9,8 @@ import { SidebarMenuNaviageItem } from './sidebar-menu-navigate-item';
 import { SidebarMenuCollapseItem } from './sidebar-menu-collapse-item';
 
 export const SidebarMenuList: FunctionComponent = () => {
-  const credentials = authorizeStore.useValue();
-  const items = sidebarService.filterItems(credentials);
+  const authorize = authorizeStore.useValue();
+  const items = sidebarService.filterItems(authorize);
 
   return (
     <List disablePadding>

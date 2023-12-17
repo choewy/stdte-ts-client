@@ -1,5 +1,4 @@
 import { v4 } from 'uuid';
-
 import { FunctionComponent, ReactElement } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,15 +6,16 @@ import { Box, Button } from '@mui/material';
 
 import { PagePath } from '@common';
 import { authorizeStore } from '@store';
+
 import { HeaderThemeSwitch } from './header-theme-switch';
 
 export const HeaderButtonGroup: FunctionComponent = () => {
   const navigate = useNavigate();
-  const credentials = authorizeStore.useValue();
+  const authorize = authorizeStore.useValue();
 
   const elements: ReactElement[] = [<HeaderThemeSwitch key={v4()} />];
 
-  if (credentials) {
+  if (authorize) {
     elements.push(
       <Button
         {...{
@@ -40,7 +40,7 @@ export const HeaderButtonGroup: FunctionComponent = () => {
     );
   }
 
-  if (credentials === false) {
+  if (authorize === false) {
     elements.push(
       <Button
         {...{

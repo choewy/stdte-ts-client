@@ -4,15 +4,15 @@ import { FunctionComponent } from 'react';
 import { TableRow } from '@mui/material';
 
 import { TableComponentCell, TableValueCell } from '@component';
-import { CredentialsAdminRowResponse, enumService } from '@service';
+import { CredentialsRow, enumService } from '@service';
 
 import { CredentialsPageTableBodyRowChangeStatusButton } from './credentials-page-table-body-row-change-status-button';
 import { CredentialsPageTableBodyRowChangePasswordButton } from './credentials-page-table-body-row-change-password-button';
 
-export const CredentialsPageTableBodyRow: FunctionComponent<{ row: CredentialsAdminRowResponse; index: number }> = ({
-  row,
-  index,
-}) => {
+export const CredentialsPageTableBodyRow: FunctionComponent<{
+  index: number;
+  row: CredentialsRow;
+}> = ({ index, row }) => {
   const keyPrefix = 'credentials-table-row';
 
   const buttonProperties = enumService.credentialsStatusComponentProperties(row.status);

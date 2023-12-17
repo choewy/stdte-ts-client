@@ -1,12 +1,12 @@
 import { HttpService } from '@core';
 
 import {
-  CredentialsAdminListQuery,
-  CredentialsAdminListResponse,
-  CredentialsAdminStatsResposne,
-  CredentialsAdminUpdatePasswordBody,
-  CredentialsAdminUpdateStatusBody,
-  CredentialsResponse,
+  CredentialsListQuery,
+  CredentialsList,
+  CredentialsStatsRow,
+  CredentialsUpdatePasswordByIdBody,
+  CredentialsUpdateStatusByIdBody,
+  Credentials,
   CredentialsSignInBody,
   CredentialsSignUpBody,
   CredentialsUpdatePasswordBody,
@@ -14,15 +14,15 @@ import {
 
 export class CredentialsHttpService extends HttpService {
   async credentials() {
-    return this.get<CredentialsResponse>(this.url(), { delay: 500 });
+    return this.get<Credentials>(this.url(), { delay: 500 });
   }
 
   async signin(body: CredentialsSignInBody) {
-    return this.post<CredentialsResponse>(this.url('signin'), body, { delay: 500 });
+    return this.post<Credentials>(this.url('signin'), body, { delay: 500 });
   }
 
   async signup(body: CredentialsSignUpBody) {
-    return this.post<CredentialsResponse>(this.url('signup'), body, { delay: 500 });
+    return this.post<Credentials>(this.url('signup'), body, { delay: 500 });
   }
 
   async signout() {
@@ -33,19 +33,19 @@ export class CredentialsHttpService extends HttpService {
     return this.patch<null>(this.url('password'), body, { delay: 500 });
   }
 
-  async getStatsByAdmin() {
-    return this.get<CredentialsAdminStatsResposne[]>(this.url('stats'));
+  async getStatsRows() {
+    return this.get<CredentialsStatsRow[]>(this.url('stats'));
   }
 
-  async getListByAdmin(query: CredentialsAdminListQuery) {
-    return this.get<CredentialsAdminListResponse>(this.url('list'), { params: query, delay: 500 });
+  async getList(query: CredentialsListQuery) {
+    return this.get<CredentialsList>(this.url('list'), { params: query, delay: 500 });
   }
 
-  async updatePasswordByAdmin(id: number, body: CredentialsAdminUpdatePasswordBody) {
+  async updatePasswordById(id: number, body: CredentialsUpdatePasswordByIdBody) {
     return this.patch<null>(this.url(id, 'password'), body, { delay: 500 });
   }
 
-  async updateStatusByAdmin(id: number, body: CredentialsAdminUpdateStatusBody) {
+  async updateStatusById(id: number, body: CredentialsUpdateStatusByIdBody) {
     return this.patch<null>(this.url(id, 'status'), body, { delay: 500 });
   }
 }

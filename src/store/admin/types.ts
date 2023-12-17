@@ -1,8 +1,8 @@
-import { CredentialsAdminListQuery, CredentialsAdminListResponse, CredentialsAdminStatsResposne } from '@service';
+import { CredentialsListQuery, CredentialsList, CredentialsStatsRow } from '@service';
 
 export type AdminCredentialsStoreProps = {
   load: boolean;
-  stats: CredentialsAdminStatsResposne[];
-  list: CredentialsAdminListResponse;
-  query: CredentialsAdminListQuery;
+  stats: CredentialsStatsRow[];
+  list: CredentialsList;
+  query: CredentialsListQuery;
 };

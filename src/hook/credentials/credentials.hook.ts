@@ -12,7 +12,7 @@ import {
   credentialsHttpService,
   credentialsValidator,
   localStorageService,
-  CredentialsAdminUpdatePasswordBody,
+  CredentialsUpdatePasswordByIdBody,
 } from '@service';
 
 export class CredentialsHook {
@@ -143,7 +143,7 @@ export class CredentialsHook {
     const setAdminCredentials = adminCredentialsStore.useSetState();
 
     return useCallback(async () => {
-      const res = await credentialsHttpService.getStatsByAdmin();
+      const res = await credentialsHttpService.getStatsRows();
 
       if (res.ok === false) {
         return SnackEvent.dispatchByException(new CredentialsException(res.exception));
@@ -161,7 +161,7 @@ export class CredentialsHook {
         return;
       }
 
-      const res = await credentialsHttpService.getListByAdmin(query);
+      const res = await credentialsHttpService.getList(query);
 
       if (res.ok === false) {
         return SnackEvent.dispatchByException(new CredentialsException(res.exception));
@@ -231,7 +231,7 @@ export class CredentialsHook {
     const setAdminCredentials = adminCredentialsStore.useSetState();
 
     return useCallback(async () => {
-      const res = await credentialsHttpService.updateStatusByAdmin(id, { status: property.status.next });
+      const res = await credentialsHttpService.updateStatusById(id, { status: property.status.next });
 
       if (res.ok === false) {
         return SnackEvent.dispatchByException(new CredentialsException(res.exception));
@@ -251,22 +251,22 @@ export class CredentialsHook {
   }
 
   useUpdatePasswordByAdminState() {
-    return useState<CredentialsAdminUpdatePasswordBody>({
+    return useState<CredentialsUpdatePasswordByIdBody>({
       newPassword: '',
       confirmPassword: '',
     });
   }
 
-  useUpdatePasswordByAdminCallback(id: number, body: CredentialsAdminUpdatePasswordBody) {
+  useUpdatePasswordByAdminCallback(id: number, body: CredentialsUpdatePasswordByIdBody) {
     return useCallback(async () => {
-      const message = credentialsValidator.updatePasswordByAdmin(body);
+      const message = credentialsValidator.updatePasswordById(body);
 
       if (message) {
         SnackEvent.dispatchByWarning(message);
         return false;
       }
 
-      const res = await credentialsHttpService.updatePasswordByAdmin(id, body);
+      const res = await credentialsHttpService.updatePasswordById(id, body);
 
       if (res.ok === false) {
         SnackEvent.dispatchByException(new CredentialsException(res.exception));

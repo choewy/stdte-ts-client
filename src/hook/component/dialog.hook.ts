@@ -4,6 +4,7 @@ import { DIALOG_DEFAULT_ROLE_ROW, DIALOG_DEFAULT_USER_ROW, dialogStore } from '@
 import {
   BUSINESS_CATEGORY_ROW,
   BusinessCategoryRowResponse,
+  CUSTOMER_ROW,
   CustomerRowResponse,
   INDUSTRY_CATEGORY_ROW,
   IndustryCategoryRowResponse,
@@ -147,8 +148,8 @@ export class DialogHook {
     return useCallback(() => {
       setDialog((prev) => ({
         ...prev,
-        businessCategory: {
-          ...prev.businessCategory,
+        customer: {
+          ...prev.customer,
           create: { open },
         },
       }));
@@ -161,9 +162,9 @@ export class DialogHook {
     return useCallback(() => {
       setDialog((prev) => ({
         ...prev,
-        businessCategory: {
-          ...prev.businessCategory,
-          [key]: { open, row: open === false ? BUSINESS_CATEGORY_ROW : row },
+        customer: {
+          ...prev.customer,
+          [key]: { open, row: open === false ? CUSTOMER_ROW : row },
         },
       }));
     }, [key, row, open, setDialog]);

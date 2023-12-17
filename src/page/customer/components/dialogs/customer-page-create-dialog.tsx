@@ -16,7 +16,7 @@ export const CustomerPageCreateDialog: FunctionComponent = () => {
   return (
     <DialogBoxy
       title="고객사 등록"
-      open={dialog.businessCategory.create.open}
+      open={dialog.customer.create.open}
       onClose={onClose}
       contents={<CustomerPageCreateDialogContent {...{ body, setBody }} />}
       actions={<CustomerPageCreateDialogAction {...{ body, onClose }} />}

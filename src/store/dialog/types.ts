@@ -1,4 +1,4 @@
-import { BusinessCategoryRowResponse, RoleAdminRowResponse, UserRowResponse } from '@service';
+import { BusinessCategoryRowResponse, CustomerRowResponse, RoleAdminRowResponse, UserRowResponse } from '@service';
 
 export type DialogStoreProps = {
   mypage: {
@@ -23,5 +23,10 @@ export type DialogStoreProps = {
     create: { open: boolean };
     update: { open: boolean; row: BusinessCategoryRowResponse };
     delete: { open: boolean; row: BusinessCategoryRowResponse };
+  };
+  customer: {
+    create: { open: boolean };
+    update: { open: boolean; row: CustomerRowResponse };
+    delete: { open: boolean; row: CustomerRowResponse };
   };
 };

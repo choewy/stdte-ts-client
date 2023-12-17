@@ -4,6 +4,8 @@ import { DIALOG_DEFAULT_ROLE_ROW, DIALOG_DEFAULT_USER_ROW, dialogStore } from '@
 import {
   BUSINESS_CATEGORY_ROW,
   BusinessCategoryRowResponse,
+  CUSTOMER_ROW,
+  CustomerRowResponse,
   INDUSTRY_CATEGORY_ROW,
   IndustryCategoryRowResponse,
   RoleAdminRowResponse,
@@ -135,6 +137,34 @@ export class DialogHook {
         industryCategory: {
           ...prev.industryCategory,
           [key]: { open, row: open === false ? INDUSTRY_CATEGORY_ROW : row },
+        },
+      }));
+    }, [key, row, open, setDialog]);
+  }
+
+  useCustomerPageCreateDialogCallback(open: boolean) {
+    const setDialog = dialogStore.useSetState();
+
+    return useCallback(() => {
+      setDialog((prev) => ({
+        ...prev,
+        customer: {
+          ...prev.customer,
+          create: { open },
+        },
+      }));
+    }, [open, setDialog]);
+  }
+
+  useCustomerPageDialogCallback(key: 'update' | 'delete', row: CustomerRowResponse, open: boolean) {
+    const setDialog = dialogStore.useSetState();
+
+    return useCallback(() => {
+      setDialog((prev) => ({
+        ...prev,
+        customer: {
+          ...prev.customer,
+          [key]: { open, row: open === false ? CUSTOMER_ROW : row },
         },
       }));
     }, [key, row, open, setDialog]);

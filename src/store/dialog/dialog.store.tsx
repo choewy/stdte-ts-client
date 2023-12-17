@@ -1,6 +1,6 @@
 import { RecoilStore } from '@core';
 
-import { BUSINESS_CATEGORY_ROW, INDUSTRY_CATEGORY_ROW } from '@service';
+import { BUSINESS_CATEGORY_ROW, CUSTOMER_ROW, INDUSTRY_CATEGORY_ROW } from '@service';
 
 import { DialogStoreProps } from './types';
 import { DIALOG_DEFAULT_ROLE_ROW, DIALOG_DEFAULT_USER_ROW } from './constants';
@@ -44,6 +44,11 @@ export class DialogStore extends RecoilStore<DialogStoreProps> {
         create: { open: false },
         update: { open: false, row: INDUSTRY_CATEGORY_ROW },
         delete: { open: false, row: INDUSTRY_CATEGORY_ROW },
+      },
+      customer: {
+        create: { open: false },
+        update: { open: false, row: CUSTOMER_ROW },
+        delete: { open: false, row: CUSTOMER_ROW },
       },
     });
   }

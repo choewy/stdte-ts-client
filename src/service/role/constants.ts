@@ -28,7 +28,7 @@ export const ROLE_ROW: RoleRow = {
   updatedAt: '',
 };
 
-export const ROLE_QUERY: RoleListQuery = {
+export const ROLE_LIST_QUERY: RoleListQuery = {
   skip: 0,
   take: 0,
 };
@@ -36,5 +36,5 @@ export const ROLE_QUERY: RoleListQuery = {
 export const ROLE_LIST: RoleList = {
   total: 0,
   rows: [],
-  query: ROLE_QUERY,
+  query: ROLE_LIST_QUERY,
 };

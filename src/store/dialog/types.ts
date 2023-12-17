@@ -4,7 +4,7 @@ import {
   RoleRow,
   TaskCategoryRowChild,
   TaskCategoryRowResponse,
-  UserRowResponse,
+  UserRow,
 } from '@service';
 
 export type DialogStoreProps = {
@@ -21,7 +21,7 @@ export type DialogStoreProps = {
     delete: { open: boolean; row: RoleRow };
   };
   user: {
-    update: { open: boolean; row: UserRowResponse };
+    update: { open: boolean; row: UserRow };
   };
   customer: {
     create: { open: boolean };

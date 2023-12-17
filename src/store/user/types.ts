@@ -1,6 +1,6 @@
-import { UserListQuery, UserListResponse } from '@service';
+import { UserListQuery, UserList } from '@service';
 
 export type UserStoreProps = {
   query: UserListQuery;
-  list: UserListResponse;
+  list: UserList;
 };

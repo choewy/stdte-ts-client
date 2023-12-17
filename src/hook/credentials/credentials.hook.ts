@@ -139,7 +139,7 @@ export class CredentialsHook {
     }, [signout]);
   }
 
-  useGetCredentialsStatsCallback() {
+  useGetStatsCallback() {
     const setCredentials = credentialsStore.useSetState();
 
     return useCallback(async () => {
@@ -153,7 +153,7 @@ export class CredentialsHook {
     }, [setCredentials]);
   }
 
-  useGetCredentialsListCallback() {
+  useGetListCallback() {
     const [{ load, query }, setCredentials] = credentialsStore.useState();
 
     return useCallback(async () => {
@@ -182,7 +182,7 @@ export class CredentialsHook {
     }, [load, query, setCredentials]);
   }
 
-  useCredentialsScrollEnd(scrollEnd: boolean) {
+  useScrollEnd(scrollEnd: boolean) {
     const setCredentials = credentialsStore.useSetState();
 
     useEffect(() => {
@@ -202,31 +202,31 @@ export class CredentialsHook {
     }, [scrollEnd, setCredentials]);
   }
 
-  useMountCredentialsPage() {
-    const getCredentialsStats = this.useGetCredentialsStatsCallback();
-    const getCredentialsList = this.useGetCredentialsListCallback();
+  useMount() {
+    const getStats = this.useGetStatsCallback();
+    const getCredentialsList = this.useGetListCallback();
 
     useEffect(() => {
-      getCredentialsStats();
-    }, [getCredentialsStats]);
+      getStats();
+    }, [getStats]);
 
     useEffect(() => {
       getCredentialsList();
     }, [getCredentialsList]);
   }
 
-  useUnmountCredentialsPage() {
-    const resetAdminCredentials = credentialsStore.useResetState();
+  useUnmount() {
+    const resetCredentials = credentialsStore.useResetState();
 
     useEffect(() => {
       return () => {
-        resetAdminCredentials();
+        resetCredentials();
       };
-    }, [resetAdminCredentials]);
+    }, [resetCredentials]);
   }
 
   useUpdateCredentialsStatusByAdminCallback(id: number, property: CredentialsChangeStatusComponentProperty) {
-    const getCredentialsStats = this.useGetCredentialsStatsCallback();
+    const getStats = this.useGetStatsCallback();
 
     const setCredentials = credentialsStore.useSetState();
 
@@ -246,8 +246,8 @@ export class CredentialsHook {
         return { ...prev, load, list: { ...prev.list, rows } };
       });
 
-      await getCredentialsStats();
-    }, [id, property, setCredentials, getCredentialsStats]);
+      await getStats();
+    }, [id, property, setCredentials, getStats]);
   }
 
   useUpdatePasswordByAdminState() {

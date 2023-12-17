@@ -1,5 +1,4 @@
 import { RecoilStore } from '@core';
-
 import {
   BUSINESS_CATEGORY_ROW,
   CUSTOMER_ROW,
@@ -7,10 +6,10 @@ import {
   ROLE_ROW,
   TASK_CATEGORY_ROW,
   TASK_CATEGORY_ROW_CHILD,
+  USER_ROW,
 } from '@service';
 
 import { DialogStoreProps } from './types';
-import { DIALOG_DEFAULT_USER_ROW } from './constants';
 
 export class DialogStore extends RecoilStore<DialogStoreProps> {
   constructor() {
@@ -40,7 +39,7 @@ export class DialogStore extends RecoilStore<DialogStoreProps> {
         },
       },
       user: {
-        update: { open: false, row: DIALOG_DEFAULT_USER_ROW },
+        update: { open: false, row: USER_ROW },
       },
       customer: {
         create: { open: false },

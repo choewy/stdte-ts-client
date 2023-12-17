@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import { DIALOG_DEFAULT_USER_ROW, dialogStore } from '@store';
+import { dialogStore } from '@store';
 import {
   BUSINESS_CATEGORY_ROW,
   BusinessCategoryRowResponse,
@@ -8,9 +8,10 @@ import {
   CustomerRowResponse,
   INDUSTRY_CATEGORY_ROW,
   IndustryCategoryRowResponse,
+  USER_ROW,
   ROLE_ROW,
   RoleRow,
-  UserRowResponse,
+  UserRow,
 } from '@service';
 
 export class DialogHook {
@@ -73,7 +74,7 @@ export class DialogHook {
     }, [key, row, open, setDialog]);
   }
 
-  useUserPageDialogCallback(key: 'update', row: UserRowResponse, open: boolean) {
+  useUserPageDialogCallback(key: 'update', row: UserRow, open: boolean) {
     const setDialog = dialogStore.useSetState();
 
     return useCallback(() => {
@@ -81,7 +82,7 @@ export class DialogHook {
         ...prev,
         user: {
           ...prev.user,
-          [key]: { open, row: open === false ? DIALOG_DEFAULT_USER_ROW : row },
+          [key]: { open, row: open === false ? USER_ROW : row },
         },
       }));
     }, [key, row, open, setDialog]);

@@ -5,6 +5,7 @@ import { taskCategoryStore } from '@store';
 import {
   SnackEvent,
   TaskCategoryCreateBody,
+  TaskCategoryCreateChildBody,
   TaskCategoryException,
   TaskCategoryRow,
   TaskCategoryUpdateBody,
@@ -84,6 +85,26 @@ export class TaskCategoryHook {
       name: '',
       description: '',
     });
+  }
+
+  useCreateChildState(
+    parent: TaskCategoryRow,
+  ): [TaskCategoryCreateChildBody, SetterOrUpdater<TaskCategoryCreateChildBody>] {
+    const [body, setBody] = useState<TaskCategoryCreateChildBody>({
+      parent: 0,
+      name: '',
+      description: '',
+    });
+
+    useEffect(() => {
+      setBody({
+        parent: parent.id,
+        name: '',
+        description: '',
+      });
+    }, [parent, setBody]);
+
+    return [body, setBody];
   }
 
   useCreateCallback(body: TaskCategoryCreateBody) {
@@ -174,6 +195,32 @@ export class TaskCategoryHook {
 
       return true;
     }, [id, setState]);
+  }
+
+  useCreateChildCallback(body: TaskCategoryCreateChildBody) {
+    const setState = taskCategoryStore.useSetState();
+
+    return useCallback(async () => {
+      const res = await taskCategoryHttpService.createChild(body);
+
+      if (res.ok === false) {
+        SnackEvent.dispatchByException(new TaskCategoryException(res.exception));
+        return false;
+      }
+
+      SnackEvent.dispatchBySuccess('수행업무구분 소분류가 등록되었습니다.');
+      setState((prev) => ({
+        ...prev,
+        list: {
+          ...prev.list,
+          rows: prev.list.rows.map((row) =>
+            row.id === body.parent ? { ...row, children: [res.data, ...row.children] } : row,
+          ),
+        },
+      }));
+
+      return true;
+    }, [body, setState]);
   }
 }
 

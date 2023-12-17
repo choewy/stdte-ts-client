@@ -9,9 +9,10 @@ import { taskCategoryHook } from '@hook';
 
 import {
   TaskCategoryPageCreateDialog,
-  TaskCategoryPageChildrenDialog,
   TaskCategoryPageUpdateDialog,
   TaskCategoryPageDeleteDialog,
+  TaskCategoryPageChildrenDialog,
+  TaskCategoryPageChildCreateDialog,
   TaskCategoryPageToolbar,
   TaskCategoryPageTable,
 } from './components';
@@ -38,9 +39,10 @@ export const TaskCategoryPage: FunctionComponent = () => {
       }}
     >
       <TaskCategoryPageCreateDialog />
-      <TaskCategoryPageChildrenDialog />
       <TaskCategoryPageUpdateDialog />
       <TaskCategoryPageDeleteDialog />
+      <TaskCategoryPageChildrenDialog />
+      <TaskCategoryPageChildCreateDialog />
       <TaskCategoryPageToolbar {...{ canCreate }} />
       <TaskCategoryPageTable {...{ canUpdate, canDelete }} />
     </Box>

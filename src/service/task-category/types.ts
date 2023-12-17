@@ -8,7 +8,7 @@ export type TaskCategoryRowChild = {
   updatedAt: string;
 };
 
-export type TaskCategoryRowResponse = {
+export type TaskCategoryRow = {
   id: number;
   name: string;
   description: string;
@@ -18,7 +18,7 @@ export type TaskCategoryRowResponse = {
 };
 
 export type TaskCategoryListQuery = HttpClientListQuery;
-export type TaskCategoryListResponse = HttpClientListResponse<TaskCategoryRowResponse, TaskCategoryListQuery>;
+export type TaskCategoryList = HttpClientListResponse<TaskCategoryRow, TaskCategoryListQuery>;
 
 export type TaskCategoryCreateBody = {
   name: string;

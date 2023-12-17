@@ -1,7 +1,7 @@
-import { TaskCategoryListQuery, TaskCategoryListResponse } from '@service';
+import { TaskCategoryListQuery, TaskCategoryList } from '@service';
 
 export type TaskCategoryStoreProps = {
   load: boolean;
-  list: TaskCategoryListResponse;
+  list: TaskCategoryList;
   query: TaskCategoryListQuery;
 };

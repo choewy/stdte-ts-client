@@ -4,27 +4,27 @@ import {
   TaskCategoryCreateBody,
   TaskCategoryCreateChildBody,
   TaskCategoryListQuery,
-  TaskCategoryListResponse,
+  TaskCategoryList,
   TaskCategoryRowChild,
-  TaskCategoryRowResponse,
+  TaskCategoryRow,
   TaskCategoryUpdateBody,
 } from './types';
 
 export class TaskCategoryHttpService extends HttpService {
   async getList(query: TaskCategoryListQuery) {
-    return this.get<TaskCategoryListResponse>(this.url(), { params: query, delay: 250 });
+    return this.get<TaskCategoryList>(this.url(), { params: query, delay: 250 });
   }
 
   async getRow(id: number) {
-    return this.get<TaskCategoryRowResponse>(this.url(id), { delay: 250 });
+    return this.get<TaskCategoryRow>(this.url(id), { delay: 250 });
   }
 
   async createRow(body: TaskCategoryCreateBody) {
-    return this.post<TaskCategoryRowResponse>(this.url(), body, { delay: 250 });
+    return this.post<TaskCategoryRow>(this.url(), body, { delay: 250 });
   }
 
   async updateRow(id: number, body: TaskCategoryUpdateBody) {
-    return this.patch<TaskCategoryRowResponse>(this.url(id), body, { delay: 250 });
+    return this.patch<TaskCategoryRow>(this.url(id), body, { delay: 250 });
   }
 
   async deleteRow(id: number) {

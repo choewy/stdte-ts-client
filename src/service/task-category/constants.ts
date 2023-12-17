@@ -1,14 +1,4 @@
-import {
-  TaskCategoryListQuery,
-  TaskCategoryListResponse,
-  TaskCategoryRowChild,
-  TaskCategoryRowResponse,
-} from './types';
-
-export const TASK_CATEGORY_QUERY: TaskCategoryListQuery = {
-  skip: 0,
-  take: 20,
-};
+import { TaskCategoryListQuery, TaskCategoryList, TaskCategoryRowChild, TaskCategoryRow } from './types';
 
 export const TASK_CATEGORY_ROW_CHILD: TaskCategoryRowChild = {
   id: 0,
@@ -18,7 +8,7 @@ export const TASK_CATEGORY_ROW_CHILD: TaskCategoryRowChild = {
   updatedAt: '',
 };
 
-export const TASK_CATEGORY_ROW: TaskCategoryRowResponse = {
+export const TASK_CATEGORY_ROW: TaskCategoryRow = {
   id: 0,
   name: '',
   description: '',
@@ -27,8 +17,13 @@ export const TASK_CATEGORY_ROW: TaskCategoryRowResponse = {
   updatedAt: '',
 };
 
-export const TASK_CATEGORY_LIST: TaskCategoryListResponse = {
+export const TASK_CATEGORY_LIST_QUERY: TaskCategoryListQuery = {
+  skip: 0,
+  take: 20,
+};
+
+export const TASK_CATEGORY_LIST: TaskCategoryList = {
   total: 0,
   rows: [],
-  query: TASK_CATEGORY_QUERY,
+  query: TASK_CATEGORY_LIST_QUERY,
 };

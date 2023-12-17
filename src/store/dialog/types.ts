@@ -1,11 +1,4 @@
-import {
-  BusinessCategoryRow,
-  CustomerRow,
-  RoleRow,
-  TaskCategoryRowChild,
-  TaskCategoryRowResponse,
-  UserRow,
-} from '@service';
+import { BusinessCategoryRow, CustomerRow, RoleRow, TaskCategoryRowChild, TaskCategoryRow, UserRow } from '@service';
 
 export type DialogStoreProps = {
   mypage: {
@@ -40,10 +33,10 @@ export type DialogStoreProps = {
   };
   taskCategory: {
     create: { open: boolean };
-    update: { open: boolean; row: TaskCategoryRowResponse };
-    delete: { open: boolean; row: TaskCategoryRowResponse };
+    update: { open: boolean; row: TaskCategoryRow };
+    delete: { open: boolean; row: TaskCategoryRow };
     child: {
-      create: { open: boolean; parant: TaskCategoryRowResponse };
+      create: { open: boolean; parant: TaskCategoryRow };
       update: { open: boolean; row: TaskCategoryRowChild };
       delete: { open: boolean; row: TaskCategoryRowChild };
     };

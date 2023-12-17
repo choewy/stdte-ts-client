@@ -1,6 +1,6 @@
 import { RecoilStore } from '@core';
 
-import { TASK_CATEGORY_LIST, TASK_CATEGORY_QUERY } from '@service';
+import { TASK_CATEGORY_LIST, TASK_CATEGORY_LIST_QUERY } from '@service';
 
 import { TaskCategoryStoreProps } from './types';
 
@@ -9,7 +9,7 @@ export class TaskCategoryStore extends RecoilStore<TaskCategoryStoreProps> {
     super(TaskCategoryStore.name, {
       load: true,
       list: TASK_CATEGORY_LIST,
-      query: TASK_CATEGORY_QUERY,
+      query: TASK_CATEGORY_LIST_QUERY,
     });
   }
 }

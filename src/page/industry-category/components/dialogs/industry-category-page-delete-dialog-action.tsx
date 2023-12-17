@@ -2,11 +2,11 @@ import { FunctionComponent, useCallback } from 'react';
 
 import { Box, Button } from '@mui/material';
 
-import { IndustryCategoryRowResponse } from '@service';
+import { IndustryCategoryRow } from '@service';
 import { industryCategoryHook } from '@hook';
 
 export const IndustryCategoryPageDeleteDialogAction: FunctionComponent<{
-  row: IndustryCategoryRowResponse;
+  row: IndustryCategoryRow;
   onClose: () => void;
 }> = ({ row, onClose }) => {
   const callback = industryCategoryHook.useDeleteCallback(row.id);

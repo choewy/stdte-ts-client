@@ -7,7 +7,7 @@ import {
   CUSTOMER_ROW,
   CustomerRowResponse,
   INDUSTRY_CATEGORY_ROW,
-  IndustryCategoryRowResponse,
+  IndustryCategoryRow,
   USER_ROW,
   ROLE_ROW,
   RoleRow,
@@ -130,7 +130,7 @@ export class DialogHook {
     }, [open, setDialog]);
   }
 
-  useIndustryCategoryPageDialogCallback(key: 'update' | 'delete', row: IndustryCategoryRowResponse, open: boolean) {
+  useIndustryCategoryPageDialogCallback(key: 'update' | 'delete', row: IndustryCategoryRow, open: boolean) {
     const setDialog = dialogStore.useSetState();
 
     return useCallback(() => {

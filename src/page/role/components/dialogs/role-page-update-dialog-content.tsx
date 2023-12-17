@@ -5,13 +5,13 @@ import { Box, TextField } from '@mui/material';
 
 import { ROLE_POLICY_KEY } from '@common';
 import { textFieldHook } from '@hook';
-import { RoleAdminUpdateBody } from '@service';
+import { RoleUpdateBody } from '@service';
 
 import { RolePageRolePolicySelectGroup } from './role-page-role-policy-select-group';
 
 export const RolePageUpdateDialogContent: FunctionComponent<{
-  body: RoleAdminUpdateBody;
-  setBody: SetterOrUpdater<RoleAdminUpdateBody>;
+  body: RoleUpdateBody;
+  setBody: SetterOrUpdater<RoleUpdateBody>;
 }> = ({ body, setBody }) => {
   const length = ROLE_POLICY_KEY.length;
   const half = Math.ceil(length / 2);

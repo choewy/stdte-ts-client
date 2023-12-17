@@ -1,32 +1,25 @@
 import { HttpService } from '@core';
 
-import {
-  RoleAdminCreateBody,
-  RoleAdminListQuery,
-  RoleAdminListResponse,
-  RoleAdminRowResponse,
-  RoleAdminUpdateBody,
-  RoleAdminUpdateUsersBody,
-} from './types';
+import { RoleCreateBody, RoleListQuery, RoleList, RoleRow, RoleUpdateBody, RoleUpdateUsersBody } from './types';
 
 export class RoleHttpService extends HttpService {
-  async getListByAdmin(query: RoleAdminListQuery) {
-    return this.get<RoleAdminListResponse>(this.url(), { params: query, delay: 500 });
+  async getList(query: RoleListQuery) {
+    return this.get<RoleList>(this.url(), { params: query, delay: 500 });
   }
 
-  async createRole(body: RoleAdminCreateBody) {
-    return this.post<RoleAdminRowResponse>(this.url(), body, { delay: 250 });
+  async createRow(body: RoleCreateBody) {
+    return this.post<RoleRow>(this.url(), body, { delay: 250 });
   }
 
-  async updateRole(id: number, body: Partial<RoleAdminUpdateBody>) {
-    return this.patch<RoleAdminRowResponse>(this.url(id), body, { delay: 250 });
+  async updateRow(id: number, body: Partial<RoleUpdateBody>) {
+    return this.patch<RoleRow>(this.url(id), body, { delay: 250 });
   }
 
-  async updateRoleUsers(id: number, body: Partial<RoleAdminUpdateUsersBody>) {
-    return this.put<RoleAdminRowResponse[]>(this.url(id, 'users'), body, { delay: 250 });
+  async updateRowUsers(id: number, body: RoleUpdateUsersBody) {
+    return this.put<RoleRow[]>(this.url(id, 'users'), { users: body.map(({ id }) => id) }, { delay: 250 });
   }
 
-  async deleteRole(id: number) {
+  async deleteRow(id: number) {
     return this.delete<null>(this.url(id));
   }
 }

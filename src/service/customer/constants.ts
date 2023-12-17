@@ -1,6 +1,6 @@
-import { CustomerListQuery, CustomerListResponse, CustomerRowResponse } from './types';
+import { CustomerListQuery, CustomerList, CustomerRow } from './types';
 
-export const CUSTOMER_ROW: CustomerRowResponse = {
+export const CUSTOMER_ROW: CustomerRow = {
   id: 0,
   kr: '',
   en: '',
@@ -10,13 +10,13 @@ export const CUSTOMER_ROW: CustomerRowResponse = {
   updatedAt: '',
 };
 
-export const CUSTOMER_QUERY: CustomerListQuery = {
+export const CUSTOMER_LIST_QUERY: CustomerListQuery = {
   skip: 0,
   take: 20,
 };
 
-export const CUSTOMER_LIST: CustomerListResponse = {
+export const CUSTOMER_LIST: CustomerList = {
   total: 0,
   rows: [],
-  query: CUSTOMER_QUERY,
+  query: CUSTOMER_LIST_QUERY,
 };

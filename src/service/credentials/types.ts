@@ -1,7 +1,7 @@
 import { CredentialsStatus, RolePolicyProperty } from '@common';
 import { HttpClientListQuery, HttpClientListResponse } from '@core';
 
-export type CredentialsRoleRespnose = {
+export type CredentialsRole = {
   id: number;
   name: string;
   rolePolicy: RolePolicyProperty;
@@ -9,11 +9,11 @@ export type CredentialsRoleRespnose = {
   updatedAt: string;
 };
 
-export type CredentialsResponse = {
+export type Credentials = {
   id: number;
   name: string;
   email: string;
-  role: CredentialsRoleRespnose | null;
+  role: CredentialsRole | null;
   status: CredentialsStatus;
   createdAt: string;
   updatedAt: string;
@@ -37,20 +37,20 @@ export type CredentialsUpdatePasswordBody = {
   confirmPassword: string;
 };
 
-export type CredentialsUpdateStatusParam = number;
-
 export type CredentialsUpdateStatusBody = {
   status: CredentialsStatus;
 };
 
-export type CredentialsAdminStatsResposne = {
+export type CredentialsStatsRow = {
   status: CredentialsStatus;
   count: number;
 };
 
-export type CredentialsAdminListQuery = HttpClientListQuery & { status: CredentialsStatus };
+export type CredentialsListQuery = HttpClientListQuery & {
+  status: CredentialsStatus;
+};
 
-export type CredentialsAdminRowResponse = {
+export type CredentialsRow = {
   id: number;
   email: string;
   name: string;
@@ -59,16 +59,13 @@ export type CredentialsAdminRowResponse = {
   updatedAt: string;
 };
 
-export type CredentialsAdminListResponse = HttpClientListResponse<
-  CredentialsAdminRowResponse,
-  CredentialsAdminListQuery
->;
+export type CredentialsList = HttpClientListResponse<CredentialsRow, CredentialsListQuery>;
 
-export type CredentialsAdminUpdatePasswordBody = {
+export type CredentialsUpdatePasswordByIdBody = {
   newPassword: string;
   confirmPassword: string;
 };
 
-export type CredentialsAdminUpdateStatusBody = {
+export type CredentialsUpdateStatusByIdBody = {
   status: CredentialsStatus;
 };

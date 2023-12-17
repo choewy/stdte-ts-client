@@ -3,13 +3,13 @@ import { SetterOrUpdater } from 'recoil';
 
 import { Checkbox, Chip, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 
-import { RoleAdminUsersBody, SelectRowResponse } from '@service';
+import { RoleUpdateUsersBody, SelectRow } from '@service';
 
 export const RolePageUsersDialogContentListItem: FunctionComponent<{
   name: string;
-  row: SelectRowResponse;
-  body: RoleAdminUsersBody;
-  setBody: SetterOrUpdater<RoleAdminUsersBody>;
+  row: SelectRow;
+  body: RoleUpdateUsersBody;
+  setBody: SetterOrUpdater<RoleUpdateUsersBody>;
 }> = ({ name, row, body, setBody }) => {
   const onClick = useCallback(() => {
     setBody((prev) => {
@@ -45,7 +45,12 @@ export const RolePageUsersDialogContentListItem: FunctionComponent<{
             }}
           />
         </ListItemIcon>
-        <ListItemText {...{ primary: row.name, primaryTypographyProps: { sx: { fontSize: 13 } } }} />
+        <ListItemText
+          {...{
+            primary: row.name,
+            primaryTypographyProps: { sx: { fontSize: 13 } },
+          }}
+        />
         {row.description && row.description !== name && <Chip label={row.description} />}
       </ListItemButton>
     </ListItem>

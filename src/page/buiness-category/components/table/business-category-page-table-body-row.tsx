@@ -3,7 +3,7 @@ import { FunctionComponent } from 'react';
 
 import { TableRow } from '@mui/material';
 
-import { BusinessCategoryRowResponse } from '@service';
+import { BusinessCategoryRow } from '@service';
 import { TableComponentCell, TableValueCell } from '@component';
 
 import { BusinessCategoryPageTableBodyRowUpdateButton } from './business-category-page-table-body-row-update-button';
@@ -11,7 +11,7 @@ import { BusinessCategoryPageTableBodyRowDeleteButton } from './business-categor
 
 export const BusinessCategoryPageTableBodyRow: FunctionComponent<{
   index: number;
-  row: BusinessCategoryRowResponse;
+  row: BusinessCategoryRow;
   canUpdate: boolean;
   canDelete: boolean;
 }> = ({ index, row, canUpdate, canDelete }) => {

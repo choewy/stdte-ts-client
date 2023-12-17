@@ -4,11 +4,11 @@ import { FunctionComponent } from 'react';
 import { TableRow } from '@mui/material';
 
 import { TableComponentCell, TableValueCell } from '@component';
-import { UserRowResponse, enumService } from '@service';
+import { UserRow, enumService } from '@service';
 
 import { UserPageTableBodyRowUpdateButton } from './user-page-table-body-row-update-button';
 
-export const UserPageTableBodyRow: FunctionComponent<{ index: number; row: UserRowResponse; canUpdate: boolean }> = ({
+export const UserPageTableBodyRow: FunctionComponent<{ index: number; row: UserRow; canUpdate: boolean }> = ({
   index,
   row,
   canUpdate,

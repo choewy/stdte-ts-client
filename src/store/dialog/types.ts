@@ -1,4 +1,4 @@
-import { BusinessCategoryRowResponse, CustomerRowResponse, RoleAdminRowResponse, UserRowResponse } from '@service';
+import { BusinessCategoryRow, CustomerRow, RoleRow, TaskCategoryRowChild, TaskCategoryRow, UserRow } from '@service';
 
 export type DialogStoreProps = {
   mypage: {
@@ -9,24 +9,37 @@ export type DialogStoreProps = {
   };
   role: {
     create: { open: boolean };
-    users: { open: boolean; row: RoleAdminRowResponse };
-    update: { open: boolean; row: RoleAdminRowResponse };
-    delete: { open: boolean; row: RoleAdminRowResponse };
+    users: { open: boolean; row: RoleRow };
+    update: { open: boolean; row: RoleRow };
+    delete: { open: boolean; row: RoleRow };
   };
-  user: { update: { open: boolean; row: UserRowResponse } };
-  businessCategory: {
-    create: { open: boolean };
-    update: { open: boolean; row: BusinessCategoryRowResponse };
-    delete: { open: boolean; row: BusinessCategoryRowResponse };
-  };
-  industryCategory: {
-    create: { open: boolean };
-    update: { open: boolean; row: BusinessCategoryRowResponse };
-    delete: { open: boolean; row: BusinessCategoryRowResponse };
+  user: {
+    update: { open: boolean; row: UserRow };
   };
   customer: {
     create: { open: boolean };
-    update: { open: boolean; row: CustomerRowResponse };
-    delete: { open: boolean; row: CustomerRowResponse };
+    update: { open: boolean; row: CustomerRow };
+    delete: { open: boolean; row: CustomerRow };
+  };
+  businessCategory: {
+    create: { open: boolean };
+    update: { open: boolean; row: BusinessCategoryRow };
+    delete: { open: boolean; row: BusinessCategoryRow };
+  };
+  industryCategory: {
+    create: { open: boolean };
+    update: { open: boolean; row: BusinessCategoryRow };
+    delete: { open: boolean; row: BusinessCategoryRow };
+  };
+  taskCategory: {
+    create: { open: boolean };
+    update: { open: boolean; row: TaskCategoryRow };
+    delete: { open: boolean; row: TaskCategoryRow };
+    children: { open: boolean; row: TaskCategoryRow };
+    child: {
+      create: { open: boolean; parent: TaskCategoryRow };
+      update: { open: boolean; parent: TaskCategoryRow; child: TaskCategoryRowChild };
+      delete: { open: boolean; parent: TaskCategoryRow; child: TaskCategoryRowChild };
+    };
   };
 };

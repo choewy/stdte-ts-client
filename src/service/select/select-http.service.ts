@@ -1,38 +1,38 @@
-import { HttpClientListQuery, HttpService } from '@core';
+import { HttpService } from '@core';
 
-import { SelectListResponse } from './types';
+import { SelectList, SelectListQuery } from './types';
 
 export class SelectHttpService extends HttpService {
-  async getUsers(query: HttpClientListQuery) {
-    return this.get<SelectListResponse>(this.url('users'), {
+  async getUsers(query: SelectListQuery) {
+    return this.get<SelectList>(this.url('users'), {
       params: query,
       delay: 250,
     });
   }
 
-  async getRoles(query: HttpClientListQuery) {
-    return this.get<SelectListResponse>(this.url('roles'), {
+  async getRoles(query: SelectListQuery) {
+    return this.get<SelectList>(this.url('roles'), {
       params: query,
       delay: 250,
     });
   }
 
-  async getBusinessCategories(query: HttpClientListQuery) {
-    return this.get<SelectListResponse>(this.url('category/businesses'), {
+  async getBusinessCategories(query: SelectListQuery) {
+    return this.get<SelectList>(this.url('category/businesses'), {
       params: query,
       delay: 250,
     });
   }
 
-  async getIndustryCategories(query: HttpClientListQuery) {
-    return this.get<SelectListResponse>(this.url('category/industries'), {
+  async getIndustryCategories(query: SelectListQuery) {
+    return this.get<SelectList>(this.url('category/industries'), {
       params: query,
       delay: 250,
     });
   }
 
-  async getTaskCategories(query: HttpClientListQuery) {
-    return this.get<SelectListResponse>(this.url('category/tasks'), {
+  async getTaskCategories(query: SelectListQuery) {
+    return this.get<SelectList>(this.url('category/tasks'), {
       params: query,
       delay: 250,
     });

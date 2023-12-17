@@ -2,12 +2,12 @@ import { FunctionComponent } from 'react';
 
 import { TableBody } from '@mui/material';
 
-import { adminRoleStore } from '@store';
+import { roleStore } from '@store';
 
 import { RolePageTableBodyRow } from './role-page-table-body-row';
 
 export const RolePageTableBody: FunctionComponent = () => {
-  const { list } = adminRoleStore.useValue();
+  const { list } = roleStore.useValue();
 
   return (
     <TableBody>

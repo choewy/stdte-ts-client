@@ -2,11 +2,11 @@ import { FunctionComponent, useCallback } from 'react';
 
 import { Box, Button } from '@mui/material';
 
-import { UserRowResponse, UserRowUpdateBody } from '@service';
+import { UserRow, UserRowUpdateBody } from '@service';
 import { buttonHook, userHook } from '@hook';
 
 export const UserPageUpdateDialogAction: FunctionComponent<{
-  row: UserRowResponse;
+  row: UserRow;
   body: UserRowUpdateBody;
   onClose: () => void;
 }> = ({ row, body, onClose }) => {
@@ -18,18 +18,18 @@ export const UserPageUpdateDialogAction: FunctionComponent<{
     body,
   );
 
-  const updateUser = userHook.useUpdateCallback(row.id, body);
-  const onClickUpdate = useCallback(async () => {
-    const ok = await updateUser();
+  const callback = userHook.useUpdateCallback(row.id, body);
+  const onClick = useCallback(async () => {
+    const ok = await callback();
 
     if (ok) {
       onClose();
     }
-  }, [updateUser, onClose]);
+  }, [callback, onClose]);
 
   return (
     <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-      <Button {...{ children: '저장', variant: 'text', onClick: onClickUpdate, disabled }} />
+      <Button {...{ children: '저장', variant: 'text', onClick, disabled }} />
       <Button {...{ children: '취소', variant: 'text', onClick: onClose }} />
     </Box>
   );

@@ -1,34 +1,34 @@
 import { useCallback, useEffect, useState } from 'react';
 import { SetterOrUpdater } from 'recoil';
 
-import { RolePolicyLevel } from '@common';
-import { adminRoleStore, selectStore } from '@store';
+import { roleStore, selectStore } from '@store';
 import {
-  RoleAdminCreateBody,
-  RoleAdminRowResponse,
-  RoleAdminUpdateBody,
-  RoleAdminUsersBody,
+  RoleCreateBody,
+  RoleRow,
+  RoleUpdateBody,
+  RoleUpdateUsersBody,
   RoleException,
   SnackEvent,
   roleHttpService,
+  ROLE_ROW_POLICY,
 } from '@service';
 
 export class RoleHook {
   useGetRoleListCallback() {
-    const [{ load, query }, setAdminRole] = adminRoleStore.useState();
+    const [{ load, query }, setRole] = roleStore.useState();
 
     return useCallback(async () => {
       if (load === false) {
         return;
       }
 
-      const res = await roleHttpService.getListByAdmin(query);
+      const res = await roleHttpService.getList(query);
 
       if (res.ok === false) {
         return SnackEvent.dispatchByException(new RoleException(res.exception));
       }
 
-      setAdminRole((prev) => ({
+      setRole((prev) => ({
         ...prev,
         load: false,
         list:
@@ -40,10 +40,10 @@ export class RoleHook {
                 query: res.data.query,
               },
       }));
-    }, [load, query, setAdminRole]);
+    }, [load, query, setRole]);
   }
 
-  useMountRolePage() {
+  useMount() {
     const getRoleList = this.useGetRoleListCallback();
 
     useEffect(() => {
@@ -51,27 +51,27 @@ export class RoleHook {
     }, [getRoleList]);
   }
 
-  useUnmountRolePage() {
-    const resetAdminRole = adminRoleStore.useResetState();
+  useUnmount() {
+    const resetRole = roleStore.useResetState();
     const resetSelect = selectStore.useResetState();
 
     useEffect(() => {
       return () => {
-        resetAdminRole();
+        resetRole();
         resetSelect();
       };
-    }, [resetAdminRole, resetSelect]);
+    }, [resetRole, resetSelect]);
   }
 
-  useRoleScrollEnd(scrollEnd: boolean) {
-    const setAdminRole = adminRoleStore.useSetState();
+  useScrollEnd(scrollEnd: boolean) {
+    const setRole = roleStore.useSetState();
 
     useEffect(() => {
       if (scrollEnd === false) {
         return;
       }
 
-      setAdminRole((prev) => {
+      setRole((prev) => {
         const skip = prev.query.skip + prev.query.take;
 
         if (prev.list.total > skip) {
@@ -80,31 +80,21 @@ export class RoleHook {
 
         return prev;
       });
-    }, [scrollEnd, setAdminRole]);
+    }, [scrollEnd, setRole]);
   }
 
-  useRoleCreateState() {
-    return useState<RoleAdminCreateBody>({
+  useCreateState() {
+    return useState<RoleCreateBody>({
       name: '',
-      rolePolicy: {
-        roleAndPolicy: RolePolicyLevel.Limit,
-        credentials: RolePolicyLevel.Limit,
-        user: RolePolicyLevel.Limit,
-        project: RolePolicyLevel.Limit,
-        customer: RolePolicyLevel.Limit,
-        businessCategory: RolePolicyLevel.Limit,
-        industryCategory: RolePolicyLevel.Limit,
-        taskCategory: RolePolicyLevel.Limit,
-        setting: RolePolicyLevel.Limit,
-      },
+      rolePolicy: ROLE_ROW_POLICY,
     });
   }
 
-  useRoleCreateCallback(body: RoleAdminCreateBody) {
-    const setAdminRole = adminRoleStore.useSetState();
+  useCreateCallback(body: RoleCreateBody) {
+    const setRole = roleStore.useSetState();
 
     return useCallback(async () => {
-      const res = await roleHttpService.createRole(body);
+      const res = await roleHttpService.createRow(body);
 
       if (res.ok === false) {
         SnackEvent.dispatchByException(new RoleException(res.exception));
@@ -113,7 +103,7 @@ export class RoleHook {
 
       SnackEvent.dispatchBySuccess('역할이 생성되었습니다.');
 
-      setAdminRole((prev) => ({
+      setRole((prev) => ({
         ...prev,
         list: {
           ...prev.list,
@@ -123,23 +113,13 @@ export class RoleHook {
       }));
 
       return true;
-    }, [body, setAdminRole]);
+    }, [body, setRole]);
   }
 
-  useRoleUpdateState(role: RoleAdminRowResponse): [RoleAdminUpdateBody, SetterOrUpdater<RoleAdminUpdateBody>] {
-    const [body, setBody] = useState<RoleAdminUpdateBody>({
+  useUpdateState(role: RoleRow): [RoleUpdateBody, SetterOrUpdater<RoleUpdateBody>] {
+    const [body, setBody] = useState<RoleUpdateBody>({
       name: '',
-      rolePolicy: {
-        roleAndPolicy: RolePolicyLevel.Limit,
-        credentials: RolePolicyLevel.Limit,
-        user: RolePolicyLevel.Limit,
-        project: RolePolicyLevel.Limit,
-        customer: RolePolicyLevel.Limit,
-        businessCategory: RolePolicyLevel.Limit,
-        industryCategory: RolePolicyLevel.Limit,
-        taskCategory: RolePolicyLevel.Limit,
-        setting: RolePolicyLevel.Limit,
-      },
+      rolePolicy: ROLE_ROW_POLICY,
     });
 
     useEffect(() => {
@@ -152,11 +132,11 @@ export class RoleHook {
     return [body, setBody];
   }
 
-  useRoleUpdateCallback(id: number, body: RoleAdminUpdateBody) {
-    const setAdminRole = adminRoleStore.useSetState();
+  useUpdateCallback(id: number, body: RoleUpdateBody) {
+    const setRole = roleStore.useSetState();
 
     return useCallback(async () => {
-      const res = await roleHttpService.updateRole(id, body);
+      const res = await roleHttpService.updateRow(id, body);
 
       if (res.ok === false) {
         SnackEvent.dispatchByException(new RoleException(res.exception));
@@ -165,7 +145,7 @@ export class RoleHook {
 
       SnackEvent.dispatchBySuccess('역할이 저장되었습니다.');
 
-      setAdminRole((prev) => ({
+      setRole((prev) => ({
         ...prev,
         list: {
           ...prev.list,
@@ -174,11 +154,11 @@ export class RoleHook {
       }));
 
       return true;
-    }, [id, body, setAdminRole]);
+    }, [id, body, setRole]);
   }
 
-  useRoleUsersState(role: RoleAdminRowResponse): [RoleAdminUsersBody, SetterOrUpdater<RoleAdminUsersBody>] {
-    const [body, setBody] = useState<RoleAdminUsersBody>([]);
+  useUpdateUsersState(role: RoleRow): [RoleUpdateUsersBody, SetterOrUpdater<RoleUpdateUsersBody>] {
+    const [body, setBody] = useState<RoleUpdateUsersBody>([]);
 
     useEffect(() => {
       setBody(role.users);
@@ -187,13 +167,11 @@ export class RoleHook {
     return [body, setBody];
   }
 
-  useRoleUsersUpdateCallback(id: number, body: RoleAdminUsersBody) {
-    const setAdminRole = adminRoleStore.useSetState();
+  useUpdateUsersCallback(id: number, body: RoleUpdateUsersBody) {
+    const setRole = roleStore.useSetState();
 
     return useCallback(async () => {
-      const res = await roleHttpService.updateRoleUsers(id, {
-        users: body.map(({ id }) => id),
-      });
+      const res = await roleHttpService.updateRowUsers(id, body);
 
       if (res.ok === false) {
         SnackEvent.dispatchByException(new RoleException(res.exception));
@@ -202,7 +180,7 @@ export class RoleHook {
 
       SnackEvent.dispatchBySuccess('역할이 저장되었습니다.');
 
-      setAdminRole((prev) => {
+      setRole((prev) => {
         if (res.data.length === 0) {
           return prev;
         }
@@ -223,14 +201,14 @@ export class RoleHook {
       });
 
       return true;
-    }, [id, body, setAdminRole]);
+    }, [id, body, setRole]);
   }
 
-  useDeleteRoleCallback(id: number) {
-    const setAdminRole = adminRoleStore.useSetState();
+  useDeleteCallback(id: number) {
+    const setRole = roleStore.useSetState();
 
     return useCallback(async () => {
-      const res = await roleHttpService.deleteRole(id);
+      const res = await roleHttpService.deleteRow(id);
 
       if (res.ok === false) {
         SnackEvent.dispatchByException(new RoleException(res.exception));
@@ -239,7 +217,7 @@ export class RoleHook {
 
       SnackEvent.dispatchBySuccess('역할이 삭제되었습니다.');
 
-      setAdminRole((prev) => {
+      setRole((prev) => {
         const total = prev.list.total - 1;
         const rows = prev.list.rows.filter((row) => row.id !== id);
         const load = rows.length < prev.query.take;
@@ -248,7 +226,7 @@ export class RoleHook {
       });
 
       return true;
-    }, [id, setAdminRole]);
+    }, [id, setRole]);
   }
 }
 

@@ -1,10 +1,10 @@
 import { FunctionComponent } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 
-import { credentialsHook } from '@hook';
+import { authorizeHook } from '@hook';
 
 export const AllowBlockOnlyGuardPage: FunctionComponent = () => {
-  const passOrPath = credentialsHook.useBlockOnlyGuard();
+  const passOrPath = authorizeHook.useBlockOnlyGuard();
 
   if (passOrPath == null) {
     return null;

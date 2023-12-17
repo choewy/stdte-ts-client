@@ -1,7 +1,7 @@
-import { IndustryCategoryListQuery, IndustryCategoryListResponse } from '@service';
+import { IndustryCategoryListQuery, IndustryCategoryList } from '@service';
 
 export type IndustryCategoryStoreProps = {
   load: boolean;
-  list: IndustryCategoryListResponse;
+  list: IndustryCategoryList;
   query: IndustryCategoryListQuery;
 };

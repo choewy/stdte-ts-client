@@ -1,8 +1,7 @@
 import { FormEvent, useCallback, useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-import { CredentialsStatus, PagePath } from '@common';
-import { adminCredentialsStore, credentialsStore } from '@store';
+import { credentialsStore, authorizeStore } from '@store';
 import {
   CredentialsException,
   CredentialsSignInBody,
@@ -13,148 +12,10 @@ import {
   credentialsHttpService,
   credentialsValidator,
   localStorageService,
-  CredentialsAdminUpdatePasswordBody,
+  CredentialsUpdatePasswordByIdBody,
 } from '@service';
 
-import { CredentialsGuardPassOrPath } from './types';
-
 export class CredentialsHook {
-  useCredentials() {
-    const pathname = useLocation().pathname;
-
-    const setCredentials = credentialsStore.useSetState();
-
-    const getCredentials = useCallback(async () => {
-      const res = await credentialsHttpService.credentials();
-
-      if (res.ok === false) {
-        return setCredentials(false);
-      }
-
-      setCredentials(res.data);
-    }, [pathname, setCredentials]);
-
-    useEffect(() => {
-      getCredentials();
-    }, [getCredentials]);
-  }
-
-  useGuestOnlyGuard() {
-    const credentials = credentialsStore.useValue();
-
-    const [passOrPath, setPassOrPath] = useState<CredentialsGuardPassOrPath>(null);
-
-    useEffect(() => {
-      if (credentials === null) {
-        return setPassOrPath(null);
-      }
-
-      if (credentials) {
-        return setPassOrPath(PagePath.Home);
-      }
-
-      setPassOrPath(true);
-    }, [credentials, setPassOrPath]);
-
-    return passOrPath;
-  }
-
-  useUserOnlyGuard() {
-    const pathname = useLocation().pathname;
-    const credentials = credentialsStore.useValue();
-
-    const [passOrPath, setPassOrPath] = useState<CredentialsGuardPassOrPath>(null);
-
-    useEffect(() => {
-      if (credentials === null) {
-        return setPassOrPath(null);
-      }
-
-      if (credentials === false) {
-        if (pathname !== PagePath.SignOut) {
-          SnackEvent.dispatchByWarning('접근 권한이 없습니다(로그인 필요)');
-        }
-
-        return setPassOrPath(PagePath.SignIn);
-      }
-
-      if (credentials.status === CredentialsStatus.Active) {
-        return setPassOrPath(true);
-      }
-
-      if ([PagePath.MyPage, PagePath.SignOut].includes(pathname as PagePath)) {
-        return setPassOrPath(true);
-      }
-
-      switch (credentials.status) {
-        case CredentialsStatus.Wating:
-          SnackEvent.dispatchByWarning('접근 권한이 없습니다(가입승인 대기 중)');
-          return setPassOrPath(PagePath.Wating);
-
-        case CredentialsStatus.Reject:
-          SnackEvent.dispatchByWarning('접근 권한이 없습니다(가입승인 거절)');
-          return setPassOrPath(PagePath.Rejected);
-
-        case CredentialsStatus.Disable:
-          SnackEvent.dispatchByWarning('접근 권한이 없습니다(비활성 계정)');
-          return setPassOrPath(PagePath.Disabled);
-      }
-    }, [pathname, credentials, setPassOrPath]);
-
-    return passOrPath;
-  }
-
-  useBlockOnlyGuard() {
-    const pathname = useLocation().pathname;
-    const credentials = credentialsStore.useValue();
-
-    const [passOrPath, setPassOrPath] = useState<CredentialsGuardPassOrPath>(null);
-
-    useEffect(() => {
-      if (credentials == null) {
-        return setPassOrPath(null);
-      }
-
-      if (credentials === false) {
-        SnackEvent.dispatchByWarning('접근 권한이 없습니다(로그인 필요)');
-
-        return setPassOrPath(PagePath.SignIn);
-      }
-
-      if (credentials.status === CredentialsStatus.Active) {
-        return setPassOrPath(PagePath.Home);
-      }
-
-      switch (credentials.status) {
-        case CredentialsStatus.Wating:
-          if (pathname === PagePath.Wating) {
-            setPassOrPath(true);
-          } else {
-            setPassOrPath(PagePath.Wating);
-          }
-          break;
-
-        case CredentialsStatus.Reject:
-          if (pathname === PagePath.Rejected) {
-            setPassOrPath(true);
-          } else {
-            setPassOrPath(PagePath.Rejected);
-          }
-          break;
-
-        case CredentialsStatus.Disable:
-          if (pathname === PagePath.Disabled) {
-            setPassOrPath(true);
-          } else {
-            setPassOrPath(PagePath.Disabled);
-          }
-          break;
-      }
-    }, [pathname, credentials, setPassOrPath]);
-
-    return passOrPath;
-  }
-
   useSignInState() {
     return useState<CredentialsSignInBody>({
       email: localStorageService.getEmail(),
@@ -163,7 +24,7 @@ export class CredentialsHook {
   }
 
   useSignInCallback(body: CredentialsSignInBody) {
-    const setCredentials = credentialsStore.useSetState();
+    const setAuthorize = authorizeStore.useSetState();
 
     return useCallback(
       async (e: FormEvent<HTMLElement>) => {
@@ -183,9 +44,9 @@ export class CredentialsHook {
 
         localStorageService.setEmail(body.email);
         SnackEvent.dispatchBySuccess('로그인되었습니다.');
-        setCredentials(res.data);
+        setAuthorize(res.data);
       },
-      [body, setCredentials],
+      [body, setAuthorize],
     );
   }
 
@@ -199,7 +60,7 @@ export class CredentialsHook {
   }
 
   useSignUpCallback(body: CredentialsSignUpBody) {
-    const setCredentials = credentialsStore.useSetState();
+    const setAuthorize = authorizeStore.useSetState();
 
     return useCallback(
       async (e: FormEvent<HTMLElement>) => {
@@ -218,9 +79,9 @@ export class CredentialsHook {
         }
 
         SnackEvent.dispatchBySuccess('회원가입이 요청되었습니다.');
-        setCredentials(res.data);
+        setAuthorize(res.data);
       },
-      [body, setCredentials],
+      [body, setAuthorize],
     );
   }
 
@@ -255,7 +116,7 @@ export class CredentialsHook {
 
   useSignOutCallback() {
     const navigate = useNavigate();
-    const setCredentials = credentialsStore.useSetState();
+    const setAuthorize = authorizeStore.useSetState();
 
     return useCallback(async () => {
       const res = await credentialsHttpService.signout();
@@ -266,8 +127,8 @@ export class CredentialsHook {
 
       SnackEvent.dispatchBySuccess('로그아웃되었습니다.');
 
-      setCredentials(false);
-    }, [navigate, setCredentials]);
+      setAuthorize(false);
+    }, [navigate, setAuthorize]);
   }
 
   useSignOutEffect() {
@@ -278,35 +139,35 @@ export class CredentialsHook {
     }, [signout]);
   }
 
-  useGetCredentialsStatsCallback() {
-    const setAdminCredentials = adminCredentialsStore.useSetState();
+  useGetStatsCallback() {
+    const setCredentials = credentialsStore.useSetState();
 
     return useCallback(async () => {
-      const res = await credentialsHttpService.getStatsByAdmin();
+      const res = await credentialsHttpService.getStatsRows();
 
       if (res.ok === false) {
         return SnackEvent.dispatchByException(new CredentialsException(res.exception));
       }
 
-      setAdminCredentials((prev) => ({ ...prev, stats: res.data }));
-    }, [setAdminCredentials]);
+      setCredentials((prev) => ({ ...prev, stats: res.data }));
+    }, [setCredentials]);
   }
 
-  useGetCredentialsListCallback() {
-    const [{ load, query }, setAdminCredentials] = adminCredentialsStore.useState();
+  useGetListCallback() {
+    const [{ load, query }, setCredentials] = credentialsStore.useState();
 
     return useCallback(async () => {
       if (load === false) {
         return;
       }
 
-      const res = await credentialsHttpService.getListByAdmin(query);
+      const res = await credentialsHttpService.getList(query);
 
       if (res.ok === false) {
         return SnackEvent.dispatchByException(new CredentialsException(res.exception));
       }
 
-      setAdminCredentials((prev) => ({
+      setCredentials((prev) => ({
         ...prev,
         load: false,
         list:
@@ -318,18 +179,18 @@ export class CredentialsHook {
                 query: res.data.query,
               },
       }));
-    }, [load, query, setAdminCredentials]);
+    }, [load, query, setCredentials]);
   }
 
-  useCredentialsScrollEnd(scrollEnd: boolean) {
-    const setAdminCredentials = adminCredentialsStore.useSetState();
+  useScrollEnd(scrollEnd: boolean) {
+    const setCredentials = credentialsStore.useSetState();
 
     useEffect(() => {
       if (scrollEnd === false) {
         return;
       }
 
-      setAdminCredentials((prev) => {
+      setCredentials((prev) => {
         const skip = prev.query.skip + prev.query.take;
 
         if (prev.list.total > skip) {
@@ -338,39 +199,39 @@ export class CredentialsHook {
 
         return prev;
       });
-    }, [scrollEnd, setAdminCredentials]);
+    }, [scrollEnd, setCredentials]);
   }
 
-  useMountCredentialsPage() {
-    const getCredentialsStats = this.useGetCredentialsStatsCallback();
-    const getCredentialsList = this.useGetCredentialsListCallback();
+  useMount() {
+    const getStats = this.useGetStatsCallback();
+    const getCredentialsList = this.useGetListCallback();
 
     useEffect(() => {
-      getCredentialsStats();
-    }, [getCredentialsStats]);
+      getStats();
+    }, [getStats]);
 
     useEffect(() => {
       getCredentialsList();
     }, [getCredentialsList]);
   }
 
-  useUnmountCredentialsPage() {
-    const resetAdminCredentials = adminCredentialsStore.useResetState();
+  useUnmount() {
+    const resetCredentials = credentialsStore.useResetState();
 
     useEffect(() => {
       return () => {
-        resetAdminCredentials();
+        resetCredentials();
       };
-    }, [resetAdminCredentials]);
+    }, [resetCredentials]);
   }
 
   useUpdateCredentialsStatusByAdminCallback(id: number, property: CredentialsChangeStatusComponentProperty) {
-    const getCredentialsStats = this.useGetCredentialsStatsCallback();
+    const getStats = this.useGetStatsCallback();
 
-    const setAdminCredentials = adminCredentialsStore.useSetState();
+    const setCredentials = credentialsStore.useSetState();
 
     return useCallback(async () => {
-      const res = await credentialsHttpService.updateStatusByAdmin(id, { status: property.status.next });
+      const res = await credentialsHttpService.updateStatusById(id, { status: property.status.next });
 
       if (res.ok === false) {
         return SnackEvent.dispatchByException(new CredentialsException(res.exception));
@@ -378,34 +239,34 @@ export class CredentialsHook {
 
       SnackEvent.dispatchBySuccess(property.message);
 
-      setAdminCredentials((prev) => {
+      setCredentials((prev) => {
         const rows = prev.list.rows.filter((row) => row.id !== id);
         const load = rows.length < prev.query.take;
 
         return { ...prev, load, list: { ...prev.list, rows } };
       });
 
-      await getCredentialsStats();
-    }, [id, property, setAdminCredentials, getCredentialsStats]);
+      await getStats();
+    }, [id, property, setCredentials, getStats]);
   }
 
   useUpdatePasswordByAdminState() {
-    return useState<CredentialsAdminUpdatePasswordBody>({
+    return useState<CredentialsUpdatePasswordByIdBody>({
       newPassword: '',
       confirmPassword: '',
     });
   }
 
-  useUpdatePasswordByAdminCallback(id: number, body: CredentialsAdminUpdatePasswordBody) {
+  useUpdatePasswordByAdminCallback(id: number, body: CredentialsUpdatePasswordByIdBody) {
     return useCallback(async () => {
-      const message = credentialsValidator.updatePasswordByAdmin(body);
+      const message = credentialsValidator.updatePasswordById(body);
 
       if (message) {
         SnackEvent.dispatchByWarning(message);
         return false;
       }
 
-      const res = await credentialsHttpService.updatePasswordByAdmin(id, body);
+      const res = await credentialsHttpService.updatePasswordById(id, body);
 
       if (res.ok === false) {
         SnackEvent.dispatchByException(new CredentialsException(res.exception));

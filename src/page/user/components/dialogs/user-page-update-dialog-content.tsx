@@ -5,13 +5,13 @@ import { Box, MenuItem, TextField } from '@mui/material';
 
 import { Degree, UserStatus } from '@common';
 import { DateInput, SelectControl } from '@component';
-import { UserRowResponse, UserRowUpdateBody, enumService } from '@service';
+import { UserRow, UserRowUpdateBody, enumService } from '@service';
 import { selectFormHook, textFieldHook } from '@hook';
 
 import { UserPageCard } from './user-page-card';
 
 export const UserPageUpdateDialogContent: FunctionComponent<{
-  row: UserRowResponse;
+  row: UserRow;
   body: UserRowUpdateBody;
   setBody: SetterOrUpdater<UserRowUpdateBody>;
 }> = ({ row, body, setBody }) => {

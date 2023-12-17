@@ -7,7 +7,7 @@ import { dialogHook } from '@hook';
 export const IndustryCategoryPageToolbar: FunctionComponent<{
   canCreate: boolean;
 }> = ({ canCreate }) => {
-  const onClickCreate = dialogHook.useIndustryCategoryPageCreateDialogCallback(true);
+  const onClick = dialogHook.useIndustryCategoryPageCreateDialogCallback(true);
 
   return (
     <Box
@@ -21,7 +21,7 @@ export const IndustryCategoryPageToolbar: FunctionComponent<{
       }}
     >
       <ButtonGroup variant="outlined">
-        {canCreate && <Button {...{ children: '등록', size: 'small', sx: { width: 64 }, onClick: onClickCreate }} />}
+        {canCreate && <Button {...{ children: '등록', size: 'small', sx: { width: 64 }, onClick }} />}
         <Button {...{ children: '다운로드', size: 'small', sx: { width: 64 } }} />
       </ButtonGroup>
     </Box>

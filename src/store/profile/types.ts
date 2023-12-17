@@ -1,3 +1,3 @@
-import { UserResponse } from '@service';
+import { UserRow } from '@service';
 
-export type ProfileStoreProps = UserResponse;
+export type ProfileStoreProps = UserRow;

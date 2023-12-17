@@ -1,4 +1,4 @@
-export type SettingResponse = {
+export type SettingRow = {
   difficultyTooltip: string;
 };
 

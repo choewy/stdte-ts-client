@@ -9,18 +9,18 @@ export const CustomerPageCreateDialogAction: FunctionComponent<{
   body: CustomerCreateBody;
   onClose: () => void;
 }> = ({ body, onClose }) => {
-  const createCallback = customerHook.useCreateCallback(body);
-  const onClickCreate = useCallback(async () => {
-    const ok = await createCallback();
+  const callback = customerHook.useCreateCallback(body);
+  const onClick = useCallback(async () => {
+    const ok = await callback();
 
     if (ok) {
       onClose();
     }
-  }, [createCallback, onClose]);
+  }, [callback, onClose]);
 
   return (
     <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-      <Button {...{ children: '등록', variant: 'text', onClick: onClickCreate }} />
+      <Button {...{ children: '등록', variant: 'text', onClick }} />
       <Button {...{ children: '취소', variant: 'text', onClick: onClose }} />
     </Box>
   );

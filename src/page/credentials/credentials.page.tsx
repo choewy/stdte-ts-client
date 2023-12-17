@@ -7,8 +7,8 @@ import { credentialsHook } from '@hook';
 import { CredentialsPageUpdatePasswordDialog, CredentialsPageTabs, CredentialsPageTable } from './components';
 
 export const CredentialsPage: FunctionComponent = () => {
-  credentialsHook.useMountCredentialsPage();
-  credentialsHook.useUnmountCredentialsPage();
+  credentialsHook.useMount();
+  credentialsHook.useUnmount();
 
   return (
     <Box

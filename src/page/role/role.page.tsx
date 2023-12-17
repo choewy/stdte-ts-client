@@ -14,8 +14,8 @@ import {
 } from './components';
 
 export const RolePage: FunctionComponent = () => {
-  roleHook.useMountRolePage();
-  roleHook.useUnmountRolePage();
+  roleHook.useMount();
+  roleHook.useUnmount();
 
   return (
     <Box

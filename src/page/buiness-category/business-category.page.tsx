@@ -3,7 +3,7 @@ import { FunctionComponent } from 'react';
 import { Box } from '@mui/material';
 
 import { RolePolicyLevel } from '@common';
-import { credentialsStore } from '@store';
+import { authorizeStore } from '@store';
 import { roleService } from '@service';
 import { businessCategoryHook } from '@hook';
 
@@ -16,11 +16,11 @@ import {
 } from './components';
 
 export const BusinessCategoryPage: FunctionComponent = () => {
-  const credentials = credentialsStore.useValue();
+  const authorize = authorizeStore.useValue();
 
-  const canCreate = roleService.can(credentials, 'businessCategory', RolePolicyLevel.Create);
-  const canUpdate = roleService.can(credentials, 'businessCategory', RolePolicyLevel.Update);
-  const canDelete = roleService.can(credentials, 'businessCategory', RolePolicyLevel.Delete);
+  const canCreate = roleService.can(authorize, 'businessCategory', RolePolicyLevel.Create);
+  const canUpdate = roleService.can(authorize, 'businessCategory', RolePolicyLevel.Update);
+  const canDelete = roleService.can(authorize, 'businessCategory', RolePolicyLevel.Delete);
 
   businessCategoryHook.useMount();
   businessCategoryHook.useUnMount();

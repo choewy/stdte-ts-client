@@ -13,7 +13,7 @@ export const RolePageTable: FunctionComponent = () => {
   const scroll = scrollHook.useDivScrollRefObject();
   const onScroll = scrollHook.useOnScroll(scroll.ref, scroll.setEnd);
 
-  roleHook.useRoleScrollEnd(scroll.end);
+  roleHook.useScrollEnd(scroll.end);
 
   return (
     <TableContainer

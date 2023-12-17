@@ -1,10 +1,10 @@
 import { HttpClientListQuery, HttpClientListResponse } from '@core';
 
-export type SelectRowResponse = {
+export type SelectRow = {
   id: number;
   name: string;
   description?: string;
 };
 
 export type SelectListQuery = HttpClientListQuery;
-export type SelectListResponse = HttpClientListResponse<SelectRowResponse, SelectListQuery>;
+export type SelectList = HttpClientListResponse<SelectRow, SelectListQuery>;

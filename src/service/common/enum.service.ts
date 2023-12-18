@@ -1,5 +1,14 @@
-import { CredentialsStatus, Degree, ProjectStatus, RolePolicyKey, RolePolicyLevel, UserStatus } from '@common';
+import {
+  CredentialsStatus,
+  Degree,
+  PROJECT_STATUS_VALUES,
+  ProjectStatus,
+  RolePolicyKey,
+  RolePolicyLevel,
+  UserStatus,
+} from '@common';
 import { CredentialsChangeStatusComponentProperty } from './types';
+import { MenuItemProps } from '@mui/material';
 
 export class EnumService {
   credentialsStatusToText(status: CredentialsStatus): string {
@@ -203,6 +212,13 @@ export class EnumService {
       default:
         return defaultValue;
     }
+  }
+
+  projectStatusSelectMenuItemProps(): MenuItemProps[] {
+    return PROJECT_STATUS_VALUES.map((value) => ({
+      value,
+      children: this.projectStatusToText(value),
+    }));
   }
 }
 

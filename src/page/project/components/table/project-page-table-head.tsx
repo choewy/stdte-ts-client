@@ -13,11 +13,12 @@ export const ProjectPageTableHead: FunctionComponent<{
       <TableRow>
         <TableValueCell value="행번호" rowSpan={2} />
         <TableValueCell value="사업정보" colSpan={12} />
-        <TableValueCell value="수주/매출" colSpan={2} />
+        <TableValueCell value="수주/매출" rowSpan={2} />
         <TableValueCell value="담당자(대외)" colSpan={3} />
         <TableValueCell value="담당자(대내)" colSpan={3} />
         <TableValueCell value="시간관리" colSpan={2} />
-        <TableValueCell colSpan={2} />
+        <TableValueCell value="등록일시" rowSpan={2} />
+        <TableValueCell value="수정일시" rowSpan={2} />
         {(canUpdate || canDelete) && <TableValueCell rowSpan={2} />}
       </TableRow>
       <TableRow>
@@ -34,22 +35,15 @@ export const ProjectPageTableHead: FunctionComponent<{
         <TableValueCell value="보존기한" />
         <TableValueCell value="상태" />
 
-        <TableValueCell value="수주기록" />
-        <TableValueCell value="매출기록" />
-
         <TableValueCell value="PO" />
         <TableValueCell value="PM" />
         <TableValueCell value="PL" />
-
         <TableValueCell value="PO" />
         <TableValueCell value="PM" />
         <TableValueCell value="PL" />
 
         <TableValueCell value="수행업무분야" />
         <TableValueCell value="노출여부" />
-
-        <TableValueCell value="등록일시" />
-        <TableValueCell value="수정일시" />
       </TableRow>
     </TableHead>
   );

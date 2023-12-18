@@ -1,4 +1,4 @@
-import { CredentialsStatus, Degree, RolePolicyKey, RolePolicyLevel, UserStatus } from '@common';
+import { CredentialsStatus, Degree, ProjectStatus, RolePolicyKey, RolePolicyLevel, UserStatus } from '@common';
 import { CredentialsChangeStatusComponentProperty } from './types';
 
 export class EnumService {
@@ -177,6 +177,28 @@ export class EnumService {
 
       case UserStatus.Retire:
         return '퇴직';
+
+      default:
+        return defaultValue;
+    }
+  }
+
+  projectStatusToText(status: ProjectStatus, defaultValue = '') {
+    switch (status) {
+      case ProjectStatus.Wating:
+        return '수주';
+
+      case ProjectStatus.Active:
+        return '진행';
+
+      case ProjectStatus.Complete:
+        return '준공';
+
+      case ProjectStatus.AfterService:
+        return 'A/S';
+
+      case ProjectStatus.LeavingOut:
+        return '탈락';
 
       default:
         return defaultValue;

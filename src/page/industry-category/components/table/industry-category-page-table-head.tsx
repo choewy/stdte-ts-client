@@ -13,7 +13,7 @@ export const IndustryCategoryPageTableHead: FunctionComponent<{ canUpdate: boole
       <TableRow>
         <TableValueCell value="행번호" />
         <TableValueCell value="산업분야명" />
-        <TableValueCell value="설명" />
+        <TableValueCell value="비고" />
         <TableValueCell value="등록일시" />
         <TableValueCell value="수정일시" />
         {(canUpdate || canDelete) && <TableValueCell />}

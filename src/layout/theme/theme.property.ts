@@ -76,15 +76,13 @@ export class ThemeProperty implements ThemeOptions {
         },
       },
       MuiTable: {
-        defaultProps: {
-          sx: { borderCollapse: 'collapse' },
-        },
+        defaultProps: { sx: { borderCollapse: 'collapse' } },
       },
       MuiTableCell: {
         defaultProps: {
           sx: {
             textWrap: 'nowrap',
-            border: `1px solid ${color === 'dark' ? 'rgba(50, 50, 50, 1)' : 'rgba(225, 225, 225, 1)'}`,
+            border: `1px solid ${color === 'dark' ? 'rgba(50, 50, 50)' : 'rgba(225, 225, 225)'}`,
           },
         },
       },

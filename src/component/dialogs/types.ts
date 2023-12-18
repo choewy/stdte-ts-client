@@ -16,4 +16,5 @@ export type DialogFullScreenProps = DialogProps &
   DialogFullScreenToolbarProps & {
     contents?: ReactElement;
     actions?: ReactElement;
+    disableEscClose?: boolean;
   };

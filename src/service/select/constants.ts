@@ -16,3 +16,14 @@ export const SELECT_LIST: SelectList = {
   rows: [],
   query: SELECT_LIST_QUERY,
 };
+
+export const SELECT_LIST_ALL_QUERY: SelectListQuery = {
+  skip: 0,
+  take: 1000,
+};
+
+export const SELECT_LIST_ALL: SelectList = {
+  total: 0,
+  rows: [],
+  query: SELECT_LIST_ALL_QUERY,
+};

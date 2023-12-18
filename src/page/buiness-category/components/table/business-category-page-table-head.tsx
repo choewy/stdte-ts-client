@@ -11,9 +11,9 @@ export const BusinessCategoryPageTableHead: FunctionComponent<{ canUpdate: boole
   return (
     <TableHead>
       <TableRow>
-        <TableValueCell />
+        <TableValueCell value="행번호" />
         <TableValueCell value="사업구분명" />
-        <TableValueCell value="설명" />
+        <TableValueCell value="비고" />
         <TableValueCell value="등록일시" />
         <TableValueCell value="수정일시" />
         {(canUpdate || canDelete) && <TableValueCell />}

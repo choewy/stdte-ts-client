@@ -1,4 +1,12 @@
-import { BusinessCategoryRow, CustomerRow, RoleRow, TaskCategoryRowChild, TaskCategoryRow, UserRow } from '@service';
+import {
+  BusinessCategoryRow,
+  CustomerRow,
+  RoleRow,
+  TaskCategoryRowChild,
+  TaskCategoryRow,
+  UserRow,
+  ProjectRow,
+} from '@service';
 
 export type DialogStoreProps = {
   mypage: {
@@ -41,5 +49,12 @@ export type DialogStoreProps = {
       update: { open: boolean; parent: TaskCategoryRow; child: TaskCategoryRowChild };
       delete: { open: boolean; parent: TaskCategoryRow; child: TaskCategoryRowChild };
     };
+  };
+  project: {
+    create: { open: boolean };
+    update: { open: boolean; row: ProjectRow };
+    delete: { open: boolean; row: ProjectRow };
+    orderRecord: { open: boolean; row: ProjectRow };
+    saleRecord: { open: boolean; row: ProjectRow };
   };
 };

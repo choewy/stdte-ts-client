@@ -14,13 +14,17 @@ export const TableValueCell: FunctionComponent<
   return (
     <TableCell
       {...props}
-      children={value ?? ''}
       align={props.align ?? 'center'}
-      sx={sizeService.getWidthByTextLength(
-        value ?? '',
-        { width: fixedWidth, maxWidth: fixedWidth, minWidth: true },
-        { textWrap: 'nowrap', width: fullWidth === true ? '100%' : undefined },
-      )}
-    />
+      sx={(theme) => ({
+        ...(theme.components?.MuiTableCell?.defaultProps?.sx ?? {}),
+        ...sizeService.getWidthByTextLength(
+          value ?? '',
+          { width: fixedWidth, maxWidth: fixedWidth, minWidth: true },
+          { width: fullWidth === true ? '100%' : undefined },
+        ),
+      })}
+    >
+      {value ?? ''}
+    </TableCell>
   );
 };

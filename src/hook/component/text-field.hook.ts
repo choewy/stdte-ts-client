@@ -52,7 +52,7 @@ export class TextFieldHook {
   ) {
     return useCallback(
       (e: ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
+        const value = e.target.value.trim();
 
         const split = value.split('.');
 

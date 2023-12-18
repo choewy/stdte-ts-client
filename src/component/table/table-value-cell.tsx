@@ -14,7 +14,6 @@ export const TableValueCell: FunctionComponent<
   return (
     <TableCell
       {...props}
-      children={value ?? ''}
       align={props.align ?? 'center'}
       sx={(theme) => ({
         ...(theme.components?.MuiTableCell?.defaultProps?.sx ?? {}),
@@ -24,6 +23,8 @@ export const TableValueCell: FunctionComponent<
           { width: fullWidth === true ? '100%' : undefined },
         ),
       })}
-    />
+    >
+      {value ?? ''}
+    </TableCell>
   );
 };

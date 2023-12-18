@@ -10,7 +10,7 @@ export class SizeService {
       const c = str.charCodeAt(i);
 
       if (c > 128) {
-        length += 2;
+        length += 3;
       } else {
         length += 1;
       }

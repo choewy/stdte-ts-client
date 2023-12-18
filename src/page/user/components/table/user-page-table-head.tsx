@@ -8,7 +8,7 @@ export const UserPageTableHead: FunctionComponent<{ canUpdate: boolean }> = ({ c
   return (
     <TableHead>
       <TableRow>
-        <TableValueCell />
+        <TableValueCell value="행번호" />
         <TableValueCell value="이름" />
         <TableValueCell value="이메일" />
         <TableValueCell value="재직상태" />

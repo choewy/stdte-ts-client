@@ -11,7 +11,7 @@ export const TaskCategoryPageChildrenDialogContentTableHead: FunctionComponent<{
   return (
     <TableHead>
       <TableRow>
-        <TableValueCell />
+        <TableValueCell value="행번호" />
         <TableValueCell value="소분류명" />
         <TableValueCell value="비고" />
         <TableValueCell value="등록일시" />

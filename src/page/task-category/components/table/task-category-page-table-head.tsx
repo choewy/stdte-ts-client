@@ -11,7 +11,7 @@ export const TaskCategoryPageTableHead: FunctionComponent<{
   return (
     <TableHead>
       <TableRow>
-        <TableValueCell />
+        <TableValueCell value="행번호" />
         <TableValueCell value="대분류명" />
         <TableValueCell value="소분류" />
         <TableValueCell value="비고" />

@@ -11,7 +11,7 @@ export const CustomerPageTableHead: FunctionComponent<{
   return (
     <TableHead>
       <TableRow>
-        <TableValueCell />
+        <TableValueCell value="행번호" />
         <TableValueCell value="별칭" />
         <TableValueCell value="국문" />
         <TableValueCell value="영문" />

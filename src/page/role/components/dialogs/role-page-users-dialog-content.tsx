@@ -19,9 +19,9 @@ export const RolePageUsersDialogContent: FunctionComponent<{
   const scroll = scrollHook.useDivScrollRefObject();
   const onScroll = scrollHook.useOnScroll(scroll.ref, scroll.setEnd);
 
-  selectHook.useSelectUsersScrollEnd(scroll.end);
-  selectHook.useSelectUserMount();
-  selectHook.useSelectUserUnMount();
+  selectHook.useScrollEndUser(scroll.end);
+  selectHook.useMountUser();
+  selectHook.useUnMountUser();
 
   return (
     <Box

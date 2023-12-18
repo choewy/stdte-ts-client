@@ -1,9 +1,9 @@
 import { Components, Palette, PaletteOptions, Theme, ThemeOptions, TypographyVariantsOptions } from '@mui/material';
 
 export class ThemeProperty implements ThemeOptions {
-  palette?: PaletteOptions | undefined;
-  typography?: TypographyVariantsOptions | ((palette: Palette) => TypographyVariantsOptions) | undefined;
-  components?: Components<Omit<Theme, 'components'>> | undefined;
+  palette: PaletteOptions | undefined;
+  typography: TypographyVariantsOptions | ((palette: Palette) => TypographyVariantsOptions) | undefined;
+  components: Components<Omit<Theme, 'components'>> | undefined;
 
   constructor(color: string) {
     this.palette = ['dark', 'light'].includes(color)
@@ -73,6 +73,17 @@ export class ThemeProperty implements ThemeOptions {
       MuiLink: {
         defaultProps: {
           sx: { fontSize: 13, cursor: 'pointer' },
+        },
+      },
+      MuiTable: {
+        defaultProps: { sx: { borderCollapse: 'collapse' } },
+      },
+      MuiTableCell: {
+        defaultProps: {
+          sx: {
+            textWrap: 'nowrap',
+            border: `1px solid ${color === 'dark' ? 'rgba(50, 50, 50)' : 'rgba(225, 225, 225)'}`,
+          },
         },
       },
     };

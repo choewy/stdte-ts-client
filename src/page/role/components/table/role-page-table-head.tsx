@@ -8,7 +8,7 @@ export const RolePageTableHead: FunctionComponent = () => {
   return (
     <TableHead>
       <TableRow>
-        <TableValueCell />
+        <TableValueCell value="행번호" />
         <TableValueCell value="이름" />
         <TableValueCell value="인원" />
         <TableValueCell value="생성일시" />

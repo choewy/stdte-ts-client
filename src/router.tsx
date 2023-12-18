@@ -16,6 +16,7 @@ import {
   RolePage,
   CredentialsPage,
   UserPage,
+  ProjectPage,
   CustomerPage,
   BusinessCategoryPage,
   IndustryCategoryPage,
@@ -98,7 +99,7 @@ export const router = createBrowserRouter(
             },
             {
               path: PagePath.ProjectList,
-              element: <EmptyPage title="프로젝트 목록" />,
+              element: <ProjectPage />,
             },
             {
               path: PagePath.ProjectCustomer,

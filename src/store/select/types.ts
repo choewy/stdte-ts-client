@@ -9,6 +9,10 @@ export type SelectStoreProps = {
     list: SelectList;
     query: SelectListQuery;
   };
+  customers: {
+    list: SelectList;
+    query: SelectListQuery;
+  };
   category: {
     businesses: {
       list: SelectList;

@@ -31,6 +31,20 @@ export class SelectFormHook {
       [key, setState],
     );
   }
+
+  useOnChangeObjectArrayProperty<D extends object>(setState: SetterOrUpdater<D>, key: keyof D) {
+    return useCallback(
+      (event: SelectChangeEvent<unknown>, _: ReactNode) => {
+        setState((prev) => {
+          return {
+            ...prev,
+            [key]: event.target.value,
+          };
+        });
+      },
+      [key, setState],
+    );
+  }
 }
 
 export const selectFormHook = new SelectFormHook();

@@ -1,4 +1,4 @@
-import { CredentialsStatus, RolePolicyLevel } from './enums';
+import { CredentialsStatus, ProjectStatus, RolePolicyLevel } from './enums';
 
 export const ROLE_POLICY_KEY = [
   'roleAndPolicy',
@@ -23,3 +23,7 @@ export const ROLE_POLICY_LEVEL_VALUES = Object.values(RolePolicyLevel)
 export const ROLE_POLICY_EDITABLE_VALUES = ROLE_POLICY_LEVEL_VALUES.filter(
   (level) => level !== RolePolicyLevel.Developer,
 );
+
+export const PROJECT_STATUS_VALUES = Object.values(ProjectStatus)
+  .filter((level) => typeof level === 'number')
+  .sort() as ProjectStatus[];

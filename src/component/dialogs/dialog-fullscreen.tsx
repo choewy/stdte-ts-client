@@ -12,10 +12,16 @@ export const DialogFullScreen: FunctionComponent<DialogFullScreenProps> = ({
   contents,
   children,
   onClose,
+  disableEscClose,
   ...props
 }) => {
   return (
-    <Dialog {...props} fullScreen TransitionComponent={DialogTransition} onClose={onClose}>
+    <Dialog
+      {...props}
+      fullScreen
+      TransitionComponent={DialogTransition}
+      onClose={disableEscClose ? undefined : onClose}
+    >
       <DialogFullScreenToolbar title={title} onClose={onClose} />
       {contents && <DialogContent>{contents}</DialogContent>}
       {actions && <DialogActions>{actions}</DialogActions>}

@@ -7,7 +7,7 @@ import { roleService } from '@service';
 import { authorizeStore } from '@store';
 import { projectHook } from '@hook';
 
-import { ProjectPageTable, ProjectPageToolbar } from './components';
+import { ProjectPageCreateDialog, ProjectPageTable, ProjectPageToolbar } from './components';
 
 export const ProjectPage: FunctionComponent = () => {
   const authorize = authorizeStore.useValue();
@@ -30,6 +30,7 @@ export const ProjectPage: FunctionComponent = () => {
         alignItems: 'center',
       }}
     >
+      <ProjectPageCreateDialog />
       <ProjectPageToolbar {...{ canCreate }} />
       <ProjectPageTable {...{ canUpdate, canDelete }} />
     </Box>

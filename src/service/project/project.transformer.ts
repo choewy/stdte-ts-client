@@ -9,6 +9,8 @@ export class ProjectTransformer {
       businessCategory: body.businessCategory === 0 ? null : body.businessCategory,
       industryCategory: body.industryCategory === 0 ? null : body.industryCategory,
       taskCategory: body.taskCategory === 0 ? null : body.taskCategory,
+      orderRecordAmount: body.orderRecordAmount.replaceAll(',', ''),
+      saleRecordAmount: body.saleRecordAmount.replaceAll(',', ''),
     };
   }
 
@@ -20,6 +22,8 @@ export class ProjectTransformer {
       businessCategory: body.businessCategory === 0 ? null : body.businessCategory,
       industryCategory: body.industryCategory === 0 ? null : body.industryCategory,
       taskCategory: body.taskCategory === 0 ? null : body.taskCategory,
+      orderRecordAmount: body.orderRecordAmount.replaceAll(',', ''),
+      saleRecordAmount: body.saleRecordAmount.replaceAll(',', ''),
     };
   }
 }

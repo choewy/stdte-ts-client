@@ -87,6 +87,10 @@ export type ProjectCreateBody = {
   startDate: string;
   endDate: string;
   keepDate: string;
+  orderRecordDate: string;
+  orderRecordAmount: string;
+  saleRecordDate: string;
+  saleRecordAmount: string;
   customer: number | null;
   businessCategory: number | null;
   industryCategory: number | null;
@@ -110,6 +114,10 @@ export type ProjectUpdateBody = {
   startDate: string;
   endDate: string;
   keepDate: string;
+  orderRecordDate: string;
+  orderRecordAmount: string;
+  saleRecordDate: string;
+  saleRecordAmount: string;
   customer: number | null;
   businessCategory: number | null;
   industryCategory: number | null;

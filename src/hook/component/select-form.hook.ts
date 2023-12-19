@@ -14,6 +14,15 @@ export class SelectFormHook {
     );
   }
 
+  useOnChangeObjectBooleanProperty<D extends object>(key: keyof D, setState: SetterOrUpdater<D>) {
+    return useCallback(
+      (event: SelectChangeEvent<unknown>, _: ReactNode) => {
+        setState((prev) => ({ ...prev, [key]: event.target.value === 1 }));
+      },
+      [key, setState],
+    );
+  }
+
   useOnChangeRolePolicyProperty<D extends { rolePolicy: RolePolicyProperty }>(
     key: keyof RolePolicyProperty,
     setState: SetterOrUpdater<D>,

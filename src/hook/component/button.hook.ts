@@ -16,6 +16,23 @@ export class ButtonHook {
     return disabled;
   }
 
+  private checkSameArray(origins: Array<unknown>, values: Array<unknown>) {
+    if (origins.length !== values.length) {
+      return false;
+    }
+
+    let disabled = true;
+
+    for (const origin of origins) {
+      if (values.includes(origin) === false) {
+        disabled = false;
+        break;
+      }
+    }
+
+    return disabled;
+  }
+
   useDisabledByObject(origin: object, value: object) {
     const [disabled, setDisabled] = useState<boolean>(true);
 
@@ -25,7 +42,13 @@ export class ButtonHook {
       let disabled = true;
 
       for (const key of keys) {
-        if (
+        if (Array.isArray(origin[key]) && Array.isArray(value[key])) {
+          disabled = this.checkSameArray(origin[key], value[key]);
+
+          if (disabled === false) {
+            break;
+          }
+        } else if (
           origin[key] &&
           value[key] &&
           typeof origin[key] === 'object' &&

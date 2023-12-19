@@ -5,6 +5,7 @@ import { Paper, Table, TableContainer } from '@mui/material';
 import { layoutStore } from '@store';
 import { projectHook, scrollHook } from '@hook';
 import { ProjectPageTableHead } from './project-page-table-head';
+import { ProjectPageTableBody } from './project-page-table-body';
 
 export const ProjectPageTable: FunctionComponent<{
   canUpdate: boolean;
@@ -29,6 +30,7 @@ export const ProjectPageTable: FunctionComponent<{
     >
       <Table stickyHeader>
         <ProjectPageTableHead {...{ canUpdate, canDelete }} />
+        <ProjectPageTableBody {...{ canUpdate, canDelete }} />
       </Table>
     </TableContainer>
   );

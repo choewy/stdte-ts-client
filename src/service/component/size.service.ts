@@ -10,7 +10,7 @@ export class SizeService {
       const c = str.charCodeAt(i);
 
       if (c > 128) {
-        length += 3;
+        length += 2;
       } else {
         length += 1;
       }
@@ -30,6 +30,10 @@ export class SizeService {
     const length = this.getTextLengthByBytes(String(value));
 
     width = 9 * length;
+
+    if (width < 70) {
+      width = 70;
+    }
 
     if (typeof min === 'number' && width < min) {
       width = min;

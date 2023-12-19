@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { SetterOrUpdater } from 'recoil';
 
-import { Box, Checkbox, Divider, ListItemText, MenuItem, Typography } from '@mui/material';
+import { Checkbox, ListItemText, MenuItem, Typography } from '@mui/material';
 
 import { SelectControl } from '@component';
 import { ProjectCreateBody, ProjectUpdateBody } from '@service';
@@ -119,9 +119,6 @@ export const ProjectPageUserSelectGroup: FunctionComponent<{
           </MenuItem>
         ))}
       </SelectControl>
-      <Box sx={{ my: 4 }}>
-        <Divider />
-      </Box>
       <Typography textAlign="center" variant="h6" sx={{ mt: 1, fontSize: 16 }}>
         담당자(대내)
       </Typography>

@@ -6,8 +6,6 @@ import { TableRow } from '@mui/material';
 import { TableComponentCell, TableValueCell } from '@component';
 import { ProjectRow, enumService } from '@service';
 
-import { ProjectPageTableBodyRowOrderRecordButton } from './project-page-table-body-row-order-record-button';
-import { ProjectPageTableBodyRowSaleRecordButton } from './project-page-table-body-row-sale-record-button';
 import { ProjectPageTableBodyRowUpdateButton } from './project-page-table-body-row-update-button';
 import { ProjectPageTableBodyRowDeleteButton } from './project-page-table-body-row-delete-button';
 
@@ -21,7 +19,7 @@ export const ProjectPageTableBodyRow: FunctionComponent<{
     <TableRow hover>
       <TableValueCell value={index + 1} />
       <TableValueCell value={row.code} />
-      <TableValueCell value={row.name} />
+      <TableValueCell value={row.name} align="left" />
       <TableValueCell value={row.difficulty} />
       <TableValueCell value={row.industryCategory?.name ?? ''} />
       <TableValueCell value={row.businessCategory?.name ?? ''} />
@@ -32,14 +30,10 @@ export const ProjectPageTableBodyRow: FunctionComponent<{
       <TableValueCell value={DateTime.fromJSDate(new Date(row.startDate)).toSQLDate() ?? ''} fixedWidth />
       <TableValueCell value={DateTime.fromJSDate(new Date(row.endDate)).toSQLDate() ?? ''} fixedWidth />
       <TableValueCell value={DateTime.fromJSDate(new Date(row.keepDate)).toSQLDate() ?? ''} fixedWidth />
-      <TableComponentCell
-        components={
-          <>
-            {<ProjectPageTableBodyRowOrderRecordButton {...{ row }} />}
-            {<ProjectPageTableBodyRowSaleRecordButton {...{ row }} />}
-          </>
-        }
-      />
+      <TableValueCell value={DateTime.fromJSDate(new Date(row.orderRecord?.date)).toSQLDate() ?? ''} fixedWidth />
+      <TableValueCell value={Number(row.orderRecord?.amount).toLocaleString('ko-KR')} align="right" />
+      <TableValueCell value={DateTime.fromJSDate(new Date(row.saleRecord?.date)).toSQLDate() ?? ''} fixedWidth />
+      <TableValueCell value={Number(row.saleRecord?.amount).toLocaleString('ko-KR')} align="right" />
       <TableValueCell value={row.externalOwners.map(({ name }) => name).join(', ')} />
       <TableValueCell value={row.externalManagers.map(({ name }) => name).join(', ')} />
       <TableValueCell value={row.externalLeaders.map(({ name }) => name).join(', ')} />

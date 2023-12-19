@@ -14,7 +14,8 @@ export const ProjectPageTableHead: FunctionComponent<{
         <TableValueCell value="행번호" rowSpan={2} />
         <TableValueCell value="사업정보" colSpan={9} />
         <TableValueCell value="기간" colSpan={3} />
-        <TableValueCell value="수주/매출" rowSpan={2} />
+        <TableValueCell value="수주" colSpan={2} />
+        <TableValueCell value="매출" colSpan={2} />
         <TableValueCell value="담당자(대외)" colSpan={3} />
         <TableValueCell value="담당자(대내)" colSpan={3} />
         <TableValueCell value="시간관리" colSpan={2} />
@@ -38,6 +39,14 @@ export const ProjectPageTableHead: FunctionComponent<{
           <TableValueCell value="시작일자" />
           <TableValueCell value="종료일자" />
           <TableValueCell value="보존기한" />
+        </>
+        <>
+          <TableValueCell value="수주일자" />
+          <TableValueCell value="수주금액" />
+        </>
+        <>
+          <TableValueCell value="매출발생일자" />
+          <TableValueCell value="매출발생금액" />
         </>
         <>
           <TableValueCell value="PO" />

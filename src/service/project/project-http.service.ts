@@ -1,10 +1,14 @@
-import { HttpService } from '@core';
+import { HttpClientDownloadResponse, HttpService } from '@core';
 
 import { ProjectCreateBody, ProjectList, ProjectListQuery, ProjectRow, ProjectUpdateBody } from './types';
 
 export class ProjectHttpService extends HttpService {
   async getList(query: ProjectListQuery) {
     return this.get<ProjectList>(this.url(), { params: query, delay: 250 });
+  }
+
+  async download() {
+    return this.post<HttpClientDownloadResponse>(this.url('download'));
   }
 
   async createRow(body: ProjectCreateBody) {

@@ -46,3 +46,8 @@ export type HttpClientListResponse<R, Q = any> = {
   rows: R[];
   query: Q;
 };
+
+export type HttpClientDownloadResponse = {
+  url: string;
+  filename: string;
+};

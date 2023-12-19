@@ -13,6 +13,7 @@ import {
   projectHttpService,
   projectValidator,
   projectTransformer,
+  downloadService,
 } from '@service';
 
 export class ProjectHook {
@@ -43,6 +44,19 @@ export class ProjectHook {
               },
       }));
     }, [load, query, setState]);
+  }
+
+  useDownloadCallback() {
+    return useCallback(async () => {
+      const res = await projectHttpService.download();
+
+      if (res.ok === false) {
+        SnackEvent.dispatchByException(new ProjectException(res.exception));
+        return false;
+      }
+
+      downloadService.download(res.data.url, res.data.filename);
+    }, []);
   }
 
   useMount() {

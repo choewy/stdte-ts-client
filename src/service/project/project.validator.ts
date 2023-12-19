@@ -1,4 +1,4 @@
-import { isEmpty } from 'class-validator';
+import { isEmpty, isNumberString } from 'class-validator';
 
 import { ProjectErrorMessage } from './enums';
 import { ProjectCreateBody, ProjectUpdateBody } from './types';
@@ -17,12 +17,16 @@ export class ProjectValidator {
       return ProjectErrorMessage.EmptyDifficulty;
     }
 
-    if (body.businessCategory === 0) {
-      return ProjectErrorMessage.EmptyBusinessCategory;
+    if (isNumberString(body.difficulty) === false) {
+      return ProjectErrorMessage.InvalidDifficulty;
     }
 
     if (body.industryCategory === 0) {
       return ProjectErrorMessage.EmptyIndustryCategory;
+    }
+
+    if (body.businessCategory === 0) {
+      return ProjectErrorMessage.EmptyBusinessCategory;
     }
 
     if (body.taskCategory === 0) {
@@ -43,12 +47,16 @@ export class ProjectValidator {
       return ProjectErrorMessage.EmptyDifficulty;
     }
 
-    if (body.businessCategory === 0) {
-      return ProjectErrorMessage.EmptyBusinessCategory;
+    if (isNumberString(body.difficulty) === false) {
+      return ProjectErrorMessage.InvalidDifficulty;
     }
 
     if (body.industryCategory === 0) {
       return ProjectErrorMessage.EmptyIndustryCategory;
+    }
+
+    if (body.businessCategory === 0) {
+      return ProjectErrorMessage.EmptyBusinessCategory;
     }
 
     if (body.taskCategory === 0) {

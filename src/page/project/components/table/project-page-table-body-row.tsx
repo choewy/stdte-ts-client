@@ -23,15 +23,15 @@ export const ProjectPageTableBodyRow: FunctionComponent<{
       <TableValueCell value={row.code} />
       <TableValueCell value={row.name} />
       <TableValueCell value={row.difficulty} />
-      <TableValueCell value={row.businessCategory?.name ?? ''} />
       <TableValueCell value={row.industryCategory?.name ?? ''} />
+      <TableValueCell value={row.businessCategory?.name ?? ''} />
       <TableValueCell value={row.customer?.alias ?? ''} />
-      <TableValueCell value={row.amount} />
+      <TableValueCell value={Number(row.amount).toLocaleString('ko-KR')} align="right" />
+      <TableValueCell value={enumService.projectStatusToText(row.status)} />
       <TableValueCell value={row.description} />
       <TableValueCell value={DateTime.fromJSDate(new Date(row.startDate)).toSQLDate() ?? ''} fixedWidth />
       <TableValueCell value={DateTime.fromJSDate(new Date(row.endDate)).toSQLDate() ?? ''} fixedWidth />
       <TableValueCell value={DateTime.fromJSDate(new Date(row.keepDate)).toSQLDate() ?? ''} fixedWidth />
-      <TableValueCell value={enumService.projectStatusToText(row.status)} />
       <TableComponentCell
         components={
           <>

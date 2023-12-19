@@ -11,6 +11,8 @@ import {
   ProjectUpdateBody,
   SnackEvent,
   projectHttpService,
+  projectValidator,
+  projectTransformer,
 } from '@service';
 
 export class ProjectHook {
@@ -89,7 +91,14 @@ export class ProjectHook {
     const setState = projectStore.useSetState();
 
     return useCallback(async () => {
-      const res = await projectHttpService.createRow(body);
+      const message = projectValidator.createRow(body);
+
+      if (message) {
+        SnackEvent.dispatchByWarning(message);
+        return false;
+      }
+
+      const res = await projectHttpService.createRow(projectTransformer.createRow(body));
 
       if (res.ok === false) {
         SnackEvent.dispatchByException(new ProjectException(res.exception));
@@ -146,7 +155,14 @@ export class ProjectHook {
     const setState = projectStore.useSetState();
 
     return useCallback(async () => {
-      const res = await projectHttpService.updateRow(id, body);
+      const message = projectValidator.updateRow(body);
+
+      if (message) {
+        SnackEvent.dispatchByWarning(message);
+        return false;
+      }
+
+      const res = await projectHttpService.updateRow(id, projectTransformer.updateRow(body));
 
       if (res.ok === false) {
         SnackEvent.dispatchByException(new ProjectException(res.exception));

@@ -9,8 +9,9 @@ export const TableValueCell: FunctionComponent<
     value?: string | number | boolean;
     fullWidth?: boolean;
     fixedWidth?: boolean;
+    stickyRow?: number;
   }
-> = ({ value, fullWidth, fixedWidth, ...props }) => {
+> = ({ value, fullWidth, fixedWidth, stickyRow, ...props }) => {
   return (
     <TableCell
       {...props}
@@ -23,6 +24,9 @@ export const TableValueCell: FunctionComponent<
           { width: fullWidth === true ? '100%' : undefined },
         ),
       })}
+      style={{
+        top: typeof stickyRow === 'number' ? `${55.28 * stickyRow}px` : undefined,
+      }}
     >
       {value ?? ''}
     </TableCell>

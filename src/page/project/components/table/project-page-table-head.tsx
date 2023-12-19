@@ -13,9 +13,9 @@ export const ProjectPageTableHead: FunctionComponent<{
       <TableRow>
         <TableValueCell value="행번호" rowSpan={2} stickyRow={0} />
         <TableValueCell value="사업정보" colSpan={9} stickyRow={0} />
-        <TableValueCell value="기간" colSpan={3} stickyRow={0} />
         <TableValueCell value="담당자(대외)" colSpan={3} stickyRow={0} />
         <TableValueCell value="담당자(대내)" colSpan={3} stickyRow={0} />
+        <TableValueCell value="기간" colSpan={3} stickyRow={0} />
         <TableValueCell value="시간관리" colSpan={2} stickyRow={0} />
         <TableValueCell value="등록일시" rowSpan={2} stickyRow={0} />
         <TableValueCell value="수정일시" rowSpan={2} stickyRow={0} />
@@ -34,17 +34,17 @@ export const ProjectPageTableHead: FunctionComponent<{
           <TableValueCell value="비고" stickyRow={1} />
         </>
         <>
+          <TableValueCell value="PO" stickyRow={1} />
+          <TableValueCell value="PM" stickyRow={1} />
+          <TableValueCell value="PL" stickyRow={1} />
+          <TableValueCell value="PO" stickyRow={1} />
+          <TableValueCell value="PM" stickyRow={1} />
+          <TableValueCell value="PL" stickyRow={1} />
+        </>
+        <>
           <TableValueCell value="착수" stickyRow={1} />
           <TableValueCell value="준공" stickyRow={1} />
           <TableValueCell value="개월수" stickyRow={1} />
-        </>
-        <>
-          <TableValueCell value="PO" stickyRow={1} />
-          <TableValueCell value="PM" stickyRow={1} />
-          <TableValueCell value="PL" stickyRow={1} />
-          <TableValueCell value="PO" stickyRow={1} />
-          <TableValueCell value="PM" stickyRow={1} />
-          <TableValueCell value="PL" stickyRow={1} />
         </>
         <>
           <TableValueCell value="수행업무구분" stickyRow={1} />

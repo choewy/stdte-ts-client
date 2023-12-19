@@ -42,10 +42,10 @@ export const ProjectPageDialogContentSection: FunctionComponent<{
         <TextField {...{ label: '비고', value: body.description, onChange: onChangeDescription }} />
       </SectionColumn>
       <SectionColumn>
-        <ProjectPageDetailsInputGroup {...{ body, setBody }} />
+        <ProjectPageUserSelectGroup {...{ body, setBody }} />
       </SectionColumn>
       <SectionColumn>
-        <ProjectPageUserSelectGroup {...{ body, setBody }} />
+        <ProjectPageDetailsInputGroup {...{ body, setBody }} />
       </SectionColumn>
       <SectionColumn title="시간관리">
         <ProjectPageTaskCategorySelect {...{ body, setBody }} />

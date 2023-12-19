@@ -1,13 +1,13 @@
 import { FunctionComponent } from 'react';
 
-import { Paper, Table, TableContainer, Typography } from '@mui/material';
+import { Paper, Table, TableContainer } from '@mui/material';
 
 import { layoutStore } from '@store';
-import { projectHook, scrollHook } from '@hook';
-import { ProjectPageTableHead } from './project-page-table-head';
-import { ProjectPageTableBody } from './project-page-table-body';
+import { scrollHook } from '@hook';
 
-export const ProjectPageTable: FunctionComponent<{
+import { ProjectPageOrderRecordTableHead } from './project-page-order-record-table-head';
+
+export const ProjectPageOrderRecordTable: FunctionComponent<{
   canUpdate: boolean;
   canDelete: boolean;
 }> = ({ canUpdate, canDelete }) => {
@@ -15,7 +15,7 @@ export const ProjectPageTable: FunctionComponent<{
   const scroll = scrollHook.useDivScrollRefObject();
   const onScroll = scrollHook.useOnScroll(scroll.ref, scroll.setEnd);
 
-  projectHook.useScrollEnd(scroll.end);
+  // projectHook.useScrollEndOrderRecord(scroll.end);
 
   return (
     <TableContainer
@@ -24,13 +24,13 @@ export const ProjectPageTable: FunctionComponent<{
       elevation={2}
       onScroll={onScroll}
       sx={{
-        height: size.innerHeight - 150,
+        height: size.innerHeight - 200,
         overflow: 'scroll',
       }}
     >
       <Table stickyHeader>
-        <ProjectPageTableHead {...{ canUpdate, canDelete }} />
-        <ProjectPageTableBody {...{ canUpdate, canDelete }} />
+        <ProjectPageOrderRecordTableHead {...{ canUpdate, canDelete }} />
+        {/* <ProjectPageTableBody {...{ canUpdate, canDelete }} /> */}
       </Table>
     </TableContainer>
   );

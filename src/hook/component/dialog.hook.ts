@@ -263,7 +263,7 @@ export class DialogHook {
     }, [open, setDialog]);
   }
 
-  useProjectPageDialogCallback(key: 'update' | 'delete', row: ProjectRow, open: boolean) {
+  useProjectPageDialogCallback(key: 'update' | 'delete' | 'record', row: ProjectRow, open: boolean) {
     const setDialog = dialogStore.useSetState();
 
     return useCallback(() => {

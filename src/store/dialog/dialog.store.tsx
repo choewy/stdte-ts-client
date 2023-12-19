@@ -70,6 +70,7 @@ export class DialogStore extends RecoilStore<DialogStoreProps> {
       },
       project: {
         create: { open: false },
+        record: { open: false, row: PROJECT_ROW },
         update: { open: false, row: PROJECT_ROW },
         delete: { open: false, row: PROJECT_ROW },
       },

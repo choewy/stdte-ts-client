@@ -52,6 +52,7 @@ export type DialogStoreProps = {
   };
   project: {
     create: { open: boolean };
+    record: { open: boolean; row: ProjectRow };
     update: { open: boolean; row: ProjectRow };
     delete: { open: boolean; row: ProjectRow };
   };

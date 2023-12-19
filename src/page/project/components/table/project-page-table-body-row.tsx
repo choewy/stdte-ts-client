@@ -8,6 +8,7 @@ import { ProjectRow, enumService } from '@service';
 
 import { ProjectPageTableBodyRowUpdateButton } from './project-page-table-body-row-update-button';
 import { ProjectPageTableBodyRowDeleteButton } from './project-page-table-body-row-delete-button';
+import { ProjectPageTableBodyRowRecordButton } from './project-page-table-body-row-record-button';
 
 export const ProjectPageTableBodyRow: FunctionComponent<{
   index: number;
@@ -44,6 +45,7 @@ export const ProjectPageTableBodyRow: FunctionComponent<{
         <TableComponentCell
           components={
             <>
+              <ProjectPageTableBodyRowRecordButton {...{ row }} />
               {canUpdate && <ProjectPageTableBodyRowUpdateButton {...{ row }} />}
               {canDelete && <ProjectPageTableBodyRowDeleteButton {...{ row }} />}
             </>

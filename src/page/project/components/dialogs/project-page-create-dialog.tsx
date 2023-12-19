@@ -20,7 +20,7 @@ export const ProjectPageCreateDialog: FunctionComponent = () => {
       onClose={onClose}
       disableEscClose
       contents={<ProjectPageCreateDialogContent {...{ body, setBody }} />}
-      actions={<ProjectPageCreateDialogAction {...{ body, onClose }} />}
+      actions={<ProjectPageCreateDialogAction {...{ body, setBody, onClose }} />}
     />
   );
 };

@@ -12,6 +12,8 @@ import { ProjectPageBusinessCategorySelect } from './project-page-business-categ
 import { ProjectPageIndustryCategorySelect } from './project-page-industry-category-select';
 import { ProjectPageCustomerSelect } from './project-page-customer-select';
 import { ProjectPageUserSelectGroup } from './project-page-user-select-group';
+import { ProjectPageTaskCategorySelect } from './project-page-task-category-select';
+import { ProjectPageCanExposeSelect } from './project-page-can-expose-select';
 
 export const ProjectPageDialogContentSection: FunctionComponent<{
   body: ProjectCreateBody | ProjectUpdateBody;
@@ -50,8 +52,8 @@ export const ProjectPageDialogContentSection: FunctionComponent<{
         <ProjectPageUserSelectGroup {...{ body, setBody }} />
       </SectionColumn>
       <SectionColumn title="시간관리">
-        {/* TODO : SELECT BOX(수행업무구분) */}
-        {/* TODO : SELECT BOX(노출, 숨김) */}
+        <ProjectPageTaskCategorySelect {...{ body, setBody }} />
+        <ProjectPageCanExposeSelect {...{ body, setBody }} />
       </SectionColumn>
     </SectionContainer>
   );

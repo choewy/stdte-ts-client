@@ -72,8 +72,6 @@ export class DialogStore extends RecoilStore<DialogStoreProps> {
         create: { open: false },
         update: { open: false, row: PROJECT_ROW },
         delete: { open: false, row: PROJECT_ROW },
-        orderRecord: { open: false, row: PROJECT_ROW },
-        saleRecord: { open: false, row: PROJECT_ROW },
       },
     });
   }

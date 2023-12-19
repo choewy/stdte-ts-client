@@ -1,4 +1,4 @@
-import { CredentialsStatus, Degree, GenderCode, RolePolicyProperty, UserStatus } from '@common';
+import { CredentialsStatus, Degree, RolePolicyProperty, UserStatus } from '@common';
 import { HttpClientListQuery, HttpClientListResponse } from '@core';
 
 export type UserRowCredentials = {
@@ -18,7 +18,6 @@ export type UserRow = {
   id: number;
   name: string;
   phone: string;
-  gender: GenderCode | string;
   birthday: string;
   scienceNumber: string;
   degree: Degree | string;
@@ -39,7 +38,6 @@ export type UserUpdateBody = {
   name: string;
   phone: string;
   birthday: string;
-  gender: GenderCode | string;
   scienceNumber: string;
   degree: Degree | string;
   school: string;

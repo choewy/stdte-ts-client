@@ -56,9 +56,7 @@ export type ProjectRow = {
   status: ProjectStatus;
   startDate: string;
   endDate: string;
-  keepDate: string;
-  orderRecord: ProjectRowOrderRecord;
-  saleRecord: ProjectRowSaleRecord;
+  months: number;
   businessCategory: ProjectRowIndustryCategory | null;
   industryCategory: ProjectRowBusinessCategory | null;
   taskCategory: ProjectRowTaskCategory | null;
@@ -86,11 +84,6 @@ export type ProjectCreateBody = {
   status: ProjectStatus;
   startDate: string;
   endDate: string;
-  keepDate: string;
-  orderRecordDate: string;
-  orderRecordAmount: string;
-  saleRecordDate: string;
-  saleRecordAmount: string;
   customer: number | null;
   businessCategory: number | null;
   industryCategory: number | null;
@@ -113,11 +106,6 @@ export type ProjectUpdateBody = {
   status: ProjectStatus;
   startDate: string;
   endDate: string;
-  keepDate: string;
-  orderRecordDate: string;
-  orderRecordAmount: string;
-  saleRecordDate: string;
-  saleRecordAmount: string;
   customer: number | null;
   businessCategory: number | null;
   industryCategory: number | null;

@@ -30,7 +30,7 @@ export const ProjectPageDialogContentSection: FunctionComponent<{
     <SectionContainer>
       <SectionColumn title="사업정보">
         <Box sx={{ display: 'flex', gap: 1 }}>
-          <TextField {...{ label: '사업코드', value: body.code, onChange: onChangeCode }} />
+          <TextField {...{ label: '약어', value: body.code, onChange: onChangeCode }} />
           <TextField {...{ label: '난이도', value: body.difficulty, onChange: onChangeDifficulty }} />
         </Box>
         <TextField {...{ label: '사업명', value: body.name, onChange: onChangeName }} />

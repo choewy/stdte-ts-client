@@ -29,11 +29,7 @@ export const ProjectPageTableBodyRow: FunctionComponent<{
       <TableValueCell value={row.description} />
       <TableValueCell value={DateTime.fromJSDate(new Date(row.startDate)).toSQLDate() ?? ''} fixedWidth />
       <TableValueCell value={DateTime.fromJSDate(new Date(row.endDate)).toSQLDate() ?? ''} fixedWidth />
-      <TableValueCell value={DateTime.fromJSDate(new Date(row.keepDate)).toSQLDate() ?? ''} fixedWidth />
-      <TableValueCell value={DateTime.fromJSDate(new Date(row.orderRecord?.date)).toSQLDate() ?? ''} fixedWidth />
-      <TableValueCell value={Number(row.orderRecord?.amount).toLocaleString('ko-KR')} align="right" />
-      <TableValueCell value={DateTime.fromJSDate(new Date(row.saleRecord?.date)).toSQLDate() ?? ''} fixedWidth />
-      <TableValueCell value={Number(row.saleRecord?.amount).toLocaleString('ko-KR')} align="right" />
+      <TableValueCell value={row.months} fixedWidth />
       <TableValueCell value={row.externalOwners.map(({ name }) => name).join(', ')} />
       <TableValueCell value={row.externalManagers.map(({ name }) => name).join(', ')} />
       <TableValueCell value={row.externalLeaders.map(({ name }) => name).join(', ')} />

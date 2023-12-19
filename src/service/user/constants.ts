@@ -11,7 +11,6 @@ export const USER_ROW: UserRow = {
   id: 0,
   name: '',
   phone: '',
-  gender: '',
   birthday: '',
   scienceNumber: '',
   degree: '',

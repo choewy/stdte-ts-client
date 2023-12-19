@@ -130,8 +130,3 @@ export type ProjectUpdateBody = {
   externalLeaders: number[];
   canExpose: boolean;
 };
-
-export type ProjectUpdateRecordBody = {
-  date: string;
-  amount: string;
-};

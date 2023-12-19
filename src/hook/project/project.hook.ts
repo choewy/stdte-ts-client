@@ -11,6 +11,8 @@ import {
   ProjectUpdateBody,
   SnackEvent,
   projectHttpService,
+  projectValidator,
+  projectTransformer,
 } from '@service';
 
 export class ProjectHook {
@@ -89,7 +91,14 @@ export class ProjectHook {
     const setState = projectStore.useSetState();
 
     return useCallback(async () => {
-      const res = await projectHttpService.createRow(body);
+      const message = projectValidator.createRow(body);
+
+      if (message) {
+        SnackEvent.dispatchByWarning(message);
+        return false;
+      }
+
+      const res = await projectHttpService.createRow(projectTransformer.createRow(body));
 
       if (res.ok === false) {
         SnackEvent.dispatchByException(new ProjectException(res.exception));
@@ -120,21 +129,25 @@ export class ProjectHook {
         code: row.code,
         description: row.description,
         difficulty: row.difficulty,
-        amount: row.amount,
+        amount: Number(row.amount).toLocaleString('ko-KR'),
         status: row.status,
         startDate: row.startDate,
         endDate: row.endDate,
         keepDate: row.keepDate,
+        orderRecordDate: row.orderRecord?.date ?? '',
+        orderRecordAmount: Number(row.orderRecord?.amount ?? '0').toLocaleString('ko-KR'),
+        saleRecordDate: row.saleRecord?.date ?? '',
+        saleRecordAmount: Number(row.saleRecord?.amount ?? '0').toLocaleString('ko-KR'),
         customer: row.customer?.id ?? 0,
         businessCategory: row.businessCategory?.id ?? 0,
         industryCategory: row.industryCategory?.id ?? 0,
         taskCategory: row.taskCategory?.id ?? 0,
-        internalOwners: row.internalOwners.map(({ id }) => id),
-        internalManagers: row.internalManagers.map(({ id }) => id),
-        internalLeaders: row.internalLeaders.map(({ id }) => id),
         externalOwners: row.externalOwners.map(({ id }) => id),
         externalManagers: row.externalManagers.map(({ id }) => id),
         externalLeaders: row.externalLeaders.map(({ id }) => id),
+        internalOwners: row.internalOwners.map(({ id }) => id),
+        internalManagers: row.internalManagers.map(({ id }) => id),
+        internalLeaders: row.internalLeaders.map(({ id }) => id),
         canExpose: row.canExpose,
       });
     }, [row, setBody]);
@@ -146,7 +159,14 @@ export class ProjectHook {
     const setState = projectStore.useSetState();
 
     return useCallback(async () => {
-      const res = await projectHttpService.updateRow(id, body);
+      const message = projectValidator.updateRow(body);
+
+      if (message) {
+        SnackEvent.dispatchByWarning(message);
+        return false;
+      }
+
+      const res = await projectHttpService.updateRow(id, projectTransformer.updateRow(body));
 
       if (res.ok === false) {
         SnackEvent.dispatchByException(new ProjectException(res.exception));

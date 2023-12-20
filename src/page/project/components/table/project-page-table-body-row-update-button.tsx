@@ -5,7 +5,7 @@ import { ProjectRow } from '@service';
 import { dialogHook } from '@hook';
 
 export const ProjectPageTableBodyRowUpdateButton: FunctionComponent<{ row: ProjectRow }> = ({ row }) => {
-  const onClick = dialogHook.useProjectPageDialogCallback('update', row, true);
+  const onClick = dialogHook.useProjectDialogCallback('update', true, row);
 
   return <TableCellButton text="수정" onClick={onClick} />;
 };

@@ -18,6 +18,8 @@ import {
   TASK_CATEGORY_ROW_CHILD,
   ProjectRow,
   PROJECT_ROW,
+  ProjectRecordRow,
+  ProjectRecordType,
 } from '@service';
 
 export class DialogHook {
@@ -263,18 +265,65 @@ export class DialogHook {
     }, [open, setDialog]);
   }
 
-  useProjectPageDialogCallback(key: 'update' | 'delete' | 'record', row: ProjectRow, open: boolean) {
+  useProjectDialogCallback(...args: ['create', boolean] | ['update' | 'delete' | 'record', boolean, ProjectRow]) {
     const setDialog = dialogStore.useSetState();
 
     return useCallback(() => {
-      setDialog((prev) => ({
-        ...prev,
-        project: {
-          ...prev.project,
-          [key]: { open, row: open === false ? PROJECT_ROW : row },
-        },
-      }));
-    }, [key, row, open, setDialog]);
+      const key = args[0];
+
+      if (key === 'create') {
+        setDialog((prev) => ({
+          ...prev,
+          project: {
+            ...prev.project,
+            [key]: { open: args[1] },
+          },
+        }));
+      } else {
+        setDialog((prev) => ({
+          ...prev,
+          project: {
+            ...prev.project,
+            [key]: { open: args[1], row: args[1] === false ? PROJECT_ROW : args[2] },
+          },
+        }));
+      }
+    }, [args, setDialog]);
+  }
+
+  useProjectRecordDialogCallback(
+    type: ProjectRecordType,
+    ...args: ['create', boolean] | ['update' | 'delete', boolean, ProjectRecordRow]
+  ) {
+    const setDialog = dialogStore.useSetState();
+
+    return useCallback(() => {
+      const key = args[0];
+
+      if (key === 'create') {
+        setDialog((prev) => ({
+          ...prev,
+          projectRecord: {
+            ...prev.projectRecord,
+            [type]: {
+              ...prev.projectRecord[type],
+              [key]: { open: args[1] },
+            },
+          },
+        }));
+      } else {
+        setDialog((prev) => ({
+          ...prev,
+          projectRecord: {
+            ...prev.projectRecord,
+            [type]: {
+              ...prev.projectRecord[type],
+              [key]: { open: args[1], row: args[2] },
+            },
+          },
+        }));
+      }
+    }, [type, args, setDialog]);
   }
 }
 

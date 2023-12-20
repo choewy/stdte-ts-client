@@ -9,7 +9,7 @@ import { ProjectPageRecordDialogContent } from './project-page-record-dialog-con
 export const ProjectPageRecordDialog: FunctionComponent = () => {
   const dialog = dialogStore.useValue();
   const row = dialog.project.record.row;
-  const onClose = dialogHook.useProjectPageDialogCallback('record', row, false);
+  const onClose = dialogHook.useProjectDialogCallback('record', false, row);
 
   return (
     <DialogFullScreen

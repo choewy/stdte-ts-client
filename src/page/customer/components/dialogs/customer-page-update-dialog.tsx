@@ -10,7 +10,7 @@ import { CustomerPageUpdateDialogAction } from './customer-page-update-dialog-ac
 export const CustomerPageUpdateDialog: FunctionComponent = () => {
   const dialog = dialogStore.useValue();
   const row = dialog.customer.update.row;
-  const onClose = dialogHook.useCustomerPageDialogCallback('update', row, false);
+  const onClose = dialogHook.useCustomerDialogCallback('update', false, row);
 
   const [body, setBody] = customerHook.useUpdateState(row);
 

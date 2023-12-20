@@ -91,32 +91,29 @@ export class DialogHook {
     }, [args, setDialog]);
   }
 
-  useCustomerPageCreateDialogCallback(open: boolean) {
+  useCustomerDialogCallback(...args: ['create', boolean] | ['update' | 'delete', boolean, CustomerRow]) {
     const setDialog = dialogStore.useSetState();
 
     return useCallback(() => {
-      setDialog((prev) => ({
-        ...prev,
-        customer: {
-          ...prev.customer,
-          create: { open },
-        },
-      }));
-    }, [open, setDialog]);
-  }
+      const [key, open, row] = args;
 
-  useCustomerPageDialogCallback(key: 'update' | 'delete', row: CustomerRow, open: boolean) {
-    const setDialog = dialogStore.useSetState();
+      switch (key) {
+        case 'create':
+          setDialog((prev) => ({
+            ...prev,
+            customer: { ...prev.customer, create: { open } },
+          }));
+          break;
 
-    return useCallback(() => {
-      setDialog((prev) => ({
-        ...prev,
-        customer: {
-          ...prev.customer,
-          [key]: { open, row: open === false ? CUSTOMER_ROW : row },
-        },
-      }));
-    }, [key, row, open, setDialog]);
+        case 'update':
+        case 'delete':
+          setDialog((prev) => ({
+            ...prev,
+            customer: { ...prev.customer, [key]: { open, row: open === false ? CUSTOMER_ROW : row } },
+          }));
+          break;
+      }
+    }, [args, setDialog]);
   }
 
   useBusinessCategoryPageCreateDialogCallback(open: boolean) {

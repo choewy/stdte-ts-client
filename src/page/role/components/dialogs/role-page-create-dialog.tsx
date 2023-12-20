@@ -9,7 +9,7 @@ import { RolePageCreateDialogAction } from './role-page-create-dialog-action';
 
 export const RolePageCreateDialog: FunctionComponent = () => {
   const dialog = dialogStore.useValue();
-  const onClose = dialogHook.useRolePageCreateDialogCallback(false);
+  const onClose = dialogHook.useRoleDialogsCallback('create', false);
 
   const [body, setBody] = roleHook.useCreateState();
 

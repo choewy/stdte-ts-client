@@ -30,15 +30,12 @@ export class DialogHook {
     return useCallback(() => {
       setDialog((prev) => ({
         ...prev,
-        mypage: {
-          ...prev.mypage,
-          updatePassword: { open },
-        },
+        mypage: { ...prev.mypage, updatePassword: { open } },
       }));
     }, [open, setDialog]);
   }
 
-  useCredentialsPageUpdatePasswordDialogCallback(id: number, open: boolean) {
+  useCredentialsUpdatePasswordDialogCallback(id: number, open: boolean) {
     const setDialog = dialogStore.useSetState();
 
     return useCallback(() => {
@@ -46,41 +43,36 @@ export class DialogHook {
         ...prev,
         credentials: {
           ...prev.credentials,
-          updatePassword: {
-            id: open === true ? id : 0,
-            open,
-          },
+          updatePassword: { id: open === true ? id : 0, open },
         },
       }));
     }, [id, open, setDialog]);
   }
 
-  useRolePageCreateDialogCallback(open: boolean) {
+  useRoleDialogsCallback(...args: ['create', boolean] | ['update' | 'delete' | 'users', boolean, RoleRow]) {
     const setDialog = dialogStore.useSetState();
 
     return useCallback(() => {
-      setDialog((prev) => ({
-        ...prev,
-        role: {
-          ...prev.role,
-          create: { open },
-        },
-      }));
-    }, [open, setDialog]);
-  }
+      const [key, open, row] = args;
 
-  useRolePageDialogsCallback(key: 'update' | 'delete' | 'users', row: RoleRow, open: boolean) {
-    const setDialog = dialogStore.useSetState();
+      switch (key) {
+        case 'create':
+          setDialog((prev) => ({
+            ...prev,
+            role: { ...prev.role, create: { open } },
+          }));
+          break;
 
-    return useCallback(() => {
-      setDialog((prev) => ({
-        ...prev,
-        role: {
-          ...prev.role,
-          [key]: { open, row: open === true ? row : ROLE_ROW },
-        },
-      }));
-    }, [key, row, open, setDialog]);
+        case 'update':
+        case 'delete':
+        case 'users':
+          setDialog((prev) => ({
+            ...prev,
+            role: { ...prev.role, [key]: { open, row: open === true ? row : ROLE_ROW } },
+          }));
+          break;
+      }
+    }, [args, setDialog]);
   }
 
   useUserPageDialogCallback(key: 'update', row: UserRow, open: boolean) {

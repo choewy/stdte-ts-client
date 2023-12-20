@@ -9,10 +9,7 @@ import { CredentialsPageUpdatePasswordDialogAction } from './credentials-page-up
 
 export const CredentialsPageUpdatePasswordDialog: FunctionComponent = () => {
   const dialog = dialogStore.useValue();
-  const onClose = dialogHook.useCredentialsPageUpdatePasswordDialogCallback(
-    dialog.credentials.updatePassword.id,
-    false,
-  );
+  const onClose = dialogHook.useCredentialsUpdatePasswordDialogCallback(dialog.credentials.updatePassword.id, false);
 
   const [body, setBody] = credentialsHook.useUpdatePasswordByAdminState();
 

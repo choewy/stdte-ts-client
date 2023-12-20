@@ -116,32 +116,34 @@ export class DialogHook {
     }, [args, setDialog]);
   }
 
-  useBusinessCategoryPageCreateDialogCallback(open: boolean) {
+  useBusinessCategoryDialogCallback(
+    ...args: ['create', boolean] | ['update' | 'delete', boolean, BusinessCategoryRow]
+  ) {
     const setDialog = dialogStore.useSetState();
 
     return useCallback(() => {
-      setDialog((prev) => ({
-        ...prev,
-        businessCategory: {
-          ...prev.businessCategory,
-          create: { open },
-        },
-      }));
-    }, [open, setDialog]);
-  }
+      const [key, open, row] = args;
 
-  useBusinessCategoryPageDialogCallback(key: 'update' | 'delete', row: BusinessCategoryRow, open: boolean) {
-    const setDialog = dialogStore.useSetState();
+      switch (key) {
+        case 'create':
+          setDialog((prev) => ({
+            ...prev,
+            businessCategory: { ...prev.businessCategory, create: { open } },
+          }));
+          break;
 
-    return useCallback(() => {
-      setDialog((prev) => ({
-        ...prev,
-        businessCategory: {
-          ...prev.businessCategory,
-          [key]: { open, row: open === false ? BUSINESS_CATEGORY_ROW : row },
-        },
-      }));
-    }, [key, row, open, setDialog]);
+        case 'update':
+        case 'delete':
+          setDialog((prev) => ({
+            ...prev,
+            businessCategory: {
+              ...prev.businessCategory,
+              [key]: { open, row: open === false ? BUSINESS_CATEGORY_ROW : row },
+            },
+          }));
+          break;
+      }
+    }, [args, setDialog]);
   }
 
   useIndustryCategoryPageCreateDialogCallback(open: boolean) {

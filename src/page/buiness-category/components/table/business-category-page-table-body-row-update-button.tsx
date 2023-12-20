@@ -7,7 +7,7 @@ import { dialogHook } from '@hook';
 export const BusinessCategoryPageTableBodyRowUpdateButton: FunctionComponent<{
   row: BusinessCategoryRow;
 }> = ({ row }) => {
-  const onClick = dialogHook.useBusinessCategoryPageDialogCallback('update', row, true);
+  const onClick = dialogHook.useBusinessCategoryDialogCallback('update', true, row);
 
   return <TableCellButton text="수정" onClick={onClick} />;
 };

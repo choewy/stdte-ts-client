@@ -11,11 +11,13 @@ export const ProjectPageSaleRecordTableHead: FunctionComponent<{
   return (
     <TableHead>
       <TableRow>
+        <TableValueCell value="행번호" />
         <TableValueCell value="매출발생일자" />
         <TableValueCell value="매출발생금액" />
+        <TableValueCell value="비고" />
         <TableValueCell value="등록일시" />
         <TableValueCell value="수정일시" />
-        {(canUpdate || canDelete) && <TableValueCell rowSpan={2} />}
+        {(canUpdate || canDelete) && <TableValueCell />}
       </TableRow>
     </TableHead>
   );

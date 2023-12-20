@@ -2,7 +2,14 @@ import { FunctionComponent } from 'react';
 
 import { Box, Button, ButtonGroup } from '@mui/material';
 
-export const ProjectPageSaleRecordTableToolbar: FunctionComponent = () => {
+import { ProjectRecordType, ProjectRow } from '@service';
+import { dialogHook } from '@hook';
+
+export const ProjectPageSaleRecordTableToolbar: FunctionComponent<{
+  row: ProjectRow;
+}> = ({ row }) => {
+  const onClick = dialogHook.useProjectRecordDialogCallback(ProjectRecordType.Sale, 'create', true, row);
+
   return (
     <Box
       sx={{
@@ -20,7 +27,7 @@ export const ProjectPageSaleRecordTableToolbar: FunctionComponent = () => {
             children: '등록',
             size: 'small',
             sx: { width: 64 },
-            onClick: () => {},
+            onClick,
           }}
         />
       </ButtonGroup>

@@ -29,7 +29,7 @@ export class SizeService {
 
     const length = this.getTextLengthByBytes(String(value));
 
-    width = 10 * length;
+    width = 9.5 * length;
 
     if (width < 70) {
       width = 70;

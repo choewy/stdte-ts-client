@@ -2,6 +2,8 @@ import { FunctionComponent } from 'react';
 
 import { Box } from '@mui/material';
 
+import { ProjectRow } from '@service';
+
 import {
   ProjectPageOrderRecordTableToolbar,
   ProjectPageOrderRecordTable,
@@ -9,15 +11,15 @@ import {
   ProjectPageSaleRecordTable,
 } from '../common';
 
-export const ProjectPageRecordDialogContent: FunctionComponent = () => {
+export const ProjectPageRecordDialogContent: FunctionComponent<{ row: ProjectRow }> = ({ row }) => {
   return (
-    <Box sx={{ display: 'flex', gap: 1 }}>
-      <Box sx={{ flex: 1 }}>
-        <ProjectPageOrderRecordTableToolbar />
+    <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1 }}>
+      <Box sx={{ overflow: 'scroll' }}>
+        <ProjectPageOrderRecordTableToolbar {...{ row }} />
         <ProjectPageOrderRecordTable {...{ canUpdate: true, canDelete: true }} />
       </Box>
-      <Box sx={{ flex: 1 }}>
-        <ProjectPageSaleRecordTableToolbar />
+      <Box sx={{ overflow: 'scroll' }}>
+        <ProjectPageSaleRecordTableToolbar {...{ row }} />
         <ProjectPageSaleRecordTable {...{ canUpdate: true, canDelete: true }} />
       </Box>
     </Box>

@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react';
 
 import { DialogFullScreen } from '@component';
 import { dialogStore } from '@store';
-import { dialogHook } from '@hook';
+import { dialogHook, projectRecordHook } from '@hook';
 
 import { ProjectPageRecordDialogContent } from './project-page-record-dialog-content';
 
@@ -11,12 +11,15 @@ export const ProjectPageRecordDialog: FunctionComponent = () => {
   const row = dialog.project.record.row;
   const onClose = dialogHook.useProjectDialogCallback('record', false, row);
 
+  projectRecordHook.useMount(row.id);
+  projectRecordHook.useUnMount();
+
   return (
     <DialogFullScreen
-      title="사업 수주/매출 기록"
+      title={`${row.code} 수주/매출 기록`}
       open={dialog.project.record.open}
       onClose={onClose}
-      contents={<ProjectPageRecordDialogContent />}
+      contents={<ProjectPageRecordDialogContent row={row} />}
       actions={<></>}
     />
   );

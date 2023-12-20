@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { Paper, Table, TableContainer, Typography } from '@mui/material';
+import { Paper, Table, TableContainer } from '@mui/material';
 
 import { layoutStore } from '@store';
 import { projectHook, scrollHook } from '@hook';

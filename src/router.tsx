@@ -21,6 +21,8 @@ import {
   BusinessCategoryPage,
   IndustryCategoryPage,
   TaskCategoryPage,
+  TimeRecordLayoutPage,
+  TimeRecordPage,
 } from '@page';
 
 export const router = createBrowserRouter(
@@ -127,11 +129,17 @@ export const router = createBrowserRouter(
             },
             {
               path: PagePath.TimeRecord,
-              element: <EmptyPage title="시간관리 내 기록으로 Redirect" />,
+              element: <TimeRecordLayoutPage />,
+              children: [
+                {
+                  path: PagePath.TimeRecordByUser,
+                  element: <TimeRecordPage />,
+                },
+              ],
             },
             {
               path: PagePath.TimeRecordByUser,
-              element: <EmptyPage title="시간관리 내 기록 또는 누군가의 기록" />,
+              element: <TimeRecordPage />,
             },
             {
               path: PagePath.TimeAnalysis,

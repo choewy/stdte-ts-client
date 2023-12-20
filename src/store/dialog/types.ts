@@ -6,6 +6,7 @@ import {
   TaskCategoryRow,
   UserRow,
   ProjectRow,
+  ProjectRecordRow,
 } from '@service';
 
 export type DialogStoreProps = {
@@ -55,5 +56,17 @@ export type DialogStoreProps = {
     record: { open: boolean; row: ProjectRow };
     update: { open: boolean; row: ProjectRow };
     delete: { open: boolean; row: ProjectRow };
+  };
+  projectRecord: {
+    order: {
+      create: { open: boolean };
+      update: { open: boolean; row: ProjectRecordRow };
+      delete: { open: boolean; row: ProjectRecordRow };
+    };
+    sale: {
+      create: { open: boolean };
+      update: { open: boolean; row: ProjectRecordRow };
+      delete: { open: boolean; row: ProjectRecordRow };
+    };
   };
 };

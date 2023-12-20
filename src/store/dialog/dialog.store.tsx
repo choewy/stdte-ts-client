@@ -3,6 +3,7 @@ import {
   BUSINESS_CATEGORY_ROW,
   CUSTOMER_ROW,
   INDUSTRY_CATEGORY_ROW,
+  PROJECT_RECORD_ROW,
   PROJECT_ROW,
   ROLE_ROW,
   TASK_CATEGORY_ROW,
@@ -73,6 +74,18 @@ export class DialogStore extends RecoilStore<DialogStoreProps> {
         record: { open: false, row: PROJECT_ROW },
         update: { open: false, row: PROJECT_ROW },
         delete: { open: false, row: PROJECT_ROW },
+      },
+      projectRecord: {
+        order: {
+          create: { open: false },
+          update: { open: false, row: PROJECT_RECORD_ROW },
+          delete: { open: false, row: PROJECT_RECORD_ROW },
+        },
+        sale: {
+          create: { open: false },
+          update: { open: false, row: PROJECT_RECORD_ROW },
+          delete: { open: false, row: PROJECT_RECORD_ROW },
+        },
       },
     });
   }

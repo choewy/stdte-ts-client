@@ -17,8 +17,8 @@ export const UserPageUpdateDialogContent: FunctionComponent<{
 }> = ({ row, body, setBody }) => {
   const onChangeName = textFieldHook.useOnChangeObjectStrProperty(setBody, 'name');
   const onChangeStatus = selectFormHook.useOnChangeObjectProperty(setBody, 'status');
-  const onChangePhone = textFieldHook.useOnChangeObjectPhoneNumberProperty('phone', setBody);
-  const onChangeScienceNumber = textFieldHook.useOnChangeObjectScienceNumberProperty('scienceNumber', setBody);
+  const onChangePhone = textFieldHook.useOnChangeObjectPhoneNumberProperty(setBody, 'phone');
+  const onChangeScienceNumber = textFieldHook.useOnChangeObjectScienceNumberProperty(setBody, 'scienceNumber');
   const onChangeBirthday = textFieldHook.useOnChangeObjectStrProperty(setBody, 'birthday');
   const onChangeEnteringDay = textFieldHook.useOnChangeObjectStrProperty(setBody, 'enteringDay');
   const onChangeResignationDay = textFieldHook.useOnChangeObjectStrProperty(setBody, 'resignationDay');

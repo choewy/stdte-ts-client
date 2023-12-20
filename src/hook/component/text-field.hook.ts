@@ -13,7 +13,7 @@ export class TextFieldHook {
     );
   }
 
-  useOnChangeObjectScienceNumberProperty<D extends object>(key: keyof D, setState: SetterOrUpdater<D>) {
+  useOnChangeObjectScienceNumberProperty<D extends object>(setState: SetterOrUpdater<D>, key: keyof D) {
     return useCallback(
       (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
@@ -28,7 +28,7 @@ export class TextFieldHook {
     );
   }
 
-  useOnChangeObjectPhoneNumberProperty<D extends object>(key: keyof D, setState: SetterOrUpdater<D>) {
+  useOnChangeObjectPhoneNumberProperty<D extends object>(setState: SetterOrUpdater<D>, key: keyof D) {
     return useCallback(
       (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;

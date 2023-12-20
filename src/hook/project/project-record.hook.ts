@@ -224,6 +224,8 @@ export class ProjectRecordHook {
           },
         };
       });
+
+      return true;
     }, [type, id, setState]);
   }
 }

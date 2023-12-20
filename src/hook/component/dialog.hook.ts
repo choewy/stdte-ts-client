@@ -209,56 +209,56 @@ export class DialogHook {
     }, [key, row, open, setDialog]);
   }
 
-  useTaskCategoryPageCreateChildDialogCallback(parent: TaskCategoryRow, open: boolean) {
-    const setDialog = dialogStore.useSetState();
-
-    return useCallback(() => {
-      setDialog((prev) => ({
-        ...prev,
-        taskCategory: {
-          ...prev.taskCategory,
-          child: {
-            ...prev.taskCategory.child,
-            create: { open, parent: open === false ? TASK_CATEGORY_ROW : parent },
-          },
-        },
-      }));
-    }, [parent, open, setDialog]);
-  }
-
-  useTaskCategoryPageChildDialogCallback(
-    key: 'update' | 'delete',
-    parent: TaskCategoryRow,
-    child: TaskCategoryRowChild,
-    open: boolean,
+  useTaskCategoryChildDialogCallback(
+    ...args:
+      | ['create', TaskCategoryRow, boolean]
+      | ['update' | 'delete', TaskCategoryRow, boolean, TaskCategoryRowChild]
   ) {
     const setDialog = dialogStore.useSetState();
 
     return useCallback(() => {
-      setDialog((prev) => ({
-        ...prev,
-        taskCategory: {
-          ...prev.taskCategory,
-          child: {
-            ...prev.taskCategory.child,
-            [key]: {
-              open,
-              parent: open === false ? TASK_CATEGORY_ROW : parent,
-              child: open === false ? TASK_CATEGORY_ROW_CHILD : child,
+      const [key, parent, open, child] = args;
+
+      switch (key) {
+        case 'create':
+          setDialog((prev) => ({
+            ...prev,
+            taskCategory: {
+              ...prev.taskCategory,
+              child: {
+                ...prev.taskCategory.child,
+                create: { open, parent: open === false ? TASK_CATEGORY_ROW : parent },
+              },
             },
-          },
-        },
-      }));
-    }, [key, parent, child, open, setDialog]);
+          }));
+          break;
+
+        case 'update':
+        case 'delete':
+          setDialog((prev) => ({
+            ...prev,
+            taskCategory: {
+              ...prev.taskCategory,
+              child: {
+                ...prev.taskCategory.child,
+                [key]: {
+                  open,
+                  parent: open === false ? TASK_CATEGORY_ROW : parent,
+                  child: open === false ? TASK_CATEGORY_ROW_CHILD : child,
+                },
+              },
+            },
+          }));
+          break;
+      }
+    }, [args, setDialog]);
   }
 
   useProjectDialogCallback(...args: ['create', boolean] | ['update' | 'delete' | 'record', boolean, ProjectRow]) {
     const setDialog = dialogStore.useSetState();
 
     return useCallback(() => {
-      const key = args[0];
-      const open = args[1];
-      const row = args[2];
+      const [key, open, row] = args;
 
       switch (key) {
         case 'create':
@@ -287,9 +287,7 @@ export class DialogHook {
     const setDialog = dialogStore.useSetState();
 
     return useCallback(() => {
-      const key = args[0];
-      const open = args[1];
-      const row = args[2];
+      const [key, open, row] = args;
 
       switch (key) {
         case 'create':

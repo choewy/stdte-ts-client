@@ -8,7 +8,7 @@ export const TaskCategoryPageChildrenDialogContentTableBodyRowUpdateButton: Func
   parent: TaskCategoryRow;
   child: TaskCategoryRowChild;
 }> = ({ parent, child }) => {
-  const onClick = dialogHook.useTaskCategoryPageChildDialogCallback('update', parent, child, true);
+  const onClick = dialogHook.useTaskCategoryChildDialogCallback('update', parent, true, child);
 
   return <TableCellButton text="수정" onClick={onClick} />;
 };

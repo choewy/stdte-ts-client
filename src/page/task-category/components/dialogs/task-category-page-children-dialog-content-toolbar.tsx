@@ -9,7 +9,7 @@ export const TaskCategoryPageChildrenDialogContentToolbar: FunctionComponent<{
   parent: TaskCategoryRow;
   canCreate: boolean;
 }> = ({ parent, canCreate }) => {
-  const onClick = dialogHook.useTaskCategoryPageCreateChildDialogCallback(parent, true);
+  const onClick = dialogHook.useTaskCategoryChildDialogCallback('create', parent, true);
 
   return (
     <Box

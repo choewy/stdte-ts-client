@@ -10,9 +10,9 @@ export const MyPageUpdatePasswordDialogContent: FunctionComponent<{
   body: CredentialsUpdatePasswordBody;
   setBody: SetterOrUpdater<CredentialsUpdatePasswordBody>;
 }> = ({ body, setBody }) => {
-  const onChangeCurrentPassword = textFieldHook.useOnChangeObjectStrProperty('currentPassword', setBody);
-  const onChangeNewPassword = textFieldHook.useOnChangeObjectStrProperty('newPassword', setBody);
-  const onChangeConfirmPassword = textFieldHook.useOnChangeObjectStrProperty('confirmPassword', setBody);
+  const onChangeCurrentPassword = textFieldHook.useOnChangeObjectStrProperty(setBody, 'currentPassword');
+  const onChangeNewPassword = textFieldHook.useOnChangeObjectStrProperty(setBody, 'newPassword');
+  const onChangeConfirmPassword = textFieldHook.useOnChangeObjectStrProperty(setBody, 'confirmPassword');
 
   return (
     <>

@@ -20,11 +20,11 @@ export const ProjectPageDialogContentSection: FunctionComponent<{
   body: ProjectCreateBody | ProjectUpdateBody;
   setBody: SetterOrUpdater<ProjectCreateBody> | SetterOrUpdater<ProjectUpdateBody>;
 }> = ({ body, setBody }) => {
-  const onChangeCode = textFieldHook.useOnChangeObjectStrProperty('code', setBody);
+  const onChangeCode = textFieldHook.useOnChangeObjectStrProperty(setBody, 'code');
   const onChangeDifficulty = textFieldHook.useOnChangeObjectDecimalProperty(setBody, 'difficulty');
-  const onChangeName = textFieldHook.useOnChangeObjectStrProperty('name', setBody);
+  const onChangeName = textFieldHook.useOnChangeObjectStrProperty(setBody, 'name');
   const onChangeAmount = textFieldHook.useOnChangeObjectKRWProperty(setBody, 'amount');
-  const onChangeDescription = textFieldHook.useOnChangeObjectStrProperty('description', setBody);
+  const onChangeDescription = textFieldHook.useOnChangeObjectStrProperty(setBody, 'description');
 
   return (
     <SectionContainer>

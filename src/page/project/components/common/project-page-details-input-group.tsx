@@ -11,8 +11,8 @@ export const ProjectPageDetailsInputGroup: FunctionComponent<{
   body: ProjectCreateBody | ProjectUpdateBody;
   setBody: SetterOrUpdater<ProjectCreateBody> | SetterOrUpdater<ProjectUpdateBody>;
 }> = ({ body, setBody }) => {
-  const onChangeStartDate = textFieldHook.useOnChangeObjectStrProperty('startDate', setBody);
-  const onChangeEndDate = textFieldHook.useOnChangeObjectStrProperty('endDate', setBody);
+  const onChangeStartDate = textFieldHook.useOnChangeObjectStrProperty(setBody, 'startDate');
+  const onChangeEndDate = textFieldHook.useOnChangeObjectStrProperty(setBody, 'endDate');
 
   return (
     <>

@@ -1,9 +1,10 @@
-import { regExpService } from '@service';
 import { ChangeEvent, useCallback } from 'react';
 import { SetterOrUpdater } from 'recoil';
 
+import { regExpService } from '@service';
+
 export class TextFieldHook {
-  useOnChangeObjectStrProperty<D extends object>(key: keyof D, setState: SetterOrUpdater<D>) {
+  useOnChangeObjectStrProperty<D extends object>(setState: SetterOrUpdater<D>, key: keyof D) {
     return useCallback(
       (e: ChangeEvent<HTMLInputElement>) => {
         setState((prev) => ({ ...prev, [key]: e.target.value }));

@@ -10,8 +10,8 @@ export const TaskCategoryPageUpdateDialogContent: FunctionComponent<{
   body: TaskCategoryUpdateBody;
   setBody: SetterOrUpdater<TaskCategoryUpdateBody>;
 }> = ({ body, setBody }) => {
-  const onChangeName = textFieldHook.useOnChangeObjectStrProperty('name', setBody);
-  const onChangeDescription = textFieldHook.useOnChangeObjectStrProperty('description', setBody);
+  const onChangeName = textFieldHook.useOnChangeObjectStrProperty(setBody, 'name');
+  const onChangeDescription = textFieldHook.useOnChangeObjectStrProperty(setBody, 'description');
 
   return (
     <>

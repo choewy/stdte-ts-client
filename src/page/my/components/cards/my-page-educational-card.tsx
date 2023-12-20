@@ -16,8 +16,8 @@ export const MyPageEducationalCard: FunctionComponent = () => {
   const [body, setBody] = profileHook.useEducationalState(profile);
 
   const onChangeDegree = selectFormHook.useOnChangeObjectProperty('degree', setBody);
-  const onChangeSchool = textFieldHook.useOnChangeObjectStrProperty('school', setBody);
-  const onChangeMajor = textFieldHook.useOnChangeObjectStrProperty('major', setBody);
+  const onChangeSchool = textFieldHook.useOnChangeObjectStrProperty(setBody, 'school');
+  const onChangeMajor = textFieldHook.useOnChangeObjectStrProperty(setBody, 'major');
 
   const disabled = buttonHook.useDisabledByObject(profile, body);
   const onClick = profileHook.useUpdateEducational(body);

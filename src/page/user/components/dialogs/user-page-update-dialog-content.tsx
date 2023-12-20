@@ -30,18 +30,6 @@ export const UserPageUpdateDialogContent: FunctionComponent<{
 
   return (
     <Box sx={{ display: 'flex', gap: 2, height: '100%' }}>
-      <UserPageCard title="기본정보">
-        <TextField {...{ label: '이메일', value: row.credentials.email, InputProps: { readOnly: true } }} />
-        <TextField {...{ label: '역할', value: row.role?.name ?? '없음', InputProps: { readOnly: true } }} />
-        <SelectControl label="재직상태" value={body.status} onChange={onChangeStatus}>
-          <MenuItem {...{ value: UserStatus.Wating, children: enumService.userStatusToText(UserStatus.Wating) }} />
-          <MenuItem {...{ value: UserStatus.Active, children: enumService.userStatusToText(UserStatus.Active) }} />
-          <MenuItem {...{ value: UserStatus.Vacate, children: enumService.userStatusToText(UserStatus.Vacate) }} />
-          <MenuItem {...{ value: UserStatus.Retire, children: enumService.userStatusToText(UserStatus.Retire) }} />
-        </SelectControl>
-        <DateInput {...{ label: '입사일자', value: body.enteringDay, onChange: onChangeEnteringDay }} />
-        <DateInput {...{ label: '퇴사일자', value: body.resignationDay, onChange: onChangeResignationDay }} />
-      </UserPageCard>
       <UserPageCard title="인적사항">
         <TextField {...{ label: '이름', value: body.name, onChange: onChangeName }} />
         <DateInput {...{ label: '생년월일', value: body.birthday, onChange: onChangeBirthday }} />
@@ -54,6 +42,18 @@ export const UserPageUpdateDialogContent: FunctionComponent<{
             onChange: onChangeScienceNumber,
           }}
         />
+      </UserPageCard>
+      <UserPageCard title="계정정보">
+        <TextField {...{ label: '이메일', value: row.credentials.email, InputProps: { readOnly: true } }} />
+        <TextField {...{ label: '역할', value: row.role?.name ?? '없음', InputProps: { readOnly: true } }} />
+        <SelectControl label="재직상태" value={body.status} onChange={onChangeStatus}>
+          <MenuItem {...{ value: UserStatus.Wating, children: enumService.userStatusToText(UserStatus.Wating) }} />
+          <MenuItem {...{ value: UserStatus.Active, children: enumService.userStatusToText(UserStatus.Active) }} />
+          <MenuItem {...{ value: UserStatus.Vacate, children: enumService.userStatusToText(UserStatus.Vacate) }} />
+          <MenuItem {...{ value: UserStatus.Retire, children: enumService.userStatusToText(UserStatus.Retire) }} />
+        </SelectControl>
+        <DateInput {...{ label: '입사일자', value: body.enteringDay, onChange: onChangeEnteringDay }} />
+        <DateInput {...{ label: '퇴사일자', value: body.resignationDay, onChange: onChangeResignationDay }} />
       </UserPageCard>
       <UserPageCard title="학력사항">
         <SelectControl label="최종학력" value={body.degree} onChange={onChangeDegree}>

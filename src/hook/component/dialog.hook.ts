@@ -20,6 +20,7 @@ import {
   PROJECT_ROW,
   ProjectRecordRow,
   ProjectRecordType,
+  PROJECT_RECORD_ROW,
 } from '@service';
 
 export class DialogHook {
@@ -256,23 +257,25 @@ export class DialogHook {
 
     return useCallback(() => {
       const key = args[0];
+      const open = args[1];
+      const row = args[2];
 
-      if (key === 'create') {
-        setDialog((prev) => ({
-          ...prev,
-          project: {
-            ...prev.project,
-            [key]: { open: args[1] },
-          },
-        }));
-      } else {
-        setDialog((prev) => ({
-          ...prev,
-          project: {
-            ...prev.project,
-            [key]: { open: args[1], row: args[1] === false ? PROJECT_ROW : args[2] },
-          },
-        }));
+      switch (key) {
+        case 'create':
+          setDialog((prev) => ({
+            ...prev,
+            project: { ...prev.project, [key]: { open } },
+          }));
+          break;
+
+        case 'update':
+        case 'delete':
+        case 'record':
+          setDialog((prev) => ({
+            ...prev,
+            project: { ...prev.project, [key]: { open, row: open === false ? PROJECT_ROW : row } },
+          }));
+          break;
       }
     }, [args, setDialog]);
   }
@@ -285,29 +288,30 @@ export class DialogHook {
 
     return useCallback(() => {
       const key = args[0];
+      const open = args[1];
+      const row = args[2];
 
-      if (key === 'create') {
-        setDialog((prev) => ({
-          ...prev,
-          projectRecord: {
-            ...prev.projectRecord,
-            [type]: {
-              ...prev.projectRecord[type],
-              [key]: { open: args[1] },
+      switch (key) {
+        case 'create':
+          setDialog((prev) => ({
+            ...prev,
+            projectRecord: {
+              ...prev.projectRecord,
+              [type]: { ...prev.projectRecord[type], [key]: { open } },
             },
-          },
-        }));
-      } else {
-        setDialog((prev) => ({
-          ...prev,
-          projectRecord: {
-            ...prev.projectRecord,
-            [type]: {
-              ...prev.projectRecord[type],
-              [key]: { open: args[1], row: args[2] },
+          }));
+          break;
+
+        case 'update':
+        case 'delete':
+          setDialog((prev) => ({
+            ...prev,
+            projectRecord: {
+              ...prev.projectRecord,
+              [type]: { ...prev.projectRecord[type], [key]: { open, row: open === false ? PROJECT_RECORD_ROW : row } },
             },
-          },
-        }));
+          }));
+          break;
       }
     }, [type, args, setDialog]);
   }

@@ -14,7 +14,7 @@ export class SelectFormHook {
     );
   }
 
-  useOnChangeObjectBooleanProperty<D extends object>(key: keyof D, setState: SetterOrUpdater<D>) {
+  useOnChangeObjectBooleanProperty<D extends object>(setState: SetterOrUpdater<D>, key: keyof D) {
     return useCallback(
       (event: SelectChangeEvent<unknown>, _: ReactNode) => {
         setState((prev) => ({ ...prev, [key]: event.target.value === 1 }));

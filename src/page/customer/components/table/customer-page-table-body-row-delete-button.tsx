@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
 import { CustomerRow } from '@service';
-import { TableCellButton } from '@component';
+import { TableCellDeleteButton } from '@component';
 import { dialogHook } from '@hook';
 
 export const CustomerPageTableBodyRowDeleteButton: FunctionComponent<{
@@ -9,5 +9,5 @@ export const CustomerPageTableBodyRowDeleteButton: FunctionComponent<{
 }> = ({ row }) => {
   const onClick = dialogHook.useCustomerDialogCallback('delete', true, row);
 
-  return <TableCellButton text="삭제" onClick={onClick} />;
+  return <TableCellDeleteButton onClick={onClick} />;
 };

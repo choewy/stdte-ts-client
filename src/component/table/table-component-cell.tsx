@@ -8,21 +8,19 @@ export const TableComponentCell: FunctionComponent<
   }
 > = ({ components, ...props }) => {
   return (
-    <TableCell
-      {...props}
-      children={
-        <Box
-          sx={{
-            marginX: 2,
-            gap: 1,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          {components}
-        </Box>
-      }
-    />
+    <TableCell {...props}>
+      <Box
+        sx={{
+          marginX: 1,
+          padding: 0,
+          gap: 1,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        {components}
+      </Box>
+    </TableCell>
   );
 };

@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
 import { BusinessCategoryRow } from '@service';
-import { TableCellButton } from '@component';
+import { TableCellEditButton } from '@component';
 import { dialogHook } from '@hook';
 
 export const BusinessCategoryPageTableBodyRowUpdateButton: FunctionComponent<{
@@ -9,5 +9,5 @@ export const BusinessCategoryPageTableBodyRowUpdateButton: FunctionComponent<{
 }> = ({ row }) => {
   const onClick = dialogHook.useBusinessCategoryDialogCallback('update', true, row);
 
-  return <TableCellButton text="수정" onClick={onClick} />;
+  return <TableCellEditButton onClick={onClick} />;
 };

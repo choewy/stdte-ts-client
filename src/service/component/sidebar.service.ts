@@ -3,6 +3,7 @@ import { v4 } from 'uuid';
 import {
   AdminPanelSettings,
   Assignment,
+  Bookmark,
   CalendarMonth,
   CorporateFare,
   FormatListBulleted,
@@ -12,7 +13,6 @@ import {
   Home,
   ManageAccounts,
   Settings,
-  Style,
   Tune,
 } from '@mui/icons-material';
 
@@ -137,7 +137,7 @@ export class SidebarService {
           name: '사업구분',
           type: SidebarMenuType.Navigate,
           scope: SidebarMenuScope.UserOnly,
-          Icon: Style,
+          Icon: Bookmark,
           path: PagePath.ProjectBusinessCategory,
           policy: { businessCategory: RolePolicyLevel.Read },
         },
@@ -145,7 +145,7 @@ export class SidebarService {
           name: '산업분야',
           type: SidebarMenuType.Navigate,
           scope: SidebarMenuScope.UserOnly,
-          Icon: Style,
+          Icon: Bookmark,
           path: PagePath.ProjectIndustryCategory,
           policy: { industryCategory: RolePolicyLevel.Read },
         },
@@ -153,7 +153,7 @@ export class SidebarService {
           name: '수행업무구분',
           type: SidebarMenuType.Navigate,
           scope: SidebarMenuScope.UserOnly,
-          Icon: Style,
+          Icon: Bookmark,
           path: PagePath.ProjectTaskCategory,
           policy: { taskCategory: RolePolicyLevel.Read },
         },

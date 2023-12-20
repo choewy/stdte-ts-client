@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { TableCellButton } from '@component';
+import { TableCellEditButton } from '@component';
 import { TaskCategoryRow, TaskCategoryRowChild } from '@service';
 import { dialogHook } from '@hook';
 
@@ -10,5 +10,5 @@ export const TaskCategoryPageChildrenDialogContentTableBodyRowUpdateButton: Func
 }> = ({ parent, child }) => {
   const onClick = dialogHook.useTaskCategoryChildDialogCallback('update', parent, true, child);
 
-  return <TableCellButton text="수정" onClick={onClick} />;
+  return <TableCellEditButton onClick={onClick} />;
 };

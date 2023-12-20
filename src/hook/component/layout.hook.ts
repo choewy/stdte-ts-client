@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import { AppConfig } from '@config';
 import { PagePath } from '@common';
 import { LoadingEvent } from '@core';
 import { layoutStore } from '@store';
@@ -82,10 +83,11 @@ export class LayoutHook {
 
     useEffect(() => {
       const title = parseTitle();
+      const version = new AppConfig().getAppVersion();
 
       setLayout((prev) => ({
         ...prev,
-        helmet: { title: ['STDTE', title].join(' - ') },
+        helmet: { title: ['STDTE', title, version].join(' - ') },
         header: { title },
       }));
     }, [parseTitle, setLayout]);

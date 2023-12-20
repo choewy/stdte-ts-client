@@ -7,13 +7,30 @@ import { DateInput } from '@component';
 import { ProjectRecordCreateBody, ProjectRecordUpdateBody } from '@service';
 import { textFieldHook } from '@hook';
 
-export const ProjectPageOrderRecordForm: FunctionComponent<{
-  body: ProjectRecordCreateBody | ProjectRecordUpdateBody;
-  setBody: SetterOrUpdater<ProjectRecordCreateBody & ProjectRecordUpdateBody>;
-}> = ({ body, setBody }) => {
-  const onChangeDate = textFieldHook.useOnChangeObjectStrProperty(setBody, 'date');
-  const onChangeAmount = textFieldHook.useOnChangeObjectKRWProperty(setBody, 'amount');
-  const onChangeDescription = textFieldHook.useOnChangeObjectStrProperty(setBody, 'description');
+export const ProjectPageOrderRecordForm: FunctionComponent<
+  | {
+      body: ProjectRecordCreateBody;
+      setBody: SetterOrUpdater<ProjectRecordCreateBody>;
+    }
+  | {
+      body: ProjectRecordUpdateBody;
+      setBody: SetterOrUpdater<ProjectRecordUpdateBody>;
+    }
+> = ({ body, setBody }) => {
+  const onChangeDate = textFieldHook.useOnChangeObjectKRWProperty(
+    setBody as SetterOrUpdater<ProjectRecordCreateBody & ProjectRecordUpdateBody>,
+    'date',
+  );
+
+  const onChangeAmount = textFieldHook.useOnChangeObjectKRWProperty(
+    setBody as SetterOrUpdater<ProjectRecordCreateBody & ProjectRecordUpdateBody>,
+    'amount',
+  );
+
+  const onChangeDescription = textFieldHook.useOnChangeObjectStrProperty(
+    setBody as SetterOrUpdater<ProjectRecordCreateBody & ProjectRecordUpdateBody>,
+    'description',
+  );
 
   return (
     <>

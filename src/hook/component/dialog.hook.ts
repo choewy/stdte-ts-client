@@ -75,10 +75,12 @@ export class DialogHook {
     }, [args, setDialog]);
   }
 
-  useUserPageDialogCallback(key: 'update', row: UserRow, open: boolean) {
+  useUserDialogCallback(...args: ['update', boolean, UserRow]) {
     const setDialog = dialogStore.useSetState();
 
     return useCallback(() => {
+      const [key, open, row] = args;
+
       setDialog((prev) => ({
         ...prev,
         user: {
@@ -86,7 +88,7 @@ export class DialogHook {
           [key]: { open, row: open === false ? USER_ROW : row },
         },
       }));
-    }, [key, row, open, setDialog]);
+    }, [args, setDialog]);
   }
 
   useCustomerPageCreateDialogCallback(open: boolean) {

@@ -11,8 +11,10 @@ export const ProjectPageOrderRecordTableHead: FunctionComponent<{
   return (
     <TableHead>
       <TableRow>
+        <TableValueCell value="행번호" />
         <TableValueCell value="수주일자" />
         <TableValueCell value="수주금액" />
+        <TableValueCell value="비고" />
         <TableValueCell value="등록일시" />
         <TableValueCell value="수정일시" />
         {(canUpdate || canDelete) && <TableValueCell />}

@@ -2,20 +2,24 @@ import { FunctionComponent } from 'react';
 
 import { Paper, Table, TableContainer } from '@mui/material';
 
+import { ProjectRecordType } from '@service';
 import { layoutStore } from '@store';
-import { scrollHook } from '@hook';
+import { projectRecordHook, scrollHook } from '@hook';
 
 import { ProjectPageOrderRecordTableHead } from './project-page-order-record-table-head';
+import { ProjectPageOrderRecordTableBody } from './project-page-order-record-table-body';
 
 export const ProjectPageOrderRecordTable: FunctionComponent<{
   canUpdate: boolean;
   canDelete: boolean;
 }> = ({ canUpdate, canDelete }) => {
+  const type = ProjectRecordType.Order;
+
   const size = layoutStore.useValue().size;
   const scroll = scrollHook.useDivScrollRefObject();
   const onScroll = scrollHook.useOnScroll(scroll.ref, scroll.setEnd);
 
-  // projectHook.useScrollEndOrderRecord(scroll.end);
+  projectRecordHook.useScrollEnd(type, scroll.end);
 
   return (
     <TableContainer
@@ -30,7 +34,7 @@ export const ProjectPageOrderRecordTable: FunctionComponent<{
     >
       <Table stickyHeader>
         <ProjectPageOrderRecordTableHead {...{ canUpdate, canDelete }} />
-        {/* <ProjectPageTableBody {...{ canUpdate, canDelete }} /> */}
+        <ProjectPageOrderRecordTableBody {...{ canUpdate, canDelete }} />
       </Table>
     </TableContainer>
   );

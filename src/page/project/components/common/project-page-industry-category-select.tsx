@@ -17,7 +17,7 @@ export const ProjectPageIndustryCategorySelect: FunctionComponent<{
   selectHook.useMountCategory('industries');
   selectHook.useUnMountCategory('industries');
 
-  const onChange = selectFormHook.useOnChangeObjectProperty('industryCategory', setBody);
+  const onChange = selectFormHook.useOnChangeObjectProperty(setBody, 'industryCategory');
 
   return (
     <SelectControl

@@ -16,13 +16,13 @@ export const UserPageUpdateDialogContent: FunctionComponent<{
   setBody: SetterOrUpdater<UserRowUpdateBody>;
 }> = ({ row, body, setBody }) => {
   const onChangeName = textFieldHook.useOnChangeObjectStrProperty(setBody, 'name');
-  const onChangeStatus = selectFormHook.useOnChangeObjectProperty('status', setBody);
+  const onChangeStatus = selectFormHook.useOnChangeObjectProperty(setBody, 'status');
   const onChangePhone = textFieldHook.useOnChangeObjectPhoneNumberProperty('phone', setBody);
   const onChangeScienceNumber = textFieldHook.useOnChangeObjectScienceNumberProperty('scienceNumber', setBody);
   const onChangeBirthday = textFieldHook.useOnChangeObjectStrProperty(setBody, 'birthday');
   const onChangeEnteringDay = textFieldHook.useOnChangeObjectStrProperty(setBody, 'enteringDay');
   const onChangeResignationDay = textFieldHook.useOnChangeObjectStrProperty(setBody, 'resignationDay');
-  const onChangeDegree = selectFormHook.useOnChangeObjectProperty('degree', setBody);
+  const onChangeDegree = selectFormHook.useOnChangeObjectProperty(setBody, 'degree');
   const onChangeSchool = textFieldHook.useOnChangeObjectStrProperty(setBody, 'school');
   const onChangeMajor = textFieldHook.useOnChangeObjectStrProperty(setBody, 'major');
   const onChangeCarType = textFieldHook.useOnChangeObjectStrProperty(setBody, 'carType');

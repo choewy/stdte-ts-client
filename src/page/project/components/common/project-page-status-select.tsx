@@ -12,7 +12,7 @@ export const ProjectPageStatusSelect: FunctionComponent<{
   setBody: SetterOrUpdater<ProjectCreateBody> | SetterOrUpdater<ProjectUpdateBody>;
 }> = ({ body, setBody }) => {
   const menuItemProps = enumService.projectStatusSelectMenuItemProps();
-  const onChange = selectFormHook.useOnChangeObjectProperty('status', setBody);
+  const onChange = selectFormHook.useOnChangeObjectProperty(setBody, 'status');
 
   return (
     <SelectControl label="상태" value={body.status} onChange={onChange}>

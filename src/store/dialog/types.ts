@@ -59,12 +59,12 @@ export type DialogStoreProps = {
   };
   projectRecord: {
     order: {
-      create: { open: boolean };
+      create: { open: boolean; row: ProjectRow };
       update: { open: boolean; row: ProjectRecordRow };
       delete: { open: boolean; row: ProjectRecordRow };
     };
     sale: {
-      create: { open: boolean };
+      create: { open: boolean; row: ProjectRow };
       update: { open: boolean; row: ProjectRecordRow };
       delete: { open: boolean; row: ProjectRecordRow };
     };

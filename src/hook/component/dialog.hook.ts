@@ -280,7 +280,7 @@ export class DialogHook {
 
   useProjectRecordDialogCallback(
     type: ProjectRecordType,
-    ...args: ['create', boolean] | ['update' | 'delete', boolean, ProjectRecordRow]
+    ...args: ['create', boolean, ProjectRow] | ['update' | 'delete', boolean, ProjectRecordRow]
   ) {
     const setDialog = dialogStore.useSetState();
 
@@ -293,7 +293,7 @@ export class DialogHook {
             ...prev,
             projectRecord: {
               ...prev.projectRecord,
-              [type]: { ...prev.projectRecord[type], [key]: { open } },
+              [type]: { ...prev.projectRecord[type], [key]: { open, row } },
             },
           }));
           break;
@@ -304,7 +304,10 @@ export class DialogHook {
             ...prev,
             projectRecord: {
               ...prev.projectRecord,
-              [type]: { ...prev.projectRecord[type], [key]: { open, row: open === false ? PROJECT_RECORD_ROW : row } },
+              [type]: {
+                ...prev.projectRecord[type],
+                [key]: { open, row: open === false ? PROJECT_RECORD_ROW : row },
+              },
             },
           }));
           break;

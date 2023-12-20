@@ -96,6 +96,7 @@ export const PROJECT_UPDATE_BODY: ProjectUpdateBody = {
 };
 
 export const PROJECT_RECORD_ROW: ProjectRecordRow = {
+  id: 0,
   date: '',
   amount: '',
   description: '',

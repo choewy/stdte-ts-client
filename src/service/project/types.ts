@@ -107,6 +107,7 @@ export type ProjectUpdateBody = {
 };
 
 export type ProjectRecordRow = {
+  id: number;
   date: string;
   amount: string;
   description: string;

@@ -251,20 +251,6 @@ export class DialogHook {
     }, [key, parent, child, open, setDialog]);
   }
 
-  useProjectPageCreateDialogCallback(open: boolean) {
-    const setDialog = dialogStore.useSetState();
-
-    return useCallback(() => {
-      setDialog((prev) => ({
-        ...prev,
-        project: {
-          ...prev.project,
-          create: { open },
-        },
-      }));
-    }, [open, setDialog]);
-  }
-
   useProjectDialogCallback(...args: ['create', boolean] | ['update' | 'delete' | 'record', boolean, ProjectRow]) {
     const setDialog = dialogStore.useSetState();
 

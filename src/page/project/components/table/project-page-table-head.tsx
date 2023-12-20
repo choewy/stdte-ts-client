@@ -19,7 +19,14 @@ export const ProjectPageTableHead: FunctionComponent<{
         <TableValueCell value="시간관리" colSpan={2} stickyRow={0} />
         <TableValueCell value="등록일시" rowSpan={2} stickyRow={0} />
         <TableValueCell value="수정일시" rowSpan={2} stickyRow={0} />
-        {(canUpdate || canDelete) && <TableValueCell rowSpan={2} stickyRow={0} />}
+        <TableValueCell value="수주/매출" rowSpan={2} stickyRow={0} />
+        {(canUpdate || canDelete) && (
+          <TableValueCell
+            value={[canUpdate && '수정', canDelete && '삭제'].filter((v) => typeof v === 'string').join('/')}
+            rowSpan={2}
+            stickyRow={0}
+          />
+        )}
       </TableRow>
       <TableRow>
         <>

@@ -17,7 +17,11 @@ export const ProjectPageSaleRecordTableHead: FunctionComponent<{
         <TableValueCell value="비고" />
         <TableValueCell value="등록일시" />
         <TableValueCell value="수정일시" />
-        {(canUpdate || canDelete) && <TableValueCell />}
+        {(canUpdate || canDelete) && (
+          <TableValueCell
+            value={[canUpdate && '수정', canDelete && '삭제'].filter((v) => typeof v === 'string').join('/')}
+          />
+        )}
       </TableRow>
     </TableHead>
   );

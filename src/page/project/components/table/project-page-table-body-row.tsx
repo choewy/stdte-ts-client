@@ -41,11 +41,11 @@ export const ProjectPageTableBodyRow: FunctionComponent<{
       <TableValueCell value={row.canExpose === true ? 'O' : 'X'} />
       <TableValueCell value={DateTime.fromJSDate(new Date(row.createdAt)).toFormat('yyyy-MM-dd HH:mm:ss')} fixedWidth />
       <TableValueCell value={DateTime.fromJSDate(new Date(row.updatedAt)).toFormat('yyyy-MM-dd HH:mm:ss')} fixedWidth />
+      <TableComponentCell components={<ProjectPageTableBodyRowRecordButton {...{ row }} />} />
       {(canUpdate || canDelete) && (
         <TableComponentCell
           components={
             <>
-              <ProjectPageTableBodyRowRecordButton {...{ row }} />
               {canUpdate && <ProjectPageTableBodyRowUpdateButton {...{ row }} />}
               {canDelete && <ProjectPageTableBodyRowDeleteButton {...{ row }} />}
             </>

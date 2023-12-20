@@ -12,6 +12,12 @@ import {
   ProjectPageRecordDialog,
   ProjectPageUpdateDialog,
   ProjectPageDeleteDialog,
+  ProjectPageOrderRecordCreateDialog,
+  ProjectPageOrderRecordUpdateDialog,
+  ProjectPageOrderRecordDeleteDialog,
+  ProjectPageSaleRecordCreateDialog,
+  ProjectPageSaleRecordUpdateDialog,
+  ProjectPageSaleRecordDeleteDialog,
   ProjectPageTable,
   ProjectPageToolbar,
 } from './components';
@@ -41,6 +47,12 @@ export const ProjectPage: FunctionComponent = () => {
       <ProjectPageRecordDialog />
       <ProjectPageUpdateDialog />
       <ProjectPageDeleteDialog />
+      <ProjectPageOrderRecordCreateDialog />
+      <ProjectPageOrderRecordUpdateDialog />
+      <ProjectPageOrderRecordDeleteDialog />
+      <ProjectPageSaleRecordCreateDialog />
+      <ProjectPageSaleRecordUpdateDialog />
+      <ProjectPageSaleRecordDeleteDialog />
       <ProjectPageToolbar {...{ canCreate }} />
       <ProjectPageTable {...{ canUpdate, canDelete }} />
     </Box>

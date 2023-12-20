@@ -104,7 +104,7 @@ export const PROJECT_RECORD_ROW: ProjectRecordRow = {
   updatedAt: '',
 };
 
-export const PROJECT_RECEORD_ORDER_LIST_QUERY: ProjectRecordListQuery = {
+export const PROJECT_RECORD_ORDER_LIST_QUERY: ProjectRecordListQuery = {
   type: ProjectRecordType.Order,
   skip: 0,
   take: 20,
@@ -113,7 +113,7 @@ export const PROJECT_RECEORD_ORDER_LIST_QUERY: ProjectRecordListQuery = {
 export const PROJECT_RECORD_ORDER_LIST: ProjectRecordList = {
   total: 0,
   rows: [],
-  query: PROJECT_RECEORD_ORDER_LIST_QUERY,
+  query: PROJECT_RECORD_ORDER_LIST_QUERY,
 };
 
 export const PROJECT_RECORD_ORDER_CREATE_BODY: ProjectRecordCreateBody = {
@@ -124,7 +124,7 @@ export const PROJECT_RECORD_ORDER_CREATE_BODY: ProjectRecordCreateBody = {
   description: '',
 };
 
-export const PROJECT_RECEORD_SALE_LIST_QUERY: ProjectRecordListQuery = {
+export const PROJECT_RECORD_SALE_LIST_QUERY: ProjectRecordListQuery = {
   type: ProjectRecordType.Sale,
   skip: 0,
   take: 20,
@@ -133,19 +133,19 @@ export const PROJECT_RECEORD_SALE_LIST_QUERY: ProjectRecordListQuery = {
 export const PROJECT_RECORD_SALE_LIST: ProjectRecordList = {
   total: 0,
   rows: [],
-  query: PROJECT_RECEORD_SALE_LIST_QUERY,
+  query: PROJECT_RECORD_SALE_LIST_QUERY,
 };
 
 export const PROJECT_RECORD_SALE_CREATE_BODY: ProjectRecordCreateBody = {
   type: ProjectRecordType.Sale,
   project: 0,
   date: '',
-  amount: '',
+  amount: '0',
   description: '',
 };
 
 export const PROJECT_RECORD_UPDATE_BODY: ProjectRecordUpdateBody = {
   date: '',
-  amount: '',
+  amount: '0',
   description: '',
 };

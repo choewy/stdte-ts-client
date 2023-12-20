@@ -7,7 +7,7 @@ import { dialogHook } from '@hook';
 export const TaskCategoryPageToolbar: FunctionComponent<{
   canCreate: boolean;
 }> = ({ canCreate }) => {
-  const onClick = dialogHook.useTaskCategoryPageCreateDialogCallback(true);
+  const onClick = dialogHook.useTaskCategoryDialogCallback('create', true);
 
   return (
     <Box

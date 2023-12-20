@@ -181,32 +181,35 @@ export class DialogHook {
     }, [key, row, open, setDialog]);
   }
 
-  useTaskCategoryPageCreateDialogCallback(open: boolean) {
+  useTaskCategoryDialogCallback(
+    ...args: ['create', boolean] | ['update' | 'delete' | 'children', boolean, TaskCategoryRow]
+  ) {
     const setDialog = dialogStore.useSetState();
 
     return useCallback(() => {
-      setDialog((prev) => ({
-        ...prev,
-        taskCategory: {
-          ...prev.taskCategory,
-          create: { open },
-        },
-      }));
-    }, [open, setDialog]);
-  }
+      const [key, open, row] = args;
 
-  useTaskCategoryPageDialogCallback(key: 'update' | 'delete' | 'children', row: TaskCategoryRow, open: boolean) {
-    const setDialog = dialogStore.useSetState();
+      switch (key) {
+        case 'create':
+          setDialog((prev) => ({
+            ...prev,
+            taskCategory: { ...prev.taskCategory, create: { open } },
+          }));
+          break;
 
-    return useCallback(() => {
-      setDialog((prev) => ({
-        ...prev,
-        taskCategory: {
-          ...prev.taskCategory,
-          [key]: { open, row: open === false ? TASK_CATEGORY_ROW : row },
-        },
-      }));
-    }, [key, row, open, setDialog]);
+        case 'update':
+        case 'delete':
+        case 'children':
+          setDialog((prev) => ({
+            ...prev,
+            taskCategory: {
+              ...prev.taskCategory,
+              [key]: { open, row: open === false ? TASK_CATEGORY_ROW : row },
+            },
+          }));
+          break;
+      }
+    }, [args, setDialog]);
   }
 
   useTaskCategoryChildDialogCallback(

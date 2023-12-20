@@ -7,7 +7,7 @@ import { dialogHook } from '@hook';
 export const TaskCategoryPageTableBodyRowUpdateButton: FunctionComponent<{
   row: TaskCategoryRow;
 }> = ({ row }) => {
-  const onClick = dialogHook.useTaskCategoryPageDialogCallback('update', row, true);
+  const onClick = dialogHook.useTaskCategoryDialogCallback('update', true, row);
 
   return <TableCellButton text="수정" onClick={onClick} />;
 };

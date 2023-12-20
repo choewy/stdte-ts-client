@@ -146,32 +146,34 @@ export class DialogHook {
     }, [args, setDialog]);
   }
 
-  useIndustryCategoryPageCreateDialogCallback(open: boolean) {
+  useIndustryCategoryDialogCallback(
+    ...args: ['create', boolean] | ['update' | 'delete', boolean, IndustryCategoryRow]
+  ) {
     const setDialog = dialogStore.useSetState();
 
     return useCallback(() => {
-      setDialog((prev) => ({
-        ...prev,
-        industryCategory: {
-          ...prev.industryCategory,
-          create: { open },
-        },
-      }));
-    }, [open, setDialog]);
-  }
+      const [key, open, row] = args;
 
-  useIndustryCategoryPageDialogCallback(key: 'update' | 'delete', row: IndustryCategoryRow, open: boolean) {
-    const setDialog = dialogStore.useSetState();
+      switch (key) {
+        case 'create':
+          setDialog((prev) => ({
+            ...prev,
+            industryCategory: { ...prev.industryCategory, create: { open } },
+          }));
+          break;
 
-    return useCallback(() => {
-      setDialog((prev) => ({
-        ...prev,
-        industryCategory: {
-          ...prev.industryCategory,
-          [key]: { open, row: open === false ? INDUSTRY_CATEGORY_ROW : row },
-        },
-      }));
-    }, [key, row, open, setDialog]);
+        case 'update':
+        case 'delete':
+          setDialog((prev) => ({
+            ...prev,
+            industryCategory: {
+              ...prev.industryCategory,
+              [key]: { open, row: open === false ? INDUSTRY_CATEGORY_ROW : row },
+            },
+          }));
+          break;
+      }
+    }, [args, setDialog]);
   }
 
   useTaskCategoryDialogCallback(

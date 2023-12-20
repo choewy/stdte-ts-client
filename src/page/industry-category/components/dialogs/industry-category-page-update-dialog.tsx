@@ -10,7 +10,7 @@ import { IndustryCategoryPageUpdateDialogAction } from './industry-category-page
 export const IndustryCategoryPageUpdateDialog: FunctionComponent = () => {
   const dialog = dialogStore.useValue();
   const row = dialog.industryCategory.update.row;
-  const onClose = dialogHook.useIndustryCategoryPageDialogCallback('update', row, false);
+  const onClose = dialogHook.useIndustryCategoryDialogCallback('update', false, row);
 
   const [body, setBody] = businessCategoryHook.useUpdateState(row);
 

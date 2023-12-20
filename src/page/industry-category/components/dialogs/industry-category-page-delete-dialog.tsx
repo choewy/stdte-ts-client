@@ -11,7 +11,7 @@ export const IndustryCategoryPageDeleteDialog: FunctionComponent = () => {
   const dialog = dialogStore.useValue();
   const row = dialog.industryCategory.delete.row;
 
-  const onClose = dialogHook.useIndustryCategoryPageDialogCallback('delete', row, false);
+  const onClose = dialogHook.useIndustryCategoryDialogCallback('delete', false, row);
 
   return (
     <DialogBoxy

@@ -20,17 +20,17 @@ export const ProjectPageDialogContentSection: FunctionComponent<{
   body: ProjectCreateBody | ProjectUpdateBody;
   setBody: SetterOrUpdater<ProjectCreateBody> | SetterOrUpdater<ProjectUpdateBody>;
 }> = ({ body, setBody }) => {
-  const onChangeCode = textFieldHook.useOnChangeObjectStrProperty('code', setBody);
+  const onChangeCode = textFieldHook.useOnChangeObjectStrProperty(setBody, 'code');
   const onChangeDifficulty = textFieldHook.useOnChangeObjectDecimalProperty(setBody, 'difficulty');
-  const onChangeName = textFieldHook.useOnChangeObjectStrProperty('name', setBody);
+  const onChangeName = textFieldHook.useOnChangeObjectStrProperty(setBody, 'name');
   const onChangeAmount = textFieldHook.useOnChangeObjectKRWProperty(setBody, 'amount');
-  const onChangeDescription = textFieldHook.useOnChangeObjectStrProperty('description', setBody);
+  const onChangeDescription = textFieldHook.useOnChangeObjectStrProperty(setBody, 'description');
 
   return (
     <SectionContainer>
       <SectionColumn title="사업정보">
         <Box sx={{ display: 'flex', gap: 1 }}>
-          <TextField {...{ label: '사업코드', value: body.code, onChange: onChangeCode }} />
+          <TextField {...{ label: '약어', value: body.code, onChange: onChangeCode }} />
           <TextField {...{ label: '난이도', value: body.difficulty, onChange: onChangeDifficulty }} />
         </Box>
         <TextField {...{ label: '사업명', value: body.name, onChange: onChangeName }} />
@@ -42,10 +42,10 @@ export const ProjectPageDialogContentSection: FunctionComponent<{
         <TextField {...{ label: '비고', value: body.description, onChange: onChangeDescription }} />
       </SectionColumn>
       <SectionColumn>
-        <ProjectPageDetailsInputGroup {...{ body, setBody }} />
+        <ProjectPageUserSelectGroup {...{ body, setBody }} />
       </SectionColumn>
       <SectionColumn>
-        <ProjectPageUserSelectGroup {...{ body, setBody }} />
+        <ProjectPageDetailsInputGroup {...{ body, setBody }} />
       </SectionColumn>
       <SectionColumn title="시간관리">
         <ProjectPageTaskCategorySelect {...{ body, setBody }} />

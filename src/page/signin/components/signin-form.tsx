@@ -7,8 +7,8 @@ import { credentialsHook, textFieldHook } from '@hook';
 export const SignInForm: FunctionComponent = () => {
   const [body, setBody] = credentialsHook.useSignInState();
 
-  const onChangeEmail = textFieldHook.useOnChangeObjectStrProperty('email', setBody);
-  const onChangePassword = textFieldHook.useOnChangeObjectStrProperty('password', setBody);
+  const onChangeEmail = textFieldHook.useOnChangeObjectStrProperty(setBody, 'email');
+  const onChangePassword = textFieldHook.useOnChangeObjectStrProperty(setBody, 'password');
   const onSubmit = credentialsHook.useSignInCallback(body);
 
   return (

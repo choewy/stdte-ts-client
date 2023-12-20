@@ -7,7 +7,7 @@ import { dialogHook } from '@hook';
 export const BusinessCategoryPageTableBodyRowDeleteButton: FunctionComponent<{
   row: BusinessCategoryRow;
 }> = ({ row }) => {
-  const onClick = dialogHook.useBusinessCategoryPageDialogCallback('delete', row, true);
+  const onClick = dialogHook.useBusinessCategoryDialogCallback('delete', true, row);
 
   return <TableCellButton text="삭제" onClick={onClick} />;
 };

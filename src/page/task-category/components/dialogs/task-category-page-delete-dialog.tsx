@@ -10,8 +10,7 @@ import { TaskCategoryPageDeleteDialogAction } from './task-category-page-delete-
 export const TaskCategoryPageDeleteDialog: FunctionComponent = () => {
   const dialog = dialogStore.useValue();
   const row = dialog.taskCategory.delete.row;
-
-  const onClose = dialogHook.useTaskCategoryPageDialogCallback('delete', row, false);
+  const onClose = dialogHook.useTaskCategoryDialogCallback('delete', false, row);
 
   return (
     <DialogBoxy

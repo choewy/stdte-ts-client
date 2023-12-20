@@ -11,7 +11,7 @@ export const UserPageUpdateDialog: FunctionComponent = () => {
   const dialog = dialogStore.useValue();
   const row = dialog.user.update.row;
 
-  const onClose = dialogHook.useUserPageDialogCallback('update', row, false);
+  const onClose = dialogHook.useUserDialogCallback('update', false, row);
 
   const [body, setBody] = userHook.useUpdateState(row);
 

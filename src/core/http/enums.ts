@@ -18,6 +18,8 @@ export enum HttpException {
   NotFoundTaskSubCategoryException = 'NotFoundTaskSubCategoryException',
   NotFoundCustomerException = 'NotFoundCustomerException',
   NotFoundProjectException = 'NotFoundProjectException',
+  NotFoundProjectOrderRecordException = 'NotFoundProjectOrderRecordException',
+  NotFoundProjectSaleRecordException = 'NotFoundProjectSaleRecordException',
   NotFoundTimeRecordException = 'NotFoundTimeRecordException',
   NotFoundTimeMemoException = 'NotFoundTimeMemoException',
   CannotAccessException = 'CannotAccessException',

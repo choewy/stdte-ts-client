@@ -10,7 +10,7 @@ import { ProjectPageUpdateDialogAction } from './project-page-update-dialog-acti
 export const ProjectPageUpdateDialog: FunctionComponent = () => {
   const dialog = dialogStore.useValue();
   const row = dialog.project.update.row;
-  const onClose = dialogHook.useProjectPageDialogCallback('update', row, false);
+  const onClose = dialogHook.useProjectDialogCallback('update', false, row);
 
   const [origin] = projectHook.useUpdateState(row);
   const [body, setBody] = projectHook.useUpdateState(row);

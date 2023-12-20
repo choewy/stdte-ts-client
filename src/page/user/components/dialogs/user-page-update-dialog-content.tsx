@@ -15,18 +15,18 @@ export const UserPageUpdateDialogContent: FunctionComponent<{
   body: UserRowUpdateBody;
   setBody: SetterOrUpdater<UserRowUpdateBody>;
 }> = ({ row, body, setBody }) => {
-  const onChangeName = textFieldHook.useOnChangeObjectStrProperty('name', setBody);
-  const onChangeStatus = selectFormHook.useOnChangeObjectProperty('status', setBody);
-  const onChangePhone = textFieldHook.useOnChangeObjectPhoneNumberProperty('phone', setBody);
-  const onChangeScienceNumber = textFieldHook.useOnChangeObjectScienceNumberProperty('scienceNumber', setBody);
-  const onChangeBirthday = textFieldHook.useOnChangeObjectStrProperty('birthday', setBody);
-  const onChangeEnteringDay = textFieldHook.useOnChangeObjectStrProperty('enteringDay', setBody);
-  const onChangeResignationDay = textFieldHook.useOnChangeObjectStrProperty('resignationDay', setBody);
-  const onChangeDegree = selectFormHook.useOnChangeObjectProperty('degree', setBody);
-  const onChangeSchool = textFieldHook.useOnChangeObjectStrProperty('school', setBody);
-  const onChangeMajor = textFieldHook.useOnChangeObjectStrProperty('major', setBody);
-  const onChangeCarType = textFieldHook.useOnChangeObjectStrProperty('carType', setBody);
-  const onChangeCarNumber = textFieldHook.useOnChangeObjectStrProperty('carNumber', setBody);
+  const onChangeName = textFieldHook.useOnChangeObjectStrProperty(setBody, 'name');
+  const onChangeStatus = selectFormHook.useOnChangeObjectProperty(setBody, 'status');
+  const onChangePhone = textFieldHook.useOnChangeObjectPhoneNumberProperty(setBody, 'phone');
+  const onChangeScienceNumber = textFieldHook.useOnChangeObjectScienceNumberProperty(setBody, 'scienceNumber');
+  const onChangeBirthday = textFieldHook.useOnChangeObjectStrProperty(setBody, 'birthday');
+  const onChangeEnteringDay = textFieldHook.useOnChangeObjectStrProperty(setBody, 'enteringDay');
+  const onChangeResignationDay = textFieldHook.useOnChangeObjectStrProperty(setBody, 'resignationDay');
+  const onChangeDegree = selectFormHook.useOnChangeObjectProperty(setBody, 'degree');
+  const onChangeSchool = textFieldHook.useOnChangeObjectStrProperty(setBody, 'school');
+  const onChangeMajor = textFieldHook.useOnChangeObjectStrProperty(setBody, 'major');
+  const onChangeCarType = textFieldHook.useOnChangeObjectStrProperty(setBody, 'carType');
+  const onChangeCarNumber = textFieldHook.useOnChangeObjectStrProperty(setBody, 'carNumber');
 
   return (
     <Box sx={{ display: 'flex', gap: 2, height: '100%' }}>

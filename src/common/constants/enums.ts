@@ -1,10 +1,3 @@
-export enum GenderCode {
-  Male1 = 1,
-  Male2 = 3,
-  Female1 = 2,
-  Female2 = 4,
-}
-
 export enum Degree {
   HighSchool = 1,
   Bachelor2Years = 2,

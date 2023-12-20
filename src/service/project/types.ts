@@ -1,19 +1,6 @@
 import { ProjectStatus } from '@common';
 import { HttpClientListQuery, HttpClientListResponse } from '@core';
-
-export type ProjectRowOrderRecord = {
-  date: string;
-  amount: string;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type ProjectRowSaleRecord = {
-  date: string;
-  amount: string;
-  createdAt: string;
-  updatedAt: string;
-};
+import { ProjectRecordType } from './enums';
 
 export type ProjectRowBusinessCategory = {
   id: number;
@@ -56,9 +43,7 @@ export type ProjectRow = {
   status: ProjectStatus;
   startDate: string;
   endDate: string;
-  keepDate: string;
-  orderRecord: ProjectRowOrderRecord;
-  saleRecord: ProjectRowSaleRecord;
+  months: number;
   businessCategory: ProjectRowIndustryCategory | null;
   industryCategory: ProjectRowBusinessCategory | null;
   taskCategory: ProjectRowTaskCategory | null;
@@ -86,11 +71,6 @@ export type ProjectCreateBody = {
   status: ProjectStatus;
   startDate: string;
   endDate: string;
-  keepDate: string;
-  orderRecordDate: string;
-  orderRecordAmount: string;
-  saleRecordDate: string;
-  saleRecordAmount: string;
   customer: number | null;
   businessCategory: number | null;
   industryCategory: number | null;
@@ -113,11 +93,6 @@ export type ProjectUpdateBody = {
   status: ProjectStatus;
   startDate: string;
   endDate: string;
-  keepDate: string;
-  orderRecordDate: string;
-  orderRecordAmount: string;
-  saleRecordDate: string;
-  saleRecordAmount: string;
   customer: number | null;
   businessCategory: number | null;
   industryCategory: number | null;
@@ -131,7 +106,28 @@ export type ProjectUpdateBody = {
   canExpose: boolean;
 };
 
-export type ProjectUpdateRecordBody = {
+export type ProjectRecordRow = {
+  id: number;
   date: string;
   amount: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ProjectRecordListQuery = HttpClientListQuery & { type: ProjectRecordType };
+export type ProjectRecordList = HttpClientListResponse<ProjectRecordRow, ProjectRecordListQuery>;
+
+export type ProjectRecordCreateBody = {
+  type: ProjectRecordType;
+  project: number;
+  date: string;
+  amount: string;
+  description: string;
+};
+
+export type ProjectRecordUpdateBody = {
+  date: string;
+  amount: string;
+  description: string;
 };

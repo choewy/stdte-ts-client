@@ -4,25 +4,15 @@ import {
   ProjectCreateBody,
   ProjectList,
   ProjectListQuery,
+  ProjectRecordCreateBody,
+  ProjectRecordList,
+  ProjectRecordListQuery,
+  ProjectRecordRow,
+  ProjectRecordUpdateBody,
   ProjectRow,
-  ProjectRowOrderRecord,
-  ProjectRowSaleRecord,
   ProjectUpdateBody,
 } from './types';
-
-export const PROJECT_ORDER_RECORD: ProjectRowOrderRecord = {
-  date: '',
-  amount: '',
-  createdAt: '',
-  updatedAt: '',
-};
-
-export const PROJECT_SALE_RECORD: ProjectRowSaleRecord = {
-  date: '',
-  amount: '',
-  createdAt: '',
-  updatedAt: '',
-};
+import { ProjectRecordType } from './enums';
 
 export const PROJECT_ROW: ProjectRow = {
   id: 0,
@@ -34,9 +24,7 @@ export const PROJECT_ROW: ProjectRow = {
   status: ProjectStatus.Wating,
   startDate: '',
   endDate: '',
-  keepDate: '',
-  orderRecord: PROJECT_ORDER_RECORD,
-  saleRecord: PROJECT_SALE_RECORD,
+  months: 0,
   businessCategory: null,
   industryCategory: null,
   taskCategory: null,
@@ -72,11 +60,6 @@ export const PROJECT_CREATE_BODY: ProjectCreateBody = {
   status: ProjectStatus.Wating,
   startDate: '',
   endDate: '',
-  keepDate: '',
-  orderRecordDate: '',
-  orderRecordAmount: '0',
-  saleRecordDate: '',
-  saleRecordAmount: '0',
   customer: 0,
   businessCategory: 0,
   industryCategory: 0,
@@ -99,11 +82,6 @@ export const PROJECT_UPDATE_BODY: ProjectUpdateBody = {
   status: ProjectStatus.Wating,
   startDate: '',
   endDate: '',
-  keepDate: '',
-  orderRecordDate: '',
-  orderRecordAmount: '0',
-  saleRecordDate: '',
-  saleRecordAmount: '0',
   customer: 0,
   businessCategory: 0,
   industryCategory: 0,
@@ -115,4 +93,59 @@ export const PROJECT_UPDATE_BODY: ProjectUpdateBody = {
   externalManagers: [],
   externalLeaders: [],
   canExpose: true,
+};
+
+export const PROJECT_RECORD_ROW: ProjectRecordRow = {
+  id: 0,
+  date: '',
+  amount: '',
+  description: '',
+  createdAt: '',
+  updatedAt: '',
+};
+
+export const PROJECT_RECEORD_ORDER_LIST_QUERY: ProjectRecordListQuery = {
+  type: ProjectRecordType.Order,
+  skip: 0,
+  take: 20,
+};
+
+export const PROJECT_RECORD_ORDER_LIST: ProjectRecordList = {
+  total: 0,
+  rows: [],
+  query: PROJECT_RECEORD_ORDER_LIST_QUERY,
+};
+
+export const PROJECT_RECORD_ORDER_CREATE_BODY: ProjectRecordCreateBody = {
+  type: ProjectRecordType.Order,
+  project: 0,
+  date: '',
+  amount: '',
+  description: '',
+};
+
+export const PROJECT_RECEORD_SALE_LIST_QUERY: ProjectRecordListQuery = {
+  type: ProjectRecordType.Sale,
+  skip: 0,
+  take: 20,
+};
+
+export const PROJECT_RECORD_SALE_LIST: ProjectRecordList = {
+  total: 0,
+  rows: [],
+  query: PROJECT_RECEORD_SALE_LIST_QUERY,
+};
+
+export const PROJECT_RECORD_SALE_CREATE_BODY: ProjectRecordCreateBody = {
+  type: ProjectRecordType.Sale,
+  project: 0,
+  date: '',
+  amount: '',
+  description: '',
+};
+
+export const PROJECT_RECORD_UPDATE_BODY: ProjectRecordUpdateBody = {
+  date: '',
+  amount: '',
+  description: '',
 };

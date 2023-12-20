@@ -8,6 +8,7 @@ import { ProjectRow, enumService } from '@service';
 
 import { ProjectPageTableBodyRowUpdateButton } from './project-page-table-body-row-update-button';
 import { ProjectPageTableBodyRowDeleteButton } from './project-page-table-body-row-delete-button';
+import { ProjectPageTableBodyRowRecordButton } from './project-page-table-body-row-record-button';
 
 export const ProjectPageTableBodyRow: FunctionComponent<{
   index: number;
@@ -27,19 +28,15 @@ export const ProjectPageTableBodyRow: FunctionComponent<{
       <TableValueCell value={Number(row.amount).toLocaleString('ko-KR')} align="right" />
       <TableValueCell value={enumService.projectStatusToText(row.status)} />
       <TableValueCell value={row.description} />
-      <TableValueCell value={DateTime.fromJSDate(new Date(row.startDate)).toSQLDate() ?? ''} fixedWidth />
-      <TableValueCell value={DateTime.fromJSDate(new Date(row.endDate)).toSQLDate() ?? ''} fixedWidth />
-      <TableValueCell value={DateTime.fromJSDate(new Date(row.keepDate)).toSQLDate() ?? ''} fixedWidth />
-      <TableValueCell value={DateTime.fromJSDate(new Date(row.orderRecord?.date)).toSQLDate() ?? ''} fixedWidth />
-      <TableValueCell value={Number(row.orderRecord?.amount).toLocaleString('ko-KR')} align="right" />
-      <TableValueCell value={DateTime.fromJSDate(new Date(row.saleRecord?.date)).toSQLDate() ?? ''} fixedWidth />
-      <TableValueCell value={Number(row.saleRecord?.amount).toLocaleString('ko-KR')} align="right" />
       <TableValueCell value={row.externalOwners.map(({ name }) => name).join(', ')} />
       <TableValueCell value={row.externalManagers.map(({ name }) => name).join(', ')} />
       <TableValueCell value={row.externalLeaders.map(({ name }) => name).join(', ')} />
       <TableValueCell value={row.internalOwners.map(({ name }) => name).join(', ')} />
       <TableValueCell value={row.internalManagers.map(({ name }) => name).join(', ')} />
       <TableValueCell value={row.internalLeaders.map(({ name }) => name).join(', ')} />
+      <TableValueCell value={DateTime.fromJSDate(new Date(row.startDate)).toSQLDate() ?? ''} fixedWidth />
+      <TableValueCell value={DateTime.fromJSDate(new Date(row.endDate)).toSQLDate() ?? ''} fixedWidth />
+      <TableValueCell value={row.months} fixedWidth />
       <TableValueCell value={row.taskCategory?.name ?? ''} />
       <TableValueCell value={row.canExpose === true ? 'O' : 'X'} />
       <TableValueCell value={DateTime.fromJSDate(new Date(row.createdAt)).toFormat('yyyy-MM-dd HH:mm:ss')} fixedWidth />
@@ -48,6 +45,7 @@ export const ProjectPageTableBodyRow: FunctionComponent<{
         <TableComponentCell
           components={
             <>
+              <ProjectPageTableBodyRowRecordButton {...{ row }} />
               {canUpdate && <ProjectPageTableBodyRowUpdateButton {...{ row }} />}
               {canDelete && <ProjectPageTableBodyRowDeleteButton {...{ row }} />}
             </>

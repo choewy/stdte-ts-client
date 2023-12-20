@@ -11,8 +11,8 @@ export const TaskCategoryPageChildrenDialog: FunctionComponent = () => {
   const dialog = dialogStore.useValue();
   const parents = taskCategoryStore.useValue().list.rows;
   const parent = parents.find((parent) => parent.id === dialog.taskCategory.children.row.id) ?? TASK_CATEGORY_ROW;
-
-  const onClose = dialogHook.useTaskCategoryPageDialogCallback('children', dialog.taskCategory.children.row, false);
+  const row = dialog.taskCategory.children.row;
+  const onClose = dialogHook.useTaskCategoryDialogCallback('children', false, row);
 
   return (
     <DialogFullScreen

@@ -1,21 +1,14 @@
-import { HttpService } from '@core';
+import { HttpClientDownloadResponse, HttpService } from '@core';
 
-import {
-  ProjectCreateBody,
-  ProjectList,
-  ProjectListQuery,
-  ProjectRow,
-  ProjectUpdateBody,
-  ProjectUpdateRecordBody,
-} from './types';
+import { ProjectCreateBody, ProjectList, ProjectListQuery, ProjectRow, ProjectUpdateBody } from './types';
 
 export class ProjectHttpService extends HttpService {
   async getList(query: ProjectListQuery) {
     return this.get<ProjectList>(this.url(), { params: query, delay: 250 });
   }
 
-  async getRowById(id: number) {
-    return this.get<ProjectRow>(this.url(id), { delay: 250 });
+  async download() {
+    return this.post<HttpClientDownloadResponse>(this.url('download'));
   }
 
   async createRow(body: ProjectCreateBody) {
@@ -24,14 +17,6 @@ export class ProjectHttpService extends HttpService {
 
   async updateRow(id: number, body: Partial<ProjectUpdateBody>) {
     return this.patch<ProjectRow>(this.url(id), body, { delay: 250 });
-  }
-
-  async updateRowOrderRecord(id: number, body: Partial<ProjectUpdateRecordBody>) {
-    return this.patch<null>(this.url(id, 'order'), body, { delay: 250 });
-  }
-
-  async updateRowSaleRecord(id: number, body: Partial<ProjectUpdateRecordBody>) {
-    return this.patch<null>(this.url(id, 'sale'), body, { delay: 250 });
   }
 
   async deleteRow(id: number) {

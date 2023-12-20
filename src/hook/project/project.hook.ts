@@ -13,6 +13,7 @@ import {
   projectHttpService,
   projectValidator,
   projectTransformer,
+  downloadService,
 } from '@service';
 
 export class ProjectHook {
@@ -43,6 +44,19 @@ export class ProjectHook {
               },
       }));
     }, [load, query, setState]);
+  }
+
+  useDownloadCallback() {
+    return useCallback(async () => {
+      const res = await projectHttpService.download();
+
+      if (res.ok === false) {
+        SnackEvent.dispatchByException(new ProjectException(res.exception));
+        return false;
+      }
+
+      downloadService.download(res.data.url, res.data.filename);
+    }, []);
   }
 
   useMount() {
@@ -133,11 +147,6 @@ export class ProjectHook {
         status: row.status,
         startDate: row.startDate,
         endDate: row.endDate,
-        keepDate: row.keepDate,
-        orderRecordDate: row.orderRecord?.date ?? '',
-        orderRecordAmount: Number(row.orderRecord?.amount ?? '0').toLocaleString('ko-KR'),
-        saleRecordDate: row.saleRecord?.date ?? '',
-        saleRecordAmount: Number(row.saleRecord?.amount ?? '0').toLocaleString('ko-KR'),
         customer: row.customer?.id ?? 0,
         businessCategory: row.businessCategory?.id ?? 0,
         industryCategory: row.industryCategory?.id ?? 0,

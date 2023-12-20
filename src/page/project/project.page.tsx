@@ -9,6 +9,7 @@ import { projectHook } from '@hook';
 
 import {
   ProjectPageCreateDialog,
+  ProjectPageRecordDialog,
   ProjectPageUpdateDialog,
   ProjectPageDeleteDialog,
   ProjectPageTable,
@@ -37,6 +38,7 @@ export const ProjectPage: FunctionComponent = () => {
       }}
     >
       <ProjectPageCreateDialog />
+      <ProjectPageRecordDialog />
       <ProjectPageUpdateDialog />
       <ProjectPageDeleteDialog />
       <ProjectPageToolbar {...{ canCreate }} />

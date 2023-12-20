@@ -9,7 +9,7 @@ import { CustomerPageCreateDialogAction } from './customer-page-create-dialog-ac
 
 export const CustomerPageCreateDialog: FunctionComponent = () => {
   const dialog = dialogStore.useValue();
-  const onClose = dialogHook.useCustomerPageCreateDialogCallback(false);
+  const onClose = dialogHook.useCustomerDialogCallback('create', false);
 
   const [body, setBody] = customerHook.useCreateState();
 

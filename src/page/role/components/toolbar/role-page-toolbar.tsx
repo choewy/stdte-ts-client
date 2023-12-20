@@ -5,7 +5,7 @@ import { Box, Button, ButtonGroup } from '@mui/material';
 import { dialogHook } from '@hook';
 
 export const RolePageToolbar: FunctionComponent = () => {
-  const onClick = dialogHook.useRolePageCreateDialogCallback(true);
+  const onClick = dialogHook.useRoleDialogsCallback('create', true);
 
   return (
     <Box

@@ -10,10 +10,10 @@ export const CustomerPageCreateDialogContent: FunctionComponent<{
   body: CustomerCreateBody;
   setBody: SetterOrUpdater<CustomerCreateBody>;
 }> = ({ body, setBody }) => {
-  const onChangeAlias = textFieldHook.useOnChangeObjectStrProperty('alias', setBody);
-  const onChangeKr = textFieldHook.useOnChangeObjectStrProperty('kr', setBody);
-  const onChangeEn = textFieldHook.useOnChangeObjectStrProperty('en', setBody);
-  const onChangeDescription = textFieldHook.useOnChangeObjectStrProperty('description', setBody);
+  const onChangeAlias = textFieldHook.useOnChangeObjectStrProperty(setBody, 'alias');
+  const onChangeKr = textFieldHook.useOnChangeObjectStrProperty(setBody, 'kr');
+  const onChangeEn = textFieldHook.useOnChangeObjectStrProperty(setBody, 'en');
+  const onChangeDescription = textFieldHook.useOnChangeObjectStrProperty(setBody, 'description');
 
   return (
     <>

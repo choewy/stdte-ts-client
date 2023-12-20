@@ -9,7 +9,7 @@ import { ProjectPageCreateDialogAction } from './project-page-create-dialog-acti
 
 export const ProjectPageCreateDialog: FunctionComponent = () => {
   const dialog = dialogStore.useValue();
-  const onClose = dialogHook.useProjectPageCreateDialogCallback(false);
+  const onClose = dialogHook.useProjectDialogCallback('create', false);
 
   const [body, setBody] = projectHook.useCreateState();
 

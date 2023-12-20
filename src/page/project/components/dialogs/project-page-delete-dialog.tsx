@@ -11,7 +11,7 @@ export const ProjectPageDeleteDialog: FunctionComponent = () => {
   const dialog = dialogStore.useValue();
   const row = dialog.project.delete.row;
 
-  const onClose = dialogHook.useProjectPageDialogCallback('delete', row, false);
+  const onClose = dialogHook.useProjectDialogCallback('delete', false, row);
 
   return (
     <DialogBoxy

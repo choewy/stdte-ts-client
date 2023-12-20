@@ -17,7 +17,7 @@ export const ProjectPageTaskCategorySelect: FunctionComponent<{
   selectHook.useMountCategory('tasks');
   selectHook.useUnMountCategory('tasks');
 
-  const onChange = selectFormHook.useOnChangeObjectProperty('taskCategory', setBody);
+  const onChange = selectFormHook.useOnChangeObjectProperty(setBody, 'taskCategory');
 
   return (
     <SelectControl

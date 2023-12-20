@@ -7,10 +7,10 @@ import { credentialsHook, textFieldHook } from '@hook';
 export const SignUpForm: FunctionComponent = () => {
   const [body, setBody] = credentialsHook.useSignUpState();
 
-  const onChangeEmail = textFieldHook.useOnChangeObjectStrProperty('email', setBody);
-  const onChangeName = textFieldHook.useOnChangeObjectStrProperty('name', setBody);
-  const onChangePassword = textFieldHook.useOnChangeObjectStrProperty('password', setBody);
-  const onChangeConfirmPassword = textFieldHook.useOnChangeObjectStrProperty('confirmPassword', setBody);
+  const onChangeEmail = textFieldHook.useOnChangeObjectStrProperty(setBody, 'email');
+  const onChangeName = textFieldHook.useOnChangeObjectStrProperty(setBody, 'name');
+  const onChangePassword = textFieldHook.useOnChangeObjectStrProperty(setBody, 'password');
+  const onChangeConfirmPassword = textFieldHook.useOnChangeObjectStrProperty(setBody, 'confirmPassword');
   const onSubmit = credentialsHook.useSignUpCallback(body);
 
   return (

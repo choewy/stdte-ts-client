@@ -10,8 +10,7 @@ import { TaskCategoryPageUpdateDialogAction } from './task-category-page-update-
 export const TaskCategoryPageUpdateDialog: FunctionComponent = () => {
   const dialog = dialogStore.useValue();
   const row = dialog.taskCategory.update.row;
-
-  const onClose = dialogHook.useTaskCategoryPageDialogCallback('update', row, false);
+  const onClose = dialogHook.useTaskCategoryDialogCallback('update', false, row);
 
   const [body, setBody] = taskCategoryHook.useUpdateState(row);
 

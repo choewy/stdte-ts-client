@@ -7,7 +7,7 @@ import { dialogHook } from '@hook';
 export const IndustryCategoryPageToolbar: FunctionComponent<{
   canCreate: boolean;
 }> = ({ canCreate }) => {
-  const onClick = dialogHook.useIndustryCategoryPageCreateDialogCallback(true);
+  const onClick = dialogHook.useIndustryCategoryDialogCallback('create', true);
 
   return (
     <Box

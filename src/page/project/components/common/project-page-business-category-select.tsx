@@ -17,7 +17,7 @@ export const ProjectPageBusinessCategorySelect: FunctionComponent<{
   selectHook.useMountCategory('businesses');
   selectHook.useUnMountCategory('businesses');
 
-  const onChange = selectFormHook.useOnChangeObjectProperty('businessCategory', setBody);
+  const onChange = selectFormHook.useOnChangeObjectProperty(setBody, 'businessCategory');
 
   return (
     <SelectControl

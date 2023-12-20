@@ -6,7 +6,7 @@ import { TableCellButton } from '@component';
 export const CredentialsPageTableBodyRowChangePasswordButton: FunctionComponent<{
   id: number;
 }> = ({ id }) => {
-  const onClick = dialogHook.useCredentialsPageUpdatePasswordDialogCallback(id, true);
+  const onClick = dialogHook.useCredentialsUpdatePasswordDialogCallback(id, true);
 
   return <TableCellButton text="비밀번호변경" onClick={onClick} />;
 };

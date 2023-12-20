@@ -13,12 +13,12 @@ export const MyPagePersinalCard: FunctionComponent = () => {
 
   const [body, setBody] = profileHook.usePersonalState(profile);
 
-  const onChangeName = textFieldHook.useOnChangeObjectStrProperty('name', setBody);
-  const onChangePhone = textFieldHook.useOnChangeObjectPhoneNumberProperty('phone', setBody);
-  const onChangeScienceNumber = textFieldHook.useOnChangeObjectScienceNumberProperty('scienceNumber', setBody);
-  const onChangeBirthday = textFieldHook.useOnChangeObjectStrProperty('birthday', setBody);
-  const onChangeEnteringDay = textFieldHook.useOnChangeObjectStrProperty('enteringDay', setBody);
-  const onChangeResignationDay = textFieldHook.useOnChangeObjectStrProperty('resignationDay', setBody);
+  const onChangeName = textFieldHook.useOnChangeObjectStrProperty(setBody, 'name');
+  const onChangePhone = textFieldHook.useOnChangeObjectPhoneNumberProperty(setBody, 'phone');
+  const onChangeScienceNumber = textFieldHook.useOnChangeObjectScienceNumberProperty(setBody, 'scienceNumber');
+  const onChangeBirthday = textFieldHook.useOnChangeObjectStrProperty(setBody, 'birthday');
+  const onChangeEnteringDay = textFieldHook.useOnChangeObjectStrProperty(setBody, 'enteringDay');
+  const onChangeResignationDay = textFieldHook.useOnChangeObjectStrProperty(setBody, 'resignationDay');
 
   const disabled = buttonHook.useDisabledByObject(profile, body);
   const onClick = profileHook.useUpdatePersonal(body);

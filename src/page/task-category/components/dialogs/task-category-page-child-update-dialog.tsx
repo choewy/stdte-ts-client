@@ -11,7 +11,7 @@ export const TaskCategoryPageChildUpdateDialog: FunctionComponent = () => {
   const dialog = dialogStore.useValue();
   const parent = dialog.taskCategory.child.update.parent;
   const child = dialog.taskCategory.child.update.child;
-  const onClose = dialogHook.useTaskCategoryPageChildDialogCallback('update', parent, child, false);
+  const onClose = dialogHook.useTaskCategoryChildDialogCallback('update', parent, false, child);
 
   const [body, setBody] = taskCategoryHook.useUpdateChildState(child);
 

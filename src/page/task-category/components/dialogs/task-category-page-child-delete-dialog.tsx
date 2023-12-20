@@ -11,7 +11,7 @@ export const TaskCategoryPageChildDeleteDialog: FunctionComponent = () => {
   const dialog = dialogStore.useValue();
   const parent = dialog.taskCategory.child.delete.parent;
   const child = dialog.taskCategory.child.delete.child;
-  const onClose = dialogHook.useTaskCategoryPageChildDialogCallback('delete', parent, child, false);
+  const onClose = dialogHook.useTaskCategoryChildDialogCallback('delete', parent, false, child);
 
   return (
     <DialogBoxy

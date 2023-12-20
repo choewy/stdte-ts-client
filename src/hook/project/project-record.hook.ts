@@ -3,7 +3,6 @@ import { SetterOrUpdater } from 'recoil';
 
 import { projectRecordStore } from '@store';
 import {
-  PROJECT_RECORD_ORDER_CREATE_BODY,
   PROJECT_RECORD_SALE_CREATE_BODY,
   PROJECT_RECORD_UPDATE_BODY,
   ProjectRecordCreateBody,
@@ -11,8 +10,10 @@ import {
   ProjectRecordRow,
   ProjectRecordType,
   ProjectRecordUpdateBody,
+  ProjectRow,
   SnackEvent,
   projectRecordHttpService,
+  projectRecordTransformer,
 } from '@service';
 
 export class ProjectRecordHook {
@@ -115,14 +116,21 @@ export class ProjectRecordHook {
     }, [type, scrollEnd, setState]);
   }
 
-  useCreateState(type: ProjectRecordType) {
-    switch (type) {
-      case ProjectRecordType.Order:
-        return useState<ProjectRecordCreateBody>(PROJECT_RECORD_SALE_CREATE_BODY);
+  useCreateState(
+    type: ProjectRecordType,
+    row: ProjectRow,
+  ): [ProjectRecordCreateBody, SetterOrUpdater<ProjectRecordCreateBody>] {
+    const [body, setBody] = useState<ProjectRecordCreateBody>(PROJECT_RECORD_SALE_CREATE_BODY);
 
-      case ProjectRecordType.Sale:
-        return useState<ProjectRecordCreateBody>(PROJECT_RECORD_ORDER_CREATE_BODY);
-    }
+    useEffect(() => {
+      setBody({
+        ...PROJECT_RECORD_SALE_CREATE_BODY,
+        type,
+        project: row.id,
+      });
+    }, [type, row]);
+
+    return [body, setBody];
   }
 
   useCreateCallback(body: ProjectRecordCreateBody) {
@@ -130,7 +138,7 @@ export class ProjectRecordHook {
     const setState = projectRecordStore.useSetState();
 
     return useCallback(async () => {
-      const res = await projectRecordHttpService.createRow(body);
+      const res = await projectRecordHttpService.createRow(projectRecordTransformer.createRow(body));
 
       if (res.ok === false) {
         SnackEvent.dispatchByException(new ProjectRecordException(res.exception));
@@ -161,7 +169,7 @@ export class ProjectRecordHook {
     useEffect(() => {
       setBody({
         date: row.date,
-        amount: row.amount,
+        amount: Number(row.amount).toLocaleString('ko-KR'),
         description: row.description,
       });
     }, [row, setBody]);
@@ -174,7 +182,7 @@ export class ProjectRecordHook {
     const setState = projectRecordStore.useSetState();
 
     return useCallback(async () => {
-      const res = await projectRecordHttpService.updateRow(type, id, body);
+      const res = await projectRecordHttpService.updateRow(type, id, projectRecordTransformer.updateRow(body));
 
       if (res.ok === false) {
         SnackEvent.dispatchByException(new ProjectRecordException(res.exception));

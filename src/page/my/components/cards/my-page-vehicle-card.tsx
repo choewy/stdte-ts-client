@@ -12,8 +12,8 @@ export const MyPageVehicleCard: FunctionComponent = () => {
 
   const [body, setBody] = profileHook.useBehicleState(profile);
 
-  const onChangeCarType = textFieldHook.useOnChangeObjectStrProperty('carType', setBody);
-  const onChangeCarNumber = textFieldHook.useOnChangeObjectStrProperty('carNumber', setBody);
+  const onChangeCarType = textFieldHook.useOnChangeObjectStrProperty(setBody, 'carType');
+  const onChangeCarNumber = textFieldHook.useOnChangeObjectStrProperty(setBody, 'carNumber');
 
   const disabled = buttonHook.useDisabledByObject(profile, body);
   const onClick = profileHook.useUpdateBehicle(body);

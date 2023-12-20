@@ -9,7 +9,7 @@ import { TaskCategoryPageCreateDialogAction } from './task-category-page-create-
 
 export const TaskCategoryPageCreateDialog: FunctionComponent = () => {
   const dialog = dialogStore.useValue();
-  const onClose = dialogHook.useTaskCategoryPageCreateDialogCallback(false);
+  const onClose = dialogHook.useTaskCategoryDialogCallback('create', false);
 
   const [body, setBody] = taskCategoryHook.useCreateState();
 

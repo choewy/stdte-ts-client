@@ -1,19 +1,6 @@
 import { ProjectStatus } from '@common';
 import { HttpClientListQuery, HttpClientListResponse } from '@core';
-
-export type ProjectRowOrderRecord = {
-  date: string;
-  amount: string;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type ProjectRowSaleRecord = {
-  date: string;
-  amount: string;
-  createdAt: string;
-  updatedAt: string;
-};
+import { ProjectRecordType } from './enums';
 
 export type ProjectRowBusinessCategory = {
   id: number;
@@ -117,4 +104,30 @@ export type ProjectUpdateBody = {
   externalManagers: number[];
   externalLeaders: number[];
   canExpose: boolean;
+};
+
+export type ProjectRecordRow = {
+  id: number;
+  date: string;
+  amount: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ProjectRecordListQuery = HttpClientListQuery & { type: ProjectRecordType };
+export type ProjectRecordList = HttpClientListResponse<ProjectRecordRow, ProjectRecordListQuery>;
+
+export type ProjectRecordCreateBody = {
+  type: ProjectRecordType;
+  project: number;
+  date: string;
+  amount: string;
+  description: string;
+};
+
+export type ProjectRecordUpdateBody = {
+  date: string;
+  amount: string;
+  description: string;
 };

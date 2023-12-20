@@ -9,3 +9,14 @@ export enum ProjectErrorMessage {
   AlreadyExist = '이미 존재하는 약어입니다.',
   NotFound = '사업 정보를 찾을 수 없습니다.',
 }
+
+export enum ProjectRecordType {
+  Order = 'order',
+  Sale = 'sale',
+}
+
+export enum ProjectRecordErrorMessage {
+  NotFoundProject = '사업 정보를 찾을 수 없습니다.',
+  NotFoundOrder = '수주 기록을 찾을 수 없습니다.',
+  NotFoundSale = '매출 기록을 찾을 수 없습니다.',
+}

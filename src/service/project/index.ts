@@ -5,3 +5,5 @@ export * from './project-http.service';
 export * from './project.exception';
 export * from './project.validator';
 export * from './project.transformer';
+export * from './project-record-http.service';
+export * from './project-record.exception';

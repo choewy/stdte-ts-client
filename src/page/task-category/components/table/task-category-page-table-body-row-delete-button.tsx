@@ -7,7 +7,7 @@ import { dialogHook } from '@hook';
 export const TaskCategoryPageTableBodyRowDeleteButton: FunctionComponent<{
   row: TaskCategoryRow;
 }> = ({ row }) => {
-  const onClick = dialogHook.useTaskCategoryPageDialogCallback('delete', row, true);
+  const onClick = dialogHook.useTaskCategoryDialogCallback('delete', true, row);
 
   return <TableCellButton text="삭제" onClick={onClick} />;
 };

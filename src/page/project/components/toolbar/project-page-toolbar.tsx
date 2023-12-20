@@ -7,7 +7,7 @@ import { dialogHook, projectHook } from '@hook';
 export const ProjectPageToolbar: FunctionComponent<{
   canCreate: boolean;
 }> = ({ canCreate }) => {
-  const onClickCreate = dialogHook.useProjectPageCreateDialogCallback(true);
+  const onClickCreate = dialogHook.useProjectDialogCallback('create', true);
   const onClickDownload = projectHook.useDownloadCallback();
 
   return (

@@ -17,7 +17,7 @@ export const ProjectPageCustomerSelect: FunctionComponent<{
   selectHook.useMountCustomer();
   selectHook.useUnMountCustomer();
 
-  const onChange = selectFormHook.useOnChangeObjectProperty('customer', setBody);
+  const onChange = selectFormHook.useOnChangeObjectProperty(setBody, 'customer');
 
   return (
     <SelectControl label="고객사" value={body.customer === 0 ? undefined : body.customer} onChange={onChange}>

@@ -11,7 +11,7 @@ export const RolePageDeleteDialog: FunctionComponent = () => {
   const dialog = dialogStore.useValue();
   const row = dialog.role.delete.row;
 
-  const onClose = dialogHook.useRolePageDialogsCallback('delete', row, false);
+  const onClose = dialogHook.useRoleDialogsCallback('delete', false, row);
 
   return (
     <DialogBoxy

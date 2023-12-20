@@ -11,7 +11,7 @@ export const RolePageUpdateDialog: FunctionComponent = () => {
   const dialog = dialogStore.useValue();
   const row = dialog.role.update.row;
 
-  const onClose = dialogHook.useRolePageDialogsCallback('update', row, false);
+  const onClose = dialogHook.useRoleDialogsCallback('update', false, row);
 
   const [body, setBody] = roleHook.useUpdateState(row);
 

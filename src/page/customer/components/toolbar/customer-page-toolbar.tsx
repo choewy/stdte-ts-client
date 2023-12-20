@@ -7,7 +7,7 @@ import { dialogHook } from '@hook';
 export const CustomerPageToolbar: FunctionComponent<{
   canCreate: boolean;
 }> = ({ canCreate }) => {
-  const onClick = dialogHook.useCustomerPageCreateDialogCallback(true);
+  const onClick = dialogHook.useCustomerDialogCallback('create', true);
 
   return (
     <Box

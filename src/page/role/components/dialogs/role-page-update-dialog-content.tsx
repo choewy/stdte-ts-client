@@ -19,7 +19,7 @@ export const RolePageUpdateDialogContent: FunctionComponent<{
   const left = ROLE_POLICY_KEY.slice(0, half);
   const right = ROLE_POLICY_KEY.slice(half, length);
 
-  const onChangeName = textFieldHook.useOnChangeObjectStrProperty('name', setBody);
+  const onChangeName = textFieldHook.useOnChangeObjectStrProperty(setBody, 'name');
 
   return (
     <>

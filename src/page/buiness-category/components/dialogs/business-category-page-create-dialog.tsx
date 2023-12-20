@@ -9,7 +9,7 @@ import { BusinessCategoryPageCreateDialogAction } from './business-category-page
 
 export const BusinessCategoryPageCreateDialog: FunctionComponent = () => {
   const dialog = dialogStore.useValue();
-  const onClose = dialogHook.useBusinessCategoryPageCreateDialogCallback(false);
+  const onClose = dialogHook.useBusinessCategoryDialogCallback('create', false);
 
   const [body, setBody] = businessCategoryHook.useCreateState();
 

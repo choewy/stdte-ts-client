@@ -10,7 +10,7 @@ import { BusinessCategoryPageUpdateDialogAction } from './business-category-page
 export const BusinessCategoryPageUpdateDialog: FunctionComponent = () => {
   const dialog = dialogStore.useValue();
   const row = dialog.businessCategory.update.row;
-  const onClose = dialogHook.useBusinessCategoryPageDialogCallback('update', row, false);
+  const onClose = dialogHook.useBusinessCategoryDialogCallback('update', false, row);
 
   const [body, setBody] = businessCategoryHook.useUpdateState(row);
 

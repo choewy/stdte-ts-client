@@ -16,7 +16,7 @@ export const ProjectPageCanExposeSelect: FunctionComponent<{
     { text: '숨김', value: false },
   ];
 
-  const onChange = selectFormHook.useOnChangeObjectBooleanProperty('canExpose', setBody);
+  const onChange = selectFormHook.useOnChangeObjectBooleanProperty(setBody, 'canExpose');
 
   return (
     <SelectControl label="노출여부" value={body.canExpose === true ? 1 : 0} onChange={onChange}>

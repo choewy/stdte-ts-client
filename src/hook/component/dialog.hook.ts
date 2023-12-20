@@ -18,6 +18,9 @@ import {
   TASK_CATEGORY_ROW_CHILD,
   ProjectRow,
   PROJECT_ROW,
+  ProjectRecordRow,
+  ProjectRecordType,
+  PROJECT_RECORD_ROW,
 } from '@service';
 
 export class DialogHook {
@@ -27,15 +30,12 @@ export class DialogHook {
     return useCallback(() => {
       setDialog((prev) => ({
         ...prev,
-        mypage: {
-          ...prev.mypage,
-          updatePassword: { open },
-        },
+        mypage: { ...prev.mypage, updatePassword: { open } },
       }));
     }, [open, setDialog]);
   }
 
-  useCredentialsPageUpdatePasswordDialogCallback(id: number, open: boolean) {
+  useCredentialsUpdatePasswordDialogCallback(id: number, open: boolean) {
     const setDialog = dialogStore.useSetState();
 
     return useCallback(() => {
@@ -43,47 +43,44 @@ export class DialogHook {
         ...prev,
         credentials: {
           ...prev.credentials,
-          updatePassword: {
-            id: open === true ? id : 0,
-            open,
-          },
+          updatePassword: { id: open === true ? id : 0, open },
         },
       }));
     }, [id, open, setDialog]);
   }
 
-  useRolePageCreateDialogCallback(open: boolean) {
+  useRoleDialogsCallback(...args: ['create', boolean] | ['update' | 'delete' | 'users', boolean, RoleRow]) {
     const setDialog = dialogStore.useSetState();
 
     return useCallback(() => {
-      setDialog((prev) => ({
-        ...prev,
-        role: {
-          ...prev.role,
-          create: { open },
-        },
-      }));
-    }, [open, setDialog]);
+      const [key, open, row] = args;
+
+      switch (key) {
+        case 'create':
+          setDialog((prev) => ({
+            ...prev,
+            role: { ...prev.role, create: { open } },
+          }));
+          break;
+
+        case 'update':
+        case 'delete':
+        case 'users':
+          setDialog((prev) => ({
+            ...prev,
+            role: { ...prev.role, [key]: { open, row: open === true ? row : ROLE_ROW } },
+          }));
+          break;
+      }
+    }, [args, setDialog]);
   }
 
-  useRolePageDialogsCallback(key: 'update' | 'delete' | 'users', row: RoleRow, open: boolean) {
+  useUserDialogCallback(...args: ['update', boolean, UserRow]) {
     const setDialog = dialogStore.useSetState();
 
     return useCallback(() => {
-      setDialog((prev) => ({
-        ...prev,
-        role: {
-          ...prev.role,
-          [key]: { open, row: open === true ? row : ROLE_ROW },
-        },
-      }));
-    }, [key, row, open, setDialog]);
-  }
+      const [key, open, row] = args;
 
-  useUserPageDialogCallback(key: 'update', row: UserRow, open: boolean) {
-    const setDialog = dialogStore.useSetState();
-
-    return useCallback(() => {
       setDialog((prev) => ({
         ...prev,
         user: {
@@ -91,190 +88,231 @@ export class DialogHook {
           [key]: { open, row: open === false ? USER_ROW : row },
         },
       }));
-    }, [key, row, open, setDialog]);
+    }, [args, setDialog]);
   }
 
-  useCustomerPageCreateDialogCallback(open: boolean) {
+  useCustomerDialogCallback(...args: ['create', boolean] | ['update' | 'delete', boolean, CustomerRow]) {
     const setDialog = dialogStore.useSetState();
 
     return useCallback(() => {
-      setDialog((prev) => ({
-        ...prev,
-        customer: {
-          ...prev.customer,
-          create: { open },
-        },
-      }));
-    }, [open, setDialog]);
+      const [key, open, row] = args;
+
+      switch (key) {
+        case 'create':
+          setDialog((prev) => ({
+            ...prev,
+            customer: { ...prev.customer, create: { open } },
+          }));
+          break;
+
+        case 'update':
+        case 'delete':
+          setDialog((prev) => ({
+            ...prev,
+            customer: { ...prev.customer, [key]: { open, row: open === false ? CUSTOMER_ROW : row } },
+          }));
+          break;
+      }
+    }, [args, setDialog]);
   }
 
-  useCustomerPageDialogCallback(key: 'update' | 'delete', row: CustomerRow, open: boolean) {
-    const setDialog = dialogStore.useSetState();
-
-    return useCallback(() => {
-      setDialog((prev) => ({
-        ...prev,
-        customer: {
-          ...prev.customer,
-          [key]: { open, row: open === false ? CUSTOMER_ROW : row },
-        },
-      }));
-    }, [key, row, open, setDialog]);
-  }
-
-  useBusinessCategoryPageCreateDialogCallback(open: boolean) {
-    const setDialog = dialogStore.useSetState();
-
-    return useCallback(() => {
-      setDialog((prev) => ({
-        ...prev,
-        businessCategory: {
-          ...prev.businessCategory,
-          create: { open },
-        },
-      }));
-    }, [open, setDialog]);
-  }
-
-  useBusinessCategoryPageDialogCallback(key: 'update' | 'delete', row: BusinessCategoryRow, open: boolean) {
-    const setDialog = dialogStore.useSetState();
-
-    return useCallback(() => {
-      setDialog((prev) => ({
-        ...prev,
-        businessCategory: {
-          ...prev.businessCategory,
-          [key]: { open, row: open === false ? BUSINESS_CATEGORY_ROW : row },
-        },
-      }));
-    }, [key, row, open, setDialog]);
-  }
-
-  useIndustryCategoryPageCreateDialogCallback(open: boolean) {
-    const setDialog = dialogStore.useSetState();
-
-    return useCallback(() => {
-      setDialog((prev) => ({
-        ...prev,
-        industryCategory: {
-          ...prev.industryCategory,
-          create: { open },
-        },
-      }));
-    }, [open, setDialog]);
-  }
-
-  useIndustryCategoryPageDialogCallback(key: 'update' | 'delete', row: IndustryCategoryRow, open: boolean) {
-    const setDialog = dialogStore.useSetState();
-
-    return useCallback(() => {
-      setDialog((prev) => ({
-        ...prev,
-        industryCategory: {
-          ...prev.industryCategory,
-          [key]: { open, row: open === false ? INDUSTRY_CATEGORY_ROW : row },
-        },
-      }));
-    }, [key, row, open, setDialog]);
-  }
-
-  useTaskCategoryPageCreateDialogCallback(open: boolean) {
-    const setDialog = dialogStore.useSetState();
-
-    return useCallback(() => {
-      setDialog((prev) => ({
-        ...prev,
-        taskCategory: {
-          ...prev.taskCategory,
-          create: { open },
-        },
-      }));
-    }, [open, setDialog]);
-  }
-
-  useTaskCategoryPageDialogCallback(key: 'update' | 'delete' | 'children', row: TaskCategoryRow, open: boolean) {
-    const setDialog = dialogStore.useSetState();
-
-    return useCallback(() => {
-      setDialog((prev) => ({
-        ...prev,
-        taskCategory: {
-          ...prev.taskCategory,
-          [key]: { open, row: open === false ? TASK_CATEGORY_ROW : row },
-        },
-      }));
-    }, [key, row, open, setDialog]);
-  }
-
-  useTaskCategoryPageCreateChildDialogCallback(parent: TaskCategoryRow, open: boolean) {
-    const setDialog = dialogStore.useSetState();
-
-    return useCallback(() => {
-      setDialog((prev) => ({
-        ...prev,
-        taskCategory: {
-          ...prev.taskCategory,
-          child: {
-            ...prev.taskCategory.child,
-            create: { open, parent: open === false ? TASK_CATEGORY_ROW : parent },
-          },
-        },
-      }));
-    }, [parent, open, setDialog]);
-  }
-
-  useTaskCategoryPageChildDialogCallback(
-    key: 'update' | 'delete',
-    parent: TaskCategoryRow,
-    child: TaskCategoryRowChild,
-    open: boolean,
+  useBusinessCategoryDialogCallback(
+    ...args: ['create', boolean] | ['update' | 'delete', boolean, BusinessCategoryRow]
   ) {
     const setDialog = dialogStore.useSetState();
 
     return useCallback(() => {
-      setDialog((prev) => ({
-        ...prev,
-        taskCategory: {
-          ...prev.taskCategory,
-          child: {
-            ...prev.taskCategory.child,
-            [key]: {
-              open,
-              parent: open === false ? TASK_CATEGORY_ROW : parent,
-              child: open === false ? TASK_CATEGORY_ROW_CHILD : child,
+      const [key, open, row] = args;
+
+      switch (key) {
+        case 'create':
+          setDialog((prev) => ({
+            ...prev,
+            businessCategory: { ...prev.businessCategory, create: { open } },
+          }));
+          break;
+
+        case 'update':
+        case 'delete':
+          setDialog((prev) => ({
+            ...prev,
+            businessCategory: {
+              ...prev.businessCategory,
+              [key]: { open, row: open === false ? BUSINESS_CATEGORY_ROW : row },
             },
-          },
-        },
-      }));
-    }, [key, parent, child, open, setDialog]);
+          }));
+          break;
+      }
+    }, [args, setDialog]);
   }
 
-  useProjectPageCreateDialogCallback(open: boolean) {
+  useIndustryCategoryDialogCallback(
+    ...args: ['create', boolean] | ['update' | 'delete', boolean, IndustryCategoryRow]
+  ) {
     const setDialog = dialogStore.useSetState();
 
     return useCallback(() => {
-      setDialog((prev) => ({
-        ...prev,
-        project: {
-          ...prev.project,
-          create: { open },
-        },
-      }));
-    }, [open, setDialog]);
+      const [key, open, row] = args;
+
+      switch (key) {
+        case 'create':
+          setDialog((prev) => ({
+            ...prev,
+            industryCategory: { ...prev.industryCategory, create: { open } },
+          }));
+          break;
+
+        case 'update':
+        case 'delete':
+          setDialog((prev) => ({
+            ...prev,
+            industryCategory: {
+              ...prev.industryCategory,
+              [key]: { open, row: open === false ? INDUSTRY_CATEGORY_ROW : row },
+            },
+          }));
+          break;
+      }
+    }, [args, setDialog]);
   }
 
-  useProjectPageDialogCallback(key: 'update' | 'delete', row: ProjectRow, open: boolean) {
+  useTaskCategoryDialogCallback(
+    ...args: ['create', boolean] | ['update' | 'delete' | 'children', boolean, TaskCategoryRow]
+  ) {
     const setDialog = dialogStore.useSetState();
 
     return useCallback(() => {
-      setDialog((prev) => ({
-        ...prev,
-        project: {
-          ...prev.project,
-          [key]: { open, row: open === false ? PROJECT_ROW : row },
-        },
-      }));
-    }, [key, row, open, setDialog]);
+      const [key, open, row] = args;
+
+      switch (key) {
+        case 'create':
+          setDialog((prev) => ({
+            ...prev,
+            taskCategory: { ...prev.taskCategory, create: { open } },
+          }));
+          break;
+
+        case 'update':
+        case 'delete':
+        case 'children':
+          setDialog((prev) => ({
+            ...prev,
+            taskCategory: {
+              ...prev.taskCategory,
+              [key]: { open, row: open === false ? TASK_CATEGORY_ROW : row },
+            },
+          }));
+          break;
+      }
+    }, [args, setDialog]);
+  }
+
+  useTaskCategoryChildDialogCallback(
+    ...args:
+      | ['create', TaskCategoryRow, boolean]
+      | ['update' | 'delete', TaskCategoryRow, boolean, TaskCategoryRowChild]
+  ) {
+    const setDialog = dialogStore.useSetState();
+
+    return useCallback(() => {
+      const [key, parent, open, child] = args;
+
+      switch (key) {
+        case 'create':
+          setDialog((prev) => ({
+            ...prev,
+            taskCategory: {
+              ...prev.taskCategory,
+              child: {
+                ...prev.taskCategory.child,
+                create: { open, parent: open === false ? TASK_CATEGORY_ROW : parent },
+              },
+            },
+          }));
+          break;
+
+        case 'update':
+        case 'delete':
+          setDialog((prev) => ({
+            ...prev,
+            taskCategory: {
+              ...prev.taskCategory,
+              child: {
+                ...prev.taskCategory.child,
+                [key]: {
+                  open,
+                  parent: open === false ? TASK_CATEGORY_ROW : parent,
+                  child: open === false ? TASK_CATEGORY_ROW_CHILD : child,
+                },
+              },
+            },
+          }));
+          break;
+      }
+    }, [args, setDialog]);
+  }
+
+  useProjectDialogCallback(...args: ['create', boolean] | ['update' | 'delete' | 'record', boolean, ProjectRow]) {
+    const setDialog = dialogStore.useSetState();
+
+    return useCallback(() => {
+      const [key, open, row] = args;
+
+      switch (key) {
+        case 'create':
+          setDialog((prev) => ({
+            ...prev,
+            project: { ...prev.project, [key]: { open } },
+          }));
+          break;
+
+        case 'update':
+        case 'delete':
+        case 'record':
+          setDialog((prev) => ({
+            ...prev,
+            project: { ...prev.project, [key]: { open, row: open === false ? PROJECT_ROW : row } },
+          }));
+          break;
+      }
+    }, [args, setDialog]);
+  }
+
+  useProjectRecordDialogCallback(
+    type: ProjectRecordType,
+    ...args: ['create', boolean, ProjectRow] | ['update' | 'delete', boolean, ProjectRecordRow]
+  ) {
+    const setDialog = dialogStore.useSetState();
+
+    return useCallback(() => {
+      const [key, open, row] = args;
+
+      switch (key) {
+        case 'create':
+          setDialog((prev) => ({
+            ...prev,
+            projectRecord: {
+              ...prev.projectRecord,
+              [type]: { ...prev.projectRecord[type], [key]: { open, row } },
+            },
+          }));
+          break;
+
+        case 'update':
+        case 'delete':
+          setDialog((prev) => ({
+            ...prev,
+            projectRecord: {
+              ...prev.projectRecord,
+              [type]: {
+                ...prev.projectRecord[type],
+                [key]: { open, row: open === false ? PROJECT_RECORD_ROW : row },
+              },
+            },
+          }));
+          break;
+      }
+    }, [type, args, setDialog]);
   }
 }
 

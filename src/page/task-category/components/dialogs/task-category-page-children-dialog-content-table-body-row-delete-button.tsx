@@ -8,7 +8,7 @@ export const TaskCategoryPageChildrenDialogContentTableBodyRowDeleteButton: Func
   parent: TaskCategoryRow;
   child: TaskCategoryRowChild;
 }> = ({ parent, child }) => {
-  const onClick = dialogHook.useTaskCategoryPageChildDialogCallback('delete', parent, child, true);
+  const onClick = dialogHook.useTaskCategoryChildDialogCallback('delete', parent, true, child);
 
   return <TableCellButton text="삭제" onClick={onClick} />;
 };

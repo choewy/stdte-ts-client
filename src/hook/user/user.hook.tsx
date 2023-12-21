@@ -3,7 +3,7 @@ import { SetterOrUpdater } from 'recoil';
 
 import { UserStatus } from '@common';
 import { userStore } from '@store';
-import { SnackEvent, UserException, UserRow, UserRowUpdateBody, userHttpService } from '@service';
+import { SnackEvent, UserException, UserRow, UserRowUpdateBody, userHttpService, userTransformer } from '@service';
 
 export class UserHook {
   useGetListCallback() {
@@ -110,7 +110,7 @@ export class UserHook {
     const setUser = userStore.useSetState();
 
     return useCallback(async () => {
-      const res = await userHttpService.updateRow(id, body);
+      const res = await userHttpService.updateRow(id, userTransformer.updateRow(body));
 
       if (res.ok === false) {
         SnackEvent.dispatchByException(new UserException(res.exception));

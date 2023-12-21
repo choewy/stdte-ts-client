@@ -2,7 +2,7 @@ import { SetterOrUpdater } from 'recoil';
 import { MouseEvent, useCallback, useEffect, useState } from 'react';
 
 import { ProfileStoreProps, profileStore } from '@store';
-import { SnackEvent, UserException, userHttpService, userValidator } from '@service';
+import { SnackEvent, UserException, userHttpService, userTransformer, userValidator } from '@service';
 
 import { ProfileBehcleState, ProfileEducationalState, ProfilePersonalState } from './types';
 
@@ -64,7 +64,7 @@ export class ProfileHook {
           return SnackEvent.dispatchByWarning(message);
         }
 
-        const res = await userHttpService.updateMyProfile(body);
+        const res = await userHttpService.updateMyProfile(userTransformer.updateRow(body));
 
         if (res.ok === false) {
           return SnackEvent.dispatchByException(new UserException(res.exception));
@@ -107,7 +107,7 @@ export class ProfileHook {
           return SnackEvent.dispatchByWarning(message);
         }
 
-        const res = await userHttpService.updateMyProfile(body);
+        const res = await userHttpService.updateMyProfile(userTransformer.updateRow(body));
 
         if (res.ok === false) {
           return SnackEvent.dispatchByException(new UserException(res.exception));
@@ -142,7 +142,7 @@ export class ProfileHook {
           return SnackEvent.dispatchByWarning(message);
         }
 
-        const res = await userHttpService.updateMyProfile(body);
+        const res = await userHttpService.updateMyProfile(userTransformer.updateRow(body));
 
         if (res.ok === false) {
           return SnackEvent.dispatchByException(new UserException(res.exception));

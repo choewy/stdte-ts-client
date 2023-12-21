@@ -7,6 +7,10 @@ export class UserHttpService extends HttpService {
     return this.get<UserRow>(this.url('profile'));
   }
 
+  async existRow(id: number) {
+    return this.head<null>(this.url(id));
+  }
+
   async updateMyProfile(body: Partial<UserUpdateBody>) {
     return this.patch<null>(this.url('profile'), body);
   }

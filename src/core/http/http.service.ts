@@ -53,6 +53,10 @@ export class HttpService {
     return [this.path, ...args].join('/');
   }
 
+  protected async head<R, D = any>(url: string = '', config?: HttpClientrequestConfig<D>) {
+    return this.transform<R>(() => this.instance.head(url, config), config?.delay);
+  }
+
   protected async get<R, D = any>(url: string = '', config?: HttpClientrequestConfig<D>) {
     return this.transform<R>(() => this.instance.get(url, config), config?.delay);
   }

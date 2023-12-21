@@ -1,2 +1,2 @@
-export * from './time-record-layout.page';
+export * from './time-record.layout';
 export * from './time-record.page';

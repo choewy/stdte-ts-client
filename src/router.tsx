@@ -21,7 +21,7 @@ import {
   BusinessCategoryPage,
   IndustryCategoryPage,
   TaskCategoryPage,
-  TimeRecordLayoutPage,
+  TimeRecordLayout,
   TimeRecordPage,
 } from '@page';
 
@@ -129,7 +129,7 @@ export const router = createBrowserRouter(
             },
             {
               path: PagePath.TimeRecord,
-              element: <TimeRecordLayoutPage />,
+              element: <TimeRecordLayout />,
               children: [
                 {
                   path: PagePath.TimeRecordByUser,

@@ -13,7 +13,7 @@ export const RolePageTableHead: FunctionComponent = () => {
         <TableValueCell value="인원" />
         <TableValueCell value="생성일시" />
         <TableValueCell value="수정일시" />
-        <TableValueCell />
+        <TableValueCell value="수정/삭제" />
       </TableRow>
     </TableHead>
   );

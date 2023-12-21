@@ -32,6 +32,7 @@ export const HomePage: FunctionComponent = () => {
       style={{
         height: 'calc(100vh - 71px)',
         width: '100%',
+        border: 0,
       }}
     />
   );

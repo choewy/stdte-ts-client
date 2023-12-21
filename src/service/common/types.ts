@@ -8,3 +8,9 @@ export type CredentialsChangeStatusComponentProperty = {
     next: CredentialsStatus;
   };
 };
+
+export type DateTimeRowProperty = {
+  date: string;
+  weekday: string;
+  color: string;
+};

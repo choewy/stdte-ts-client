@@ -18,7 +18,7 @@ export const TableValueCell: FunctionComponent<
       align={props.align ?? 'center'}
       sx={(theme) => ({
         ...(theme.components?.MuiTableCell?.defaultProps?.sx ?? {}),
-        ...sizeService.getWidthByTextLength(
+        ...sizeService.getWidthSxByTextLength(
           value ?? '',
           { width: fixedWidth, maxWidth: fixedWidth, minWidth: true },
           { width: fullWidth === true ? '100%' : undefined },

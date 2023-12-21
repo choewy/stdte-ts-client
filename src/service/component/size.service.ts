@@ -19,7 +19,25 @@ export class SizeService {
     return length;
   }
 
-  getWidthByTextLength(
+  getWidthByTextLength(value: string | number | boolean, min?: number): number {
+    let width = 0;
+
+    const length = this.getTextLengthByBytes(String(value));
+
+    width = 9.5 * length;
+
+    if (width < 70) {
+      width = 70;
+    }
+
+    if (typeof min === 'number' && width < min) {
+      width = min;
+    }
+
+    return width;
+  }
+
+  getWidthSxByTextLength(
     value: string | number | boolean,
     options: ComponentWidthOptions,
     sxProps: SxProps = {},

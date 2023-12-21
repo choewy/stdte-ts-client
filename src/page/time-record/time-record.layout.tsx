@@ -11,11 +11,12 @@ import { layoutStore } from '@store';
 export const TimeRecordLayout: FunctionComponent = () => {
   const size = layoutStore.useValue().size;
 
-  timeRecordHook.useParamID();
-  timeRecordHook.useValidateID();
-
   timeRecordLayoutHook.useMount();
   timeRecordLayoutHook.useUnMount();
+  timeRecordHook.useParamID();
+  timeRecordHook.useValidateID();
+  timeRecordHook.useMount();
+  timeRecordHook.useUnMount();
 
   return (
     <Box

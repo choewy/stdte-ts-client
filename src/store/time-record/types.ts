@@ -8,14 +8,13 @@ import {
 
 export type TimeRecordStoreProps = {
   id: number;
+  load: boolean;
   editable: boolean;
   sums: TimeRecordSumRow[];
   rows: TimeRecordRow[];
 };
 
 export type TimeRecordLayoutStoreProps = {
-  id: number;
-  editable: boolean;
   log: TimeRecordLogList;
   project: TimeRecordProjectList;
   date: {

@@ -2,7 +2,7 @@ import { useCallback, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { PagePath } from '@common';
-import { userHttpService } from '@service';
+import { timeRecordHttpService, userHttpService } from '@service';
 import { authorizeStore, timeRecordLayoutStore, timeRecordStore } from '@store';
 
 export class TimeRecordHook {
@@ -33,14 +33,14 @@ export class TimeRecordHook {
         return navigate([PagePath.TimeRecord, authorize.id].join('/'), { replace: true });
       }
 
-      setTimeRecord((prev) => ({ ...prev, id, editable }));
+      setTimeRecord((prev) => ({ ...prev, id, editable, load: false }));
     }, [navigate, authorize, param, setTimeRecord]);
   }
 
   useValidateID() {
     const navigate = useNavigate();
 
-    const { id } = timeRecordStore.useValue();
+    const [{ id }, setTimeRecord] = timeRecordStore.useState();
     const { log } = timeRecordLayoutStore.useValue();
 
     const existUser = useCallback(async () => {
@@ -57,11 +57,66 @@ export class TimeRecordHook {
       if (res.ok === false) {
         return navigate([PagePath.TimeRecord, log.rows[0].id].join('/'), { replace: true });
       }
-    }, [navigate, id, log]);
+
+      setTimeRecord((prev) => ({ ...prev, load: true }));
+    }, [navigate, id, log, setTimeRecord]);
 
     useEffect(() => {
       existUser();
     }, [existUser]);
+  }
+
+  useGetTimeListCallback() {
+    const { date } = timeRecordLayoutStore.useValue();
+    const [{ id, load }, setTimeRecord] = timeRecordStore.useState();
+
+    return useCallback(async () => {
+      if (id === 0) {
+        return;
+      }
+
+      if (date.s === '' || date.e === '') {
+        return;
+      }
+
+      if (load === false) {
+        return;
+      }
+
+      const res = await timeRecordHttpService.getTimeList({
+        user: id,
+        s: date.s,
+        e: date.e,
+      });
+
+      if (res.ok === false) {
+        return;
+      }
+
+      setTimeRecord((prev) => ({
+        ...prev,
+        sums: res.data.sums,
+        rows: res.data.rows,
+      }));
+    }, [date.s, date.e, id, load, setTimeRecord]);
+  }
+
+  useMount() {
+    const getTimeRecordList = this.useGetTimeListCallback();
+
+    useEffect(() => {
+      getTimeRecordList();
+    }, [getTimeRecordList]);
+  }
+
+  useUnMount() {
+    const resetTimeRecord = timeRecordStore.useResetState();
+
+    useEffect(() => {
+      return () => {
+        resetTimeRecord();
+      };
+    }, [resetTimeRecord]);
   }
 }
 

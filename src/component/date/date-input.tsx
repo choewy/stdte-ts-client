@@ -4,14 +4,31 @@ import { FunctionComponent } from 'react';
 
 import { TextField, TextFieldProps } from '@mui/material';
 
-export const DateInput: FunctionComponent<TextFieldProps> = (props) => {
+import { layoutStore } from '@store';
+
+export const DateInput: FunctionComponent<
+  TextFieldProps & {
+    min?: string;
+    max?: string;
+  }
+> = ({ min, max, ...props }) => {
+  const { theme } = layoutStore.useValue();
+
   return (
     <TextField
-      {...{
-        type: 'date',
-        className: 'date-input',
-        required: true,
-        ...props,
+      {...props}
+      type="date"
+      className="date-input"
+      required
+      inputProps={{
+        ...(props.inputProps ?? {
+          min,
+          max,
+          style: {
+            fontSize: 13,
+            colorScheme: theme === 'dark' ? 'dark' : 'light',
+          },
+        }),
       }}
     />
   );

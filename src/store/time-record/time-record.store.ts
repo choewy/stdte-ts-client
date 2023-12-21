@@ -7,6 +7,8 @@ export class TimeRecordStore extends RecoilStore<TimeRecordStoreProps> {
     super(TimeRecordStore.name, {
       id: 0,
       editable: false,
+      sums: [],
+      rows: [],
     });
   }
 }

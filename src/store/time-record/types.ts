@@ -1,8 +1,16 @@
-import { DateTimeRowProperty, TimeRecordLogList, TimeRecordProjectList } from '@service';
+import {
+  DateTimeRowProperty,
+  TimeRecordLogList,
+  TimeRecordProjectList,
+  TimeRecordRow,
+  TimeRecordSumRow,
+} from '@service';
 
 export type TimeRecordStoreProps = {
   id: number;
   editable: boolean;
+  sums: TimeRecordSumRow[];
+  rows: TimeRecordRow[];
 };
 
 export type TimeRecordLayoutStoreProps = {

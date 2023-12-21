@@ -10,9 +10,13 @@ import { AuthorizeGuardPassOrPath } from './types';
 export class AuthorizeHook {
   useAuthorizeCredentials() {
     const pathname = useLocation().pathname;
-    const setAuthorize = authorizeStore.useSetState();
+    const [authorize, setAuthorize] = authorizeStore.useState();
 
     const getAuthorizeCredentials = useCallback(async () => {
+      if (authorize === false || authorize) {
+        return;
+      }
+
       const res = await credentialsHttpService.credentials();
 
       if (res.ok === false) {
@@ -20,7 +24,7 @@ export class AuthorizeHook {
       }
 
       setAuthorize(res.data);
-    }, [pathname, setAuthorize]);
+    }, [pathname, authorize, setAuthorize]);
 
     useEffect(() => {
       getAuthorizeCredentials();

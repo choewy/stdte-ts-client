@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { TableCell, TableCellProps } from '@mui/material';
+import { SxProps, TableCell, TableCellProps } from '@mui/material';
 
 import { sizeService } from '@service';
 
@@ -20,8 +20,8 @@ export const TableValueCell: FunctionComponent<
         ...(theme.components?.MuiTableCell?.defaultProps?.sx ?? {}),
         ...sizeService.getWidthSxByTextLength(
           value ?? '',
-          { width: fixedWidth, maxWidth: fixedWidth, minWidth: true },
-          { width: fullWidth === true ? '100%' : undefined },
+          { width: fixedWidth, maxWidth: fixedWidth, minWidth: fixedWidth },
+          { width: fullWidth === true ? '100%' : undefined, ...((props.sx as SxProps) ?? {}) },
         ),
       })}
       style={{

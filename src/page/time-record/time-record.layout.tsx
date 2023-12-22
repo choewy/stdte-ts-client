@@ -15,8 +15,6 @@ export const TimeRecordLayout: FunctionComponent = () => {
   timeRecordLayoutHook.useUnMount();
   timeRecordHook.useParamID();
   timeRecordHook.useValidateID();
-  timeRecordHook.useMount();
-  timeRecordHook.useUnMount();
 
   return (
     <Box
@@ -27,7 +25,8 @@ export const TimeRecordLayout: FunctionComponent = () => {
         gap: 1,
         height: size.innerHeight - 65,
         paddingLeft: 0,
-        paddingRight: 3,
+        paddingRight: 1,
+        paddingBottom: 1,
         boxSizing: 'border-box',
       }}
     >

@@ -26,7 +26,8 @@ export const TimeRecordLayoutLogTabs: FunctionComponent = () => {
         variant="scrollable"
         value={timeRecordLogTabValue > -1 ? timeRecordLogTabValue : 0}
         sx={{
-          height: size.innerHeight - 150,
+          marginTop: 2,
+          height: size.innerHeight - 100,
           width: '100%',
           borderRight: 1,
           borderColor: 'divider',

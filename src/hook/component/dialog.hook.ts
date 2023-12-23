@@ -21,6 +21,11 @@ import {
   ProjectRecordRow,
   ProjectRecordType,
   PROJECT_RECORD_ROW,
+  TimeRecordRow,
+  TimeRecordProjectRow,
+  TimeRecordProjectRowTaskCategoryChild,
+  DateTimeRowProperty,
+  TIME_RECORD_ROW,
 } from '@service';
 
 export class DialogHook {
@@ -313,6 +318,54 @@ export class DialogHook {
           break;
       }
     }, [type, args, setDialog]);
+  }
+
+  useTimeRecordDialog(
+    ...args:
+      | [
+          'upsert',
+          boolean,
+          TimeRecordRow | undefined,
+          TimeRecordProjectRow,
+          TimeRecordProjectRowTaskCategoryChild,
+          DateTimeRowProperty,
+        ]
+  ) {
+    const setDialog = dialogStore.useSetState();
+
+    return useCallback(() => {
+      const [key, open, row, project, child, date] = args;
+
+      switch (key) {
+        case 'upsert':
+          setDialog((prev) => ({
+            ...prev,
+            timeRecord: {
+              ...prev.timeRecord,
+              [key]: {
+                ...prev.timeRecord[key],
+                open,
+                row:
+                  open === true
+                    ? {
+                        ...(row ?? TIME_RECORD_ROW),
+                        date: date.date,
+                        project: project.id,
+                        category: {
+                          parent: project.category.id,
+                          child: child.id,
+                        },
+                      }
+                    : TIME_RECORD_ROW,
+                project,
+                child,
+                date,
+              },
+            },
+          }));
+          break;
+      }
+    }, [args]);
   }
 }
 

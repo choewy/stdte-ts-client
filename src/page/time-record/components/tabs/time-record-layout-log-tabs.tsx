@@ -27,7 +27,7 @@ export const TimeRecordLayoutLogTabs: FunctionComponent = () => {
         value={timeRecordLogTabValue > -1 ? timeRecordLogTabValue : 0}
         sx={{
           marginTop: 2,
-          height: size.innerHeight - 100,
+          height: size.innerHeight - 90,
           width: '100%',
           borderRight: 1,
           borderColor: 'divider',

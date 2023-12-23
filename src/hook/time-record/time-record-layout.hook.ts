@@ -1,7 +1,13 @@
 import { useCallback, useEffect } from 'react';
 
-import { timeRecordLayoutStore } from '@store';
-import { datetimeService, timeRecordHttpService } from '@service';
+import { authorizeStore, timeRecordLayoutStore } from '@store';
+import {
+  TimeRecordLogEvent,
+  TimeRecordLogRow,
+  datetimeService,
+  timeRecordHttpService,
+  timeRecordLogSocketService,
+} from '@service';
 
 export class TimeRecordLayoutHook {
   useGetTimeRecordLogListCallback() {
@@ -40,6 +46,53 @@ export class TimeRecordLayoutHook {
         },
       }));
     }, [date.s, date.e, setTimeRecordLayout]);
+  }
+
+  useEventListeners() {
+    const authorize = authorizeStore.useValue();
+
+    const setTimeRecordLayout = timeRecordLayoutStore.useSetState();
+
+    const handler = useCallback(
+      (e: Event) => {
+        const event = e as CustomEvent<TimeRecordLogRow>;
+        const detail = event.detail;
+
+        setTimeRecordLayout((prev) => ({
+          ...prev,
+          log: { ...prev.log, rows: prev.log.rows.map((row) => (row.id === detail.id ? detail : row)) },
+        }));
+      },
+      [setTimeRecordLayout],
+    );
+
+    useEffect(() => {
+      if (authorize == null || authorize === false) {
+        return;
+      }
+
+      window.addEventListener(TimeRecordLogEvent.UPDATE, handler);
+
+      return () => {
+        window.removeEventListener(TimeRecordLogEvent.UPDATE, handler);
+      };
+    }, [authorize, handler]);
+  }
+
+  useSocketConnect() {
+    const authorize = authorizeStore.useValue();
+
+    useEffect(() => {
+      if (authorize == null || authorize === false) {
+        return;
+      }
+
+      timeRecordLogSocketService.connection();
+
+      return () => {
+        timeRecordLogSocketService.disconnect();
+      };
+    }, [authorize]);
   }
 
   useMount() {

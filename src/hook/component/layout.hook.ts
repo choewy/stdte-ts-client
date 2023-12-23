@@ -74,7 +74,7 @@ export class LayoutHook {
           return '시간 집계';
       }
 
-      if (PagePath.TimeRecord.startsWith(pathname)) {
+      if (pathname.startsWith(PagePath.TimeRecord)) {
         return '시간 기록';
       }
 

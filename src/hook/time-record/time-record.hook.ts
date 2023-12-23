@@ -1,9 +1,20 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { SetterOrUpdater } from 'recoil';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { PagePath } from '@common';
-import { timeRecordHttpService, userHttpService } from '@service';
 import { authorizeStore, timeRecordLayoutStore, timeRecordStore } from '@store';
+import {
+  SnackEvent,
+  TimeRecordEvent,
+  TimeRecordException,
+  TimeRecordOne,
+  TimeRecordRow,
+  TimeRecordUpsertBody,
+  timeRecordHttpService,
+  timeRecordSocketService,
+  userHttpService,
+} from '@service';
 
 export class TimeRecordHook {
   useParamID() {
@@ -101,6 +112,72 @@ export class TimeRecordHook {
     }, [date.s, date.e, id, load, setTimeRecord]);
   }
 
+  useEventListeners() {
+    const authorize = authorizeStore.useValue();
+    const { id } = timeRecordStore.useValue();
+
+    const setTimeRecord = timeRecordStore.useSetState();
+
+    const handler = useCallback(
+      (e: Event) => {
+        const event = e as CustomEvent<TimeRecordOne>;
+        const detail = event.detail;
+
+        if (detail.row == null || detail.sum == null) {
+          return;
+        }
+
+        setTimeRecord((prev) => {
+          const ids = prev.rows.map(({ id }) => id);
+
+          if (ids.includes(detail.row.id)) {
+            return {
+              ...prev,
+              rows: prev.rows.map((row) => (row.id === detail.row.id ? detail.row : row)),
+              sums: prev.sums.map((sum) => (sum.date === detail.sum.date ? detail.sum : sum)),
+            };
+          } else {
+            return {
+              ...prev,
+              rows: [...prev.rows, detail.row],
+              sums: prev.sums.map((sum) => (sum.date === detail.sum.date ? detail.sum : sum)),
+            };
+          }
+        });
+      },
+      [setTimeRecord],
+    );
+
+    useEffect(() => {
+      if (authorize == null || authorize === false || id === 0) {
+        return;
+      }
+
+      window.addEventListener(TimeRecordEvent.UPSERT, handler);
+
+      return () => {
+        window.removeEventListener(TimeRecordEvent.UPSERT, handler);
+      };
+    }, [authorize, id, handler]);
+  }
+
+  useSocketConnect() {
+    const authorize = authorizeStore.useValue();
+    const { id } = timeRecordStore.useValue();
+
+    useEffect(() => {
+      if (authorize == null || authorize === false || id === 0) {
+        return;
+      }
+
+      timeRecordSocketService.connection(id);
+
+      return () => {
+        timeRecordSocketService.disconnect();
+      };
+    }, [authorize, id]);
+  }
+
   useMount() {
     const getTimeRecordList = this.useGetTimeListCallback();
 
@@ -117,6 +194,45 @@ export class TimeRecordHook {
         resetTimeRecord();
       };
     }, [resetTimeRecord]);
+  }
+
+  useUpsertState(id: number, row: TimeRecordRow): [TimeRecordUpsertBody, SetterOrUpdater<TimeRecordUpsertBody>] {
+    const [body, setBody] = useState<TimeRecordUpsertBody>({
+      user: 0,
+      date: '',
+      time: '',
+      project: 0,
+      taskMainCategory: 0,
+      taskSubCategory: 0,
+    });
+
+    useEffect(() => {
+      setBody({
+        user: id,
+        date: row.date,
+        time: row.time,
+        project: row.project,
+        taskMainCategory: row.category.parent,
+        taskSubCategory: row.category.child,
+      });
+    }, [id, row, setBody]);
+
+    return [body, setBody];
+  }
+
+  useUpsertCallback(body: TimeRecordUpsertBody) {
+    return useCallback(async () => {
+      const res = await timeRecordHttpService.upsertTime(body);
+
+      if (res.ok === false) {
+        SnackEvent.dispatchByException(new TimeRecordException(res.exception));
+
+        return false;
+      }
+
+      SnackEvent.dispatchBySuccess('저장되었습니다.');
+      return true;
+    }, [body]);
   }
 }
 

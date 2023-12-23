@@ -1,18 +1,20 @@
 import { useCallback, useEffect, useState } from 'react';
+import { SetterOrUpdater } from 'recoil';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { PagePath } from '@common';
+import { authorizeStore, timeRecordLayoutStore, timeRecordStore } from '@store';
 import {
-  DateTimeRowProperty,
   SnackEvent,
+  TimeRecordEvent,
   TimeRecordException,
+  TimeRecordOne,
   TimeRecordRow,
   TimeRecordUpsertBody,
   timeRecordHttpService,
+  timeRecordSocketService,
   userHttpService,
 } from '@service';
-import { authorizeStore, timeRecordLayoutStore, timeRecordStore } from '@store';
-import { SetterOrUpdater } from 'recoil';
 
 export class TimeRecordHook {
   useParamID() {
@@ -108,6 +110,72 @@ export class TimeRecordHook {
         rows: res.data.rows,
       }));
     }, [date.s, date.e, id, load, setTimeRecord]);
+  }
+
+  useEventListeners() {
+    const authorize = authorizeStore.useValue();
+    const { id } = timeRecordStore.useValue();
+
+    const setTimeRecord = timeRecordStore.useSetState();
+
+    const handler = useCallback(
+      (e: Event) => {
+        const event = e as CustomEvent<TimeRecordOne>;
+        const detail = event.detail;
+
+        if (detail.row == null || detail.sum == null) {
+          return;
+        }
+
+        setTimeRecord((prev) => {
+          const ids = prev.rows.map(({ id }) => id);
+
+          if (ids.includes(detail.row.id)) {
+            return {
+              ...prev,
+              rows: prev.rows.map((row) => (row.id === detail.row.id ? detail.row : row)),
+              sums: prev.sums.map((sum) => (sum.date === detail.sum.date ? detail.sum : sum)),
+            };
+          } else {
+            return {
+              ...prev,
+              rows: [...prev.rows, detail.row],
+              sums: prev.sums.map((sum) => (sum.date === detail.sum.date ? detail.sum : sum)),
+            };
+          }
+        });
+      },
+      [setTimeRecord],
+    );
+
+    useEffect(() => {
+      if (authorize == null || authorize === false || id === 0) {
+        return;
+      }
+
+      window.addEventListener(TimeRecordEvent.UPSERT, handler);
+
+      return () => {
+        window.removeEventListener(TimeRecordEvent.UPSERT, handler);
+      };
+    }, [authorize, id, handler]);
+  }
+
+  useConnectSocket() {
+    const authorize = authorizeStore.useValue();
+    const { id } = timeRecordStore.useValue();
+
+    useEffect(() => {
+      if (authorize == null || authorize === false || id === 0) {
+        return;
+      }
+
+      timeRecordSocketService.connection(id);
+
+      return () => {
+        timeRecordSocketService.disconnect();
+      };
+    }, [authorize, id]);
   }
 
   useMount() {

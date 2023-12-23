@@ -35,11 +35,11 @@ jobs:
       - name: Create environments
         env:
           ENV: ${{ secrets.ENV_GHPAGES }}
-          TAG: ${{ github.ref_name }}
+          REF: ${{ github.ref_name }}
         run: |
           rm .env*
           echo "$ENV" >> .env
-          echo "VERSION=$TAG_$(date +'%Y-%m-%d_%H:%M:%S')" >> .env
+          echo "REACT_APP_VERSION=$REF_$(date +'%Y-%m-%d_%H:%M:%S')" >> .env
 
       - name: Add homepage into package.json
         run: |

@@ -16,7 +16,6 @@ export const TimeRecordPageTableBodyRow: FunctionComponent<{
     <>
       <TableRow>
         <TableValueCell
-          component="th"
           value={project.name}
           rowSpan={project.category.children.length + 1}
           sx={sxMap.projectNameBodyCellSx()}
@@ -34,7 +33,10 @@ export const TimeRecordPageTableBodyRow: FunctionComponent<{
       </TableRow>
 
       {project.category.children.map((child, index) => (
-        <TableRow key={['time-record-page-table-body-row', project.id, project.category.id, child.id, index].join('-')}>
+        <TableRow
+          key={['time-record-page-table-body-row', project.id, project.category.id, child.id, index].join('-')}
+          hover
+        >
           <TableValueCell value={child.name} sx={sxMap.categoryChildBodyCellSx()} />
           <TimeRecordPageTableBodyRowTimeRecordCells project={project} child={child} />
         </TableRow>

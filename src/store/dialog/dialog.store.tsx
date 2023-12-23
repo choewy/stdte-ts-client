@@ -98,10 +98,6 @@ export class DialogStore extends RecoilStore<DialogStoreProps> {
           date: { date: '', weekday: '', color: undefined },
           row: TIME_RECORD_ROW,
         },
-        delete: {
-          open: false,
-          row: TIME_RECORD_ROW,
-        },
       },
     });
   }

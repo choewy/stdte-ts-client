@@ -81,6 +81,5 @@ export type DialogStoreProps = {
       date: DateTimeRowProperty;
       row: TimeRecordRow;
     };
-    delete: { open: boolean; row: TimeRecordRow };
   };
 };

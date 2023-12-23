@@ -1,9 +1,18 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { PagePath } from '@common';
-import { timeRecordHttpService, userHttpService } from '@service';
+import {
+  DateTimeRowProperty,
+  SnackEvent,
+  TimeRecordException,
+  TimeRecordRow,
+  TimeRecordUpsertBody,
+  timeRecordHttpService,
+  userHttpService,
+} from '@service';
 import { authorizeStore, timeRecordLayoutStore, timeRecordStore } from '@store';
+import { SetterOrUpdater } from 'recoil';
 
 export class TimeRecordHook {
   useParamID() {
@@ -117,6 +126,45 @@ export class TimeRecordHook {
         resetTimeRecord();
       };
     }, [resetTimeRecord]);
+  }
+
+  useUpsertState(id: number, row: TimeRecordRow): [TimeRecordUpsertBody, SetterOrUpdater<TimeRecordUpsertBody>] {
+    const [body, setBody] = useState<TimeRecordUpsertBody>({
+      user: 0,
+      date: '',
+      time: '',
+      project: 0,
+      taskMainCategory: 0,
+      taskSubCategory: 0,
+    });
+
+    useEffect(() => {
+      setBody({
+        user: id,
+        date: row.date,
+        time: row.time,
+        project: row.project,
+        taskMainCategory: row.category.parent,
+        taskSubCategory: row.category.child,
+      });
+    }, [id, row, setBody]);
+
+    return [body, setBody];
+  }
+
+  useUpsertCallback(body: TimeRecordUpsertBody) {
+    return useCallback(async () => {
+      const res = await timeRecordHttpService.upsertTime(body);
+
+      if (res.ok === false) {
+        SnackEvent.dispatchByException(new TimeRecordException(res.exception));
+
+        return false;
+      }
+
+      SnackEvent.dispatchBySuccess('저장되었습니다.');
+      return true;
+    }, [body]);
   }
 }
 

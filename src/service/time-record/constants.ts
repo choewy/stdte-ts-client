@@ -53,7 +53,7 @@ export const TIME_RECORD_LIST: TimeRecordList = {
 export const TIME_RECORD_ROW: TimeRecordRow = {
   id: '',
   date: '',
-  time: '',
+  time: '0',
   project: 0,
   category: {
     parent: 0,

@@ -16,11 +16,12 @@ export const TImeRecordPageTableBodyRowTimeCell: FunctionComponent<{
   date: DateTimeRowProperty;
   editable: boolean;
 }> = ({ project, child, date, row, editable }) => {
+  const time = row?.time ?? '0';
   const onClick = dialogHook.useTimeRecordDialog('upsert', true, row, project, child, date);
 
   return (
     <TableValueCell
-      value={row?.time ?? ''}
+      value={Number(time) > 0 ? time : ''}
       onClick={editable === true ? onClick : undefined}
       sx={{
         color: date.color,

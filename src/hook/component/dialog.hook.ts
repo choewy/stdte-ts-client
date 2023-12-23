@@ -330,7 +330,6 @@ export class DialogHook {
           TimeRecordProjectRowTaskCategoryChild,
           DateTimeRowProperty,
         ]
-      | ['delete', boolean, TimeRecordRow | undefined]
   ) {
     const setDialog = dialogStore.useSetState();
 
@@ -346,24 +345,21 @@ export class DialogHook {
               [key]: {
                 ...prev.timeRecord[key],
                 open,
-                row: open === true ? row ?? TIME_RECORD_ROW : TIME_RECORD_ROW,
+                row:
+                  open === true
+                    ? {
+                        ...(row ?? TIME_RECORD_ROW),
+                        date: date.date,
+                        project: project.id,
+                        category: {
+                          parent: project.category.id,
+                          child: child.id,
+                        },
+                      }
+                    : TIME_RECORD_ROW,
                 project,
                 child,
                 date,
-              },
-            },
-          }));
-          break;
-
-        case 'delete':
-          setDialog((prev) => ({
-            ...prev,
-            timeRecord: {
-              ...prev.timeRecord,
-              [key]: {
-                ...prev.timeRecord[key],
-                open,
-                row: open === true ? row ?? TIME_RECORD_ROW : TIME_RECORD_ROW,
               },
             },
           }));

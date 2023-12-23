@@ -20,11 +20,7 @@ export const ProjectPageTaskCategorySelect: FunctionComponent<{
   const onChange = selectFormHook.useOnChangeObjectProperty(setBody, 'taskCategory');
 
   return (
-    <SelectControl
-      label="수행업무구분"
-      value={body.taskCategory === 0 ? undefined : body.taskCategory}
-      onChange={onChange}
-    >
+    <SelectControl label="수행업무구분" value={body.taskCategory === 0 ? '' : body.taskCategory} onChange={onChange}>
       {category.tasks.list.rows.map((row, i) => (
         <MenuItem key={['project-task-category-menu-item', row.id, i].join('-')} value={row.id}>
           {row.name}

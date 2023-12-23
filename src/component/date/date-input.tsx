@@ -23,7 +23,7 @@ export const DateInput: FunctionComponent<
       inputProps={{
         ...(props.inputProps ?? {
           min,
-          max,
+          max: max ?? '9999-12-31',
           style: {
             fontSize: 13,
             colorScheme: theme === 'dark' ? 'dark' : 'light',

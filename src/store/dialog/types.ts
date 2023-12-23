@@ -7,6 +7,10 @@ import {
   UserRow,
   ProjectRow,
   ProjectRecordRow,
+  TimeRecordProjectRow,
+  TimeRecordProjectRowTaskCategoryChild,
+  TimeRecordRow,
+  DateTimeRowProperty,
 } from '@service';
 
 export type DialogStoreProps = {
@@ -68,5 +72,15 @@ export type DialogStoreProps = {
       update: { open: boolean; row: ProjectRecordRow };
       delete: { open: boolean; row: ProjectRecordRow };
     };
+  };
+  timeRecord: {
+    upsert: {
+      open: boolean;
+      project: TimeRecordProjectRow;
+      child: TimeRecordProjectRowTaskCategoryChild;
+      date: DateTimeRowProperty;
+      row: TimeRecordRow;
+    };
+    delete: { open: boolean; row: TimeRecordRow };
   };
 };

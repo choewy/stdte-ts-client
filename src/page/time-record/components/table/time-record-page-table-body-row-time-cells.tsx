@@ -32,7 +32,7 @@ export const TimeRecordPageTableBodyRowTimeRecordCells: FunctionComponent<{
           project={project}
           child={child}
           date={date}
-          time={records.find((record) => record.date === date.date)?.time ?? ''}
+          row={records.find((record) => record.date === date.date)}
           editable={editable}
         />
       ))}

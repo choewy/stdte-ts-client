@@ -1,25 +1,27 @@
-import { FunctionComponent, useCallback } from 'react';
+import { FunctionComponent } from 'react';
 
 import { TableValueCell } from '@component';
-import { DateTimeRowProperty, TimeRecordProjectRow, TimeRecordProjectRowTaskCategoryChild } from '@service';
+import {
+  DateTimeRowProperty,
+  TimeRecordProjectRow,
+  TimeRecordProjectRowTaskCategoryChild,
+  TimeRecordRow,
+} from '@service';
+import { dialogHook } from '@hook';
 
 export const TImeRecordPageTableBodyRowTimeCell: FunctionComponent<{
+  row: TimeRecordRow | undefined;
   project: TimeRecordProjectRow;
   child: TimeRecordProjectRowTaskCategoryChild;
   date: DateTimeRowProperty;
-  time: string;
   editable: boolean;
-}> = ({ project, child, date, time, editable }) => {
-  const onClick = useCallback(() => {
-    if (editable === false) {
-      return;
-    }
-  }, [project, child, date, time, editable]);
+}> = ({ project, child, date, row, editable }) => {
+  const onClick = dialogHook.useTimeRecordDialog('upsert', true, row, project, child, date);
 
   return (
     <TableValueCell
-      value={time}
-      onClick={onClick}
+      value={row?.time ?? ''}
+      onClick={editable === true ? onClick : undefined}
       sx={{
         color: date.color,
         cursor: editable === true ? 'pointer' : 'default',

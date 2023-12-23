@@ -8,6 +8,9 @@ import {
   ROLE_ROW,
   TASK_CATEGORY_ROW,
   TASK_CATEGORY_ROW_CHILD,
+  TIME_RECORD_PROJECT_ROW,
+  TIME_RECORD_PROJECT_ROW_TASK_CATEGORY_CHILD,
+  TIME_RECORD_ROW,
   USER_ROW,
 } from '@service';
 
@@ -85,6 +88,19 @@ export class DialogStore extends RecoilStore<DialogStoreProps> {
           create: { open: false, row: PROJECT_ROW },
           update: { open: false, row: PROJECT_RECORD_ROW },
           delete: { open: false, row: PROJECT_RECORD_ROW },
+        },
+      },
+      timeRecord: {
+        upsert: {
+          open: false,
+          project: TIME_RECORD_PROJECT_ROW,
+          child: TIME_RECORD_PROJECT_ROW_TASK_CATEGORY_CHILD,
+          date: { date: '', weekday: '', color: undefined },
+          row: TIME_RECORD_ROW,
+        },
+        delete: {
+          open: false,
+          row: TIME_RECORD_ROW,
         },
       },
     });

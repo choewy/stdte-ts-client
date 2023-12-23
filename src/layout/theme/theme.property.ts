@@ -78,12 +78,25 @@ export class ThemeProperty implements ThemeOptions {
       MuiTable: {
         defaultProps: { sx: { borderCollapse: 'seperate', borderSpacing: 0 } },
       },
-      MuiTableCell: {
-        defaultProps: {
-          sx: {
-            textWrap: 'nowrap',
-            border: `0.5px solid ${color === 'dark' ? 'rgba(50, 50, 50)' : 'rgba(225, 225, 225)'}`,
+
+      MuiTableRow: {
+        styleOverrides: {
+          root: {
+            '& th': {
+              backgroundColor: color === 'dark' ? '#101010' : '#f7f7f7',
+            },
           },
+        },
+      },
+      MuiTableCell: {
+        styleOverrides: {
+          root: {
+            border: `0.5px solid ${color === 'dark' ? 'rgba(50, 50, 50)' : 'rgba(225, 225, 225)'}`,
+            fontSize: '11px',
+          },
+        },
+        defaultProps: {
+          sx: { textWrap: 'nowrap' },
         },
       },
     };

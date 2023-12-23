@@ -7,5 +7,5 @@ import { TableCellEditButton } from '@component';
 export const RolePageTableBodyRowUpdateButton: FunctionComponent<{ row: RoleRow }> = ({ row }) => {
   const onClick = dialogHook.useRoleDialogsCallback('update', true, row);
 
-  return <TableCellEditButton onClick={onClick} />;
+  return <TableCellEditButton onClick={onClick} disabled={row.isReadonly} />;
 };

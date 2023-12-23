@@ -15,12 +15,12 @@ export const TimeRecordPageTableHead: FunctionComponent = () => {
     <TableHead>
       <TableRow>
         <TableValueCell value="합계" colSpan={4} stickyRow={0} sx={sxMap.sumHeadCellSx()} />
-        <TimeRecordPageTableHeadSumCells />
+        <TimeRecordPageTableHeadSumCells sxMap={sxMap} />
       </TableRow>
       <TableRow>
         <TableValueCell value="사업" sx={sxMap.projectHeadCellSx()} colSpan={2} stickyRow={1} />
         <TableValueCell value="수행업무구분" sx={sxMap.categoryHeadCellSx()} colSpan={2} stickyRow={1} />
-        <TimeRecordPageTableHeadDateCells />
+        <TimeRecordPageTableHeadDateCells sxMap={sxMap} />
       </TableRow>
       <TableRow>
         <>

@@ -11,6 +11,7 @@ export type RoleRow = {
   name: string;
   users: RoleRowUser[];
   rolePolicy: RolePolicyProperty;
+  isReadonly: boolean;
   createdAt: string;
   updatedAt: string;
 };

@@ -13,6 +13,7 @@ export class TimeRecordPageTableSxMap {
     return {
       position: 'sticky',
       zIndex: 3,
+      fontSize: 12,
       ...sx,
     };
   }
@@ -22,6 +23,7 @@ export class TimeRecordPageTableSxMap {
       position: 'sticky',
       zIndex: 1.5,
       backgroundColor: this.backgroundColor,
+      fontSize: 12,
       ...sx,
     };
   }
@@ -29,28 +31,50 @@ export class TimeRecordPageTableSxMap {
   private widthSx(
     field: 'sum' | 'project' | 'category' | 'project.name' | 'project.code' | 'category.parent' | 'category.child',
   ): SxProps {
+    let left: number | undefined = undefined;
+    let width: number | undefined = undefined;
+
     switch (field) {
       case 'sum':
-        return { left: 0 };
+        left = 0;
+        break;
 
       case 'project':
-        return { left: 0, width: 300, minWidth: 300, maxWidth: 300 };
+        left = 0;
+        width = 325;
+        break;
 
       case 'category':
-        return { left: 300, width: 200, minWidth: 200, maxWidth: 200 };
+        left = 325;
+        width = 250;
+        break;
 
       case 'project.name':
-        return { left: 0, width: 200, minWidth: 200, maxWidth: 200 };
+        left = 0;
+        width = 200;
+        break;
 
       case 'project.code':
-        return { left: 200, width: 100, minWidth: 100, maxWidth: 100 };
+        left = 200;
+        width = 125;
+        break;
 
       case 'category.parent':
-        return { left: 300, width: 100, minWidth: 100, maxWidth: 100 };
+        left = 325;
+        width = 125;
+        break;
 
       case 'category.child':
-        return { left: 400, width: 100, minWidth: 100, maxWidth: 100 };
+        left = 450;
+        width = 125;
+        break;
     }
+
+    return { left, width, minWidth: width, maxWidth: width };
+  }
+
+  defaultCellSx(sx?: SxProps): SxProps {
+    return { fontSize: 12, ...(sx ?? {}) };
   }
 
   sumHeadCellSx(): SxProps {

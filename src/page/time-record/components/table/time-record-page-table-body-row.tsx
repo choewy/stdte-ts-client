@@ -38,7 +38,7 @@ export const TimeRecordPageTableBodyRow: FunctionComponent<{
           hover
         >
           <TableValueCell value={child.name} sx={sxMap.categoryChildBodyCellSx()} />
-          <TimeRecordPageTableBodyRowTimeRecordCells project={project} child={child} />
+          <TimeRecordPageTableBodyRowTimeRecordCells project={project} child={child} sxMap={sxMap} />
         </TableRow>
       ))}
     </>

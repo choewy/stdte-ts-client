@@ -22,14 +22,7 @@ export const ProjectPageSaleRecordTableToolbar: FunctionComponent<{
       }}
     >
       <ButtonGroup variant="outlined">
-        <Button
-          {...{
-            children: '등록',
-            size: 'small',
-            sx: { width: 64 },
-            onClick,
-          }}
-        />
+        <Button {...{ children: '등록', size: 'small', onClick }} />
       </ButtonGroup>
     </Box>
   );

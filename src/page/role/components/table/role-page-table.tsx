@@ -21,10 +21,7 @@ export const RolePageTable: FunctionComponent = () => {
       component={Paper}
       elevation={2}
       onScroll={onScroll}
-      sx={{
-        height: size.innerHeight - 150,
-        overflow: 'scroll',
-      }}
+      sx={{ height: size.innerHeight - 150 }}
     >
       <Table stickyHeader>
         <RolePageTableHead />

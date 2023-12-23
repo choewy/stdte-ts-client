@@ -10,10 +10,11 @@ export const SectionColumn: FunctionComponent<
 > = ({ title, minWidth, children }) => {
   return (
     <Paper
+      className="box"
       {...{
         elevation: 3,
         noValidate: true,
-        sx: { p: 2, mb: 1, flex: 1, overflow: 'scroll', minWidth },
+        sx: { p: 2, mb: 1, flex: 1, minWidth, overflow: 'auto' },
       }}
     >
       {title && (

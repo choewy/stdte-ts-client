@@ -27,10 +27,7 @@ export const ProjectPageOrderRecordTable: FunctionComponent<{
       component={Paper}
       elevation={2}
       onScroll={onScroll}
-      sx={{
-        height: size.innerHeight - 200,
-        overflow: 'scroll',
-      }}
+      sx={{ height: size.innerHeight - 200 }}
     >
       <Table stickyHeader>
         <ProjectPageOrderRecordTableHead {...{ canUpdate, canDelete }} />

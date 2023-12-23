@@ -14,11 +14,11 @@ import {
 export const ProjectPageRecordDialogContent: FunctionComponent<{ row: ProjectRow }> = ({ row }) => {
   return (
     <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1 }}>
-      <Box sx={{ overflow: 'scroll' }}>
+      <Box sx={{ overflow: 'auto', padding: 1, boxSizing: 'border-box' }}>
         <ProjectPageOrderRecordTableToolbar {...{ row }} />
         <ProjectPageOrderRecordTable {...{ canUpdate: true, canDelete: true }} />
       </Box>
-      <Box sx={{ overflow: 'scroll' }}>
+      <Box sx={{ overflow: 'auto', padding: 1, boxSizing: 'border-box' }}>
         <ProjectPageSaleRecordTableToolbar {...{ row }} />
         <ProjectPageSaleRecordTable {...{ canUpdate: true, canDelete: true }} />
       </Box>

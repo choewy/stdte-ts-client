@@ -15,7 +15,7 @@ export const UserPageToolbar: FunctionComponent = () => {
       }}
     >
       <ButtonGroup variant="outlined">
-        <Button {...{ children: '다운로드', size: 'small', sx: { width: 64 } }} />
+        <Button {...{ children: '다운로드', size: 'small' }} />
       </ButtonGroup>
     </Box>
   );

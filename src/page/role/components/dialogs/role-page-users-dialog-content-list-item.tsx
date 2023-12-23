@@ -29,7 +29,7 @@ export const RolePageUsersDialogContentListItem: FunctionComponent<{
         {...{
           onClick,
           sx: {
-            fontSize: 13,
+            fontSize: '12px',
             height: 30,
           },
         }}
@@ -48,7 +48,7 @@ export const RolePageUsersDialogContentListItem: FunctionComponent<{
         <ListItemText
           {...{
             primary: row.name,
-            primaryTypographyProps: { sx: { fontSize: 13 } },
+            primaryTypographyProps: { sx: { fontSize: '12px' } },
           }}
         />
         {row.description && row.description !== name && <Chip label={row.description} />}

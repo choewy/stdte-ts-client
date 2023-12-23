@@ -11,8 +11,8 @@ export class TimeRecordLayoutStore extends RecoilStore<TimeRecordLayoutStoreProp
       log: TIME_RECORD_LOG_LIST,
       project: TIME_RECORD_PROJECT_LIST,
       date: {
-        s: DateTime.local().startOf('week').toSQLDate(),
-        e: DateTime.local().endOf('week').toSQLDate(),
+        s: DateTime.local().minus({ week: 1 }).startOf('week').toSQLDate(),
+        e: DateTime.local().plus({ week: 1 }).endOf('week').toSQLDate(),
         rows: [],
       },
     });

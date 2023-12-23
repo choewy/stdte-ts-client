@@ -10,7 +10,7 @@ export class ThemeProperty implements ThemeOptions {
       ? { mode: color as 'dark' | 'light' }
       : { primary: { main: color } };
 
-    this.typography = { fontSize: 13 };
+    this.typography = { fontSize: 12 };
 
     this.components = {
       MuiFormControl: {
@@ -20,34 +20,39 @@ export class ThemeProperty implements ThemeOptions {
         },
       },
       MuiMenuItem: {
-        defaultProps: { sx: { fontSize: 13 } },
+        defaultProps: { sx: { fontSize: '12px' } },
       },
       MuiTextField: {
+        styleOverrides: {
+          root: {
+            fontSize: '12px',
+            '& input': { fontSize: '12px', colorScheme: color === 'dark' ? 'dark' : 'light' },
+          },
+        },
         defaultProps: {
           fullWidth: true,
           margin: 'normal',
           autoComplete: 'off',
-          InputProps: { sx: { colorScheme: color === 'dark' ? 'dark' : 'light' } },
-          inputProps: { style: { fontSize: 13, colorScheme: color === 'dark' ? 'dark' : 'light' } },
-          InputLabelProps: { style: { fontSize: 13 } },
         },
       },
       MuiInputLabel: {
-        defaultProps: {
-          sx: { fontSize: 13 },
+        styleOverrides: {
+          root: { fontSize: '12px' },
         },
       },
       MuiSelect: {
-        defaultProps: {
-          sx: { fontSize: 13 },
+        styleOverrides: {
+          root: { fontSize: '12px' },
         },
       },
       MuiButton: {
+        styleOverrides: {
+          root: { fontSize: '12px' },
+        },
         defaultProps: {
           fullWidth: true,
           variant: 'contained',
           size: 'large',
-          sx: { fontSize: 12 },
         },
       },
       MuiDialogTitle: {
@@ -62,7 +67,7 @@ export class ThemeProperty implements ThemeOptions {
       },
       MuiDialogContentText: {
         defaultProps: {
-          sx: { paddingY: 2, fontSize: 13 },
+          sx: { paddingY: 2, fontSize: '12px' },
         },
       },
       MuiDialogActions: {
@@ -71,14 +76,21 @@ export class ThemeProperty implements ThemeOptions {
         },
       },
       MuiLink: {
-        defaultProps: {
-          sx: { fontSize: 13, cursor: 'pointer' },
+        styleOverrides: {
+          root: {
+            fontSize: '12px',
+            cursor: 'pointer',
+          },
         },
       },
       MuiTable: {
-        defaultProps: { sx: { borderCollapse: 'seperate', borderSpacing: 0 } },
+        styleOverrides: {
+          root: {
+            borderCollapse: 'separate',
+            borderSpacing: 0,
+          },
+        },
       },
-
       MuiTableRow: {
         styleOverrides: {
           root: {
@@ -92,7 +104,8 @@ export class ThemeProperty implements ThemeOptions {
         styleOverrides: {
           root: {
             border: `0.5px solid ${color === 'dark' ? 'rgba(50, 50, 50)' : 'rgba(225, 225, 225)'}`,
-            fontSize: '11px',
+            fontSize: '12px',
+            padding: '8px',
           },
         },
         defaultProps: {

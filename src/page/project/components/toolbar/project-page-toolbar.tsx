@@ -22,24 +22,8 @@ export const ProjectPageToolbar: FunctionComponent<{
       }}
     >
       <ButtonGroup variant="outlined">
-        {canCreate && (
-          <Button
-            {...{
-              children: '등록',
-              size: 'small',
-              sx: { width: 64 },
-              onClick: onClickCreate,
-            }}
-          />
-        )}
-        <Button
-          {...{
-            children: '다운로드',
-            size: 'small',
-            sx: { width: 64 },
-            onClick: onClickDownload,
-          }}
-        />
+        {canCreate && <Button {...{ children: '등록', size: 'small', onClick: onClickCreate }} />}
+        <Button {...{ children: '다운로드', size: 'small', onClick: onClickDownload }} />
       </ButtonGroup>
     </Box>
   );

@@ -2,7 +2,7 @@ name: Release
 
 on:
   push:
-    branches: ['master']
+    tags: ['v*']
     paths-ignore: ['*.md']
 
 jobs:
@@ -34,11 +34,11 @@ jobs:
       - name: Create environments
         env:
           ENV: ${{ secrets.ENV_PRODUCT }}
-          REF: ${{ github.ref_name }}
+          TAG: ${{ github.ref_name }}
         run: |
           rm .env
           echo "$ENV" >> .env
-          echo "REACT_APP_VERSION=$REF" >> .env
+          echo "REACT_APP_VERSION=$TAG" >> .env
 
       - name: Build application
         run: |

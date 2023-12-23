@@ -53,7 +53,9 @@ export class TextFieldHook {
   ) {
     return useCallback(
       (e: ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value.trim();
+        let value = e.target.value.trim();
+
+        value = value === '' ? '0' : value;
 
         const split = value.split('.');
 
@@ -81,7 +83,10 @@ export class TextFieldHook {
           }
         }
 
-        setState((prev) => ({ ...prev, [key]: value }));
+        setState((prev) => ({
+          ...prev,
+          [key]: split.map((v) => (v === '' ? v : Number(v))).join('.'),
+        }));
       },
       [setState, key, precision, scale],
     );

@@ -12,5 +12,5 @@ export type CredentialsChangeStatusComponentProperty = {
 export type DateTimeRowProperty = {
   date: string;
   weekday: string;
-  color: string;
+  color?: string;
 };

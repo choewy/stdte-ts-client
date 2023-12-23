@@ -3,16 +3,18 @@ import { Outlet } from 'react-router-dom';
 
 import { Box } from '@mui/material';
 
+import { layoutStore } from '@store';
 import { timeRecordHook, timeRecordLayoutHook } from '@hook';
 
 import { TimeRecordLayoutLogTabs, TimeRecordLayoutToolbar } from './components';
-import { layoutStore } from '@store';
 
 export const TimeRecordLayout: FunctionComponent = () => {
   const size = layoutStore.useValue().size;
 
   timeRecordLayoutHook.useMount();
   timeRecordLayoutHook.useUnMount();
+  timeRecordLayoutHook.useEventListeners();
+  timeRecordLayoutHook.useSocketConnect();
   timeRecordHook.useParamID();
   timeRecordHook.useValidateID();
 

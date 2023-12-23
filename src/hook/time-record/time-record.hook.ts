@@ -161,7 +161,7 @@ export class TimeRecordHook {
     }, [authorize, id, handler]);
   }
 
-  useConnectSocket() {
+  useSocketConnect() {
     const authorize = authorizeStore.useValue();
     const { id } = timeRecordStore.useValue();
 

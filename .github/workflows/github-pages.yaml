@@ -23,8 +23,14 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
+      - name: Set Timezone
+        uses: szenius/set-timezone@v1.2
+        with:
+          timezoneLinux: Asia/Seoul
+
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm ci
 
       - name: Create environments
         env:
@@ -44,7 +50,7 @@ jobs:
           npm run build
           cp build/index.html build/404.html
 
-      - name: Deploy to github pages
+      - name: Push chunks
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

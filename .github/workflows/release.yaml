@@ -1,8 +1,8 @@
-name: Develop
+name: Release
 
 on:
   push:
-    branches: ['develop']
+    branches: ['master']
     paths-ignore: ['*.md']
 
 jobs:
@@ -33,7 +33,7 @@ jobs:
 
       - name: Create environments
         env:
-          ENV: ${{ secrets.ENV_DEVELOP }}
+          ENV: ${{ secrets.ENV_PRODUCT }}
           IMAGE_TAG: ${{ github.ref_name }}
         run: |
           rm .env
@@ -56,11 +56,11 @@ jobs:
         env:
           S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
         run: |
-          aws s3 sync build s3://$S3_BUCKET/develop \
+          aws s3 sync build s3://$S3_BUCKET/product \
             --acl bucket-owner-full-control
 
       - name: Invalidate cloundfront cache
         uses: chetan/invalidate-cloudfront-action@master
         env:
-          DISTRIBUTION: ${{ secrets.DISTRIBUTION_ID_DEVELOP }}
+          DISTRIBUTION: ${{ secrets.DISTRIBUTION_ID_PRODUCT }}
           PATHS: /*

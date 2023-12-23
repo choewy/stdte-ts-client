@@ -38,7 +38,7 @@ jobs:
         run: |
           rm .env
           echo "$ENV" >> .env
-          echo "REACT_APP_VERSION=$REF_$(date +'%Y-%m-%d_%H:%M:%S')" >> .env
+          echo "REACT_APP_VERSION=$REF" >> .env
 
       - name: Build application
         run: |

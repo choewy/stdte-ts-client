@@ -123,11 +123,11 @@ export class ProjectRecordHook {
     const [body, setBody] = useState<ProjectRecordCreateBody>(PROJECT_RECORD_SALE_CREATE_BODY);
 
     useEffect(() => {
-      setBody({
-        ...PROJECT_RECORD_SALE_CREATE_BODY,
+      setBody((prev) => ({
+        ...prev,
         type,
         project: row.id,
-      });
+      }));
     }, [type, row]);
 
     return [body, setBody];

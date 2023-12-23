@@ -166,7 +166,6 @@ export class SidebarService {
       Icon: History,
       prefix: PagePath.Time,
       divider: true,
-      policy: {},
       children: [
         {
           name: '테이블',
@@ -213,7 +212,7 @@ export class SidebarService {
       }
 
       if (authorize.role == null) {
-        return;
+        return false;
       }
 
       const keys = Object.keys(item.policy) as RolePolicyKey[];

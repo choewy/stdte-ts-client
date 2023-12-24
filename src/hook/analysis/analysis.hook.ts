@@ -12,7 +12,7 @@ export class AnalysisHook {
     const [{ query }, setAnalysisProjectRecord] = analysisProjectRecordStore.useState();
 
     return useCallback(async () => {
-      if (query.s === '' || query.e === '') {
+      if (query.s.length < 4 || query.e.length < 4) {
         return;
       }
 

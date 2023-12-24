@@ -12,8 +12,8 @@ export const DateInput: FunctionComponent<
 > = ({ min, max, ...props }) => {
   return (
     <TextField
-      {...props}
       type="date"
+      {...props}
       className="date-input"
       required
       inputProps={{

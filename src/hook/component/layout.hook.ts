@@ -70,6 +70,13 @@ export class LayoutHook {
         case PagePath.ProjectTaskCategory:
           return '수행업무구분';
 
+        case PagePath.AnalysisProject:
+        case PagePath.AnalysisProjectOrders:
+          return '사업 수주 분석';
+
+        case PagePath.AnalysisProjectSales:
+          return '사업 매출 분석';
+
         case PagePath.TimeAnalysis:
           return '시간 집계';
       }

@@ -1,6 +1,6 @@
-import { FunctionComponent, SyntheticEvent, useCallback } from 'react';
+import { ChangeEvent, FunctionComponent, SyntheticEvent, useCallback } from 'react';
 
-import { Box, Button, ButtonGroup, Tab, TabProps, Tabs } from '@mui/material';
+import { Box, Button, ButtonGroup, Tab, TabProps, Tabs, TextField } from '@mui/material';
 
 import { AnalysisProjectRecordList } from '@service';
 import { analysisProjectRecordStore } from '@store';
@@ -21,7 +21,7 @@ const tabProps: TabProps[] = [
 ];
 
 export const AnalysisProjectRecordPageToolbar: FunctionComponent = () => {
-  const [{ tabIndex }, setAnalysisProjectRecord] = analysisProjectRecordStore.useState();
+  const [{ tabIndex, query }, setAnalysisProjectRecord] = analysisProjectRecordStore.useState();
 
   const onChange = useCallback(
     (_: SyntheticEvent<Element, Event>, tabIndex: keyof AnalysisProjectRecordList) => {
@@ -46,31 +46,76 @@ export const AnalysisProjectRecordPageToolbar: FunctionComponent = () => {
     [setAnalysisProjectRecord],
   );
 
+  const onChangeStartYear = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      let value = e.target.value;
+
+      const year = Number(value);
+
+      if (Number.isNaN(year)) {
+        return;
+      }
+
+      if (year > 9999) {
+        return;
+      }
+
+      setAnalysisProjectRecord((prev) => ({ ...prev, query: { ...prev.query, s: value } }));
+    },
+    [setAnalysisProjectRecord],
+  );
+
+  const onChangeEndYear = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      let value = e.target.value;
+
+      const year = Number(value);
+
+      if (Number.isNaN(year)) {
+        return;
+      }
+
+      if (year > 9999) {
+        return;
+      }
+
+      setAnalysisProjectRecord((prev) => ({ ...prev, query: { ...prev.query, e: value } }));
+    },
+    [setAnalysisProjectRecord],
+  );
+
   return (
     <Box
       sx={{
         display: 'flex',
         width: '100%',
-        justifyContent: 'space-between',
         height: 40,
         mb: 1,
       }}
     >
-      <Tabs value={tabIndex} onChange={onChange}>
-        {tabProps.map((props, i) => (
-          <Tab key={['analysis-project-record-page-tab', props.value, i].join('-')} {...props} />
-        ))}
-      </Tabs>
-      <ButtonGroup
-        variant="outlined"
+      <Box>
+        <Tabs value={tabIndex} onChange={onChange}>
+          {tabProps.map((props, i) => (
+            <Tab key={['analysis-project-record-page-tab', props.value, i].join('-')} {...props} />
+          ))}
+        </Tabs>
+      </Box>
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 2, flex: 1 }}>
+        <TextField value={query.s} size="small" onChange={onChangeStartYear} fullWidth={false} />
+        <div style={{ display: 'flex', alignItems: 'center', marginTop: '8px' }}>~</div>
+        <TextField value={query.e} size="small" onChange={onChangeEndYear} fullWidth={false} />
+      </Box>
+      <Box
         sx={{
           display: 'flex',
           justifyContent: 'flex-end',
           alignItems: 'flex-end',
         }}
       >
-        <Button {...{ children: '다운로드', size: 'small' }} />
-      </ButtonGroup>
+        <ButtonGroup variant="outlined">
+          <Button {...{ children: '다운로드', size: 'small' }} />
+        </ButtonGroup>
+      </Box>
     </Box>
   );
 };

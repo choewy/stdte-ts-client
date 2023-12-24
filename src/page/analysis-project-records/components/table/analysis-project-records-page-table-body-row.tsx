@@ -10,7 +10,7 @@ export const AnalysisProjectRecordPageTableBodyRow: FunctionComponent<{
   row: AnalysisProjectRecordRow;
 }> = ({ years, row }) => {
   return (
-    <TableRow>
+    <TableRow hover>
       <TableValueCell value={row.row} />
       {years.map((year, i) => {
         const col = row.cols.find((col) => col.year === year.year);
@@ -20,8 +20,9 @@ export const AnalysisProjectRecordPageTableBodyRow: FunctionComponent<{
             <TableValueCell
               value={col?.amount == null ? '' : Number(col.amount).toLocaleString('ko-KR')}
               align="right"
+              sx={{ minWidth: 120 }}
             />
-            <TableValueCell value={col?.rate == null ? '' : `${col.rate}%`} />
+            <TableValueCell value={col?.rate == null ? '' : `${col.rate}%`} align="right" sx={{ minWidth: 80 }} />
           </Fragment>
         );
       })}

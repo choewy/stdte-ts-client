@@ -20,6 +20,7 @@ import {
   ProjectPageSaleRecordDeleteDialog,
   ProjectPageTable,
   ProjectPageToolbar,
+  ProjectPageCaption,
 } from './components';
 
 export const ProjectPage: FunctionComponent = () => {
@@ -55,6 +56,7 @@ export const ProjectPage: FunctionComponent = () => {
       <ProjectPageSaleRecordDeleteDialog />
       <ProjectPageToolbar {...{ canCreate }} />
       <ProjectPageTable {...{ canUpdate, canDelete }} />
+      <ProjectPageCaption />
     </Box>
   );
 };

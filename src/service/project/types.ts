@@ -1,5 +1,6 @@
 import { ProjectStatus } from '@common';
 import { HttpClientListQuery, HttpClientListResponse } from '@core';
+
 import { ProjectRecordType } from './enums';
 
 export type ProjectRowBusinessCategory = {
@@ -59,8 +60,17 @@ export type ProjectRow = {
   updatedAt: string;
 };
 
-export type ProjectListQuery = HttpClientListQuery;
-export type ProjectList = HttpClientListResponse<ProjectRow, ProjectListQuery>;
+export type ProjectListQuery = HttpClientListQuery & {
+  businessCategory?: number;
+  industryCategory?: number;
+  taskMainCategory?: number;
+  customer?: number;
+  status?: ProjectStatus;
+};
+
+export type ProjectList = HttpClientListResponse<ProjectRow, ProjectListQuery> & {
+  amounts: string;
+};
 
 export type ProjectCreateBody = {
   name: string;

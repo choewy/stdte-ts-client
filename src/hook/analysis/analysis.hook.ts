@@ -27,7 +27,7 @@ export class AnalysisHook {
       }
 
       if (path.startsWith(PagePath.AnalysisProjectSales)) {
-        const res = await analysisHttpService.getProjectOrderRecords(query);
+        const res = await analysisHttpService.getProjectSaleRecords(query);
 
         if (res.ok) {
           list = res.data;

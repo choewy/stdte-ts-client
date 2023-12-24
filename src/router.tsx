@@ -23,6 +23,8 @@ import {
   TaskCategoryPage,
   TimeRecordLayout,
   TimeRecordPage,
+  AnalysisProjectOrdersPage,
+  AnalysisProjectSalesPage,
 } from '@page';
 
 export const router = createBrowserRouter(
@@ -122,6 +124,18 @@ export const router = createBrowserRouter(
             {
               path: PagePath.ProjectTaskCategory,
               element: <TaskCategoryPage />,
+            },
+            {
+              path: PagePath.AnalysisProject,
+              element: <Navigate to={PagePath.AnalysisProjectOrders} />,
+            },
+            {
+              path: PagePath.AnalysisProjectOrders,
+              element: <AnalysisProjectOrdersPage />,
+            },
+            {
+              path: PagePath.AnalysisProjectSales,
+              element: <AnalysisProjectSalesPage />,
             },
             {
               path: PagePath.Time,

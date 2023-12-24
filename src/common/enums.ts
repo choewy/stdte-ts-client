@@ -24,4 +24,7 @@ export enum PagePath {
   ProjectBusinessCategory = '/project/category/business',
   ProjectIndustryCategory = '/project/category/industry',
   ProjectTaskCategory = '/project/category/task',
+  AnalysisProject = '/analysis/project',
+  AnalysisProjectOrders = '/analysis/project/orders',
+  AnalysisProjectSales = '/analysis/project/sales',
 }

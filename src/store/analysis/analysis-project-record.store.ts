@@ -6,6 +6,8 @@ import { AnalysisProjectRecordStoreProps } from './types';
 export class AnalysisProjectRecordStore extends RecoilStore<AnalysisProjectRecordStoreProps> {
   constructor() {
     super(AnalysisProjectRecordStore.name, {
+      tabIndex: 'customer',
+      head: '고객사',
       query: ANALYSIS_PROJECT_RECORD_LIST_QUERY,
       list: ANALYSIS_PROJECT_RECORD_LIST,
     });

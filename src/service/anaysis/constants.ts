@@ -7,9 +7,7 @@ export const ANALYSIS_PROJECT_RECORD_LIST_QUERY: AnalysisProjectRecordListQuery 
 };
 
 export const ANALYSIS_PROJECT_RECORD_LIST: AnalysisProjectRecordList = {
-  total: '0',
-  years: [],
-  customer: [],
-  businessCategory: [],
-  industryCategory: [],
+  customer: { years: [], rows: [] },
+  businessCategory: { years: [], rows: [] },
+  industryCategory: { years: [], rows: [] },
 };

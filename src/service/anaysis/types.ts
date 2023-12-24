@@ -21,9 +21,16 @@ export type AnalysisProjectRecordRow = {
 };
 
 export type AnalysisProjectRecordList = {
-  total: string;
-  years: AnalysisProjectRecordYear[];
-  customer: AnalysisProjectRecordRow[];
-  businessCategory: AnalysisProjectRecordRow[];
-  industryCategory: AnalysisProjectRecordRow[];
+  customer: {
+    years: AnalysisProjectRecordYear[];
+    rows: AnalysisProjectRecordRow[];
+  };
+  businessCategory: {
+    years: AnalysisProjectRecordYear[];
+    rows: AnalysisProjectRecordRow[];
+  };
+  industryCategory: {
+    years: AnalysisProjectRecordYear[];
+    rows: AnalysisProjectRecordRow[];
+  };
 };

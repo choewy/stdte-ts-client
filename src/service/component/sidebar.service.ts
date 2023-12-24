@@ -160,6 +160,31 @@ export class SidebarService {
       ],
     },
     {
+      name: '사업분석',
+      type: SidebarMenuType.Collapse,
+      scope: SidebarMenuScope.UserOnly,
+      Icon: Assignment,
+      prefix: PagePath.AnalysisProject,
+      divider: true,
+      policy: { project: RolePolicyLevel.Read },
+      children: [
+        {
+          name: '수주분석',
+          type: SidebarMenuType.Navigate,
+          scope: SidebarMenuScope.UserOnly,
+          Icon: Bookmark,
+          path: PagePath.AnalysisProjectOrders,
+        },
+        {
+          name: '매출분석',
+          type: SidebarMenuType.Navigate,
+          scope: SidebarMenuScope.UserOnly,
+          Icon: Bookmark,
+          path: PagePath.AnalysisProjectSales,
+        },
+      ],
+    },
+    {
       name: '시간관리',
       type: SidebarMenuType.Collapse,
       scope: SidebarMenuScope.UserOnly,

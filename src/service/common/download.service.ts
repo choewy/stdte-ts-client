@@ -1,3 +1,5 @@
+import { HttpClientDownloadResponse } from '@core';
+
 export class DownloadService {
   private createAnchor(url: string, filename: string) {
     const anchor = document.createElement('a');
@@ -15,8 +17,8 @@ export class DownloadService {
     document.body.removeChild(anchor);
   }
 
-  download(url: string, filename: string) {
-    this.clickAnchor(this.createAnchor(url, filename));
+  download(data: HttpClientDownloadResponse) {
+    this.clickAnchor(this.createAnchor(data.url, data.filename));
   }
 }
 

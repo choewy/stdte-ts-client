@@ -127,7 +127,7 @@ export class AnalysisHook {
         return;
       }
 
-      downloadService.download(res.data.url, res.data.filename);
+      downloadService.download(res.data);
     }, [query]);
   }
 

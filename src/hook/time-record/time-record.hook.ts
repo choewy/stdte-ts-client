@@ -198,6 +198,7 @@ export class TimeRecordHook {
 
   useUpsertState(id: number, row: TimeRecordRow): [TimeRecordUpsertBody, SetterOrUpdater<TimeRecordUpsertBody>] {
     const [body, setBody] = useState<TimeRecordUpsertBody>({
+      id: null,
       user: 0,
       date: '',
       time: '',
@@ -208,6 +209,7 @@ export class TimeRecordHook {
 
     useEffect(() => {
       setBody({
+        id: row.id ?? null,
         user: id,
         date: row.date,
         time: row.time,

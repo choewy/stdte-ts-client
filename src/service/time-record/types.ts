@@ -34,7 +34,7 @@ export type TimeRecordRowCategory = {
 };
 
 export type TimeRecordRow = {
-  id: string;
+  id: number | null;
   date: string;
   time: string;
   project: number;
@@ -65,6 +65,7 @@ export type TimeRecordOne = {
 };
 
 export type TimeRecordUpsertBody = {
+  id: number | null;
   date: string;
   time: string;
   user: number;

@@ -25,10 +25,6 @@ export class TimeRecordHttpService extends HttpService {
   async upsertTime(body: TimeRecordUpsertBody) {
     return this.patch<TimeRecordOne>(this.url('time'), body, { delay: 250 });
   }
-
-  async deleteTime(id: number) {
-    return this.delete<null>(this.url('time', id), { delay: 250 });
-  }
 }
 
 export const timeRecordHttpService = new TimeRecordHttpService('record');

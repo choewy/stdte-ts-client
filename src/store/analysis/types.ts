@@ -3,6 +3,8 @@ import {
   AnalysisProjectRecordListQuery,
   AnalysisTimeRecordList,
   AnalysisTimeRecordsQuery,
+  AnalysisUserRecordList,
+  AnalysisUserRecordsQuery,
 } from '@service';
 
 export type AnalysisProjectRecordStoreProps = {
@@ -15,4 +17,9 @@ export type AnalysisProjectRecordStoreProps = {
 export type AnalysisTimeRecordStoreProps = {
   query: AnalysisTimeRecordsQuery;
   list: AnalysisTimeRecordList;
+};
+
+export type AnalysisUserRecordStoreProps = {
+  query: AnalysisUserRecordsQuery;
+  list: AnalysisUserRecordList;
 };

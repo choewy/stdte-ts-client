@@ -81,7 +81,7 @@ export type AnalysisUserRecordsQuery = {
   e: string;
 };
 
-export type AnalysisUserYearRow = {
+export type AnalysisUserRecordYearRow = {
   year: string;
   months: number;
   days: number;
@@ -92,21 +92,21 @@ export type AnalysisUserYearRow = {
   leave: number;
 };
 
-export type AnalysisUserUserCol = {
+export type AnalysisUserRecordUserCol = {
   year: string;
   months: number;
   days: number;
 };
 
-export type AnalysisUserUserRow = {
+export type AnalysisUserRecordUserRow = {
   id: number;
   name: string;
   enteringDay: string;
   resignationDay: string;
-  cols: AnalysisUserUserCol[];
+  cols: AnalysisUserRecordUserCol[];
 };
 
-export type AnalysisUserList = {
-  years: AnalysisUserYearRow[];
-  users: AnalysisUserUserRow[];
+export type AnalysisUserRecordList = {
+  years: AnalysisUserRecordYearRow[];
+  users: AnalysisUserRecordUserRow[];
 };

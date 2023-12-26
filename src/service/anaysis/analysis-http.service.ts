@@ -5,7 +5,7 @@ import {
   AnalysisProjectRecordListQuery,
   AnalysisTimeRecordList,
   AnalysisTimeRecordsQuery,
-  AnalysisUserList,
+  AnalysisUserRecordList,
   AnalysisUserRecordsQuery,
 } from './types';
 
@@ -23,7 +23,7 @@ export class AnalysisHttpService extends HttpService {
   }
 
   async getUserRecords(query: AnalysisUserRecordsQuery) {
-    return this.get<AnalysisUserList>(this.url('users'), { params: query, delay: 250 });
+    return this.get<AnalysisUserRecordList>(this.url('users'), { params: query, delay: 250 });
   }
 }
 

@@ -34,3 +34,28 @@ export type AnalysisProjectRecordList = {
     rows: AnalysisProjectRecordRow[];
   };
 };
+
+export type AnalysisTimeRecordsQuery = {
+  s: string;
+  e: string;
+};
+
+export type AnalysisTimeRecordYear = {
+  year: string;
+  time: string;
+};
+
+export type AnalysisTimeRecordRow = {
+  id: number;
+  name: string;
+  year: string;
+  time: string;
+};
+
+export type AnalysisTimeRecord = {
+  id: number;
+  name: string;
+  code: string;
+  years: AnalysisTimeRecordYear[];
+  rows: AnalysisTimeRecordRow[];
+};

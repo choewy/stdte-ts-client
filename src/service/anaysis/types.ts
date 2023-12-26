@@ -75,3 +75,38 @@ export type AnalysisTimeRecordList = {
   users: AnalysisTimeRecordUserRow[];
   projects: AnalysisTimeRecordProjectRow[];
 };
+
+export type AnalysisUserRecordsQuery = {
+  s: string;
+  e: string;
+};
+
+export type AnalysisUserYearRow = {
+  year: string;
+  months: number;
+  days: number;
+  avgMonths: number;
+  avgDays: number;
+  active: number;
+  enter: number;
+  leave: number;
+};
+
+export type AnalysisUserUserCol = {
+  year: string;
+  months: number;
+  days: number;
+};
+
+export type AnalysisUserUserRow = {
+  id: number;
+  name: string;
+  enteringDay: string;
+  resignationDay: string;
+  cols: AnalysisUserUserCol[];
+};
+
+export type AnalysisUserList = {
+  years: AnalysisUserYearRow[];
+  users: AnalysisUserUserRow[];
+};

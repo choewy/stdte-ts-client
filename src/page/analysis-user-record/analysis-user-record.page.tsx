@@ -4,6 +4,8 @@ import { Box } from '@mui/material';
 
 import { analysisHook } from '@hook';
 
+import { AnalysisUserRecordPageToolbar } from './components';
+
 export const AnalysisUserRecordPage: FunctionComponent = () => {
   analysisHook.useMountUserRecords();
   analysisHook.useUnMountUserRecords();
@@ -18,6 +20,8 @@ export const AnalysisUserRecordPage: FunctionComponent = () => {
         flexDirection: 'column',
         alignItems: 'center',
       }}
-    ></Box>
+    >
+      <AnalysisUserRecordPageToolbar />
+    </Box>
   );
 };

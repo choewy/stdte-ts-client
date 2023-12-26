@@ -79,6 +79,24 @@ export class AnalysisHook {
     }, [query, setAnalysisTimeRecords]);
   }
 
+  useDownloadTimeRecordListCallback() {
+    const { query } = analysisTimeRecordStore.useValue();
+
+    return useCallback(async () => {
+      if (query.s.length < 4 || query.e.length < 4) {
+        return;
+      }
+
+      const res = await analysisHttpService.downloadTimeRecords(query);
+
+      if (res.ok === false) {
+        return;
+      }
+
+      downloadService.download(res.data);
+    }, [query]);
+  }
+
   useMountTimeRecords() {
     const getTimeRecordList = this.useGetTimeRecordListCallback();
 

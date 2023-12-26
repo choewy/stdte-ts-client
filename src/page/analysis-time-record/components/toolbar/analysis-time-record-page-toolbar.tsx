@@ -3,6 +3,7 @@ import { ChangeEvent, FunctionComponent, useCallback } from 'react';
 import { Box, Button, ButtonGroup, TextField } from '@mui/material';
 
 import { analysisTimeRecordStore } from '@store';
+import { analysisHook } from '@hook';
 
 export const AnalysisTimeRecordPageToolbar: FunctionComponent = () => {
   const [{ query }, setAnalysisTimeReceord] = analysisTimeRecordStore.useState();
@@ -53,6 +54,8 @@ export const AnalysisTimeRecordPageToolbar: FunctionComponent = () => {
     [query.s, setAnalysisTimeReceord],
   );
 
+  const onClickDownload = analysisHook.useDownloadTimeRecordListCallback();
+
   return (
     <Box
       sx={{
@@ -77,7 +80,7 @@ export const AnalysisTimeRecordPageToolbar: FunctionComponent = () => {
         }}
       >
         <ButtonGroup variant="outlined">
-          <Button {...{ children: '다운로드', size: 'small' }} />
+          <Button {...{ children: '다운로드', size: 'small', onClick: onClickDownload }} />
         </ButtonGroup>
       </Box>
     </Box>

@@ -22,6 +22,10 @@ export class AnalysisHttpService extends HttpService {
     return this.get<AnalysisTimeRecordList>(this.url('times'), { params: query, delay: 250 });
   }
 
+  async downloadTimeRecords(query: AnalysisTimeRecordsQuery) {
+    return this.get<HttpClientDownloadResponse>(this.url('times/download'), { params: query, delay: 250 });
+  }
+
   async getUserRecords(query: AnalysisUserRecordsQuery) {
     return this.get<AnalysisUserRecordList>(this.url('users'), { params: query, delay: 250 });
   }

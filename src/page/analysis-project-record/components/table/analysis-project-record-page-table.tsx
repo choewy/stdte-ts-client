@@ -4,8 +4,8 @@ import { Paper, Table, TableContainer } from '@mui/material';
 
 import { layoutStore } from '@store';
 
-import { AnalysisProjectRecordPageTableHead } from './analysis-project-records-page-table-head';
-import { AnalysisProjectRecordPageTableBody } from './analysis-project-records-page-table-body';
+import { AnalysisProjectRecordPageTableHead } from './analysis-project-record-page-table-head';
+import { AnalysisProjectRecordPageTableBody } from './analysis-project-record-page-table-body';
 
 export const AnalysisProjectRecordPageTable: FunctionComponent = () => {
   const size = layoutStore.useValue().size;

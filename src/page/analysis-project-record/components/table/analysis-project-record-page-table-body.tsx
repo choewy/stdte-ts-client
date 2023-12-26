@@ -4,7 +4,7 @@ import { TableBody } from '@mui/material';
 
 import { analysisProjectRecordStore } from '@store';
 
-import { AnalysisProjectRecordPageTableBodyRow } from './analysis-project-records-page-table-body-row';
+import { AnalysisProjectRecordPageTableBodyRow } from './analysis-project-record-page-table-body-row';
 
 export const AnalysisProjectRecordPageTableBody: FunctionComponent = () => {
   const { tabIndex, list } = analysisProjectRecordStore.useValue();

@@ -6,7 +6,7 @@ import { analysisHook } from '@hook';
 
 import { AnalysisProjectRecordPageToolbar, AnalysisProjectRecordPageTable } from './components';
 
-export const AnalysisProjectRecordsPage: FunctionComponent = () => {
+export const AnalysisProjectRecordPage: FunctionComponent = () => {
   analysisHook.useMountProjectRecord();
   analysisHook.useUnMountProjectRecord();
 

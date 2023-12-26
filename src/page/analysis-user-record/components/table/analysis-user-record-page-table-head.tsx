@@ -19,7 +19,7 @@ export const AnalysisUserRecordPageTableHead: FunctionComponent<{
         {list.years.map((year, i) => (
           <TableValueCell
             key={['analysis-user-record-page-table-head', year.year, i].join('-')}
-            colSpan={7}
+            colSpan={6}
             value={`${year.year}년`}
           />
         ))}
@@ -28,13 +28,12 @@ export const AnalysisUserRecordPageTableHead: FunctionComponent<{
         <TableValueCell value="연간통계" rowSpan={2} colSpan={3} stickyRow={1} sx={sxMap.totalHeadCellSx()} />
         {list.years.map((year, i) => (
           <Fragment key={['analysis-user-record-page-table-head-total-column', year.year, i].join('-')}>
-            <TableValueCell value="기준인원수" stickyRow={1} />
-            <TableValueCell value="입사자수" stickyRow={1} />
-            <TableValueCell value="퇴사자수" stickyRow={1} />
             <TableValueCell value="총일수" stickyRow={1} />
             <TableValueCell value="평균일수" stickyRow={1} />
             <TableValueCell value="총개월수" stickyRow={1} />
             <TableValueCell value="평균개월수" stickyRow={1} />
+            <TableValueCell value="입사자수" stickyRow={1} />
+            <TableValueCell value="퇴사자수" stickyRow={1} />
           </Fragment>
         ))}
       </TableRow>
@@ -45,7 +44,6 @@ export const AnalysisUserRecordPageTableHead: FunctionComponent<{
             <TableValueCell value={`${year.avgDays}일`} stickyRow={2} />
             <TableValueCell value={`${year.months}개월`} stickyRow={2} />
             <TableValueCell value={`${year.avgMonths}개월`} stickyRow={2} />
-            <TableValueCell value={`${year.active}명`} stickyRow={2} />
             <TableValueCell value={`${year.enter}명`} stickyRow={2} />
             <TableValueCell value={`${year.leave}명`} stickyRow={2} />
           </Fragment>
@@ -59,7 +57,7 @@ export const AnalysisUserRecordPageTableHead: FunctionComponent<{
           <Fragment key={['analysis-user-record-page-table-head-column', year.year, i].join('-')}>
             <TableValueCell value="누적근속일수" stickyRow={3} colSpan={2} />
             <TableValueCell value="누적근속개월수" stickyRow={3} colSpan={2} />
-            <TableValueCell value="비고" stickyRow={3} colSpan={3} />
+            <TableValueCell value="비고" stickyRow={3} colSpan={2} />
           </Fragment>
         ))}
       </TableRow>

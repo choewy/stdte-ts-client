@@ -27,7 +27,7 @@ export const AnalysisUserRecordPageTableBodyRow: FunctionComponent<{
           <Fragment key={['analysis-user-record-=page-table-body-row-year', user.id, year.year, i].join('-')}>
             <TableValueCell value={col?.days == null ? '' : `${col.days}일`} colSpan={2} />
             <TableValueCell value={col?.months == null ? '' : `${col.months}개월`} colSpan={2} />
-            <TableValueCell value={description} colSpan={3} />
+            <TableValueCell value={description} colSpan={2} />
           </Fragment>
         );
       })}

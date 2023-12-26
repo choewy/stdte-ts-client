@@ -60,9 +60,13 @@ export const AnalysisProjectRecordPageToolbar: FunctionComponent = () => {
         return;
       }
 
+      if (value.length === 4 && query.e.length === 4 && year > Number(query.e)) {
+        value = query.e;
+      }
+
       setAnalysisProjectRecord((prev) => ({ ...prev, query: { ...prev.query, s: value } }));
     },
-    [setAnalysisProjectRecord],
+    [query.e, setAnalysisProjectRecord],
   );
 
   const onChangeEndYear = useCallback(
@@ -79,9 +83,13 @@ export const AnalysisProjectRecordPageToolbar: FunctionComponent = () => {
         return;
       }
 
+      if (value.length === 4 && query.s.length === 4 && year < Number(query.s)) {
+        value = query.s;
+      }
+
       setAnalysisProjectRecord((prev) => ({ ...prev, query: { ...prev.query, e: value } }));
     },
-    [setAnalysisProjectRecord],
+    [query.s, setAnalysisProjectRecord],
   );
 
   return (

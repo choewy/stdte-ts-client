@@ -21,9 +21,13 @@ export const AnalysisTimeRecordPageToolbar: FunctionComponent = () => {
         return;
       }
 
+      if (value.length === 4 && query.e.length === 4 && year > Number(query.e)) {
+        value = query.e;
+      }
+
       setAnalysisTimeReceord((prev) => ({ ...prev, query: { ...prev.query, s: value } }));
     },
-    [setAnalysisTimeReceord],
+    [query.e, setAnalysisTimeReceord],
   );
 
   const onChangeEndYear = useCallback(
@@ -40,9 +44,13 @@ export const AnalysisTimeRecordPageToolbar: FunctionComponent = () => {
         return;
       }
 
+      if (value.length === 4 && query.s.length === 4 && year < Number(query.s)) {
+        value = query.s;
+      }
+
       setAnalysisTimeReceord((prev) => ({ ...prev, query: { ...prev.query, e: value } }));
     },
-    [setAnalysisTimeReceord],
+    [query.s, setAnalysisTimeReceord],
   );
 
   return (

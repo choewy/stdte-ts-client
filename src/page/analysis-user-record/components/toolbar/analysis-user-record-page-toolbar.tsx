@@ -21,9 +21,16 @@ export const AnalysisUserRecordPageToolbar: FunctionComponent = () => {
         return;
       }
 
-      setAnalysisUserReceord((prev) => ({ ...prev, query: { ...prev.query, s: value } }));
+      if (value.length === 4 && query.e.length === 4 && year > Number(query.e)) {
+        value = query.e;
+      }
+
+      setAnalysisUserReceord((prev) => ({
+        ...prev,
+        query: { ...prev.query, s: value },
+      }));
     },
-    [setAnalysisUserReceord],
+    [query.e, setAnalysisUserReceord],
   );
 
   const onChangeEndYear = useCallback(
@@ -40,9 +47,13 @@ export const AnalysisUserRecordPageToolbar: FunctionComponent = () => {
         return;
       }
 
+      if (value.length === 4 && query.s.length === 4 && year < Number(query.s)) {
+        value = query.s;
+      }
+
       setAnalysisUserReceord((prev) => ({ ...prev, query: { ...prev.query, e: value } }));
     },
-    [setAnalysisUserReceord],
+    [query.s, setAnalysisUserReceord],
   );
 
   return (

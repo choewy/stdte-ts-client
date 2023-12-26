@@ -25,6 +25,7 @@ import {
   TimeRecordPage,
   AnalysisProjectRecordPage,
   AnalysisTimeRecordPage,
+  AnalysisUserRecordPage,
 } from '@page';
 
 export const router = createBrowserRouter(
@@ -95,7 +96,15 @@ export const router = createBrowserRouter(
             },
             {
               path: PagePath.User,
+              element: <Navigate to={PagePath.UserList} />,
+            },
+            {
+              path: PagePath.UserList,
               element: <UserPage />,
+            },
+            {
+              path: PagePath.UserAnalysis,
+              element: <AnalysisUserRecordPage />,
             },
             {
               path: PagePath.Project,

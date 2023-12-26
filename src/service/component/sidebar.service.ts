@@ -101,12 +101,30 @@ export class SidebarService {
     },
     {
       name: '구성원',
-      type: SidebarMenuType.Navigate,
+      type: SidebarMenuType.Collapse,
       scope: SidebarMenuScope.UserOnly,
       Icon: Group,
-      path: PagePath.User,
-      policy: { user: RolePolicyLevel.Read },
+      prefix: PagePath.User,
+      policy: {},
       divider: true,
+      children: [
+        {
+          name: '구성원 목록',
+          type: SidebarMenuType.Navigate,
+          scope: SidebarMenuScope.UserOnly,
+          Icon: FormatListBulleted,
+          path: PagePath.UserList,
+          policy: { user: RolePolicyLevel.Read },
+        },
+        {
+          name: '인력변동 현황',
+          type: SidebarMenuType.Navigate,
+          scope: SidebarMenuScope.UserOnly,
+          Icon: FormatListBulleted,
+          path: PagePath.UserAnalysis,
+          policy: { user: RolePolicyLevel.Read },
+        },
+      ],
     },
     {
       name: '사업관리',

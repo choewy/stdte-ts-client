@@ -17,6 +17,8 @@ export enum PagePath {
   AdminCredentials = '/admin/credentials',
   AdminSetting = '/admin/setting',
   User = '/user',
+  UserList = '/user/list',
+  UserAnalysis = '/user/analysis',
   Project = '/project',
   ProjectList = '/project/list',
   ProjectCustomer = '/project/customer',

@@ -5,8 +5,8 @@ import { Paper, Typography } from '@mui/material';
 export const UserPageCard: FunctionComponent<PropsWithChildren & { title: string }> = ({ title, children }) => {
   return (
     <Paper
+      variant="outlined"
       {...{
-        elevation: 3,
         noValidate: true,
         sx: {
           p: 2,

@@ -7,8 +7,8 @@ import { MyPageCardProps } from './types';
 export const MyPageCard: FunctionComponent<MyPageCardProps> = ({ title, children }) => {
   return (
     <Paper
+      variant="outlined"
       {...{
-        elevation: 3,
         noValidate: true,
         sx: {
           p: 2,

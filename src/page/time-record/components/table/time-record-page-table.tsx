@@ -13,7 +13,7 @@ export const TimeRecordPageTable: FunctionComponent = () => {
   return (
     <TableContainer
       component={Paper}
-      elevation={2}
+      variant="outlined"
       sx={{
         width: '100%',
         maxWidth: size.innerWidth - 270,

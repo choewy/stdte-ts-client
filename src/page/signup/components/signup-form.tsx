@@ -15,9 +15,9 @@ export const SignUpForm: FunctionComponent = () => {
 
   return (
     <Paper
+      variant="outlined"
       {...{
         component: 'form',
-        elevation: 3,
         noValidate: true,
         sx: { p: 5, boxSizing: 'border-box', width: 400 },
         onSubmit,

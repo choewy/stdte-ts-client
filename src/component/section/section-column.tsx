@@ -11,8 +11,8 @@ export const SectionColumn: FunctionComponent<
   return (
     <Paper
       className="box"
+      variant="outlined"
       {...{
-        elevation: 3,
         noValidate: true,
         sx: { p: 2, mb: 1, flex: 1, minWidth, overflow: 'auto' },
       }}

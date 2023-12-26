@@ -16,7 +16,7 @@ export const TaskCategoryPageChildrenDialogContentTable: FunctionComponent<{
   const size = layoutStore.useValue().size;
 
   return (
-    <TableContainer component={Paper} elevation={2} sx={{ height: size.innerHeight - 200 }}>
+    <TableContainer component={Paper} variant="outlined" sx={{ height: size.innerHeight - 200 }}>
       <Table>
         <TaskCategoryPageChildrenDialogContentTableHead {...{ canUpdate, canDelete }} />
         <TaskCategoryPageChildrenDialogContentTableBody {...{ parent, canUpdate, canDelete }} />

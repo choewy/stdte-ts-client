@@ -14,7 +14,7 @@ export const AnalysisProjectRecordPageTable: FunctionComponent = () => {
   const sxMap = new AnalysisProjectRecordPageTableSxMap(theme);
 
   return (
-    <TableContainer component={Paper} elevation={2} sx={{ height: size.innerHeight - 150 }}>
+    <TableContainer component={Paper} variant="outlined" sx={{ height: size.innerHeight - 150 }}>
       <Table stickyHeader>
         <AnalysisProjectRecordPageTableHead sxMap={sxMap} />
         <AnalysisProjectRecordPageTableBody sxMap={sxMap} />

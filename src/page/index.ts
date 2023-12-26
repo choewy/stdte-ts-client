@@ -17,3 +17,4 @@ export * from './task-category';
 export * from './project';
 export * from './time-record';
 export * from './analysis-project-record';
+export * from './analysis-time-record';

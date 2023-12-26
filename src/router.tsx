@@ -24,6 +24,7 @@ import {
   TimeRecordLayout,
   TimeRecordPage,
   AnalysisProjectRecordPage,
+  AnalysisTimeRecordPage,
 } from '@page';
 
 export const router = createBrowserRouter(
@@ -156,7 +157,7 @@ export const router = createBrowserRouter(
             },
             {
               path: PagePath.TimeAnalysis,
-              element: <EmptyPage title="시간관리 통계" />,
+              element: <AnalysisTimeRecordPage />,
             },
           ],
         },

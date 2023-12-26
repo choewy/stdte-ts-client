@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 
 import { PagePath } from '@common';
 import { ANALYSIS_PROJECT_RECORD_LIST, AnalysisProjectRecordList, analysisHttpService } from '@service';
-import { analysisProjectRecordStore, analysisTimeRecordStore } from '@store';
+import { analysisProjectRecordStore, analysisTimeRecordStore, analysisUserRecordStore } from '@store';
 
 export class AnalysisHook {
   useGetProjectRecordListCallback() {
@@ -88,6 +88,40 @@ export class AnalysisHook {
     useEffect(() => {
       resetAnalysisTimeRecords();
     }, [resetAnalysisTimeRecords]);
+  }
+
+  useGetUserRecordListCallback() {
+    const [{ query }, setAnalysisUserRecords] = analysisUserRecordStore.useState();
+
+    return useCallback(async () => {
+      if (query.s.length < 4 || query.e.length < 4) {
+        return;
+      }
+
+      const res = await analysisHttpService.getUserRecords(query);
+
+      if (res.ok === false) {
+        return;
+      }
+
+      setAnalysisUserRecords((prev) => ({ ...prev, list: res.data }));
+    }, [query, setAnalysisUserRecords]);
+  }
+
+  useMountUserRecords() {
+    const getUserRecordList = this.useGetTimeRecordListCallback();
+
+    useEffect(() => {
+      getUserRecordList();
+    }, [getUserRecordList]);
+  }
+
+  useUnMountUserRecords() {
+    const resetAnalysisUserRecords = analysisUserRecordStore.useResetState();
+
+    useEffect(() => {
+      resetAnalysisUserRecords();
+    }, [resetAnalysisUserRecords]);
   }
 }
 

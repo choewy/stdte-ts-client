@@ -27,7 +27,7 @@ export const SidebarMenuDefaultItem: FunctionComponent<SidebarMenuItemDefaultPro
         <ListItemText
           {...{
             primary: item.name,
-            primaryTypographyProps: { sx: { fontSize: 13 } },
+            primaryTypographyProps: { sx: { fontSize: '12px' } },
           }}
         />
         {item.type === SidebarMenuType.Navigate ? null : icon}

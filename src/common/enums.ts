@@ -17,6 +17,8 @@ export enum PagePath {
   AdminCredentials = '/admin/credentials',
   AdminSetting = '/admin/setting',
   User = '/user',
+  UserList = '/user/list',
+  UserAnalysis = '/user/analysis',
   Project = '/project',
   ProjectList = '/project/list',
   ProjectCustomer = '/project/customer',
@@ -24,4 +26,7 @@ export enum PagePath {
   ProjectBusinessCategory = '/project/category/business',
   ProjectIndustryCategory = '/project/category/industry',
   ProjectTaskCategory = '/project/category/task',
+  AnalysisProject = '/analysis/project',
+  AnalysisProjectOrders = '/analysis/project/orders',
+  AnalysisProjectSales = '/analysis/project/sales',
 }

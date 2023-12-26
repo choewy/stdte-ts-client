@@ -12,6 +12,7 @@ export type TaskCategoryRow = {
   id: number;
   name: string;
   description: string;
+  isReadonly: boolean;
   children: TaskCategoryRowChild[];
   createdAt: string;
   updatedAt: string;

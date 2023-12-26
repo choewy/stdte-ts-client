@@ -12,7 +12,6 @@ export const UserPageCard: FunctionComponent<PropsWithChildren & { title: string
           p: 2,
           mb: 1,
           flex: 1,
-          overflow: 'scroll',
           minWidth: 340,
         },
       }}

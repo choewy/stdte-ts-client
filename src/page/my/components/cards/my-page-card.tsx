@@ -14,7 +14,6 @@ export const MyPageCard: FunctionComponent<MyPageCardProps> = ({ title, children
           p: 2,
           m: 1,
           flex: 1,
-          overflow: 'scroll',
           minWidth: 340,
         },
       }}

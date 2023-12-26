@@ -24,6 +24,7 @@ export const ROLE_ROW: RoleRow = {
   name: '',
   users: [],
   rolePolicy: ROLE_ROW_POLICY,
+  isReadonly: false,
   createdAt: '',
   updatedAt: '',
 };

@@ -12,6 +12,7 @@ export const TASK_CATEGORY_ROW: TaskCategoryRow = {
   id: 0,
   name: '',
   description: '',
+  isReadonly: false,
   children: [],
   createdAt: '',
   updatedAt: '',

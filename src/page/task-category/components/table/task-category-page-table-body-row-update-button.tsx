@@ -9,5 +9,5 @@ export const TaskCategoryPageTableBodyRowUpdateButton: FunctionComponent<{
 }> = ({ row }) => {
   const onClick = dialogHook.useTaskCategoryDialogCallback('update', true, row);
 
-  return <TableCellEditButton onClick={onClick} />;
+  return <TableCellEditButton onClick={onClick} disabled={row.isReadonly} />;
 };

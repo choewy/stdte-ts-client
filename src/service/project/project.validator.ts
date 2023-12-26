@@ -9,10 +9,6 @@ export class ProjectValidator {
       return ProjectErrorMessage.EmptyName;
     }
 
-    if (isEmpty(body.code)) {
-      return ProjectErrorMessage.EmptyCode;
-    }
-
     if (isEmpty(body.difficulty)) {
       return ProjectErrorMessage.EmptyDifficulty;
     }
@@ -37,10 +33,6 @@ export class ProjectValidator {
   updateRow(body: ProjectUpdateBody) {
     if (isEmpty(body.name)) {
       return ProjectErrorMessage.EmptyName;
-    }
-
-    if (isEmpty(body.code)) {
-      return ProjectErrorMessage.EmptyCode;
     }
 
     if (isEmpty(body.difficulty)) {

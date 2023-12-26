@@ -1,46 +1,30 @@
 import { FunctionComponent } from 'react';
 
-import { Box, Button, ButtonGroup } from '@mui/material';
+import { Box } from '@mui/material';
 
-import { dialogHook, projectHook } from '@hook';
+import { ProjectPageToolbarFilter } from './project-page-toolbar-filter';
+import { ProjectPageToolbarButtonGroup } from './project-page-toolbar-buttons';
 
 export const ProjectPageToolbar: FunctionComponent<{
   canCreate: boolean;
 }> = ({ canCreate }) => {
-  const onClickCreate = dialogHook.useProjectDialogCallback('create', true);
-  const onClickDownload = projectHook.useDownloadCallback();
-
   return (
     <Box
       sx={{
         display: 'flex',
         width: '100%',
-        justifyContent: 'flex-end',
+        justifyContent: 'space-between',
         alignItems: 'flex-end',
-        height: 40,
+        height: 45,
         mb: 1,
       }}
     >
-      <ButtonGroup variant="outlined">
-        {canCreate && (
-          <Button
-            {...{
-              children: '등록',
-              size: 'small',
-              sx: { width: 64 },
-              onClick: onClickCreate,
-            }}
-          />
-        )}
-        <Button
-          {...{
-            children: '다운로드',
-            size: 'small',
-            sx: { width: 64 },
-            onClick: onClickDownload,
-          }}
-        />
-      </ButtonGroup>
+      <Box sx={{ display: 'flex', justifyContent: 'flex-start', gap: 1, flex: 1 }}>
+        <ProjectPageToolbarFilter />
+      </Box>
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end', flex: 1 }}>
+        <ProjectPageToolbarButtonGroup canCreate={canCreate} />
+      </Box>
     </Box>
   );
 };

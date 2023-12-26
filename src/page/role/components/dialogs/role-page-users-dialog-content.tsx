@@ -29,7 +29,7 @@ export const RolePageUsersDialogContent: FunctionComponent<{
         ref: scroll.ref,
         component: 'div',
         onScroll,
-        sx: { height: 600, overflow: 'scroll' },
+        sx: { height: 600 },
       }}
     >
       <List>

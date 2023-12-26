@@ -18,6 +18,8 @@ export const TimeRecordLayoutLogTabs: FunctionComponent = () => {
       sx={{
         flexGrow: 1,
         display: 'flex',
+        width: 250,
+        minWidth: 250,
         maxWidth: 250,
       }}
     >
@@ -29,6 +31,8 @@ export const TimeRecordLayoutLogTabs: FunctionComponent = () => {
           marginTop: 2,
           height: size.innerHeight - 90,
           width: '100%',
+          minWidth: 250,
+          maxWidth: 250,
           borderRight: 1,
           borderColor: 'divider',
         }}

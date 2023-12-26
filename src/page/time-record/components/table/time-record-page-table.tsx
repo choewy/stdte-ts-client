@@ -18,7 +18,6 @@ export const TimeRecordPageTable: FunctionComponent = () => {
         width: '100%',
         maxWidth: size.innerWidth - 270,
         height: size.innerHeight - 100,
-        overflow: 'scroll',
       }}
     >
       <Table stickyHeader>

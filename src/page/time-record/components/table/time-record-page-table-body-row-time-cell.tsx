@@ -8,14 +8,16 @@ import {
   TimeRecordRow,
 } from '@service';
 import { dialogHook } from '@hook';
+import { TimeRecordPageTableSxMap } from './time-record-page-table-sx-map';
 
 export const TImeRecordPageTableBodyRowTimeCell: FunctionComponent<{
   row: TimeRecordRow | undefined;
   project: TimeRecordProjectRow;
   child: TimeRecordProjectRowTaskCategoryChild;
   date: DateTimeRowProperty;
+  sxMap: TimeRecordPageTableSxMap;
   editable: boolean;
-}> = ({ project, child, date, row, editable }) => {
+}> = ({ project, child, date, row, editable, sxMap }) => {
   const time = row?.time ?? '0';
   const onClick = dialogHook.useTimeRecordDialog('upsert', true, row, project, child, date);
 
@@ -23,10 +25,10 @@ export const TImeRecordPageTableBodyRowTimeCell: FunctionComponent<{
     <TableValueCell
       value={Number(time) > 0 ? time : ''}
       onClick={editable === true ? onClick : undefined}
-      sx={{
+      sx={sxMap.defaultCellSx({
         color: date.color,
         cursor: editable === true ? 'pointer' : 'default',
-      }}
+      })}
     />
   );
 };

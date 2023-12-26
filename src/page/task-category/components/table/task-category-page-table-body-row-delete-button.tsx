@@ -9,5 +9,5 @@ export const TaskCategoryPageTableBodyRowDeleteButton: FunctionComponent<{
 }> = ({ row }) => {
   const onClick = dialogHook.useTaskCategoryDialogCallback('delete', true, row);
 
-  return <TableCellDeleteButton onClick={onClick} />;
+  return <TableCellDeleteButton onClick={onClick} disabled={row.isReadonly} />;
 };

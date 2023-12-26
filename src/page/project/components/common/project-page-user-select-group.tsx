@@ -53,7 +53,7 @@ export const ProjectPageUserSelectGroup: FunctionComponent<{
             <ListItemText
               primary={user.name}
               primaryTypographyProps={{
-                sx: { fontSize: 13 },
+                sx: { fontSize: '12px' },
               }}
             />
           </MenuItem>
@@ -83,7 +83,7 @@ export const ProjectPageUserSelectGroup: FunctionComponent<{
             <ListItemText
               primary={user.name}
               primaryTypographyProps={{
-                sx: { fontSize: 13 },
+                sx: { fontSize: '12px' },
               }}
             />
           </MenuItem>
@@ -113,7 +113,7 @@ export const ProjectPageUserSelectGroup: FunctionComponent<{
             <ListItemText
               primary={user.name}
               primaryTypographyProps={{
-                sx: { fontSize: 13 },
+                sx: { fontSize: '12px' },
               }}
             />
           </MenuItem>
@@ -146,7 +146,7 @@ export const ProjectPageUserSelectGroup: FunctionComponent<{
             <ListItemText
               primary={user.name}
               primaryTypographyProps={{
-                sx: { fontSize: 13 },
+                sx: { fontSize: '12px' },
               }}
             />
           </MenuItem>
@@ -176,7 +176,7 @@ export const ProjectPageUserSelectGroup: FunctionComponent<{
             <ListItemText
               primary={user.name}
               primaryTypographyProps={{
-                sx: { fontSize: 13 },
+                sx: { fontSize: '12px' },
               }}
             />
           </MenuItem>
@@ -206,7 +206,7 @@ export const ProjectPageUserSelectGroup: FunctionComponent<{
             <ListItemText
               primary={user.name}
               primaryTypographyProps={{
-                sx: { fontSize: 13 },
+                sx: { fontSize: '12px' },
               }}
             />
           </MenuItem>

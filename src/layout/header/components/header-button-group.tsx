@@ -65,5 +65,5 @@ export const HeaderButtonGroup: FunctionComponent = () => {
     );
   }
 
-  return <Box>{elements}</Box>;
+  return <Box sx={{ display: 'flex', gap: 0.5 }}>{elements}</Box>;
 };

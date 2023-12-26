@@ -20,7 +20,6 @@ export const ProjectPageRecordDialog: FunctionComponent = () => {
       open={dialog.project.record.open}
       onClose={onClose}
       contents={<ProjectPageRecordDialogContent row={row} />}
-      actions={<></>}
     />
   );
 };

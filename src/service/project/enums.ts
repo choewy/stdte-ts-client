@@ -1,6 +1,5 @@
 export enum ProjectErrorMessage {
   EmptyName = '사업명을 입력하세요.',
-  EmptyCode = '약어를 입력하세요.',
   EmptyDifficulty = '난이도를 입력하세요.',
   InvalidDifficulty = '난이도를 확인하세요.',
   EmptyBusinessCategory = '사업구분을 선택하세요.',

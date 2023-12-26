@@ -15,7 +15,6 @@ const boxSx = (width: number, height: number): SxProps => ({
   display: 'flex',
   flexDirection: width < 800 ? 'column' : 'row',
   height: width < 800 ? '100%' : height,
-  overflow: 'scroll',
 });
 
 export const MyPageCards: FunctionComponent = () => {

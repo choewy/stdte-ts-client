@@ -22,7 +22,7 @@ export const ProjectPageIndustryCategorySelect: FunctionComponent<{
   return (
     <SelectControl
       label="산업분야"
-      value={body.industryCategory === 0 ? undefined : body.industryCategory}
+      value={body.industryCategory === 0 ? '' : body.industryCategory}
       onChange={onChange}
     >
       {category.industries.list.rows.map((row, i) => (

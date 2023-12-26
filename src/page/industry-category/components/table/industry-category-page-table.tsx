@@ -24,10 +24,7 @@ export const IndustryCategoryPageTable: FunctionComponent<{
       component={Paper}
       elevation={2}
       onScroll={onScroll}
-      sx={{
-        height: size.innerHeight - 150,
-        overflow: 'scroll',
-      }}
+      sx={{ height: size.innerHeight - 150 }}
     >
       <Table stickyHeader>
         <IndustryCategoryPageTableHead canUpdate={canUpdate} canDelete={canDelete} />

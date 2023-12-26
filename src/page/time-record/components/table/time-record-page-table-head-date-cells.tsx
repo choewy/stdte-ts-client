@@ -3,7 +3,11 @@ import { FunctionComponent } from 'react';
 import { TableValueCell } from '@component';
 import { timeRecordLayoutStore } from '@store';
 
-export const TimeRecordPageTableHeadDateCells: FunctionComponent = () => {
+import { TimeRecordPageTableSxMap } from './time-record-page-table-sx-map';
+
+export const TimeRecordPageTableHeadDateCells: FunctionComponent<{
+  sxMap: TimeRecordPageTableSxMap;
+}> = ({ sxMap }) => {
   const { date } = timeRecordLayoutStore.useValue();
 
   return (
@@ -14,7 +18,7 @@ export const TimeRecordPageTableHeadDateCells: FunctionComponent = () => {
           value={`${row.date.split('-').splice(1).join('/')}(${row.weekday})`}
           rowSpan={2}
           stickyRow={1}
-          sx={{ color: row.color }}
+          sx={sxMap.defaultCellSx({ color: row.color })}
         />
       ))}
     </>

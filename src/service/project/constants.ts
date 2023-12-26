@@ -48,6 +48,7 @@ export const PROJECT_LIST_QUERY: ProjectListQuery = {
 export const PROJECT_LIST: ProjectList = {
   total: 0,
   rows: [],
+  amounts: '0',
   query: PROJECT_LIST_QUERY,
 };
 

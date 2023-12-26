@@ -7,5 +7,5 @@ import { TableCellDeleteButton } from '@component';
 export const RolePageTableBodyRowDeleteButton: FunctionComponent<{ row: RoleRow }> = ({ row }) => {
   const onClick = dialogHook.useRoleDialogsCallback('delete', true, row);
 
-  return <TableCellDeleteButton onClick={onClick} />;
+  return <TableCellDeleteButton onClick={onClick} disabled={row.isReadonly} />;
 };

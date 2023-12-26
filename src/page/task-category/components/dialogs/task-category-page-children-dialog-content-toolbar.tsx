@@ -23,7 +23,7 @@ export const TaskCategoryPageChildrenDialogContentToolbar: FunctionComponent<{
       }}
     >
       <ButtonGroup variant="outlined">
-        {canCreate && <Button {...{ children: '등록', size: 'small', sx: { width: 64 }, onClick }} />}
+        {canCreate && <Button {...{ children: '등록', size: 'small', onClick }} />}
       </ButtonGroup>
     </Box>
   );

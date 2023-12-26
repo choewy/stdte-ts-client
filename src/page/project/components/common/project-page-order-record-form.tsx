@@ -17,7 +17,7 @@ export const ProjectPageOrderRecordForm: FunctionComponent<
       setBody: SetterOrUpdater<ProjectRecordUpdateBody>;
     }
 > = ({ body, setBody }) => {
-  const onChangeDate = textFieldHook.useOnChangeObjectKRWProperty(
+  const onChangeDate = textFieldHook.useOnChangeObjectStrProperty(
     setBody as SetterOrUpdater<ProjectRecordCreateBody & ProjectRecordUpdateBody>,
     'date',
   );

@@ -23,10 +23,7 @@ export const ProjectPageTable: FunctionComponent<{
       component={Paper}
       elevation={2}
       onScroll={onScroll}
-      sx={{
-        height: size.innerHeight - 150,
-        overflow: 'scroll',
-      }}
+      sx={{ height: size.innerHeight - 180 }}
     >
       <Table stickyHeader>
         <ProjectPageTableHead {...{ canUpdate, canDelete }} />

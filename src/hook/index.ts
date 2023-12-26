@@ -11,3 +11,4 @@ export * from './industry-category';
 export * from './task-category';
 export * from './project';
 export * from './time-record';
+export * from './analysis';

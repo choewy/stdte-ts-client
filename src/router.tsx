@@ -23,6 +23,9 @@ import {
   TaskCategoryPage,
   TimeRecordLayout,
   TimeRecordPage,
+  AnalysisProjectRecordPage,
+  AnalysisTimeRecordPage,
+  AnalysisUserRecordPage,
 } from '@page';
 
 export const router = createBrowserRouter(
@@ -93,7 +96,15 @@ export const router = createBrowserRouter(
             },
             {
               path: PagePath.User,
+              element: <Navigate to={PagePath.UserList} />,
+            },
+            {
+              path: PagePath.UserList,
               element: <UserPage />,
+            },
+            {
+              path: PagePath.UserAnalysis,
+              element: <AnalysisUserRecordPage />,
             },
             {
               path: PagePath.Project,
@@ -124,6 +135,18 @@ export const router = createBrowserRouter(
               element: <TaskCategoryPage />,
             },
             {
+              path: PagePath.AnalysisProject,
+              element: <Navigate to={PagePath.AnalysisProjectOrders} />,
+            },
+            {
+              path: PagePath.AnalysisProjectOrders,
+              element: <AnalysisProjectRecordPage />,
+            },
+            {
+              path: PagePath.AnalysisProjectSales,
+              element: <AnalysisProjectRecordPage />,
+            },
+            {
               path: PagePath.Time,
               element: <Navigate to={PagePath.TimeRecord} />,
             },
@@ -143,7 +166,7 @@ export const router = createBrowserRouter(
             },
             {
               path: PagePath.TimeAnalysis,
-              element: <EmptyPage title="시간관리 통계" />,
+              element: <AnalysisTimeRecordPage />,
             },
           ],
         },

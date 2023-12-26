@@ -22,7 +22,7 @@ export const ProjectPageBusinessCategorySelect: FunctionComponent<{
   return (
     <SelectControl
       label="사업구분"
-      value={body.businessCategory === 0 ? undefined : body.businessCategory}
+      value={body.businessCategory === 0 ? '' : body.businessCategory}
       onChange={onChange}
     >
       {category.businesses.list.rows.map((row, i) => (

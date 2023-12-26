@@ -52,11 +52,14 @@ export class LayoutHook {
         case PagePath.AdminSetting:
           return '공통설정';
 
-        case PagePath.User:
-          return '구성원';
+        case PagePath.UserList:
+          return '구성원 목록';
+
+        case PagePath.UserAnalysis:
+          return '인력변동 현황';
 
         case PagePath.ProjectList:
-          return '사업';
+          return '사업 목록';
 
         case PagePath.ProjectCustomer:
           return '고객사';
@@ -69,6 +72,13 @@ export class LayoutHook {
 
         case PagePath.ProjectTaskCategory:
           return '수행업무구분';
+
+        case PagePath.AnalysisProject:
+        case PagePath.AnalysisProjectOrders:
+          return '사업 수주 분석';
+
+        case PagePath.AnalysisProjectSales:
+          return '사업 매출 분석';
 
         case PagePath.TimeAnalysis:
           return '시간 집계';

@@ -96,6 +96,10 @@ export type AnalysisUserRecordUserCol = {
   year: string;
   months: number;
   days: number;
+  descriptions: {
+    entered: boolean;
+    leaved: boolean;
+  };
 };
 
 export type AnalysisUserRecordUserRow = {

@@ -4,7 +4,7 @@ import { Box } from '@mui/material';
 
 import { analysisHook } from '@hook';
 
-import { AnalysisUserRecordPageToolbar } from './components';
+import { AnalysisUserRecordPageTable, AnalysisUserRecordPageToolbar } from './components';
 
 export const AnalysisUserRecordPage: FunctionComponent = () => {
   analysisHook.useMountUserRecords();
@@ -22,6 +22,7 @@ export const AnalysisUserRecordPage: FunctionComponent = () => {
       }}
     >
       <AnalysisUserRecordPageToolbar />
+      <AnalysisUserRecordPageTable />
     </Box>
   );
 };

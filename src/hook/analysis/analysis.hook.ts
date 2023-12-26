@@ -109,7 +109,7 @@ export class AnalysisHook {
   }
 
   useMountUserRecords() {
-    const getUserRecordList = this.useGetTimeRecordListCallback();
+    const getUserRecordList = this.useGetUserRecordListCallback();
 
     useEffect(() => {
       getUserRecordList();

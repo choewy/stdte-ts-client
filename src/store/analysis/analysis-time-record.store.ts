@@ -6,9 +6,12 @@ import { AnalysisTimeRecordStoreProps } from './types';
 export class AnalysisTimeRecordStore extends RecoilStore<AnalysisTimeRecordStoreProps> {
   constructor() {
     super(AnalysisTimeRecordStore.name, {
-      tabIndex: 0,
       query: ANALYSIS_TIME_RECORDS_QUERY,
-      results: [],
+      list: {
+        years: [],
+        users: [],
+        projects: [],
+      },
     });
   }
 }

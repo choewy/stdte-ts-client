@@ -25,6 +25,7 @@ export const TableValueCell: FunctionComponent<
         ),
       })}
       style={{
+        ...(props.style ?? {}),
         top: typeof stickyRow === 'number' ? `${37.57 * stickyRow}px` : undefined,
       }}
     >

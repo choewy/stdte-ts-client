@@ -56,7 +56,7 @@ export class AnalysisHook {
     }, [setAnalysisProjectRecord]);
   }
 
-  useGetTimeRecordsCallback() {
+  useGetTimeRecordListCallback() {
     const [{ query }, setAnalysisTimeRecords] = analysisTimeRecordStore.useState();
 
     return useCallback(async () => {
@@ -70,16 +70,16 @@ export class AnalysisHook {
         return;
       }
 
-      setAnalysisTimeRecords((prev) => ({ ...prev, results: res.data }));
+      setAnalysisTimeRecords((prev) => ({ ...prev, list: res.data }));
     }, [query, setAnalysisTimeRecords]);
   }
 
   useMountTimeRecords() {
-    const getTimeRecords = this.useGetTimeRecordsCallback();
+    const getTimeRecordList = this.useGetTimeRecordListCallback();
 
     useEffect(() => {
-      getTimeRecords();
-    }, [getTimeRecords]);
+      getTimeRecordList();
+    }, [getTimeRecordList]);
   }
 
   useUnMountTimeRecords() {

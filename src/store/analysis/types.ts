@@ -1,7 +1,7 @@
 import {
   AnalysisProjectRecordList,
   AnalysisProjectRecordListQuery,
-  AnalysisTimeRecord,
+  AnalysisTimeRecordList,
   AnalysisTimeRecordsQuery,
 } from '@service';
 
@@ -13,7 +13,6 @@ export type AnalysisProjectRecordStoreProps = {
 };
 
 export type AnalysisTimeRecordStoreProps = {
-  tabIndex: number;
   query: AnalysisTimeRecordsQuery;
-  results: AnalysisTimeRecord[];
+  list: AnalysisTimeRecordList;
 };

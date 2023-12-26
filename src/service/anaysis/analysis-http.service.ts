@@ -3,7 +3,7 @@ import { HttpService } from '@core';
 import {
   AnalysisProjectRecordList,
   AnalysisProjectRecordListQuery,
-  AnalysisTimeRecord,
+  AnalysisTimeRecordList,
   AnalysisTimeRecordsQuery,
 } from './types';
 
@@ -17,7 +17,7 @@ export class AnalysisHttpService extends HttpService {
   }
 
   async getTimeRecords(query: AnalysisTimeRecordsQuery) {
-    return this.get<AnalysisTimeRecord[]>(this.url('times'), { params: query, delay: 250 });
+    return this.get<AnalysisTimeRecordList>(this.url('times'), { params: query, delay: 250 });
   }
 }
 

@@ -40,22 +40,38 @@ export type AnalysisTimeRecordsQuery = {
   e: string;
 };
 
-export type AnalysisTimeRecordYear = {
+export type AnalysisTimeRecordYearRow = {
   year: string;
   time: string;
 };
 
-export type AnalysisTimeRecordRow = {
-  id: number;
-  name: string;
+export type AnalysisTimeRecordProjectCol = {
   year: string;
   time: string;
 };
 
-export type AnalysisTimeRecord = {
+export type AnalysisTimeRecordProjectRow = {
   id: number;
   name: string;
   code: string;
-  years: AnalysisTimeRecordYear[];
-  rows: AnalysisTimeRecordRow[];
+  cols: AnalysisTimeRecordProjectCol[];
+};
+
+export type AnalysisTimeRecordUserCol = {
+  uid: number;
+  pid: number;
+  year: string;
+  time: string;
+};
+
+export type AnalysisTimeRecordUserRow = {
+  id: number;
+  name: string;
+  cols: AnalysisTimeRecordUserCol[];
+};
+
+export type AnalysisTimeRecordList = {
+  years: AnalysisTimeRecordYearRow[];
+  users: AnalysisTimeRecordUserRow[];
+  projects: AnalysisTimeRecordProjectRow[];
 };

@@ -6,18 +6,20 @@ import { KeyboardArrowDown, KeyboardArrowUp } from '@mui/icons-material';
 import { TableValueCell } from '@component';
 import { AnalysisTimeRecordProjectRow, AnalysisTimeRecordYearRow } from '@service';
 import { SetterOrUpdater } from 'recoil';
+import { AnalysisTimeRecordPageTableSxMap } from './analysis-time-record-page-table-sx-map';
 
 export const AnalysisTimeRecordPageTableBodyProjectRow: FunctionComponent<{
+  sxMap: AnalysisTimeRecordPageTableSxMap;
   open: boolean;
   setOpen: SetterOrUpdater<boolean>;
   row: AnalysisTimeRecordProjectRow;
   years: AnalysisTimeRecordYearRow[];
-}> = ({ open, setOpen, row, years }) => {
+}> = ({ sxMap, open, setOpen, row, years }) => {
   const onClick = useCallback(() => setOpen((prev) => !prev), [setOpen]);
 
   return (
     <TableRow hover>
-      <TableCell style={{ borderRight: 0, width: '20px' }} component="th">
+      <TableCell style={{ width: '20px' }} component="th" sx={sxMap.projectNameBodyCellSx()}>
         <IconButton size="small" onClick={onClick} sx={{ marginRight: 3 }}>
           {open ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
         </IconButton>

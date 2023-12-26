@@ -4,18 +4,20 @@ import { AnalysisTimeRecordProjectRow, AnalysisTimeRecordUserRow, AnalysisTimeRe
 
 import { AnalysisTimeRecordPageTableBodyProjectRow } from './analysis-time-record-page-table-body-project-row';
 import { AnalysisTimeRecordPageTableBodyUserRows } from './analysis-time-record-page-table-body-user-rows';
+import { AnalysisTimeRecordPageTableSxMap } from './analysis-time-record-page-table-sx-map';
 
 export const AnalysisTimeRecordPageTableBodyRow: FunctionComponent<{
+  sxMap: AnalysisTimeRecordPageTableSxMap;
   row: AnalysisTimeRecordProjectRow;
   years: AnalysisTimeRecordYearRow[];
   users: AnalysisTimeRecordUserRow[];
-}> = ({ row, years, users }) => {
+}> = ({ sxMap, row, years, users }) => {
   const [open, setOpen] = useState<boolean>(false);
 
   return (
     <Fragment>
-      <AnalysisTimeRecordPageTableBodyProjectRow open={open} setOpen={setOpen} row={row} years={years} />
-      <AnalysisTimeRecordPageTableBodyUserRows open={open} row={row} years={years} users={users} />
+      <AnalysisTimeRecordPageTableBodyProjectRow sxMap={sxMap} open={open} setOpen={setOpen} row={row} years={years} />
+      <AnalysisTimeRecordPageTableBodyUserRows sxMap={sxMap} open={open} row={row} years={years} users={users} />
     </Fragment>
   );
 };

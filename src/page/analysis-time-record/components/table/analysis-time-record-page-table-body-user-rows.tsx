@@ -4,13 +4,15 @@ import { TableRow } from '@mui/material';
 
 import { TableValueCell } from '@component';
 import { AnalysisTimeRecordProjectRow, AnalysisTimeRecordUserRow, AnalysisTimeRecordYearRow } from '@service';
+import { AnalysisTimeRecordPageTableSxMap } from './analysis-time-record-page-table-sx-map';
 
 export const AnalysisTimeRecordPageTableBodyUserRows: FunctionComponent<{
+  sxMap: AnalysisTimeRecordPageTableSxMap;
   open: boolean;
   row: AnalysisTimeRecordProjectRow;
   years: AnalysisTimeRecordYearRow[];
   users: AnalysisTimeRecordUserRow[];
-}> = ({ open, row, years, users }) => {
+}> = ({ sxMap, open, row, years, users }) => {
   if (open === false) {
     return null;
   }
@@ -19,7 +21,7 @@ export const AnalysisTimeRecordPageTableBodyUserRows: FunctionComponent<{
     <Fragment>
       {users.map((user, i) => (
         <TableRow key={['analysis-time-record-page-table-body-row-user', row.id, user.id, i].join('-')} hover>
-          <TableValueCell value={user.name} />
+          <TableValueCell value={user.name} sx={sxMap.userNameBodyCellSx()} />
           {years.map((year, i) => (
             <TableValueCell
               key={['analysis-time-record-page-table-body-row-user-year', row.id, user.id, year.year, i].join('-')}

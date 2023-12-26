@@ -1,4 +1,4 @@
-import { HttpService } from '@core';
+import { HttpClientDownloadResponse, HttpService } from '@core';
 
 import {
   AnalysisProjectRecordList,
@@ -24,6 +24,10 @@ export class AnalysisHttpService extends HttpService {
 
   async getUserRecords(query: AnalysisUserRecordsQuery) {
     return this.get<AnalysisUserRecordList>(this.url('users'), { params: query, delay: 250 });
+  }
+
+  async downloadUserRecords(query: AnalysisUserRecordsQuery) {
+    return this.get<HttpClientDownloadResponse>(this.url('users/download'), { params: query, delay: 250 });
   }
 }
 

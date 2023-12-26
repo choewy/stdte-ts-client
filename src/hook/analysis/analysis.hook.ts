@@ -2,7 +2,12 @@ import { useCallback, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { PagePath } from '@common';
-import { ANALYSIS_PROJECT_RECORD_LIST, AnalysisProjectRecordList, analysisHttpService } from '@service';
+import {
+  ANALYSIS_PROJECT_RECORD_LIST,
+  AnalysisProjectRecordList,
+  analysisHttpService,
+  downloadService,
+} from '@service';
 import { analysisProjectRecordStore, analysisTimeRecordStore, analysisUserRecordStore } from '@store';
 
 export class AnalysisHook {
@@ -106,6 +111,24 @@ export class AnalysisHook {
 
       setAnalysisUserRecords((prev) => ({ ...prev, list: res.data }));
     }, [query, setAnalysisUserRecords]);
+  }
+
+  useDownloadUserRecordListCallback() {
+    const { query } = analysisUserRecordStore.useValue();
+
+    return useCallback(async () => {
+      if (query.s.length < 4 || query.e.length < 4) {
+        return;
+      }
+
+      const res = await analysisHttpService.downloadUserRecords(query);
+
+      if (res.ok === false) {
+        return;
+      }
+
+      downloadService.download(res.data.url, res.data.filename);
+    }, [query]);
   }
 
   useMountUserRecords() {

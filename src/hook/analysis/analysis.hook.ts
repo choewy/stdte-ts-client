@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 
 import { PagePath } from '@common';
 import { ANALYSIS_PROJECT_RECORD_LIST, AnalysisProjectRecordList, analysisHttpService } from '@service';
-import { analysisProjectRecordStore } from '@store';
+import { analysisProjectRecordStore, analysisTimeRecordStore } from '@store';
 
 export class AnalysisHook {
   useGetProjectRecordListCallback() {
@@ -39,11 +39,11 @@ export class AnalysisHook {
   }
 
   useMountProjectRecord() {
-    const getList = this.useGetProjectRecordListCallback();
+    const getProjectRecordList = this.useGetProjectRecordListCallback();
 
     useEffect(() => {
-      getList();
-    }, [getList]);
+      getProjectRecordList();
+    }, [getProjectRecordList]);
   }
 
   useUnMountProjectRecord() {
@@ -54,6 +54,40 @@ export class AnalysisHook {
         setAnalysisProjectRecord((prev) => ({ ...prev, list: ANALYSIS_PROJECT_RECORD_LIST }));
       };
     }, [setAnalysisProjectRecord]);
+  }
+
+  useGetTimeRecordsCallback() {
+    const [{ query }, setAnalysisTimeRecords] = analysisTimeRecordStore.useState();
+
+    return useCallback(async () => {
+      if (query.s.length < 4 || query.e.length < 4) {
+        return;
+      }
+
+      const res = await analysisHttpService.getTimeRecords(query);
+
+      if (res.ok === false) {
+        return;
+      }
+
+      setAnalysisTimeRecords((prev) => ({ ...prev, results: res.data }));
+    }, [query, setAnalysisTimeRecords]);
+  }
+
+  useMountTimeRecords() {
+    const getTimeRecords = this.useGetTimeRecordsCallback();
+
+    useEffect(() => {
+      getTimeRecords();
+    }, [getTimeRecords]);
+  }
+
+  useUnMountTimeRecords() {
+    const resetAnalysisTimeRecords = analysisTimeRecordStore.useResetState();
+
+    useEffect(() => {
+      resetAnalysisTimeRecords();
+    }, [resetAnalysisTimeRecords]);
   }
 }
 

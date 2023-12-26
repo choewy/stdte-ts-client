@@ -2,9 +2,14 @@ import { FunctionComponent } from 'react';
 
 import { Box } from '@mui/material';
 
+import { analysisHook } from '@hook';
+
 import { AnalysisTimeRecordPageToolbar, AnalysisTimeRecordPageTable } from './components';
 
 export const AnalysisTimeRecordPage: FunctionComponent = () => {
+  analysisHook.useMountTimeRecords();
+  analysisHook.useUnMountTimeRecords();
+
   return (
     <Box
       sx={{

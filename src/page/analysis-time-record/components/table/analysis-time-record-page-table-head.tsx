@@ -18,7 +18,7 @@ export const AnalysisTimeRecordPageTableHead: FunctionComponent<{
         {list.years.map((col, i) => (
           <TableValueCell
             key={['analysis-time-record-page-table-head-year', col.year, i].join('-')}
-            value={col.year}
+            value={`${col.year}년`}
             sx={{ minWidth: 100, maxWidth: 100 }}
           />
         ))}

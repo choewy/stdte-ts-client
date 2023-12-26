@@ -4,8 +4,11 @@ import { TableHead, TableRow } from '@mui/material';
 
 import { TableValueCell } from '@component';
 import { analysisProjectRecordStore } from '@store';
+import { AnalysisProjectRecordPageTableSxMap } from './analysis-project-record-page-table-sx-map';
 
-export const AnalysisProjectRecordPageTableHead: FunctionComponent = () => {
+export const AnalysisProjectRecordPageTableHead: FunctionComponent<{
+  sxMap: AnalysisProjectRecordPageTableSxMap;
+}> = ({ sxMap }) => {
   const { tabIndex, head, list } = analysisProjectRecordStore.useValue();
 
   const years = list[tabIndex].years;
@@ -13,7 +16,7 @@ export const AnalysisProjectRecordPageTableHead: FunctionComponent = () => {
   return (
     <TableHead>
       <TableRow>
-        <TableValueCell value={head} />
+        <TableValueCell value={head} sx={sxMap.nameHeadCellSx()} />
         {years.map((row, i) => (
           <Fragment key={['analysis-project-record-table-head-year', row.year, i].join('-')}>
             <TableValueCell value={row.year} stickyRow={0} />
@@ -22,8 +25,7 @@ export const AnalysisProjectRecordPageTableHead: FunctionComponent = () => {
         ))}
       </TableRow>
       <TableRow>
-        <TableValueCell value="합계" />
-
+        <TableValueCell value="합계" sx={sxMap.totalHeadCellSx()} />
         {years.map((row, i) => (
           <Fragment key={['analysis-project-record-table-head-total', row.year, i].join('-')}>
             <TableValueCell value={Number(row.amount ?? '0').toLocaleString('ko-KR')} align="right" stickyRow={1} />

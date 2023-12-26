@@ -4,14 +4,16 @@ import { TableRow } from '@mui/material';
 
 import { AnalysisProjectRecordRow, AnalysisProjectRecordYear } from '@service';
 import { TableValueCell } from '@component';
+import { AnalysisProjectRecordPageTableSxMap } from './analysis-project-record-page-table-sx-map';
 
 export const AnalysisProjectRecordPageTableBodyRow: FunctionComponent<{
+  sxMap: AnalysisProjectRecordPageTableSxMap;
   years: AnalysisProjectRecordYear[];
   row: AnalysisProjectRecordRow;
-}> = ({ years, row }) => {
+}> = ({ sxMap, years, row }) => {
   return (
     <TableRow hover>
-      <TableValueCell value={row.row} />
+      <TableValueCell value={row.row} sx={sxMap.nameBodyCellSx()} />
       {years.map((year, i) => {
         const col = row.cols.find((col) => col.year === year.year);
 

@@ -93,7 +93,7 @@ export const AnalysisProjectRecordPageToolbar: FunctionComponent = () => {
         mb: 1,
       }}
     >
-      <Box>
+      <Box sx={{ flex: 1 }}>
         <Tabs value={tabIndex} onChange={onChange}>
           {tabProps.map((props, i) => (
             <Tab key={['analysis-project-record-page-tab', props.value, i].join('-')} {...props} />
@@ -110,6 +110,7 @@ export const AnalysisProjectRecordPageToolbar: FunctionComponent = () => {
           display: 'flex',
           justifyContent: 'flex-end',
           alignItems: 'flex-end',
+          flex: 1,
         }}
       >
         <ButtonGroup variant="outlined">

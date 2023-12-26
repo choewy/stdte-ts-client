@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react';
 
 import { Box, Button, ButtonGroup } from '@mui/material';
 
-export const AnalysisTimeRecordToolbar: FunctionComponent = () => {
+export const AnalysisTimeRecordPageToolbar: FunctionComponent = () => {
   return (
     <Box
       sx={{

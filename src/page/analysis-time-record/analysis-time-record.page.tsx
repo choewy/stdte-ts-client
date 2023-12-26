@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react';
 
 import { Box } from '@mui/material';
 
-import { AnalysisTimeRecordToolbar } from './components';
+import { AnalysisTimeRecordPageToolbar, AnalysisTimeRecordPageTable } from './components';
 
 export const AnalysisTimeRecordPage: FunctionComponent = () => {
   return (
@@ -16,7 +16,8 @@ export const AnalysisTimeRecordPage: FunctionComponent = () => {
         alignItems: 'center',
       }}
     >
-      <AnalysisTimeRecordToolbar />
+      <AnalysisTimeRecordPageToolbar />
+      <AnalysisTimeRecordPageTable />
     </Box>
   );
 };

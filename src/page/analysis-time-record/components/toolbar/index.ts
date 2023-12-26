@@ -1,1 +1,1 @@
-export * from './analysis-time-record-toolbar';
+export * from './analysis-time-record-page-toolbar';

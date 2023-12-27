@@ -6,11 +6,12 @@ import { Checkbox, Chip, ListItem, ListItemButton, ListItemIcon, ListItemText } 
 import { RoleUpdateUsersBody, SelectRow } from '@service';
 
 export const RolePageUsersDialogContentListItem: FunctionComponent<{
+  disabled: boolean;
   name: string;
   row: SelectRow;
   body: RoleUpdateUsersBody;
   setBody: SetterOrUpdater<RoleUpdateUsersBody>;
-}> = ({ name, row, body, setBody }) => {
+}> = ({ disabled, name, row, body, setBody }) => {
   const onClick = useCallback(() => {
     setBody((prev) => {
       const checked = prev.findIndex((user) => user.id === row.id) > -1;
@@ -42,6 +43,7 @@ export const RolePageUsersDialogContentListItem: FunctionComponent<{
               checked: body.findIndex((user) => user.id === row.id) > -1,
               tabIndex: -1,
               disableRipple: true,
+              disabled,
             }}
           />
         </ListItemIcon>

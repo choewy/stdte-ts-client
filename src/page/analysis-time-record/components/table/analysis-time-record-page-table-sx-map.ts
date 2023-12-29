@@ -57,7 +57,7 @@ export class AnalysisTimeRecordPageTableSxMap {
   }
 
   projectNameBodyCellSx(): SxProps {
-    return this.stickyHeadCellSx(this.widthSx('project.name'));
+    return this.stickyHeadCellSx({ ...this.widthSx('project.name'), zIndex: 2 });
   }
 
   userNameBodyCellSx(): SxProps {

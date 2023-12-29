@@ -25,7 +25,7 @@ export const AnalysisTimeRecordPageTableHead: FunctionComponent<{
         <TableValueCell value="합계" stickyRow={0} />
       </TableRow>
       <TableRow>
-        <TableValueCell value="합계" stickyRow={1} sx={sxMap.totalHeadCellSx()} />
+        <TableValueCell value="합계" sx={sxMap.totalHeadCellSx()} stickyRow={1} />
         {list.years.map((col, i) => (
           <TableValueCell
             key={['analysis-time-record-page-table-head-total', col.year, i].join('-')}

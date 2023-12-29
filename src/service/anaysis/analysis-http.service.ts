@@ -2,7 +2,7 @@ import { HttpClientDownloadResponse, HttpService } from '@core';
 
 import {
   AnalysisProjectRecordList,
-  AnalysisProjectRecordListQuery,
+  AnalysisProjectRecordQuery,
   AnalysisTimeRecordList,
   AnalysisTimeRecordsQuery,
   AnalysisUserRecordList,
@@ -10,12 +10,16 @@ import {
 } from './types';
 
 export class AnalysisHttpService extends HttpService {
-  async getProjectOrderRecords(query: AnalysisProjectRecordListQuery) {
-    return this.get<AnalysisProjectRecordList>(this.url('project/orders'), { params: query, delay: 250 });
+  async getProjectOrderRecords(query: AnalysisProjectRecordQuery) {
+    return this.get<AnalysisProjectRecordList>(this.url('project/records/orders'), { params: query, delay: 250 });
   }
 
-  async getProjectSaleRecords(query: AnalysisProjectRecordListQuery) {
-    return this.get<AnalysisProjectRecordList>(this.url('project/sales'), { params: query, delay: 250 });
+  async getProjectSaleRecords(query: AnalysisProjectRecordQuery) {
+    return this.get<AnalysisProjectRecordList>(this.url('project/records/sales'), { params: query, delay: 250 });
+  }
+
+  async downloadProjectRecords(query: AnalysisProjectRecordQuery) {
+    return this.get<HttpClientDownloadResponse>(this.url('project/records/download'), { params: query, delay: 250 });
   }
 
   async getTimeRecords(query: AnalysisTimeRecordsQuery) {

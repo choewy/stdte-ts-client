@@ -1,12 +1,12 @@
 import { DateTime } from 'luxon';
 import {
   AnalysisProjectRecordList,
-  AnalysisProjectRecordListQuery,
+  AnalysisProjectRecordQuery,
   AnalysisTimeRecordsQuery,
   AnalysisUserRecordsQuery,
 } from './types';
 
-export const ANALYSIS_PROJECT_RECORD_LIST_QUERY: AnalysisProjectRecordListQuery = {
+export const ANALYSIS_PROJECT_RECORD_LIST_QUERY: AnalysisProjectRecordQuery = {
   s: DateTime.local().minus({ years: 3 }).toFormat('yyyy'),
   e: DateTime.local().toFormat('yyyy'),
 };

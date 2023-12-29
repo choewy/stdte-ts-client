@@ -1,6 +1,6 @@
 import {
   AnalysisProjectRecordList,
-  AnalysisProjectRecordListQuery,
+  AnalysisProjectRecordQuery,
   AnalysisTimeRecordList,
   AnalysisTimeRecordsQuery,
   AnalysisUserRecordList,
@@ -10,7 +10,7 @@ import {
 export type AnalysisProjectRecordStoreProps = {
   tabIndex: keyof AnalysisProjectRecordList;
   head: string;
-  query: AnalysisProjectRecordListQuery;
+  query: AnalysisProjectRecordQuery;
   list: AnalysisProjectRecordList;
 };
 

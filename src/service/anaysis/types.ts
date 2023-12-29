@@ -1,4 +1,4 @@
-export type AnalysisProjectRecordListQuery = {
+export type AnalysisProjectRecordQuery = {
   s: string;
   e: string;
 };

@@ -1,11 +1,12 @@
 import { FunctionComponent, useCallback } from 'react';
+import { SetterOrUpdater } from 'recoil';
 
 import { IconButton, TableCell, TableRow } from '@mui/material';
 import { KeyboardArrowDown, KeyboardArrowUp } from '@mui/icons-material';
 
 import { TableValueCell } from '@component';
 import { AnalysisTimeRecordProjectRow, AnalysisTimeRecordYearRow } from '@service';
-import { SetterOrUpdater } from 'recoil';
+
 import { AnalysisTimeRecordPageTableSxMap } from './analysis-time-record-page-table-sx-map';
 
 export const AnalysisTimeRecordPageTableBodyProjectRow: FunctionComponent<{

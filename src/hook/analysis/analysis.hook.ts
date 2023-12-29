@@ -43,6 +43,24 @@ export class AnalysisHook {
     }, [path, query, setAnalysisProjectRecord]);
   }
 
+  useDownloadProjectRecordListCallback() {
+    const { query } = analysisProjectRecordStore.useValue();
+
+    return useCallback(async () => {
+      if (query.s.length < 4 || query.e.length < 4) {
+        return;
+      }
+
+      const res = await analysisHttpService.downloadProjectRecords(query);
+
+      if (res.ok === false) {
+        return;
+      }
+
+      downloadService.download(res.data);
+    }, [query]);
+  }
+
   useMountProjectRecord() {
     const getProjectRecordList = this.useGetProjectRecordListCallback();
 

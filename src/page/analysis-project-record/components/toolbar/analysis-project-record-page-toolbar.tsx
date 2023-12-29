@@ -4,6 +4,7 @@ import { Box, Button, ButtonGroup, Tab, TabProps, Tabs, TextField } from '@mui/m
 
 import { AnalysisProjectRecordList } from '@service';
 import { analysisProjectRecordStore } from '@store';
+import { analysisHook } from '@hook';
 
 const tabProps: TabProps[] = [
   {
@@ -92,6 +93,8 @@ export const AnalysisProjectRecordPageToolbar: FunctionComponent = () => {
     [query.s, setAnalysisProjectRecord],
   );
 
+  const onClickDownload = analysisHook.useDownloadProjectRecordListCallback();
+
   return (
     <Box
       sx={{
@@ -122,7 +125,7 @@ export const AnalysisProjectRecordPageToolbar: FunctionComponent = () => {
         }}
       >
         <ButtonGroup variant="outlined">
-          <Button {...{ children: '다운로드', size: 'small' }} />
+          <Button {...{ children: '다운로드', size: 'small', onClick: onClickDownload }} />
         </ButtonGroup>
       </Box>
     </Box>

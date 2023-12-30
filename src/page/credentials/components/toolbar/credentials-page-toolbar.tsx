@@ -22,7 +22,8 @@ export const CredentialsPageTabs: FunctionComponent = () => {
     <Box
       sx={{
         display: 'flex',
-        width: 600,
+        width: '100%',
+        maxWidth: 600,
         justifyContent: 'space-between',
         height: 40,
         mb: 1,

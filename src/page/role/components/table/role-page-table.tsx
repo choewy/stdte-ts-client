@@ -21,7 +21,7 @@ export const RolePageTable: FunctionComponent = () => {
       component={Paper}
       variant="outlined"
       onScroll={onScroll}
-      sx={{ height: size.innerHeight - 150, width: 600 }}
+      sx={{ height: size.innerHeight - 150, maxWidth: 600 }}
     >
       <Table stickyHeader>
         <RolePageTableHead />

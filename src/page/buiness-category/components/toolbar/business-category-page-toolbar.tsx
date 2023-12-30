@@ -2,12 +2,13 @@ import { FunctionComponent } from 'react';
 
 import { Box, Button, ButtonGroup } from '@mui/material';
 
-import { dialogHook } from '@hook';
+import { businessCategoryHook, dialogHook } from '@hook';
 
 export const BusinessCategoryPageToolbar: FunctionComponent<{
   canCreate: boolean;
 }> = ({ canCreate }) => {
-  const onClick = dialogHook.useBusinessCategoryDialogCallback('create', true);
+  const onClickCreate = dialogHook.useBusinessCategoryDialogCallback('create', true);
+  const onClickDownload = businessCategoryHook.useDownloadCallback();
 
   return (
     <Box
@@ -22,8 +23,8 @@ export const BusinessCategoryPageToolbar: FunctionComponent<{
       }}
     >
       <ButtonGroup variant="outlined">
-        {canCreate && <Button {...{ children: '등록', size: 'small', onClick }} />}
-        <Button {...{ children: '다운로드', size: 'small' }} />
+        {canCreate && <Button {...{ children: '등록', size: 'small', onClick: onClickCreate }} />}
+        <Button {...{ children: '다운로드', size: 'small', onClick: onClickDownload }} />
       </ButtonGroup>
     </Box>
   );

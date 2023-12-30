@@ -9,6 +9,7 @@ import {
   BusinessCategoryUpdateBody,
   SnackEvent,
   businessCategoryHttpService,
+  downloadService,
 } from '@service';
 
 export class BusinessCategoryHook {
@@ -39,6 +40,19 @@ export class BusinessCategoryHook {
               },
       }));
     }, [load, query, setState]);
+  }
+
+  useDownloadCallback() {
+    return useCallback(async () => {
+      const res = await businessCategoryHttpService.download();
+
+      if (res.ok === false) {
+        SnackEvent.dispatchByException(new BusinessCategoryException(res.exception));
+        return false;
+      }
+
+      downloadService.download(res.data);
+    }, []);
   }
 
   useMount() {

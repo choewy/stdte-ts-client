@@ -11,11 +11,9 @@ export const IndustryCategoryPageTableHead: FunctionComponent<{ canUpdate: boole
   return (
     <TableHead>
       <TableRow>
-        <TableValueCell value="행번호" />
+        <TableValueCell value="ID" />
         <TableValueCell value="산업분야명" />
         <TableValueCell value="비고" />
-        <TableValueCell value="등록일시" />
-        <TableValueCell value="수정일시" />
         {(canUpdate || canDelete) && (
           <TableValueCell
             value={[canUpdate && '수정', canDelete && '삭제'].filter((v) => typeof v === 'string').join('/')}

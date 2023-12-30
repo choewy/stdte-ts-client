@@ -18,7 +18,6 @@ export const IndustryCategoryPageTableBody: FunctionComponent<{ canUpdate: boole
         <IndustryCategoryPageTableBodyRow
           {...{
             key: ['industry-category-page-table-row', row.id, index].join('-'),
-            index,
             row,
             canUpdate,
             canDelete,

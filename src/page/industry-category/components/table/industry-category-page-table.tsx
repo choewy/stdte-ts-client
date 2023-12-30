@@ -24,7 +24,7 @@ export const IndustryCategoryPageTable: FunctionComponent<{
       component={Paper}
       variant="outlined"
       onScroll={onScroll}
-      sx={{ height: size.innerHeight - 150 }}
+      sx={{ height: size.innerHeight - 150, maxWidth: 1080 }}
     >
       <Table stickyHeader>
         <IndustryCategoryPageTableHead canUpdate={canUpdate} canDelete={canDelete} />

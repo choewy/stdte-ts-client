@@ -13,7 +13,8 @@ export const BusinessCategoryPageToolbar: FunctionComponent<{
     <Box
       sx={{
         display: 'flex',
-        width: 1080,
+        width: '100%',
+        maxWidth: 1080,
         justifyContent: 'flex-end',
         alignItems: 'flex-end',
         height: 40,

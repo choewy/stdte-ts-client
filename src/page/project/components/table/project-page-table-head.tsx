@@ -11,14 +11,12 @@ export const ProjectPageTableHead: FunctionComponent<{
   return (
     <TableHead>
       <TableRow>
-        <TableValueCell value="행번호" rowSpan={2} stickyRow={0} />
+        <TableValueCell value="ID" rowSpan={2} stickyRow={0} />
         <TableValueCell value="사업정보" colSpan={9} stickyRow={0} />
         <TableValueCell value="담당자(대외)" colSpan={3} stickyRow={0} />
         <TableValueCell value="담당자(대내)" colSpan={3} stickyRow={0} />
         <TableValueCell value="기간" colSpan={3} stickyRow={0} />
         <TableValueCell value="시간관리" colSpan={2} stickyRow={0} />
-        <TableValueCell value="등록일시" rowSpan={2} stickyRow={0} />
-        <TableValueCell value="수정일시" rowSpan={2} stickyRow={0} />
         <TableValueCell value="수주/매출" rowSpan={2} stickyRow={0} />
         {(canUpdate || canDelete) && (
           <TableValueCell

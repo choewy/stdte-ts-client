@@ -11,14 +11,13 @@ import { ProjectPageTableBodyRowDeleteButton } from './project-page-table-body-r
 import { ProjectPageTableBodyRowRecordButton } from './project-page-table-body-row-record-button';
 
 export const ProjectPageTableBodyRow: FunctionComponent<{
-  index: number;
   row: ProjectRow;
   canUpdate: boolean;
   canDelete: boolean;
-}> = ({ index, row, canUpdate, canDelete }) => {
+}> = ({ row, canUpdate, canDelete }) => {
   return (
     <TableRow hover>
-      <TableValueCell value={index + 1} />
+      <TableValueCell value={row.id} />
       <TableValueCell value={row.code} />
       <TableValueCell value={row.name} align="left" />
       <TableValueCell value={row.difficulty} />
@@ -27,7 +26,7 @@ export const ProjectPageTableBodyRow: FunctionComponent<{
       <TableValueCell value={row.customer?.alias ?? ''} />
       <TableValueCell value={Number(row.amount).toLocaleString('ko-KR')} align="right" />
       <TableValueCell value={enumService.projectStatusToText(row.status)} />
-      <TableValueCell value={row.description} />
+      <TableValueCell value={row.description} align="left" />
       <TableValueCell value={row.externalOwners.map(({ name }) => name).join(', ')} />
       <TableValueCell value={row.externalManagers.map(({ name }) => name).join(', ')} />
       <TableValueCell value={row.externalLeaders.map(({ name }) => name).join(', ')} />
@@ -39,8 +38,6 @@ export const ProjectPageTableBodyRow: FunctionComponent<{
       <TableValueCell value={row.months} fixedWidth />
       <TableValueCell value={row.taskCategory?.name ?? ''} />
       <TableValueCell value={row.canExpose === true ? 'O' : 'X'} />
-      <TableValueCell value={DateTime.fromJSDate(new Date(row.createdAt)).toFormat('yyyy-MM-dd HH:mm:ss')} fixedWidth />
-      <TableValueCell value={DateTime.fromJSDate(new Date(row.updatedAt)).toFormat('yyyy-MM-dd HH:mm:ss')} fixedWidth />
       <TableComponentCell components={<ProjectPageTableBodyRowRecordButton {...{ row }} />} />
       {(canUpdate || canDelete) && (
         <TableComponentCell

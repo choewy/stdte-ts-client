@@ -18,7 +18,6 @@ export const ProjectPageTableBody: FunctionComponent<{
         <ProjectPageTableBodyRow
           {...{
             key: ['project-page-table-row', row.id, index].join('-'),
-            index,
             row,
             canUpdate,
             canDelete,

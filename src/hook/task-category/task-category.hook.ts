@@ -11,6 +11,7 @@ import {
   TaskCategoryRowChild,
   TaskCategoryUpdateBody,
   TaskCategoryUpdateChildBody,
+  downloadService,
   taskCategoryHttpService,
 } from '@service';
 
@@ -42,6 +43,19 @@ export class TaskCategoryHook {
               },
       }));
     }, [load, query, setState]);
+  }
+
+  useDownloadCallback() {
+    return useCallback(async () => {
+      const res = await taskCategoryHttpService.download();
+
+      if (res.ok === false) {
+        SnackEvent.dispatchByException(new TaskCategoryException(res.exception));
+        return false;
+      }
+
+      downloadService.download(res.data);
+    }, []);
   }
 
   useMount() {

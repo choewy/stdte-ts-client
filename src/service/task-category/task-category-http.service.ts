@@ -1,4 +1,4 @@
-import { HttpService } from '@core';
+import { HttpClientDownloadResponse, HttpService } from '@core';
 
 import {
   TaskCategoryCreateBody,
@@ -15,8 +15,8 @@ export class TaskCategoryHttpService extends HttpService {
     return this.get<TaskCategoryList>(this.url(), { params: query, delay: 250 });
   }
 
-  async getRow(id: number) {
-    return this.get<TaskCategoryRow>(this.url(id), { delay: 250 });
+  async download() {
+    return this.get<HttpClientDownloadResponse>(this.url('download'), { delay: 250 });
   }
 
   async createRow(body: TaskCategoryCreateBody) {

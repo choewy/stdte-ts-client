@@ -18,7 +18,6 @@ export const ProjectPageOrderRecordTableBody: FunctionComponent<{
         <ProjectPageOrderRecordTableBodyRow
           {...{
             key: ['project-page-order-recrod-table-row', row.id, index].join('-'),
-            index,
             row,
             canUpdate,
             canDelete,

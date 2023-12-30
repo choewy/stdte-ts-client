@@ -27,6 +27,7 @@ export const ProjectPageTableBodyRow: FunctionComponent<{
       <TableValueCell value={Number(row.amount).toLocaleString('ko-KR')} align="right" />
       <TableValueCell value={enumService.projectStatusToText(row.status)} />
       <TableValueCell value={row.description} align="left" />
+      <TableComponentCell components={<ProjectPageTableBodyRowRecordButton {...{ row }} />} />
       <TableValueCell value={row.externalOwners.map(({ name }) => name).join(', ')} />
       <TableValueCell value={row.externalManagers.map(({ name }) => name).join(', ')} />
       <TableValueCell value={row.externalLeaders.map(({ name }) => name).join(', ')} />
@@ -38,7 +39,6 @@ export const ProjectPageTableBodyRow: FunctionComponent<{
       <TableValueCell value={row.months} fixedWidth />
       <TableValueCell value={row.taskCategory?.name ?? ''} />
       <TableValueCell value={row.canExpose === true ? 'O' : 'X'} />
-      <TableComponentCell components={<ProjectPageTableBodyRowRecordButton {...{ row }} />} />
       {(canUpdate || canDelete) && (
         <TableComponentCell
           components={

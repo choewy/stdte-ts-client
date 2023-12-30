@@ -18,7 +18,6 @@ export const TaskCategoryPageTableBody: FunctionComponent<{
         <TaskCategoryPageTableBodyRow
           {...{
             key: ['task-category-page-table-row', row.id, index].join('-'),
-            index,
             row,
             canUpdate,
             canDelete,

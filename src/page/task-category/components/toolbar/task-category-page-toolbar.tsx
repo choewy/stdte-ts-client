@@ -14,6 +14,7 @@ export const TaskCategoryPageToolbar: FunctionComponent<{
       sx={{
         display: 'flex',
         width: '100%',
+        maxWidth: 1080,
         justifyContent: 'flex-end',
         alignItems: 'flex-end',
         height: 40,

@@ -29,7 +29,7 @@ export const AnalysisTimeRecordPageTableHead: FunctionComponent<{
         {list.years.map((col, i) => (
           <TableValueCell
             key={['analysis-time-record-page-table-head-total', col.year, i].join('-')}
-            value={col.time}
+            value={Number(col.time).toLocaleString()}
             align="right"
             sx={{ minWidth: 100, width: 100, maxWidth: 100 }}
             stickyRow={1}
@@ -41,7 +41,7 @@ export const AnalysisTimeRecordPageTableHead: FunctionComponent<{
               t += Number(v.time);
               return t;
             }, 0)
-            .toFixed(2)}
+            .toLocaleString()}
           align="right"
           sx={{ minWidth: 100, width: 100, maxWidth: 100 }}
           stickyRow={1}

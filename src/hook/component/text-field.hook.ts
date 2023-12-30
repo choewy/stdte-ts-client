@@ -103,7 +103,7 @@ export class TextFieldHook {
 
         setState((prev) => ({
           ...prev,
-          [key]: value.toLocaleString('ko-KR'),
+          [key]: value.toLocaleString(),
         }));
       },
       [setState, key],

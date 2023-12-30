@@ -169,7 +169,7 @@ export class ProjectRecordHook {
     useEffect(() => {
       setBody({
         date: row.date,
-        amount: Number(row.amount).toLocaleString('ko-KR'),
+        amount: Number(row.amount).toLocaleString(),
         description: row.description,
       });
     }, [row, setBody]);

@@ -28,7 +28,7 @@ export const AnalysisProjectRecordPageTableHead: FunctionComponent<{
         <TableValueCell value="합계" sx={sxMap.totalHeadCellSx()} stickyRow={1} />
         {years.map((row, i) => (
           <Fragment key={['analysis-project-record-table-head-total', row.year, i].join('-')}>
-            <TableValueCell value={Number(row.amount ?? '0').toLocaleString('ko-KR')} align="right" stickyRow={1} />
+            <TableValueCell value={Number(row.amount ?? '0').toLocaleString()} align="right" stickyRow={1} />
             <TableValueCell value="100.0%" align="right" stickyRow={1} />
           </Fragment>
         ))}

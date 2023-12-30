@@ -143,7 +143,7 @@ export class ProjectHook {
         code: row.code,
         description: row.description,
         difficulty: row.difficulty,
-        amount: Number(row.amount).toLocaleString('ko-KR'),
+        amount: Number(row.amount).toLocaleString(),
         status: row.status,
         startDate: row.startDate,
         endDate: row.endDate,

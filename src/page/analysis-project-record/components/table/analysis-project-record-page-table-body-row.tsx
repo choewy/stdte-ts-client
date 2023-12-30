@@ -20,7 +20,7 @@ export const AnalysisProjectRecordPageTableBodyRow: FunctionComponent<{
         return (
           <Fragment key={['analysis-project-record-table-body-row-values', year.year, i].join('-')}>
             <TableValueCell
-              value={col?.amount == null ? '' : Number(col.amount).toLocaleString('ko-KR')}
+              value={col?.amount == null ? '' : Number(col.amount).toLocaleString()}
               align="right"
               sx={{ minWidth: 120 }}
             />

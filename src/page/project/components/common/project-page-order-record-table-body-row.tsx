@@ -19,7 +19,7 @@ export const ProjectPageOrderRecordTableBodyRow: FunctionComponent<{
     <TableRow hover>
       <TableValueCell value={index + 1} />
       <TableValueCell value={DateTime.fromJSDate(new Date(row.date)).toSQLDate() ?? ''} fixedWidth />
-      <TableValueCell value={Number(row.amount).toLocaleString('ko-KR')} fixedWidth />
+      <TableValueCell value={Number(row.amount).toLocaleString()} fixedWidth />
       <TableValueCell value={row.description} fullWidth align="left" />
       <TableValueCell value={DateTime.fromJSDate(new Date(row.createdAt)).toFormat('yyyy-MM-dd HH:mm:ss')} fixedWidth />
       <TableValueCell value={DateTime.fromJSDate(new Date(row.updatedAt)).toFormat('yyyy-MM-dd HH:mm:ss')} fixedWidth />

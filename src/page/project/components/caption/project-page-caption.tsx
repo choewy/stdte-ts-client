@@ -19,7 +19,7 @@ export const ProjectPageCaption: FunctionComponent = () => {
         fontSize: '12px',
       }}
     >
-      <caption>합계 : {Number(amounts).toLocaleString('ko-KR')}원</caption>
+      <caption>합계 : {Number(amounts).toLocaleString()}원</caption>
     </Box>
   );
 };

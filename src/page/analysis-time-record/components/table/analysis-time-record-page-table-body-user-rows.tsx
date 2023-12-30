@@ -26,7 +26,9 @@ export const AnalysisTimeRecordPageTableBodyUserRows: FunctionComponent<{
             <TableValueCell
               key={['analysis-time-record-page-table-body-row-user-year', row.id, user.id, year.year, i].join('-')}
               align="right"
-              value={user.cols.find((col) => col.pid === row.id && col.year === year.year)?.time ?? '0.00'}
+              value={Number(
+                user.cols.find((col) => col.pid === row.id && col.year === year.year)?.time ?? '0.00',
+              ).toLocaleString()}
             />
           ))}
           <TableValueCell
@@ -38,7 +40,7 @@ export const AnalysisTimeRecordPageTableBodyUserRows: FunctionComponent<{
                 }
                 return t;
               }, 0)
-              .toFixed(2)}
+              .toLocaleString()}
           />
         </TableRow>
       ))}

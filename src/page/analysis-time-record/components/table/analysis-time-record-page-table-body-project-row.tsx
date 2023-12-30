@@ -31,7 +31,7 @@ export const AnalysisTimeRecordPageTableBodyProjectRow: FunctionComponent<{
           key={['analysis-time-record-page-table-body-row-year', row.id, year.year, i].join('-')}
           component="th"
           align="right"
-          value={row.cols.find((col) => col.year === year.year)?.time ?? '0.00'}
+          value={Number(row.cols.find((col) => col.year === year.year)?.time ?? '0.00').toLocaleString()}
         />
       ))}
       <TableValueCell
@@ -42,7 +42,7 @@ export const AnalysisTimeRecordPageTableBodyProjectRow: FunctionComponent<{
             t += Number(v.time);
             return t;
           }, 0)
-          .toFixed(2)}
+          .toLocaleString()}
       />
     </TableRow>
   );

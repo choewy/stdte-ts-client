@@ -21,7 +21,7 @@ export const RolePageToolbar: FunctionComponent = () => {
     >
       <ButtonGroup variant="outlined">
         <Button {...{ children: '생성', onClick, size: 'small' }} />
-        <Button {...{ children: '다운로드', size: 'small' }} />
+        {/* <Button {...{ children: '다운로드', size: 'small' }} /> */}
       </ButtonGroup>
     </Box>
   );

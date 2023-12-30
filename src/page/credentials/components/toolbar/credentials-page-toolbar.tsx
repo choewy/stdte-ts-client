@@ -42,7 +42,7 @@ export const CredentialsPageTabs: FunctionComponent = () => {
           alignItems: 'flex-end',
         }}
       >
-        <Button {...{ children: '다운로드', size: 'small' }} />
+        {/* <Button {...{ children: '다운로드', size: 'small' }} /> */}
       </ButtonGroup>
     </Box>
   );

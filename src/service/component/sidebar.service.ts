@@ -101,6 +101,7 @@ export class SidebarService {
           Icon: Tune,
           path: PagePath.AdminSetting,
           policy: { setting: RolePolicyLevel.Admin },
+          hidden: true,
         },
       ],
     },
@@ -275,6 +276,48 @@ export class SidebarService {
         if (authorize.role.rolePolicy[key] < policy) {
           return false;
         }
+      }
+
+      if (item.type === SidebarMenuType.Collapse) {
+        item.children = item.children.filter((child, i) => {
+          child.id = [this.id, item.id, child.type, child.scope, i].join('-');
+
+          if (child.hidden === true) {
+            return false;
+          }
+
+          if (child.scope === null) {
+            return true;
+          }
+
+          if (child.scope !== scope) {
+            return false;
+          }
+
+          if (child.policy == null) {
+            return true;
+          }
+
+          if (authorize.role == null) {
+            return false;
+          }
+
+          const keys = Object.keys(child.policy) as RolePolicyKey[];
+
+          for (const key of keys) {
+            const policy = child.policy[key];
+
+            if (policy == null) {
+              continue;
+            }
+
+            if (authorize.role.rolePolicy[key] < policy) {
+              return false;
+            }
+          }
+
+          return true;
+        });
       }
 
       return true;

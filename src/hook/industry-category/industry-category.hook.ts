@@ -8,6 +8,7 @@ import {
   IndustryCategoryRow,
   IndustryCategoryUpdateBody,
   SnackEvent,
+  downloadService,
   industryCategoryHttpService,
 } from '@service';
 
@@ -39,6 +40,19 @@ export class IndustryCategoryHook {
               },
       }));
     }, [load, query, setState]);
+  }
+
+  useDownloadCallback() {
+    return useCallback(async () => {
+      const res = await industryCategoryHttpService.download();
+
+      if (res.ok === false) {
+        SnackEvent.dispatchByException(new IndustryCategoryException(res.exception));
+        return false;
+      }
+
+      downloadService.download(res.data);
+    }, []);
   }
 
   useMount() {

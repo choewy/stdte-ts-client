@@ -1,4 +1,4 @@
-import { HttpService } from '@core';
+import { HttpClientDownloadResponse, HttpService } from '@core';
 
 import {
   IndustryCategoryCreateBody,
@@ -11,6 +11,10 @@ import {
 export class IndustryCategoryHttpService extends HttpService {
   async getList(query: IndustryCategoryListQuery) {
     return this.get<IndustryCategoryList>(this.url(), { params: query, delay: 250 });
+  }
+
+  async download() {
+    return this.get<HttpClientDownloadResponse>(this.url('download'), { delay: 250 });
   }
 
   async createRow(body: IndustryCategoryCreateBody) {

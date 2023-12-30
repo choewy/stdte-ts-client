@@ -13,8 +13,6 @@ export const UserPageTableHead: FunctionComponent<{ canUpdate: boolean }> = ({ c
         <TableValueCell value="계정정보" colSpan={5} stickyRow={0} />
         <TableValueCell value="학력사항" colSpan={3} stickyRow={0} />
         <TableValueCell value="차량정보" colSpan={2} stickyRow={0} />
-        <TableValueCell value="가입일시" rowSpan={2} stickyRow={0} />
-        <TableValueCell value="수정일시" rowSpan={2} stickyRow={0} />
         {canUpdate && (
           <TableValueCell
             value={[canUpdate && '수정'].filter((v) => typeof v === 'string').join('/')}

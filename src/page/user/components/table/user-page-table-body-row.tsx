@@ -17,7 +17,7 @@ export const UserPageTableBodyRow: FunctionComponent<{ index: number; row: UserR
     <TableRow hover>
       <TableValueCell value={index + 1} />
       <>
-        <TableValueCell value={row.name} fullWidth />
+        <TableValueCell value={row.name} />
         <TableValueCell value={DateTime.fromJSDate(new Date(row.birthday)).toSQLDate() ?? '-'} />
         <TableValueCell value={row.phone === '' ? '-' : row.phone} />
         <TableValueCell value={row.scienceNumber === '' ? '-' : row.scienceNumber} />
@@ -38,8 +38,6 @@ export const UserPageTableBodyRow: FunctionComponent<{ index: number; row: UserR
         <TableValueCell value={row.carType === '' ? '-' : row.carType} />
         <TableValueCell value={row.carNumber === '' ? '-' : row.carNumber} />
       </>
-      <TableValueCell value={DateTime.fromJSDate(new Date(row.createdAt)).toFormat('yyyy-MM-dd HH:mm:ss')} fixedWidth />
-      <TableValueCell value={DateTime.fromJSDate(new Date(row.updatedAt)).toFormat('yyyy-MM-dd HH:mm:ss')} fixedWidth />
       {canUpdate && <TableComponentCell components={<UserPageTableBodyRowUpdateButton {...{ row }} />} />}
     </TableRow>
   );

@@ -206,6 +206,9 @@ export class EnumService {
       case ProjectStatus.AfterService:
         return 'A/S';
 
+      case ProjectStatus.Stop:
+        return '중단';
+
       case ProjectStatus.LeavingOut:
         return '탈락';
 

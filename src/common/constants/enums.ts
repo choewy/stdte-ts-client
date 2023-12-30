@@ -35,5 +35,6 @@ export enum ProjectStatus {
   Active = 1,
   Complete = 3,
   AfterService = 4,
-  LeavingOut = 5,
+  Stop = 5,
+  LeavingOut = 6,
 }

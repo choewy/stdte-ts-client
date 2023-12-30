@@ -39,7 +39,7 @@ export class ProjectHook {
             ? res.data
             : {
                 ...prev.list,
-                rows: [...prev.list.rows, ...res.data.rows],
+                rows: [...prev.list.rows, ...res.data.rows].sort((x, y) => x.id - y.id),
                 query: res.data.query,
               },
       }));

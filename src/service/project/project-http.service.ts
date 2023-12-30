@@ -8,7 +8,7 @@ export class ProjectHttpService extends HttpService {
   }
 
   async download() {
-    return this.post<HttpClientDownloadResponse>(this.url('download'));
+    return this.get<HttpClientDownloadResponse>(this.url('download'));
   }
 
   async createRow(body: ProjectCreateBody) {

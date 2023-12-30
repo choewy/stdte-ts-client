@@ -14,7 +14,6 @@ export const UserPageTableBody: FunctionComponent<{ canUpdate: boolean }> = ({ c
         <UserPageTableBodyRow
           {...{
             key: ['user-page-table-row', row.id, index].join('-'),
-            index,
             row,
             canUpdate,
           }}

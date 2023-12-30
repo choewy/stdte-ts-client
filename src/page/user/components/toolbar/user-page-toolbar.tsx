@@ -1,8 +1,11 @@
 import { FunctionComponent } from 'react';
 
 import { Box, Button, ButtonGroup } from '@mui/material';
+import { userHook } from '@hook';
 
 export const UserPageToolbar: FunctionComponent = () => {
+  const onClickDownload = userHook.useDownloadCallback();
+
   return (
     <Box
       sx={{
@@ -15,7 +18,7 @@ export const UserPageToolbar: FunctionComponent = () => {
       }}
     >
       <ButtonGroup variant="outlined">
-        <Button {...{ children: '다운로드', size: 'small' }} />
+        <Button {...{ children: '다운로드', size: 'small', onClick: onClickDownload }} />
       </ButtonGroup>
     </Box>
   );

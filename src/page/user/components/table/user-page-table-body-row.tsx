@@ -8,14 +8,13 @@ import { UserRow, enumService } from '@service';
 
 import { UserPageTableBodyRowUpdateButton } from './user-page-table-body-row-update-button';
 
-export const UserPageTableBodyRow: FunctionComponent<{ index: number; row: UserRow; canUpdate: boolean }> = ({
-  index,
-  row,
-  canUpdate,
-}) => {
+export const UserPageTableBodyRow: FunctionComponent<{
+  row: UserRow;
+  canUpdate: boolean;
+}> = ({ row, canUpdate }) => {
   return (
     <TableRow hover>
-      <TableValueCell value={index + 1} />
+      <TableValueCell value={row.id} />
       <>
         <TableValueCell value={row.name} />
         <TableValueCell value={DateTime.fromJSDate(new Date(row.birthday)).toSQLDate() ?? '-'} />

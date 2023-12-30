@@ -1,10 +1,14 @@
-import { HttpService } from '@core';
+import { HttpClientDownloadResponse, HttpService } from '@core';
 
 import { UserListQuery, UserList, UserRow, UserRowUpdateBody, UserUpdateBody } from './types';
 
 export class UserHttpService extends HttpService {
   async getMyProfile() {
     return this.get<UserRow>(this.url('profile'));
+  }
+
+  async download() {
+    return this.get<HttpClientDownloadResponse>(this.url('download'), { delay: 250 });
   }
 
   async existRow(id: number) {

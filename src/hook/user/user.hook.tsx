@@ -3,7 +3,15 @@ import { SetterOrUpdater } from 'recoil';
 
 import { UserStatus } from '@common';
 import { userStore } from '@store';
-import { SnackEvent, UserException, UserRow, UserRowUpdateBody, userHttpService, userTransformer } from '@service';
+import {
+  SnackEvent,
+  UserException,
+  UserRow,
+  UserRowUpdateBody,
+  downloadService,
+  userHttpService,
+  userTransformer,
+} from '@service';
 
 export class UserHook {
   useGetListCallback() {
@@ -28,6 +36,19 @@ export class UserHook {
               },
       }));
     }, [query, setState]);
+  }
+
+  useDownloadCallback() {
+    return useCallback(async () => {
+      const res = await userHttpService.download();
+
+      if (res.ok === false) {
+        SnackEvent.dispatchByException(new UserException(res.exception));
+        return false;
+      }
+
+      downloadService.download(res.data);
+    }, []);
   }
 
   useMount() {

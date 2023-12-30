@@ -19,7 +19,7 @@ export const TaskCategoryPageChildrenDialogContent: FunctionComponent<{
   const canDelete = roleService.can(authorize, 'taskCategory', RolePolicyLevel.Delete);
 
   return (
-    <Box>
+    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <TaskCategoryPageChildrenDialogContentToolbar {...{ parent, canCreate }} />
       <TaskCategoryPageChildrenDialogContentTable {...{ parent, canUpdate, canDelete }} />
     </Box>

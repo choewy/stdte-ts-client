@@ -17,7 +17,6 @@ export const TaskCategoryPageChildrenDialogContentTableBody: FunctionComponent<{
         <TaskCategoryPageChildrenDialogContentTableBodyRow
           {...{
             key: ['task-category-page-children-table-row', parent.id, child.id, index].join('-'),
-            index,
             parent,
             child,
             canUpdate,

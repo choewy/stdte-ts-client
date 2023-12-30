@@ -18,7 +18,6 @@ export const BusinessCategoryPageTableBody: FunctionComponent<{
         <BusinessCategoryPageTableBodyRow
           {...{
             key: ['business-category-page-table-row', row.id, index].join('-'),
-            index,
             row,
             canUpdate,
             canDelete,

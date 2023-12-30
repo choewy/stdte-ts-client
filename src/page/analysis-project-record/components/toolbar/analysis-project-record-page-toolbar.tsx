@@ -112,9 +112,21 @@ export const AnalysisProjectRecordPageToolbar: FunctionComponent = () => {
         </Tabs>
       </Box>
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 2, flex: 1 }}>
-        <TextField value={query.s} size="small" onChange={onChangeStartYear} fullWidth={false} />
+        <TextField
+          value={query.s}
+          size="small"
+          onChange={onChangeStartYear}
+          fullWidth={false}
+          inputProps={{ style: { textAlign: 'center' } }}
+        />
         <div style={{ display: 'flex', alignItems: 'center', marginTop: '8px' }}>~</div>
-        <TextField value={query.e} size="small" onChange={onChangeEndYear} fullWidth={false} />
+        <TextField
+          value={query.e}
+          size="small"
+          onChange={onChangeEndYear}
+          fullWidth={false}
+          inputProps={{ style: { textAlign: 'center' } }}
+        />
       </Box>
       <Box
         sx={{

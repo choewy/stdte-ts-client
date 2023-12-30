@@ -103,7 +103,7 @@ export class IndustryCategoryHook {
         list: {
           ...prev.list,
           total: prev.list.total + 1,
-          rows: [res.data, ...prev.list.rows],
+          rows: [...prev.list.rows, res.data],
         },
       }));
 

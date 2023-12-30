@@ -1,4 +1,3 @@
-import { DateTime } from 'luxon';
 import { FunctionComponent } from 'react';
 
 import { TableRow } from '@mui/material';
@@ -10,15 +9,12 @@ import { RolePageTableBodyRowUpdateButton } from './role-page-table-body-row-upd
 import { RolePageTableBodyRowDeleteButton } from './role-page-table-body-row-delete-button';
 import { RolePageTableBodyRowUsersButton } from './role-page-table-body-row-users-button';
 
-export const RolePageTableBodyRow: FunctionComponent<{ row: RoleRow; index: number }> = ({ row, index }) => {
+export const RolePageTableBodyRow: FunctionComponent<{ row: RoleRow }> = ({ row }) => {
   return (
     <TableRow hover>
-      <TableValueCell value={index + 1} />
-      <TableValueCell value={row.name} fullWidth />
+      <TableValueCell value={row.id} fixedWidth />
+      <TableValueCell value={row.name} />
       <TableComponentCell components={<RolePageTableBodyRowUsersButton {...{ row }} />} />
-
-      <TableValueCell value={DateTime.fromJSDate(new Date(row.createdAt)).toFormat('yyyy-MM-dd HH:mm:ss')} fixedWidth />
-      <TableValueCell value={DateTime.fromJSDate(new Date(row.updatedAt)).toFormat('yyyy-MM-dd HH:mm:ss')} fixedWidth />
       <TableComponentCell
         components={
           <>

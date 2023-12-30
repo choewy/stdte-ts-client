@@ -25,10 +25,11 @@ export const RolePageUsersDialogContentListItem: FunctionComponent<{
   }, [row, setBody]);
 
   return (
-    <ListItem sx={{ paddingY: 0.5 }}>
+    <ListItem sx={{ paddingY: 0.5, paddingX: 0 }}>
       <ListItemButton
         {...{
           onClick,
+          disabled,
           sx: {
             fontSize: '12px',
             height: 30,
@@ -43,7 +44,6 @@ export const RolePageUsersDialogContentListItem: FunctionComponent<{
               checked: body.findIndex((user) => user.id === row.id) > -1,
               tabIndex: -1,
               disableRipple: true,
-              disabled,
             }}
           />
         </ListItemIcon>

@@ -11,7 +11,7 @@ export const RolePageToolbar: FunctionComponent = () => {
     <Box
       sx={{
         display: 'flex',
-        width: '100%',
+        width: 600,
         justifyContent: 'flex-end',
         alignItems: 'flex-end',
         height: 40,

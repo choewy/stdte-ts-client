@@ -12,7 +12,7 @@ export const RolePageTableBody: FunctionComponent = () => {
   return (
     <TableBody>
       {list.rows.map((row, i) => (
-        <RolePageTableBodyRow key={['role-page-table-row', row.id, i].join('-')} index={i} row={row} />
+        <RolePageTableBodyRow key={['role-page-table-row', row.id, i].join('-')} row={row} />
       ))}
     </TableBody>
   );

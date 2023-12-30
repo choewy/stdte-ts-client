@@ -13,7 +13,7 @@ export const CustomerPageToolbar: FunctionComponent<{
     <Box
       sx={{
         display: 'flex',
-        width: '100%',
+        width: 1020,
         justifyContent: 'flex-end',
         alignItems: 'flex-end',
         height: 40,

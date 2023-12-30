@@ -18,7 +18,6 @@ export const CustomerPageTableBody: FunctionComponent<{
         <CustomerPageTableBodyRow
           {...{
             key: ['customer-page-table-row', row.id, index].join('-'),
-            index,
             row,
             canUpdate,
             canDelete,

@@ -9,6 +9,7 @@ import {
   CustomerUpdateBody,
   SnackEvent,
   customerHttpService,
+  downloadService,
 } from '@service';
 
 export class CustomerHook {
@@ -39,6 +40,19 @@ export class CustomerHook {
               },
       }));
     }, [load, query, setState]);
+  }
+
+  useDownloadCallback() {
+    return useCallback(async () => {
+      const res = await customerHttpService.download();
+
+      if (res.ok === false) {
+        SnackEvent.dispatchByException(new CustomerException(res.exception));
+        return false;
+      }
+
+      downloadService.download(res.data);
+    }, []);
   }
 
   useMount() {

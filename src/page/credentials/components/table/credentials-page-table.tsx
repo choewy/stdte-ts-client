@@ -21,7 +21,7 @@ export const CredentialsPageTable: FunctionComponent = () => {
       component={Paper}
       variant="outlined"
       onScroll={onScroll}
-      sx={{ height: size.innerHeight - 150 }}
+      sx={{ height: size.innerHeight - 150, width: 600 }}
     >
       <Table stickyHeader>
         <CredentialsPageTableHead />

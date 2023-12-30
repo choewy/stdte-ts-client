@@ -1,4 +1,3 @@
-import { DateTime } from 'luxon';
 import { FunctionComponent } from 'react';
 
 import { TableRow } from '@mui/material';
@@ -10,20 +9,17 @@ import { CredentialsPageTableBodyRowChangeStatusButton } from './credentials-pag
 import { CredentialsPageTableBodyRowChangePasswordButton } from './credentials-page-table-body-row-change-password-button';
 
 export const CredentialsPageTableBodyRow: FunctionComponent<{
-  index: number;
   row: CredentialsRow;
-}> = ({ index, row }) => {
+}> = ({ row }) => {
   const keyPrefix = 'credentials-table-row';
 
   const buttonProperties = enumService.credentialsStatusComponentProperties(row.status);
 
   return (
     <TableRow hover>
-      <TableValueCell value={index + 1} />
-      <TableValueCell value={row.email} fullWidth />
+      <TableValueCell value={row.id} fixedWidth />
       <TableValueCell value={row.name} />
-      <TableValueCell value={DateTime.fromJSDate(new Date(row.createdAt)).toFormat('yyyy-MM-dd HH:mm:ss')} fixedWidth />
-      <TableValueCell value={DateTime.fromJSDate(new Date(row.updatedAt)).toFormat('yyyy-MM-dd HH:mm:ss')} fixedWidth />
+      <TableValueCell value={row.email} />
       <TableComponentCell
         components={
           <>

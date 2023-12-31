@@ -2,7 +2,8 @@ import { FunctionComponent, useState } from 'react';
 
 import { Box, Tab, Tabs } from '@mui/material';
 
-import { TimeRecordPageTabLogList } from './time-record-layout-tab-log-list';
+import { TimeRecordLayoutTabLogList } from './time-record-layout-tab-log-list';
+import { TimeRecordLayoutTabMemoList } from './time-record-layout-tab-memo-list';
 
 export const TimeRecordLayoutTabs: FunctionComponent = () => {
   const [tabIndex, setTabIndex] = useState<number>(1);
@@ -14,8 +15,8 @@ export const TimeRecordLayoutTabs: FunctionComponent = () => {
         <Tab value={2} label="메모" />
       </Tabs>
       <Box>
-        {tabIndex === 1 && <TimeRecordPageTabLogList />}
-        {tabIndex === 2 && <div>MEMO</div>}
+        {tabIndex === 1 && <TimeRecordLayoutTabLogList />}
+        {tabIndex === 2 && <TimeRecordLayoutTabMemoList />}
       </Box>
     </Box>
   );

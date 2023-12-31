@@ -84,7 +84,10 @@ export class TimeLayoutHook {
 
         setTimeLayout((prev) => ({
           ...prev,
-          rows: prev.log.rows.map((row) => (row.id === detail.id ? detail : row)),
+          log: {
+            ...prev.log,
+            rows: prev.log.rows.map((row) => (row.id === detail.id ? detail : row)),
+          },
         }));
       },
       [setTimeLayout],

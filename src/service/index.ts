@@ -10,6 +10,8 @@ export * from './business-category';
 export * from './industry-category';
 export * from './task-category';
 export * from './project';
+export * from './time-log';
+export * from './time-project';
 export * from './time-record';
 export * from './time-memo';
 export * from './anaysis';

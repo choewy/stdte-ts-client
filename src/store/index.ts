@@ -12,6 +12,7 @@ export * from './task-category';
 export * from './credentials';
 export * from './role';
 export * from './project';
+export * from './time-layout';
 export * from './time-record';
 export * from './time-memo';
 export * from './analysis';

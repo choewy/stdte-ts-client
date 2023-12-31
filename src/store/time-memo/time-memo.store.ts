@@ -5,9 +5,11 @@ import { TimeMemoStoreProps } from './types';
 export class TimeMemoStore extends RecoilStore<TimeMemoStoreProps> {
   constructor() {
     super(TimeMemoStore.name, {
-      id: 0,
-      editable: false,
       rows: [],
+      dialog: {
+        upsert: { open: false, row: { id: 0, date: '', text: '', updatedAt: '' } },
+        delete: { open: false, row: { id: 0, date: '', text: '', updatedAt: '' } },
+      },
     });
   }
 }

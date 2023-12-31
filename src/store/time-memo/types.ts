@@ -1,7 +1,15 @@
 import { TimeMemoRow } from '@service';
 
 export type TimeMemoStoreProps = {
-  id: number;
-  editable: boolean;
   rows: TimeMemoRow[];
+  dialog: {
+    upsert: {
+      open: boolean;
+      row: TimeMemoRow;
+    };
+    delete: {
+      open: boolean;
+      row: TimeMemoRow;
+    };
+  };
 };

@@ -3,13 +3,13 @@ import { FunctionComponent } from 'react';
 import { TableRow } from '@mui/material';
 
 import { TableValueCell } from '@component';
-import { TimeRecordProjectRow } from '@service';
+import { TimeProjectRow } from '@service';
 
 import { TimeRecordPageTableSxMap } from './time-record-page-table-sx-map';
 import { TimeRecordPageTableBodyRowTimeRecordCells } from './time-record-page-table-body-row-time-cells';
 
 export const TimeRecordPageTableBodyRow: FunctionComponent<{
-  project: TimeRecordProjectRow;
+  project: TimeProjectRow;
   sxMap: TimeRecordPageTableSxMap;
 }> = ({ project, sxMap }) => {
   return (

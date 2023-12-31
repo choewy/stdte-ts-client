@@ -5,10 +5,10 @@ import { useNavigate } from 'react-router-dom';
 import { ListItem, ListItemButton, ListItemText } from '@mui/material';
 
 import { PagePath } from '@common';
-import { TimeRecordLogRow } from '@service';
+import { TimeLogRow } from '@service';
 
 export const TimeRecordPageTabLogListItem: FunctionComponent<{
-  row: TimeRecordLogRow;
+  row: TimeLogRow;
   selected: boolean;
 }> = ({ row, selected }) => {
   const navigate = useNavigate();

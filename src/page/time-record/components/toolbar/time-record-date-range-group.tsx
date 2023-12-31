@@ -3,10 +3,10 @@ import { ChangeEvent, FunctionComponent, useCallback } from 'react';
 import { Box } from '@mui/material';
 
 import { DateInput } from '@component';
-import { timeRecordLayoutStore } from '@store';
+import { timeLayoutStore } from '@store';
 
 export const TimeRecordDateRangeGroup: FunctionComponent = () => {
-  const [{ date }, setTimeRecordLayout] = timeRecordLayoutStore.useState();
+  const [{ date }, setTimeRecordLayout] = timeLayoutStore.useState();
 
   const onChangeStartDate = useCallback(
     (e: ChangeEvent<HTMLInputElement>) =>

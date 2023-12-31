@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react';
 
 import { TableBody } from '@mui/material';
 
-import { layoutStore, timeRecordLayoutStore } from '@store';
+import { layoutStore, timeLayoutStore } from '@store';
 
 import { TimeRecordPageTableSxMap } from './time-record-page-table-sx-map';
 import { TimeRecordPageTableBodyRow } from './time-record-page-table-body-row';
@@ -12,7 +12,7 @@ export const TimeRecordPageTableBody: FunctionComponent = () => {
 
   const sxMap = new TimeRecordPageTableSxMap(theme);
 
-  const { project } = timeRecordLayoutStore.useValue();
+  const { project } = timeLayoutStore.useValue();
 
   return (
     <TableBody>

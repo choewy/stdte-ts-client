@@ -1,18 +1,18 @@
 import { FunctionComponent } from 'react';
 
-import { timeRecordLayoutStore, timeRecordStore } from '@store';
-import { TimeRecordProjectRow, TimeRecordProjectRowTaskCategoryChild } from '@service';
+import { timeLayoutStore, timeRecordStore } from '@store';
+import { TimeProjectRow, TimeProjectRowTaskCategoryChild } from '@service';
 
 import { TImeRecordPageTableBodyRowTimeCell } from './time-record-page-table-body-row-time-cell';
 import { TimeRecordPageTableSxMap } from './time-record-page-table-sx-map';
 
 export const TimeRecordPageTableBodyRowTimeRecordCells: FunctionComponent<{
-  project: TimeRecordProjectRow;
-  child: TimeRecordProjectRowTaskCategoryChild;
+  project: TimeProjectRow;
+  child: TimeProjectRowTaskCategoryChild;
   sxMap: TimeRecordPageTableSxMap;
 }> = ({ project, child, sxMap }) => {
-  const { date } = timeRecordLayoutStore.useValue();
-  const { editable, rows } = timeRecordStore.useValue();
+  const { editable, date } = timeLayoutStore.useValue();
+  const { rows } = timeRecordStore.useValue();
 
   const records = rows.filter(
     (row) =>

@@ -1,14 +1,14 @@
 import { FunctionComponent } from 'react';
 
 import { TableValueCell } from '@component';
-import { timeRecordLayoutStore } from '@store';
+import { timeLayoutStore } from '@store';
 
 import { TimeRecordPageTableSxMap } from './time-record-page-table-sx-map';
 
 export const TimeRecordPageTableHeadDateCells: FunctionComponent<{
   sxMap: TimeRecordPageTableSxMap;
 }> = ({ sxMap }) => {
-  const { date } = timeRecordLayoutStore.useValue();
+  const { date } = timeLayoutStore.useValue();
 
   return (
     <>

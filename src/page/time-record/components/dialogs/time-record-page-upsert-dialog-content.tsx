@@ -3,11 +3,11 @@ import { SetterOrUpdater } from 'recoil';
 
 import { TextField } from '@mui/material';
 
-import { TimeRecordProjectRow, TimeRecordUpsertBody } from '@service';
+import { TimeProjectRow, TimeRecordUpsertBody } from '@service';
 import { textFieldHook } from '@hook';
 
 export const TimeRecordPageUpsertDialogContent: FunctionComponent<{
-  project: TimeRecordProjectRow;
+  project: TimeProjectRow;
   body: TimeRecordUpsertBody;
   setBody: SetterOrUpdater<TimeRecordUpsertBody>;
 }> = ({ project, body, setBody }) => {

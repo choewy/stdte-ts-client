@@ -1,19 +1,15 @@
 import { FunctionComponent } from 'react';
 
 import { TableValueCell } from '@component';
-import {
-  DateTimeRowProperty,
-  TimeRecordProjectRow,
-  TimeRecordProjectRowTaskCategoryChild,
-  TimeRecordRow,
-} from '@service';
+import { DateTimeRowProperty, TimeProjectRow, TimeProjectRowTaskCategoryChild, TimeRecordRow } from '@service';
 import { dialogHook } from '@hook';
+
 import { TimeRecordPageTableSxMap } from './time-record-page-table-sx-map';
 
 export const TImeRecordPageTableBodyRowTimeCell: FunctionComponent<{
   row: TimeRecordRow | undefined;
-  project: TimeRecordProjectRow;
-  child: TimeRecordProjectRowTaskCategoryChild;
+  project: TimeProjectRow;
+  child: TimeProjectRowTaskCategoryChild;
   date: DateTimeRowProperty;
   sxMap: TimeRecordPageTableSxMap;
   editable: boolean;

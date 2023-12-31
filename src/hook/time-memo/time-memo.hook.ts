@@ -1,7 +1,15 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { SetterOrUpdater } from 'recoil';
 
 import { authorizeStore, timeLayoutStore, timeMemoStore } from '@store';
-import { TimeMemoEvent, TimeMemoRow, timeMemoHttpService, timeMemoSocketService } from '@service';
+import {
+  SnackEvent,
+  TimeMemoEvent,
+  TimeMemoRow,
+  TimeMemoUpsertBody,
+  timeMemoHttpService,
+  timeMemoSocketService,
+} from '@service';
 
 export class TimeMemoHook {
   useGetListCallback() {
@@ -109,6 +117,63 @@ export class TimeMemoHook {
         resetTimeMemo();
       };
     }, [resetTimeMemo]);
+  }
+
+  useDialogCallback(...args: ['delete', boolean, TimeMemoRow] | ['upsert', boolean, TimeMemoRow]) {
+    const setTimeMemo = timeMemoStore.useSetState();
+
+    return useCallback(() => {
+      const [key, open, row] = args;
+
+      setTimeMemo((prev) => ({ ...prev, dialog: { ...prev.dialog, [key]: { open, row } } }));
+    }, [args, setTimeMemo]);
+  }
+
+  useUpsertState(user: number, row: TimeMemoRow): [TimeMemoUpsertBody, SetterOrUpdater<TimeMemoUpsertBody>] {
+    const [body, setBody] = useState<TimeMemoUpsertBody>({
+      id: null,
+      user: 0,
+      date: '',
+      text: '',
+    });
+
+    useEffect(() => {
+      setBody({
+        id: row.id,
+        date: row.date,
+        text: row.text,
+        user,
+      });
+    }, [user, row]);
+
+    return [body, setBody];
+  }
+
+  useUpsertCallback(body: TimeMemoUpsertBody) {
+    return useCallback(async () => {
+      const res = await timeMemoHttpService.upsertRow(body);
+
+      if (res.ok === false) {
+        return false;
+      }
+
+      SnackEvent.dispatchBySuccess('저장되었습니다.');
+
+      return res.ok;
+    }, [body]);
+  }
+
+  useDeleteCallback(id: number) {
+    return useCallback(async () => {
+      const res = await timeMemoHttpService.deleteRow(id);
+
+      if (res.ok === false) {
+        return false;
+      }
+
+      SnackEvent.dispatchBySuccess('삭제되었습니다.');
+      return true;
+    }, [id]);
   }
 }
 

@@ -12,6 +12,19 @@ export class DateTimeService {
     { weekday: '일', color: '#f00' },
   ];
 
+  getDateTimeRow(d: string): DateTimeRowProperty {
+    const dt = DateTime.fromISO(d);
+
+    if (dt.isValid === false) {
+      return {
+        date: '',
+        weekday: '',
+      };
+    }
+
+    return { date: dt.toSQLDate(), ...this.WEEK_DAYS[dt.weekday - 1] };
+  }
+
   getDateTimeRowsByRange(s: string, e: string) {
     const sd = DateTime.fromISO(s);
     const ed = DateTime.fromISO(e);

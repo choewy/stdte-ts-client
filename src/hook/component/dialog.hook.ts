@@ -22,8 +22,8 @@ import {
   ProjectRecordType,
   PROJECT_RECORD_ROW,
   TimeRecordRow,
-  TimeRecordProjectRow,
-  TimeRecordProjectRowTaskCategoryChild,
+  TimeProjectRow,
+  TimeProjectRowTaskCategoryChild,
   DateTimeRowProperty,
   TIME_RECORD_ROW,
 } from '@service';
@@ -326,8 +326,8 @@ export class DialogHook {
           'upsert',
           boolean,
           TimeRecordRow | undefined,
-          TimeRecordProjectRow,
-          TimeRecordProjectRowTaskCategoryChild,
+          TimeProjectRow,
+          TimeProjectRowTaskCategoryChild,
           DateTimeRowProperty,
         ]
   ) {

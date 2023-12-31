@@ -7,8 +7,8 @@ import {
   UserRow,
   ProjectRow,
   ProjectRecordRow,
-  TimeRecordProjectRow,
-  TimeRecordProjectRowTaskCategoryChild,
+  TimeProjectRow,
+  TimeProjectRowTaskCategoryChild,
   TimeRecordRow,
   DateTimeRowProperty,
 } from '@service';
@@ -76,8 +76,8 @@ export type DialogStoreProps = {
   timeRecord: {
     upsert: {
       open: boolean;
-      project: TimeRecordProjectRow;
-      child: TimeRecordProjectRowTaskCategoryChild;
+      project: TimeProjectRow;
+      child: TimeProjectRowTaskCategoryChild;
       date: DateTimeRowProperty;
       row: TimeRecordRow;
     };

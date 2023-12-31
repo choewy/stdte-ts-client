@@ -13,4 +13,5 @@ export * from './credentials';
 export * from './role';
 export * from './project';
 export * from './time-record';
+export * from './time-memo';
 export * from './analysis';

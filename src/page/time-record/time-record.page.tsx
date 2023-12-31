@@ -2,7 +2,12 @@ import { FunctionComponent } from 'react';
 
 import { timeMemoHook, timeRecordHook } from '@hook';
 
-import { TimeRecordPageUpsertDialog, TimeRecordPageTable } from './components';
+import {
+  TimeMemoUpsertDialog,
+  TimeMemoDeleteDialog,
+  TimeRecordPageTable,
+  TimeRecordPageUpsertDialog,
+} from './components';
 
 export const TimeRecordPage: FunctionComponent = () => {
   timeRecordHook.useMount();
@@ -16,6 +21,8 @@ export const TimeRecordPage: FunctionComponent = () => {
 
   return (
     <>
+      <TimeMemoUpsertDialog />
+      <TimeMemoDeleteDialog />
       <TimeRecordPageUpsertDialog />
       <TimeRecordPageTable />
     </>

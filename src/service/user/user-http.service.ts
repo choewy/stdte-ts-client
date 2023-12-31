@@ -12,7 +12,7 @@ export class UserHttpService extends HttpService {
   }
 
   async existRow(id: number) {
-    return this.head<null>(this.url(id));
+    return this.head<null>(this.url(id), { smooth: true });
   }
 
   async updateMyProfile(body: Partial<UserUpdateBody>) {

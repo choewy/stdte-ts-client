@@ -16,10 +16,16 @@ export class HttpService {
     });
   }
 
-  private async transform<R>(request: () => Promise<AxiosResponse>, delay?: number): Promise<HttpClientResponse<R>> {
-    LoadingEvent.dispatch(true);
+  private async transform<R>(
+    request: () => Promise<AxiosResponse>,
+    delay?: number,
+    smooth?: boolean,
+  ): Promise<HttpClientResponse<R>> {
+    if (smooth !== true) {
+      LoadingEvent.dispatch(true);
+    }
 
-    const res = await new Promise<{ ok: boolean; data: any }>(async (resolve, reject) => {
+    const res = await new Promise<{ ok: boolean; data: any }>(async (resolve) => {
       const res = await request()
         .then((response) => ({ ok: true, data: response?.data }))
         .catch((error) => ({ ok: false, data: error.response?.data }));
@@ -34,7 +40,9 @@ export class HttpService {
       }, delay);
     });
 
-    LoadingEvent.dispatch(false);
+    if (smooth !== true) {
+      LoadingEvent.dispatch(false);
+    }
 
     return {
       ok: res.ok,
@@ -54,26 +62,26 @@ export class HttpService {
   }
 
   protected async head<R, D = any>(url: string = '', config?: HttpClientrequestConfig<D>) {
-    return this.transform<R>(() => this.instance.head(url, config), config?.delay);
+    return this.transform<R>(() => this.instance.head(url, config), config?.delay, config?.smooth);
   }
 
   protected async get<R, D = any>(url: string = '', config?: HttpClientrequestConfig<D>) {
-    return this.transform<R>(() => this.instance.get(url, config), config?.delay);
+    return this.transform<R>(() => this.instance.get(url, config), config?.delay, config?.smooth);
   }
 
   protected async post<R, D = any>(url: string = '', data?: D, config?: HttpClientrequestConfig<D>) {
-    return this.transform<R>(() => this.instance.post(url, data, config), config?.delay);
+    return this.transform<R>(() => this.instance.post(url, data, config), config?.delay, config?.smooth);
   }
 
   protected async patch<R, D = any>(url: string = '', data?: D, config?: HttpClientrequestConfig<D>) {
-    return this.transform<R>(() => this.instance.patch(url, data, config), config?.delay);
+    return this.transform<R>(() => this.instance.patch(url, data, config), config?.delay, config?.smooth);
   }
 
   protected async put<R, D = any>(url: string = '', data?: D, config?: HttpClientrequestConfig<D>) {
-    return this.transform<R>(() => this.instance.put(url, data, config), config?.delay);
+    return this.transform<R>(() => this.instance.put(url, data, config), config?.delay, config?.smooth);
   }
 
   protected async delete<R, D = any>(url: string = '', config?: HttpClientrequestConfig<D>) {
-    return this.transform<R>(() => this.instance.delete(url, config), config?.delay);
+    return this.transform<R>(() => this.instance.delete(url, config), config?.delay, config?.smooth);
   }
 }

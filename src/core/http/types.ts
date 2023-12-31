@@ -2,6 +2,7 @@ import { AxiosRequestConfig } from 'axios';
 
 export type HttpClientrequestConfig<D> = AxiosRequestConfig<D> & {
   delay?: number;
+  smooth?: boolean;
 };
 
 export type HttpClientRequest = {

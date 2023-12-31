@@ -95,7 +95,7 @@ export class ThemeProperty implements ThemeOptions {
         styleOverrides: {
           root: {
             '& th': {
-              backgroundColor: color === 'dark' ? '#101010' : '#f7f7f7',
+              backgroundColor: color === 'dark' ? '#303E4A' : '#f7f7f7',
             },
           },
         },

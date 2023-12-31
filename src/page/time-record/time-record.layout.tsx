@@ -6,7 +6,7 @@ import { Box } from '@mui/material';
 import { layoutStore } from '@store';
 import { timeRecordHook, timeRecordLayoutHook } from '@hook';
 
-import { TimeRecordLayoutLogTabs, TimeRecordLayoutToolbar } from './components';
+import { TimeRecordLayoutTabs, TimeRecordLayoutToolbar } from './components';
 
 export const TimeRecordLayout: FunctionComponent = () => {
   const size = layoutStore.useValue().size;
@@ -24,7 +24,6 @@ export const TimeRecordLayout: FunctionComponent = () => {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'flex-start',
-        gap: 1,
         height: size.innerHeight - 65,
         paddingLeft: 0,
         paddingRight: 1,
@@ -32,7 +31,7 @@ export const TimeRecordLayout: FunctionComponent = () => {
         boxSizing: 'border-box',
       }}
     >
-      <TimeRecordLayoutLogTabs />
+      <TimeRecordLayoutTabs />
       <Box
         sx={{
           display: 'flex',

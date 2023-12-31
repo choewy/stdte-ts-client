@@ -41,31 +41,31 @@ export class TimeRecordPageTableSxMap {
 
       case 'project':
         left = 0;
-        width = 325;
+        width = 275;
         break;
 
       case 'category':
-        left = 325;
+        left = 275;
         width = 250;
         break;
 
       case 'project.name':
         left = 0;
-        width = 200;
+        width = 150;
         break;
 
       case 'project.code':
-        left = 200;
+        left = 150;
         width = 125;
         break;
 
       case 'category.parent':
-        left = 325;
+        left = 275;
         width = 125;
         break;
 
       case 'category.child':
-        left = 450;
+        left = 400;
         width = 125;
         break;
     }

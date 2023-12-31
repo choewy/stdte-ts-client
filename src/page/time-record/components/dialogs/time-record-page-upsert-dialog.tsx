@@ -20,7 +20,7 @@ export const TimeRecordPageUpsertDialog: FunctionComponent = () => {
       title={[`${date.date}(${date.weekday})`, project.code, project.category.name, child.name].join(' - ')}
       open={open}
       onClose={onClose}
-      contents={<TimeRecordPageUpsertDialogContent {...{ row, project, body, setBody }} />}
+      contents={<TimeRecordPageUpsertDialogContent {...{ project, body, setBody }} />}
       actions={<TimeRecordPageUpsertDialogAction {...{ origin, body, onClose }} />}
     />
   );

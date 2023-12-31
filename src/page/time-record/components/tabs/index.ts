@@ -1,1 +1,1 @@
-export * from './time-record-layout-log-tabs';
+export * from './time-record-layout-tabs';

@@ -16,7 +16,7 @@ export const TimeRecordPageTable: FunctionComponent = () => {
       variant="outlined"
       sx={{
         width: '100%',
-        maxWidth: size.innerWidth - 270,
+        maxWidth: size.innerWidth - 200,
         height: size.innerHeight - 100,
       }}
     >

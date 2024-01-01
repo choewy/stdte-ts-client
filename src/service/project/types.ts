@@ -63,7 +63,7 @@ export type ProjectRow = {
 export type ProjectListQuery = HttpClientListQuery & {
   businessCategory?: number;
   industryCategory?: number;
-  taskMainCategory?: number;
+  canExpose?: boolean;
   customer?: number;
   status?: ProjectStatus;
 };

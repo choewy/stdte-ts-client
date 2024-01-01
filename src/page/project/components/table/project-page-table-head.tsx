@@ -20,7 +20,7 @@ export const ProjectPageTableHead: FunctionComponent<{
         <TableValueCell value="담당자(대외)" colSpan={3} stickyRow={0} />
         <TableValueCell value="담당자(대내)" colSpan={3} stickyRow={0} />
         <TableValueCell value="기간" colSpan={3} stickyRow={0} />
-        <TableValueCell value="시간관리" colSpan={2} stickyRow={0} />
+        <TableValueCell value="시간관리" colSpan={1} stickyRow={0} />
         {(canUpdate || canDelete) && (
           <TableValueCell
             value={[canUpdate && '수정', canDelete && '삭제'].filter((v) => typeof v === 'string').join('/')}
@@ -58,10 +58,7 @@ export const ProjectPageTableHead: FunctionComponent<{
           <TableValueCell value="준공" stickyRow={1} />
           <TableValueCell value="개월수" stickyRow={1} />
         </>
-        <>
-          <TableValueCell value="수행업무구분" stickyRow={1} />
-          <TableValueCell value="노출여부" stickyRow={1} />
-        </>
+        <TableValueCell value="노출여부" stickyRow={1} />
       </TableRow>
     </TableHead>
   );

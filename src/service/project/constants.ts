@@ -43,6 +43,8 @@ export const PROJECT_ROW: ProjectRow = {
 export const PROJECT_LIST_QUERY: ProjectListQuery = {
   skip: 0,
   take: 20,
+  status: ProjectStatus.Active,
+  canExpose: true,
 };
 
 export const PROJECT_LIST: ProjectList = {

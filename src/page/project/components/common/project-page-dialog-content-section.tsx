@@ -2,9 +2,11 @@ import { FunctionComponent } from 'react';
 import { SetterOrUpdater } from 'recoil';
 
 import { Box, InputAdornment, TextField } from '@mui/material';
+import { Info } from '@mui/icons-material';
 
 import { MultilineTooltip, SectionColumn, SectionContainer } from '@component';
 import { ProjectCreateBody, ProjectUpdateBody } from '@service';
+import { settingStore } from '@store';
 import { textFieldHook } from '@hook';
 
 import { ProjectPageStatusSelect } from './project-page-status-select';
@@ -13,10 +15,7 @@ import { ProjectPageIndustryCategorySelect } from './project-page-industry-categ
 import { ProjectPageCustomerSelect } from './project-page-customer-select';
 import { ProjectPageDetailsInputGroup } from './project-page-details-input-group';
 import { ProjectPageUserSelectGroup } from './project-page-user-select-group';
-import { ProjectPageTaskCategorySelect } from './project-page-task-category-select';
 import { ProjectPageCanExposeSelect } from './project-page-can-expose-select';
-import { Info } from '@mui/icons-material';
-import { settingStore } from '@store';
 
 export const ProjectPageDialogContentSection: FunctionComponent<{
   body: ProjectCreateBody | ProjectUpdateBody;
@@ -67,7 +66,6 @@ export const ProjectPageDialogContentSection: FunctionComponent<{
         <ProjectPageDetailsInputGroup {...{ body, setBody }} />
       </SectionColumn>
       <SectionColumn title="시간관리">
-        <ProjectPageTaskCategorySelect {...{ body, setBody }} />
         <ProjectPageCanExposeSelect {...{ body, setBody }} />
       </SectionColumn>
     </SectionContainer>

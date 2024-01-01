@@ -37,7 +37,6 @@ export const ProjectPageTableBodyRow: FunctionComponent<{
       <TableValueCell value={DateTime.fromJSDate(new Date(row.startDate)).toSQLDate() ?? ''} fixedWidth />
       <TableValueCell value={DateTime.fromJSDate(new Date(row.endDate)).toSQLDate() ?? ''} fixedWidth />
       <TableValueCell value={row.months} fixedWidth />
-      <TableValueCell value={row.taskCategory?.name ?? ''} />
       <TableValueCell value={row.canExpose === true ? 'O' : 'X'} />
       {(canUpdate || canDelete) && (
         <TableComponentCell

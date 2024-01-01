@@ -101,7 +101,6 @@ export class SidebarService {
           Icon: Tune,
           path: PagePath.AdminSetting,
           policy: { setting: RolePolicyLevel.Admin },
-          hidden: true,
         },
       ],
     },

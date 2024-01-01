@@ -6,7 +6,6 @@ import {
   AllowGuestOnlyGuardPage,
   AllowUserOnlyGuardPage,
   AllowBlockOnlyGuardPage,
-  EmptyPage,
   HomePage,
   NotFoundPage,
   SignInPage,
@@ -15,6 +14,7 @@ import {
   MyPage,
   RolePage,
   CredentialsPage,
+  SettingPage,
   UserPage,
   ProjectPage,
   CustomerPage,
@@ -92,7 +92,7 @@ export const router = createBrowserRouter(
             },
             {
               path: PagePath.AdminSetting,
-              element: <EmptyPage title="공통설정" />,
+              element: <SettingPage />,
             },
             {
               path: PagePath.User,

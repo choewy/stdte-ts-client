@@ -1,13 +1,16 @@
 import { FunctionComponent } from 'react';
 
-import { TableHead, TableRow } from '@mui/material';
+import { TableCell, TableHead, TableRow } from '@mui/material';
 
-import { TableValueCell } from '@component';
+import { MultilineTooltip, TableValueCell } from '@component';
+import { settingStore } from '@store';
 
 export const ProjectPageTableHead: FunctionComponent<{
   canUpdate: boolean;
   canDelete: boolean;
 }> = ({ canUpdate, canDelete }) => {
+  const setting = settingStore.useValue();
+
   return (
     <TableHead>
       <TableRow>
@@ -30,7 +33,11 @@ export const ProjectPageTableHead: FunctionComponent<{
         <>
           <TableValueCell value="약어" stickyRow={1} />
           <TableValueCell value="사업명" stickyRow={1} />
-          <TableValueCell value="난이도" stickyRow={1} />
+          <TableCell style={{ top: `${37.57 * 1}px` }}>
+            <MultilineTooltip title={setting.row.difficultyTooltip}>
+              <span>난이도</span>
+            </MultilineTooltip>
+          </TableCell>
           <TableValueCell value="산업분야" stickyRow={1} />
           <TableValueCell value="사업구분" stickyRow={1} />
           <TableValueCell value="고객사" stickyRow={1} />

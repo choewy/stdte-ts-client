@@ -2,6 +2,7 @@ export * from './layout';
 export * from './snack';
 export * from './dialog';
 export * from './authorize';
+export * from './setting';
 export * from './profile';
 export * from './select';
 export * from './user';

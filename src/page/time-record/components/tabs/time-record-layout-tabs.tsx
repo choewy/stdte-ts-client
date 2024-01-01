@@ -10,7 +10,7 @@ export const TimeRecordLayoutTabs: FunctionComponent = () => {
 
   return (
     <Box>
-      <Tabs value={tabIndex} sx={{ width: 200, marginY: '5px' }} centered onChange={(_, v) => setTabIndex(v)}>
+      <Tabs value={tabIndex} sx={{ width: 230, marginY: '5px' }} centered onChange={(_, v) => setTabIndex(v)}>
         <Tab value={1} label="인원" />
         <Tab value={2} label="메모" />
       </Tabs>

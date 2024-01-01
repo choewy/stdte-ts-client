@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 
 import { TableCell, TableHead, TableRow } from '@mui/material';
+import { Info } from '@mui/icons-material';
 
 import { MultilineTooltip, TableValueCell } from '@component';
 import { settingStore } from '@store';
@@ -34,9 +35,12 @@ export const ProjectPageTableHead: FunctionComponent<{
           <TableValueCell value="약어" stickyRow={1} />
           <TableValueCell value="사업명" stickyRow={1} />
           <TableCell style={{ top: `${37.57 * 1}px` }}>
-            <MultilineTooltip title={setting.row.difficultyTooltip}>
-              <span>난이도</span>
-            </MultilineTooltip>
+            <div style={{ display: 'flex' }}>
+              난이도
+              <MultilineTooltip title={setting.row.difficultyTooltip}>
+                <Info sx={{ fontSize: 13, color: 'grayText', cursor: 'pointer' }} />
+              </MultilineTooltip>
+            </div>
           </TableCell>
           <TableValueCell value="산업분야" stickyRow={1} />
           <TableValueCell value="사업구분" stickyRow={1} />

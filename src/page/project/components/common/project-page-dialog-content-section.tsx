@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
 import { SetterOrUpdater } from 'recoil';
 
-import { Box, TextField } from '@mui/material';
+import { Box, InputAdornment, TextField } from '@mui/material';
 
-import { SectionColumn, SectionContainer } from '@component';
+import { MultilineTooltip, SectionColumn, SectionContainer } from '@component';
 import { ProjectCreateBody, ProjectUpdateBody } from '@service';
 import { textFieldHook } from '@hook';
 
@@ -15,11 +15,15 @@ import { ProjectPageDetailsInputGroup } from './project-page-details-input-group
 import { ProjectPageUserSelectGroup } from './project-page-user-select-group';
 import { ProjectPageTaskCategorySelect } from './project-page-task-category-select';
 import { ProjectPageCanExposeSelect } from './project-page-can-expose-select';
+import { Info } from '@mui/icons-material';
+import { settingStore } from '@store';
 
 export const ProjectPageDialogContentSection: FunctionComponent<{
   body: ProjectCreateBody | ProjectUpdateBody;
   setBody: SetterOrUpdater<ProjectCreateBody> | SetterOrUpdater<ProjectUpdateBody>;
 }> = ({ body, setBody }) => {
+  const setting = settingStore.useValue();
+
   const onChangeCode = textFieldHook.useOnChangeObjectStrProperty(setBody, 'code');
   const onChangeDifficulty = textFieldHook.useOnChangeObjectDecimalProperty(setBody, 'difficulty');
   const onChangeName = textFieldHook.useOnChangeObjectStrProperty(setBody, 'name');
@@ -31,7 +35,22 @@ export const ProjectPageDialogContentSection: FunctionComponent<{
       <SectionColumn title="사업정보">
         <Box sx={{ display: 'flex', gap: 1 }}>
           <TextField {...{ label: '약어', value: body.code, onChange: onChangeCode }} />
-          <TextField {...{ label: '난이도', value: body.difficulty, onChange: onChangeDifficulty }} />
+          <TextField
+            {...{
+              label: '난이도',
+              value: body.difficulty,
+              onChange: onChangeDifficulty,
+              InputProps: {
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <MultilineTooltip title={setting.row.difficultyTooltip}>
+                      <Info sx={{ fontSize: 16 }} />
+                    </MultilineTooltip>
+                  </InputAdornment>
+                ),
+              },
+            }}
+          />
         </Box>
         <TextField {...{ label: '사업명', value: body.name, onChange: onChangeName }} />
         <TextField {...{ label: '규모(단위 : 원)', value: body.amount, onChange: onChangeAmount }} />

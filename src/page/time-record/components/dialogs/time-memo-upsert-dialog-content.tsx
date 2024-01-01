@@ -24,6 +24,7 @@ export const TimeMemoUpsertDialogContent: FunctionComponent<{
         InputProps={{ readOnly: editable === false, sx: { fontSize: 12 } }}
         value={body.text}
         onChange={onChange}
+        placeholder="내용을 입력하세요."
         helperText={
           updatedAt
             ? `마지막 수정일시 : ${DateTime.fromJSDate(new Date(updatedAt)).toFormat('yyyy-MM-dd HH:mm:ss')}`

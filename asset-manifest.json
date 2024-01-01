@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/stdte-ts-client/static/css/main.9e19588f.css",
-    "main.js": "/stdte-ts-client/static/js/main.10c699e4.js",
+    "main.js": "/stdte-ts-client/static/js/main.2c5acbb9.js",
     "static/js/787.f2a78fd1.chunk.js": "/stdte-ts-client/static/js/787.f2a78fd1.chunk.js",
     "index.html": "/stdte-ts-client/index.html",
     "main.9e19588f.css.map": "/stdte-ts-client/static/css/main.9e19588f.css.map",
-    "main.10c699e4.js.map": "/stdte-ts-client/static/js/main.10c699e4.js.map",
+    "main.2c5acbb9.js.map": "/stdte-ts-client/static/js/main.2c5acbb9.js.map",
     "787.f2a78fd1.chunk.js.map": "/stdte-ts-client/static/js/787.f2a78fd1.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9e19588f.css",
-    "static/js/main.10c699e4.js"
+    "static/js/main.2c5acbb9.js"
   ]
 }

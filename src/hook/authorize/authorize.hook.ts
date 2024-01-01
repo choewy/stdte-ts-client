@@ -8,11 +8,11 @@ import { authorizeStore } from '@store';
 import { AuthorizeGuardPassOrPath } from './types';
 
 export class AuthorizeHook {
-  useAuthorizeCredentials() {
+  useCheckAuthorizeCallback() {
     const pathname = useLocation().pathname;
     const [authorize, setAuthorize] = authorizeStore.useState();
 
-    const getAuthorizeCredentials = useCallback(async () => {
+    return useCallback(async () => {
       if (authorize === false || authorize) {
         return;
       }
@@ -25,10 +25,14 @@ export class AuthorizeHook {
 
       setAuthorize(res.data);
     }, [pathname, authorize, setAuthorize]);
+  }
+
+  useMount() {
+    const checkAuthorize = this.useCheckAuthorizeCallback();
 
     useEffect(() => {
-      getAuthorizeCredentials();
-    }, [getAuthorizeCredentials]);
+      checkAuthorize();
+    }, [checkAuthorize]);
   }
 
   useGuestOnlyGuard() {

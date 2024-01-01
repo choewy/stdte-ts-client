@@ -14,3 +14,4 @@ export * from './time-layout';
 export * from './time-record';
 export * from './time-memo';
 export * from './analysis';
+export * from './setting';

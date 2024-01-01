@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 
 import { CssBaseline } from '@mui/material';
 
-import { authorizeHook, layoutHook } from '@hook';
+import { authorizeHook, layoutHook, settingHook } from '@hook';
 
 import { Helmet } from './helmet';
 import { Loader } from './loader';
@@ -15,7 +15,8 @@ import { Sidebar } from './sidebar';
 export const Layout: FunctionComponent = () => {
   layoutHook.useTitleListener();
   layoutHook.useResizeListener();
-  authorizeHook.useAuthorizeCredentials();
+  authorizeHook.useMount();
+  settingHook.useMount();
 
   return (
     <Fragment>

@@ -18,8 +18,7 @@ export const ProjectPageTableHead: FunctionComponent<{
         <TableValueCell value="ID" rowSpan={2} stickyRow={0} />
         <TableValueCell value="사업정보" colSpan={9} stickyRow={0} />
         <TableValueCell value="수주/매출" rowSpan={2} stickyRow={0} />
-        <TableValueCell value="담당자(대외)" colSpan={3} stickyRow={0} />
-        <TableValueCell value="담당자(대내)" colSpan={3} stickyRow={0} />
+        <TableValueCell value="담당자" colSpan={3} stickyRow={0} />
         <TableValueCell value="기간" colSpan={3} stickyRow={0} />
         <TableValueCell value="시간관리" colSpan={1} stickyRow={0} />
         {(canUpdate || canDelete) && (
@@ -50,11 +49,8 @@ export const ProjectPageTableHead: FunctionComponent<{
           <TableValueCell value="비고" stickyRow={1} />
         </>
         <>
-          <TableValueCell value="PO" stickyRow={1} />
-          <TableValueCell value="PM" stickyRow={1} />
-          <TableValueCell value="PL" stickyRow={1} />
-          <TableValueCell value="PO" stickyRow={1} />
-          <TableValueCell value="PM" stickyRow={1} />
+          <TableValueCell value="PM(용수계)" stickyRow={1} />
+          <TableValueCell value="PM(실졔)" stickyRow={1} />
           <TableValueCell value="PL" stickyRow={1} />
         </>
         <>

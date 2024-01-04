@@ -49,12 +49,9 @@ export type ProjectRow = {
   industryCategory: ProjectRowBusinessCategory | null;
   taskCategory: ProjectRowTaskCategory | null;
   customer: ProjectRowCustomer | null;
-  internalOwners: ProjectRowUser[];
+  externalManagers: ProjectRowUser[];
   internalManagers: ProjectRowUser[];
   internalLeaders: ProjectRowUser[];
-  externalOwners: ProjectRowUser[];
-  externalManagers: ProjectRowUser[];
-  externalLeaders: ProjectRowUser[];
   canExpose: boolean;
   createdAt: string;
   updatedAt: string;
@@ -85,12 +82,9 @@ export type ProjectCreateBody = {
   businessCategory: number | null;
   industryCategory: number | null;
   taskCategory: number | null;
-  internalOwners: number[];
+  externalManagers: number[];
   internalManagers: number[];
   internalLeaders: number[];
-  externalOwners: number[];
-  externalManagers: number[];
-  externalLeaders: number[];
   canExpose: boolean;
 };
 
@@ -107,12 +101,9 @@ export type ProjectUpdateBody = {
   businessCategory: number | null;
   industryCategory: number | null;
   taskCategory: number | null;
-  internalOwners: number[];
+  externalManagers: number[];
   internalManagers: number[];
   internalLeaders: number[];
-  externalOwners: number[];
-  externalManagers: number[];
-  externalLeaders: number[];
   canExpose: boolean;
 };
 

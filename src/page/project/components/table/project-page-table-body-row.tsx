@@ -28,10 +28,7 @@ export const ProjectPageTableBodyRow: FunctionComponent<{
       <TableValueCell value={enumService.projectStatusToText(row.status)} />
       <TableValueCell value={row.description} align="left" />
       <TableComponentCell components={<ProjectPageTableBodyRowRecordButton {...{ row }} />} />
-      <TableValueCell value={row.externalOwners.map(({ name }) => name).join(', ')} />
       <TableValueCell value={row.externalManagers.map(({ name }) => name).join(', ')} />
-      <TableValueCell value={row.externalLeaders.map(({ name }) => name).join(', ')} />
-      <TableValueCell value={row.internalOwners.map(({ name }) => name).join(', ')} />
       <TableValueCell value={row.internalManagers.map(({ name }) => name).join(', ')} />
       <TableValueCell value={row.internalLeaders.map(({ name }) => name).join(', ')} />
       <TableValueCell value={DateTime.fromJSDate(new Date(row.startDate)).toSQLDate() ?? ''} fixedWidth />

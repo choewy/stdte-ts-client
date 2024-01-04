@@ -31,7 +31,7 @@ export class UserHook {
             ? res.data
             : {
                 ...prev.list,
-                rows: [...prev.list.rows, ...res.data.rows].sort((x, y) => x.id - y.id),
+                rows: [...prev.list.rows, ...res.data.rows],
                 query: res.data.query,
               },
       }));
@@ -103,7 +103,7 @@ export class UserHook {
       enteringDay: '',
       resignationDay: '',
       role: null,
-      status: UserStatus.Wating,
+      status: UserStatus.Active,
     });
 
     useEffect(() => {

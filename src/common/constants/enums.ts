@@ -14,7 +14,7 @@ export enum CredentialsStatus {
 }
 
 export enum UserStatus {
-  Wating = 0,
+  Reference = 0,
   Active = 1,
   Vacate = 2,
   Retire = 3,

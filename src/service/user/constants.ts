@@ -20,7 +20,7 @@ export const USER_ROW: UserRow = {
   carNumber: '',
   enteringDay: '',
   resignationDay: '',
-  status: UserStatus.Wating,
+  status: UserStatus.Active,
   credentials: USER_ROW_CREDENTIALS,
   role: null,
   createdAt: '',

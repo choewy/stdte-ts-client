@@ -175,8 +175,8 @@ export class EnumService {
 
   userStatusToText(status: UserStatus, defaultValue = '') {
     switch (status) {
-      case UserStatus.Wating:
-        return '확인필요';
+      case UserStatus.Reference:
+        return '참조';
 
       case UserStatus.Active:
         return '재직';

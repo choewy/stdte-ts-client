@@ -47,7 +47,6 @@ export const UserPageUpdateDialogContent: FunctionComponent<{
         <TextField {...{ label: '이메일', value: row.credentials.email, InputProps: { readOnly: true } }} />
         <TextField {...{ label: '역할', value: row.role?.name ?? '없음', InputProps: { readOnly: true } }} />
         <SelectControl label="재직상태" value={body.status} onChange={onChangeStatus}>
-          <MenuItem {...{ value: UserStatus.Wating, children: enumService.userStatusToText(UserStatus.Wating) }} />
           <MenuItem {...{ value: UserStatus.Active, children: enumService.userStatusToText(UserStatus.Active) }} />
           <MenuItem {...{ value: UserStatus.Vacate, children: enumService.userStatusToText(UserStatus.Vacate) }} />
           <MenuItem {...{ value: UserStatus.Retire, children: enumService.userStatusToText(UserStatus.Retire) }} />

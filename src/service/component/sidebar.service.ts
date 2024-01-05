@@ -181,7 +181,7 @@ export class SidebarService {
       Icon: BarChart,
       prefix: PagePath.AnalysisProject,
       divider: true,
-      policy: { project: RolePolicyLevel.Read },
+      policy: { project: RolePolicyLevel.Admin },
       children: [
         {
           name: '수주분석',

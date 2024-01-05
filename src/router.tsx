@@ -131,7 +131,7 @@ export const router = createBrowserRouter(
               element: <IndustryCategoryPage />,
             },
             {
-              path: PagePath.ProjectTaskCategory,
+              path: PagePath.TimeTaskCategory,
               element: <TaskCategoryPage />,
             },
             {

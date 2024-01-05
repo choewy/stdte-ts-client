@@ -172,14 +172,6 @@ export class SidebarService {
           path: PagePath.ProjectIndustryCategory,
           policy: { industryCategory: RolePolicyLevel.Read },
         },
-        {
-          name: '수행업무구분',
-          type: SidebarMenuType.Navigate,
-          scope: SidebarMenuScope.UserOnly,
-          Icon: Bookmark,
-          path: PagePath.ProjectTaskCategory,
-          policy: { taskCategory: RolePolicyLevel.Read },
-        },
       ],
     },
     {
@@ -221,6 +213,14 @@ export class SidebarService {
           scope: SidebarMenuScope.UserOnly,
           Icon: CalendarMonth,
           path: PagePath.TimeRecord,
+        },
+        {
+          name: '수행업무구분',
+          type: SidebarMenuType.Navigate,
+          scope: SidebarMenuScope.UserOnly,
+          Icon: Bookmark,
+          path: PagePath.TimeTaskCategory,
+          policy: { taskCategory: RolePolicyLevel.Read },
         },
         {
           name: '집계',

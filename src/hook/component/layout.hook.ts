@@ -70,7 +70,7 @@ export class LayoutHook {
         case PagePath.ProjectIndustryCategory:
           return '산업분야';
 
-        case PagePath.ProjectTaskCategory:
+        case PagePath.TimeTaskCategory:
           return '수행업무구분';
 
         case PagePath.AnalysisProject:

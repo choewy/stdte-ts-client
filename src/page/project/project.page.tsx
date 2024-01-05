@@ -29,6 +29,7 @@ export const ProjectPage: FunctionComponent = () => {
   const canCreate = roleService.can(authorize, 'project', RolePolicyLevel.Create);
   const canUpdate = roleService.can(authorize, 'project', RolePolicyLevel.Update);
   const canDelete = roleService.can(authorize, 'project', RolePolicyLevel.Delete);
+  const isAdmin = roleService.can(authorize, 'project', RolePolicyLevel.Admin);
 
   projectHook.useMount();
   projectHook.useUnMount();
@@ -54,8 +55,8 @@ export const ProjectPage: FunctionComponent = () => {
       <ProjectPageSaleRecordCreateDialog />
       <ProjectPageSaleRecordUpdateDialog />
       <ProjectPageSaleRecordDeleteDialog />
-      <ProjectPageToolbar {...{ canCreate }} />
-      <ProjectPageTable {...{ canUpdate, canDelete }} />
+      <ProjectPageToolbar {...{ canCreate, canDownload: isAdmin }} />
+      <ProjectPageTable {...{ canUpdate, canDelete, isAdmin }} />
       <ProjectPageCaption />
     </Box>
   );

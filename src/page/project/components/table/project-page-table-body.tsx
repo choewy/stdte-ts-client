@@ -9,7 +9,8 @@ import { ProjectPageTableBodyRow } from './project-page-table-body-row';
 export const ProjectPageTableBody: FunctionComponent<{
   canUpdate: boolean;
   canDelete: boolean;
-}> = ({ canUpdate, canDelete }) => {
+  isAdmin: boolean;
+}> = ({ canUpdate, canDelete, isAdmin }) => {
   const { list } = projectStore.useValue();
 
   return (
@@ -21,6 +22,7 @@ export const ProjectPageTableBody: FunctionComponent<{
             row,
             canUpdate,
             canDelete,
+            isAdmin,
           }}
         />
       ))}

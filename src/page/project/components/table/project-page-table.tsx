@@ -10,7 +10,8 @@ import { ProjectPageTableBody } from './project-page-table-body';
 export const ProjectPageTable: FunctionComponent<{
   canUpdate: boolean;
   canDelete: boolean;
-}> = ({ canUpdate, canDelete }) => {
+  isAdmin: boolean;
+}> = ({ canUpdate, canDelete, isAdmin }) => {
   const size = layoutStore.useValue().size;
   const scroll = scrollHook.useDivScrollRefObject();
   const onScroll = scrollHook.useOnScroll(scroll.ref, scroll.setEnd);
@@ -26,8 +27,8 @@ export const ProjectPageTable: FunctionComponent<{
       sx={{ height: size.innerHeight - 180 }}
     >
       <Table stickyHeader>
-        <ProjectPageTableHead {...{ canUpdate, canDelete }} />
-        <ProjectPageTableBody {...{ canUpdate, canDelete }} />
+        <ProjectPageTableHead {...{ canUpdate, canDelete, isAdmin }} />
+        <ProjectPageTableBody {...{ canUpdate, canDelete, isAdmin }} />
       </Table>
     </TableContainer>
   );

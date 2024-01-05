@@ -14,7 +14,8 @@ export const ProjectPageTableBodyRow: FunctionComponent<{
   row: ProjectRow;
   canUpdate: boolean;
   canDelete: boolean;
-}> = ({ row, canUpdate, canDelete }) => {
+  isAdmin: boolean;
+}> = ({ row, canUpdate, canDelete, isAdmin }) => {
   return (
     <TableRow hover>
       <TableValueCell value={row.id} />
@@ -27,7 +28,7 @@ export const ProjectPageTableBodyRow: FunctionComponent<{
       <TableValueCell value={Number(row.amount).toLocaleString('ko-KR')} align="right" />
       <TableValueCell value={enumService.projectStatusToText(row.status)} />
       <TableValueCell value={row.description} align="left" />
-      <TableComponentCell components={<ProjectPageTableBodyRowRecordButton {...{ row }} />} />
+      {isAdmin && <TableComponentCell components={<ProjectPageTableBodyRowRecordButton {...{ row }} />} />}
       <TableValueCell value={row.externalManagers.map(({ name }) => name).join(', ')} />
       <TableValueCell value={row.internalManagers.map(({ name }) => name).join(', ')} />
       <TableValueCell value={row.internalLeaders.map(({ name }) => name).join(', ')} />

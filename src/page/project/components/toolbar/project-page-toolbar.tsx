@@ -7,7 +7,8 @@ import { ProjectPageToolbarButtonGroup } from './project-page-toolbar-buttons';
 
 export const ProjectPageToolbar: FunctionComponent<{
   canCreate: boolean;
-}> = ({ canCreate }) => {
+  canDownload: boolean;
+}> = ({ canCreate, canDownload }) => {
   return (
     <Box
       sx={{
@@ -23,7 +24,7 @@ export const ProjectPageToolbar: FunctionComponent<{
         <ProjectPageToolbarFilter />
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', flex: 1 }}>
-        <ProjectPageToolbarButtonGroup canCreate={canCreate} />
+        <ProjectPageToolbarButtonGroup canCreate={canCreate} canDownload={canDownload} />
       </Box>
     </Box>
   );

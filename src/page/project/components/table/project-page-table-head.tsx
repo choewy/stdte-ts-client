@@ -9,7 +9,8 @@ import { settingStore } from '@store';
 export const ProjectPageTableHead: FunctionComponent<{
   canUpdate: boolean;
   canDelete: boolean;
-}> = ({ canUpdate, canDelete }) => {
+  isAdmin: boolean;
+}> = ({ canUpdate, canDelete, isAdmin }) => {
   const setting = settingStore.useValue();
 
   return (
@@ -17,7 +18,7 @@ export const ProjectPageTableHead: FunctionComponent<{
       <TableRow>
         <TableValueCell value="ID" rowSpan={2} stickyRow={0} />
         <TableValueCell value="사업정보" colSpan={9} stickyRow={0} />
-        <TableValueCell value="수주/매출" rowSpan={2} stickyRow={0} />
+        {isAdmin && <TableValueCell value="수주/매출" rowSpan={2} stickyRow={0} />}
         <TableValueCell value="담당자" colSpan={3} stickyRow={0} />
         <TableValueCell value="기간" colSpan={3} stickyRow={0} />
         <TableValueCell value="시간관리" colSpan={1} stickyRow={0} />

@@ -16,11 +16,13 @@ import { ProjectPageCustomerSelect } from './project-page-customer-select';
 import { ProjectPageDetailsInputGroup } from './project-page-details-input-group';
 import { ProjectPageUserSelectGroup } from './project-page-user-select-group';
 import { ProjectPageCanExposeSelect } from './project-page-can-expose-select';
+import { ProjectPageTaskCategorySelect } from './project-page-task-category-select';
 
 export const ProjectPageDialogContentSection: FunctionComponent<{
   body: ProjectCreateBody | ProjectUpdateBody;
   setBody: SetterOrUpdater<ProjectCreateBody> | SetterOrUpdater<ProjectUpdateBody>;
-}> = ({ body, setBody }) => {
+  isCreateMode?: boolean;
+}> = ({ body, setBody, isCreateMode }) => {
   const setting = settingStore.useValue();
 
   const onChangeCode = textFieldHook.useOnChangeObjectStrProperty(setBody, 'code');
@@ -66,6 +68,7 @@ export const ProjectPageDialogContentSection: FunctionComponent<{
         <ProjectPageDetailsInputGroup {...{ body, setBody }} />
       </SectionColumn>
       <SectionColumn title="시간관리">
+        <ProjectPageTaskCategorySelect {...{ body, setBody, isCreateMode }} />
         <ProjectPageCanExposeSelect {...{ body, setBody }} />
       </SectionColumn>
     </SectionContainer>

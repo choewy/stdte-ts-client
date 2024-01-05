@@ -4,6 +4,7 @@ export type SelectRow = {
   id: number;
   name: string;
   description?: string;
+  isDefault?: boolean;
 };
 
 export type SelectListQuery = HttpClientListQuery;

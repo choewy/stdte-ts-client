@@ -9,5 +9,5 @@ export const ProjectPageCreateDialogContent: FunctionComponent<{
   body: ProjectCreateBody;
   setBody: SetterOrUpdater<ProjectCreateBody>;
 }> = ({ body, setBody }) => {
-  return <ProjectPageDialogContentSection {...{ body, setBody }} />;
+  return <ProjectPageDialogContentSection {...{ body, setBody, isCreateMode: true }} />;
 };
